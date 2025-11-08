@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5dkxddale4vk"]
+
+[ext_resource type="Script" uid="uid://cyug4vnabq7cw" path="res://scenes/character_view/character_view.gd" id="1_b5qxt"]
+
+[node name="CharacterView" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_b5qxt")
+
+[node name="SpriteRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+expand_mode = 4
+
+[node name="Info" type="VBoxContainer" parent="."]
+layout_mode = 2

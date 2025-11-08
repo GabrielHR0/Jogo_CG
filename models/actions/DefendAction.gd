@@ -1,0 +1,19 @@
+extends Action
+class_name DefendAction
+
+@export var defense_buff: int = 5
+@export var duration: int = 2
+
+func _init():
+	name = "Defender"
+	ap_cost = 1
+	target_type = "self"
+	description = "Assume posição defensiva"
+
+func execute(user: Character, target: Character) -> void:
+	super.execute(user, target)
+	
+	# Aplica buff de defesa
+	user.add_buff("constitution", defense_buff, duration)
+	print("   🛡️ " + user.name + " assume posição defensiva")
+	print("   📈 +" + str(defense_buff) + " constituição por " + str(duration) + " turnos")

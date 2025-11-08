@@ -1,0 +1,20 @@
+[gd_resource type="Theme" format=3 uid="uid://b5th02g0hem3f"]
+
+[resource]
+/* Estilo para o BottomPanel */
+.BottomPanel {
+    background-color: #1e1e1e;
+}
+
+/* Botões dentro do BottomPanel */
+.BottomPanel Button {
+    background-color: #000000;
+    color: #ffffff;
+    border-radius: 10px;
+}
+
+/* Labels dentro do BottomPanel */
+.BottomPanel Label {
+    color: #ffffff;
+    font-size: 14px;
+}

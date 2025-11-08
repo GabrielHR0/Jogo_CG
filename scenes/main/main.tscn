@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://cg31efrnloffw"]
+
+[ext_resource type="Script" uid="uid://dtb7luoxo3uvr" path="res://scenes/main/main.gd" id="1_hyk8p"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_hyk8p")
+
+[node name="StartButton" type="Button" parent="."]
+offset_left = 202.0
+offset_top = 38.0
+offset_right = 391.0
+offset_bottom = 69.0
+text = "Iniciar Batalha de Teste"
+
+[node name="StatusLabel" type="Label" parent="."]
+offset_left = 225.0
+offset_top = 75.0
+offset_right = 365.0
+offset_bottom = 124.0
+text = "Clique para iniciar
+"
