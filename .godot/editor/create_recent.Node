@@ -1,3 +1,6 @@
+CollisionShape2D
+Sprite2D
+CharacterBody2D
 ProgressBar
 Label
 TabBar
@@ -10,4 +13,3 @@ Panel
 Control
 Node2D
 CanvasLayer
-CanvasModulate
