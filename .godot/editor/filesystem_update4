@@ -1,3 +1,11 @@
-res://scenes/main/main.tscn
+res://scenes/BattleScene/BattleScene.tscn
 res://addons/godot-css-theme/editor/css_syntax.tres
-res://scenes/main/player.gd
+res://models/Battle.gd
+res://scenes/BattleScene/battle_scene.gd
+res://scenes/main/main.gd
+res://models/actions/DefendAction.gd
+res://models/Character.gd
+res://models/actions/Action.gd
+res://models/actions/atacks/AttackAction.gd
+res://models/actions/SupportAction.gd
+res://models/Party.gd

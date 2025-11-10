@@ -13,11 +13,11 @@ func _on_start_button_pressed():
 	print("🎯 Iniciando batalha...")
 	status_label.text = "Carregando batalha..."
 	
-	# Cria as parties
-	var allies_party = create_simple_allies_party()
-	var enemies_party = create_simple_enemies_party()
+	# Cria as parties de teste
+	var allies_party = create_test_allies()
+	var enemies_party = create_test_enemies()
 	
-	# CARREGA A CENA DE BATALHA
+	# Carrega a cena de batalha
 	load_battle_scene(allies_party, enemies_party)
 
 func load_battle_scene(allies_party: Party, enemies_party: Party):
@@ -32,9 +32,12 @@ func load_battle_scene(allies_party: Party, enemies_party: Party):
 	print("✅ Cena de batalha carregada!")
 	
 	# AGORA chama setup_battle DEPOIS que a cena já está na árvore
+	# Usando call_deferred para garantir que _ready() já executou
 	battle_scene.call_deferred("setup_battle", allies_party, enemies_party)
 
-func create_simple_allies_party() -> Party:
+# ... (o resto do código permanece igual)
+
+func create_test_allies() -> Party:
 	var party = Party.new()
 	party.name = "Heróis"
 	
@@ -44,8 +47,11 @@ func create_simple_allies_party() -> Party:
 	warrior.constitution = 7
 	warrior.agility = 4
 	warrior.intelligence = 3
-	warrior.position = "front"
 	warrior.calculate_stats()
+	
+	# Adiciona ações ao guerreiro
+	warrior.add_combat_action(create_basic_attack())
+	warrior.add_combat_action(create_heavy_attack())
 	party.add_member(warrior)
 	
 	var mage = Character.new()
@@ -54,13 +60,17 @@ func create_simple_allies_party() -> Party:
 	mage.constitution = 4
 	mage.agility = 5
 	mage.intelligence = 9
-	mage.position = "back"
 	mage.calculate_stats()
+	
+	# Adiciona ações ao mago
+	mage.add_combat_action(create_basic_attack())
+	mage.add_combat_action(create_fireball())
 	party.add_member(mage)
 	
+	print("✅ Party aliada criada: " + party.name)
 	return party
 
-func create_simple_enemies_party() -> Party:
+func create_test_enemies() -> Party:
 	var party = Party.new()
 	party.name = "Inimigos"
 	
@@ -70,8 +80,9 @@ func create_simple_enemies_party() -> Party:
 	goblin.constitution = 5
 	goblin.agility = 8
 	goblin.intelligence = 2
-	goblin.position = "front"
 	goblin.calculate_stats()
+	
+	goblin.add_combat_action(create_basic_attack())
 	party.add_member(goblin)
 	
 	var orc = Character.new()
@@ -80,8 +91,38 @@ func create_simple_enemies_party() -> Party:
 	orc.constitution = 8
 	orc.agility = 3
 	orc.intelligence = 1
-	orc.position = "front"
 	orc.calculate_stats()
+	
+	orc.add_combat_action(create_basic_attack())
+	orc.add_combat_action(create_heavy_attack())
 	party.add_member(orc)
 	
+	print("✅ Party inimiga criada: " + party.name)
 	return party
+	
+func create_basic_attack() -> AttackAction:
+	var a := AttackAction.new()
+	a.name = "Ataque Básico"
+	a.ap_cost = 2
+	a.target_type = "enemy"
+	a.damage_multiplier = 1.0
+	a.formula = "melee"
+	return a
+
+func create_heavy_attack() -> AttackAction:
+	var a := AttackAction.new()
+	a.name = "Ataque Pesado"
+	a.ap_cost = 4
+	a.target_type = "enemy"
+	a.damage_multiplier = 1.6
+	a.formula = "melee"
+	return a
+
+func create_fireball() -> AttackAction:
+	var a := AttackAction.new()
+	a.name = "Bola de Fogo"
+	a.ap_cost = 5
+	a.target_type = "enemy"
+	a.damage_multiplier = 1.8
+	a.formula = "magic"
+	return a
