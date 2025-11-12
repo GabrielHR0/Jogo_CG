@@ -1,113 +1,549 @@
 extends Control
 
-# Áreas dos personagens
-@onready var allies_area := $BattleCharactersArea/AlliesArea
-@onready var enemies_area := $BattleCharactersArea/EnemiesArea
+# Áreas de batalha (topo)
+@onready var enemies_front_row = $HBoxContainer/EnemiesArea/EnemyFrontRow
+@onready var enemies_back_row  = $HBoxContainer/EnemiesArea/EnemyBackRow
+@onready var allies_front_row  = $HBoxContainer/AlliesArea/AllyFrontRow
+@onready var allies_back_row   = $HBoxContainer/AlliesArea/AllyBackRow
 
-# Painel inferior
-@onready var bottom_name := $BottomPanel/BottomContent/CharacterStatusBar/ActionMenu/NameLabel
-@onready var bottom_hp := $BottomPanel/BottomContent/CharacterStatusBar/ActionMenu/HPBar
-@onready var bottom_hp_label := $BottomPanel/BottomContent/CharacterStatusBar/ActionMenu/HPBar/Label
-@onready var bottom_ap_label := $BottomPanel/BottomContent/CharacterStatusBar/ActionMenu/APBar/Label
-@onready var bottom_ap := $BottomPanel/BottomContent/CharacterStatusBar/ActionMenu/APBar
-@onready var bottom_action := $BottomPanel/BottomContent/CharacterStatusBar/ActionMenu/ActionLabel
+# Status do personagem ativo (no BottomPanel/HBoxContainer/CharacterStatus)
+@onready var character_icon = $BottomPanel/HBoxContainer/CharacterStatus/CharacterIcon
+@onready var character_name = $BottomPanel/HBoxContainer/CharacterStatus/VBoxContainer/CharacterName
+@onready var hp_bar        = $BottomPanel/HBoxContainer/CharacterStatus/VBoxContainer/HPBar
+@onready var hp_label      = $BottomPanel/HBoxContainer/CharacterStatus/VBoxContainer/HPBar/HPLabel
+@onready var ap_bar        = $BottomPanel/HBoxContainer/CharacterStatus/VBoxContainer/APBar
+@onready var ap_label      = $BottomPanel/HBoxContainer/CharacterStatus/VBoxContainer/APBar/APLabel
+@onready var action_label  = $BottomPanel/HBoxContainer/CharacterStatus/ActionLabel
+
+# Menu de comandos (no BottomPanel/HBoxContainer/CommandMenu)
+@onready var fight_button  = $BottomPanel/HBoxContainer/CommandMenu/FightButton
+@onready var defend_button = $BottomPanel/HBoxContainer/CommandMenu/DefendButton
+@onready var items_button  = $BottomPanel/HBoxContainer/CommandMenu/ItemsButton
+@onready var skip_button   = $BottomPanel/HBoxContainer/CommandMenu/SkipButton
+
+# Sub-menus (dentro do mesmo HBoxContainer)
+@onready var attack_menu              = $BottomPanel/HBoxContainer/AttackMenu
+@onready var attack_buttons_container = $BottomPanel/HBoxContainer/AttackMenu/AttackButtons
+@onready var target_menu              = $BottomPanel/HBoxContainer/TargetMenu
+@onready var target_buttons_container = $BottomPanel/HBoxContainer/TargetMenu/TargetButtons
 
 # Sistema de batalha
 var battle: Battle
-var character_labels := {}
-var current_active_character: String = ""
+var character_displays := {}
+var current_player_character: Character = null
+var selected_action: Action = null
+var battle_ended: bool = false
 
 func _ready():
-	print("🎮 BattleScene: Pronta para receber parties")
+	print("=== 🎮 BattleScene READY ===")
+	_setup_root_layout()
+	setup_ui()
+	connect_buttons()
 
-func setup_battle(allies: Party, enemies: Party):
-	print("⚔️ SETUP_BATTLE: Configurando batalha")
+func _setup_root_layout():
+	set_anchors_preset(Control.PRESET_FULL_RECT)
+
+func setup_ui():
+	attack_menu.visible = false
+	attack_buttons_container.visible = false
+	target_menu.visible = false
+	target_buttons_container.visible = false
+	
+	fight_button.text = "🗡️ LUTAR"
+	defend_button.text = "🛡️ DEFENDER"
+	items_button.text  = "📦 ITENS"
+	skip_button.text   = "⏭️ PULAR"
+	print("UI ▶️ Botões ok; Menus ocultos")
+
+func connect_buttons():
+	fight_button.pressed.connect(_on_fight_pressed)
+	defend_button.pressed.connect(_on_defend_pressed)
+	items_button.pressed.connect(_on_items_pressed)
+	skip_button.pressed.connect(_on_skip_pressed)
+	print("UI 🔗 Sinais conectados")
+
+func setup_battle(allies_party: Party, enemies_party: Party):
+	print("⚔️ Setup battle:", allies_party.name, "vs", enemies_party.name)
+	battle_ended = false
 	
 	battle = Battle.new()
-	battle.setup(allies, enemies)
 	add_child(battle)
-	
-	# Conecta os sinais
-	battle.turn_started.connect(_on_turn_started)
+
+	# Conecta sinais
+	battle.battle_started.connect(_on_battle_started)
+	battle.player_turn_started.connect(_on_player_turn_started)
+	battle.action_executed.connect(_on_action_executed)
 	battle.turn_completed.connect(_on_turn_completed)
+	battle.character_died.connect(_on_character_died)
 	battle.battle_ended.connect(_on_battle_ended)
-	
-	create_character_names()
+	battle.player_action_selected.connect(_on_player_action_selected)
+
+	battle.setup_battle(allies_party, enemies_party)
+	create_character_displays()
+
+	await get_tree().create_timer(0.25).timeout
+	print("▶️ start_battle()")
 	battle.start_battle()
 
-func create_character_names():
-	print("👥 Criando nomes dos personagens...")
-	
-	# Limpa áreas anteriores
-	for child in allies_area.get_children():
-		child.queue_free()
-	for child in enemies_area.get_children():
-		child.queue_free()
-	
-	# Aliados
-	for char in battle.allies_party.members:
-		var label = Label.new()
-		label.text = char.name + "\nAGI: " + str(char.get_attribute("agility"))
-		label.add_theme_font_size_override("font_size", 20)
-		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		allies_area.add_child(label)
-		character_labels[char.name] = label
-	
-	# Inimigos
-	for char in battle.enemies_party.members:
-		var label = Label.new()
-		label.text = char.name + "\nAGI: " + str(char.get_attribute("agility"))
-		label.add_theme_font_size_override("font_size", 20)
-		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		enemies_area.add_child(label)
-		character_labels[char.name] = label
+func create_character_displays():
+	clear_character_displays()
+	print("👥 Criando displays...")
+	create_enemy_displays()
+	create_ally_displays()
 
-func _on_turn_started(character: Character, action: Action, target: Character):
-	print("🎯 TURNO INICIADO: " + character.name)
-	current_active_character = character.name
-	highlight_character(character.name, true)
-	update_bottom_panel(character, "🎯 " + character.name + " usa " + action.name + " em " + target.name)
+func create_enemy_displays():
+	for character in battle.enemies_party.members:
+		var display = create_character_display(character)
+		if character.position == "front":
+			enemies_front_row.add_child(display)
+		else:
+			enemies_back_row.add_child(display)
+		character_displays[character.name] = display
+		print("   💀 Inimigo no grid:", character.name)
+
+func create_ally_displays():
+	for character in battle.allies_party.members:
+		var display = create_character_display(character)
+		if character.position == "front":
+			allies_front_row.add_child(display)
+		else:
+			allies_back_row.add_child(display)
+		character_displays[character.name] = display
+		print("   🎯 Aliado no grid:", character.name)
+
+func create_character_display(character: Character) -> PanelContainer:
+	var panel = PanelContainer.new()
+	panel.custom_minimum_size = Vector2(120, 150)
+
+	var vbox = VBoxContainer.new()
+	vbox.name = "VBoxContainer"
+	vbox.size_flags_vertical = Control.SIZE_EXPAND_FILL
+
+	var name_label = Label.new()
+	name_label.name = "Name"
+	name_label.text = character.name
+	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	name_label.add_theme_font_size_override("font_size", 14)
+
+	var hp_container = HBoxContainer.new()
+	hp_container.name = "HPRow"
+	var hp_text = Label.new(); hp_text.text = "HP:"
+	var hp_value = Label.new(); hp_value.name = "HPValue"
+	hp_value.text = "%d/%d" % [character.current_hp, character.get_max_hp()]
+	hp_container.add_child(hp_text); hp_container.add_child(hp_value)
+
+	var ap_container = HBoxContainer.new()
+	ap_container.name = "APRow"
+	var ap_text = Label.new(); ap_text.text = "AP:"
+	var ap_value = Label.new(); ap_value.name = "APValue"
+	ap_value.text = "%d/%d" % [character.current_ap, character.get_max_ap()]
+	ap_container.add_child(ap_text); ap_container.add_child(ap_value)
+
+	vbox.add_child(name_label)
+	vbox.add_child(hp_container)
+	vbox.add_child(ap_container)
+	panel.add_child(vbox)
+	return panel
+
+func clear_character_displays():
+	for display in character_displays.values():
+		display.queue_free()
+	character_displays.clear()
+	print("🧹 Displays limpos")
+
+# ===== Eventos/sinais =====
+
+func _on_battle_started():
+	print("🎲 Batalha iniciada")
+	action_label.text = "Batalha Iniciada!"
+	hide_sub_menus()
+
+func _on_player_turn_started(character: Character):
+	if battle_ended:
+		return
+		
+	current_player_character = character
+	print("🕐 Turno:", character.name, "| AP:", character.current_ap, "/", character.get_max_ap(), "| Ações:", character.combat_actions.size())
+	_print_actions(character)
+	update_character_status(character)
+	highlight_active_character(character.name)
+	action_label.text = "Sua vez! Escolha uma ação"
+	hide_sub_menus() # fecha restos do turno anterior
+	print("🧭 CommandMenu pronto; Menus fechados")
+
+func _print_actions(character: Character):
+	if character == null:
+		print("⚠️ _print_actions: character null")
+		return
+	if character.combat_actions.is_empty():
+		print("⚠️", character.name, "não possui combat_actions")
+	else:
+		print("📜 Ações de", character.name, ":")
+		for a in character.combat_actions:
+			var ok_ap = character.has_ap_for_action(a)
+			print("  •", a.name, "| custo:", a.ap_cost, "| tem AP?:", ok_ap)
+
+func _on_action_executed(character: Character, action: Action, target: Character):
+	if battle_ended:
+		return
+		
+	var action_text = "%s usa %s em %s" % [character.name, action.name, target.name]
+	print("✅ Executada:", action_text)
+	action_label.text = action_text
+	update_character_displays()
 
 func _on_turn_completed(character: Character):
-	print("✅ TURNO COMPLETADO: " + character.name)
-	highlight_character(character.name, false)
-	update_bottom_panel(character, "✅ " + character.name + " completou ação")
-	current_active_character = ""
+	if battle_ended:
+		return
+		
+	print("⏭️ Turno concluído:", character.name)
+	remove_character_highlight(character.name)
+	hide_sub_menus()
+
+func _on_character_died(character: Character):
+	print("💀 Morte:", character.name)
+	if character.name in character_displays:
+		var display = character_displays[character.name]
+		# 🎯 CORREÇÃO: Faz o personagem desaparecer em vez de escurecer
+		display.visible = false
+		# Remove do dicionário para evitar acesso futuro
+		character_displays.erase(character.name)
+		print("   👻 Personagem removido da tela:", character.name)
 
 func _on_battle_ended(victory: bool):
+	print("🎯 BattleScene: _on_battle_ended chamado - Vitória:", victory)
+	battle_ended = true
+	
 	if victory:
-		print("🎉 VITÓRIA NA BATALHA!")
-		bottom_action.text = "🎉 VITÓRIA!"
+		print("🎉 VITÓRIA!")
+		action_label.text = "🎉 VITÓRIA!"
 	else:
-		print("💔 DERROTA NA BATALHA!")
-		bottom_action.text = "💔 DERROTA!"
+		print("💔 DERROTA!")
+		action_label.text = "💔 DERROTA!"
+	
+	hide_sub_menus()
+	
+	# 🎯 CORREÇÃO: Voltar para a main após um delay
+	await get_tree().create_timer(2.0).timeout
+	return_to_main()
 
-func highlight_character(character_name: String, highlight: bool):
-	# Remove destaque de todos
-	for name in character_labels:
-		var label = character_labels[name]
-		label.add_theme_color_override("font_color", Color.WHITE)
-		label.add_theme_font_size_override("font_size", 20)
-	
-	# Destaca apenas o ativo
-	if highlight and character_name in character_labels:
-		var label = character_labels[character_name]
-		label.add_theme_color_override("font_color", Color.YELLOW)
-		label.add_theme_font_size_override("font_size", 24)
+func _on_player_action_selected():
+	print("🔄 Player action selected signal received")
+	# Este sinal é apenas para sincronização interna do Battle
+	# Não precisa fazer nada aqui
 
-func update_bottom_panel(character: Character, action_text: String):
-	if bottom_name:
-		bottom_name.text = character.name
+func return_to_main():
+	print("🏠 Voltando para a tela principal...")
 	
-	if bottom_hp and bottom_hp_label:
-		bottom_hp.max_value = character.get_max_hp()
-		bottom_hp.value = character.current_hp
-		bottom_hp_label.text = str(character.current_hp) + "/" + str(character.get_max_hp())
+	# 🎯 CORREÇÃO: Abordagem direta para trocar de cena
+	var main_scene_path = "res://scenes/main/main.tscn"
 	
-	if bottom_ap and bottom_ap_label:
-		bottom_ap.max_value = character.get_max_ap()
-		bottom_ap.value = character.current_ap
-		bottom_ap_label.text = str(character.current_ap) + "/" + str(character.get_max_ap())
+	# Verifica se o arquivo existe antes de tentar carregar
+	if FileAccess.file_exists(main_scene_path):
+		get_tree().change_scene_to_file(main_scene_path)
+		print("✅ Cena principal carregada: " + main_scene_path)
+	else:
+		print("❌ Arquivo da cena principal não encontrado: " + main_scene_path)
+		# Fallback: tentar carregar cena com nome comum
+		try_alternative_scenes()
+
+func try_alternative_scenes():
+	# Tenta carregar cenas com nomes alternativos comuns
+	var alternative_paths = [
+		"res://Main.tscn",
+		"res://scenes/main.tscn",
+		"res://Scenes/Main.tscn",
+		"res://menu_principal.tscn",
+		"res://MenuPrincipal.tscn"
+	]
 	
-	if bottom_action:
-		bottom_action.text = action_text
+	for path in alternative_paths:
+		if FileAccess.file_exists(path):
+			get_tree().change_scene_to_file(path)
+			print("✅ Cena principal carregada (alternativa): " + path)
+			return
+	
+	print("❌ Nenhuma cena principal encontrada. Verifique o nome do arquivo.")
+	# Se não encontrar, pelo menos limpa a batalha
+	queue_free()
+
+# ===== Menus =====
+
+func show_command_menu():
+	hide_sub_menus()
+	print("🧭 CommandMenu visível; Sub-menus ocultos")
+
+func hide_sub_menus():
+	attack_menu.visible = false
+	attack_buttons_container.visible = false
+	target_menu.visible = false
+	target_buttons_container.visible = false
+	print("🙈 Todos os sub-menus ocultados")
+
+func _on_fight_pressed():
+	if battle_ended:
+		return
+	print("🗡️ LUTAR por:", current_player_character and current_player_character.name)
+	show_attack_menu()
+
+func _on_defend_pressed():
+	if battle_ended:
+		return
+	print("🛡️ DEFENDER")
+	if current_player_character == null:
+		print("⚠️ DEFENDER: sem personagem ativo")
+		return
+	
+	var defend_action = find_defend_action(current_player_character)
+	if defend_action:
+		# 🛡️ CORREÇÃO: Mostra menu de alvos para defender (apenas self)
+		print("🎯 Defender - mostrando menu de alvos")
+		selected_action = defend_action
+		show_target_menu(defend_action)
+	else:
+		print("⚠️ 'Defender' não encontrada")
+
+func _on_items_pressed():
+	if battle_ended:
+		return
+	print("📦 ITENS (WIP)")
+	action_label.text = "Sistema de itens em desenvolvimento"
+
+func _on_skip_pressed():
+	if battle_ended:
+		return
+	print("⏭️ PULAR")
+	if current_player_character == null:
+		print("⚠️ PULAR: sem personagem ativo")
+		return
+	var skip_action = find_skip_action(current_player_character)
+	if skip_action:
+		execute_player_action(skip_action, current_player_character)
+	else:
+		print("⚠️ 'Pular Turno' não encontrada")
+
+func show_attack_menu():
+	if battle_ended:
+		return
+	print("📂 AttackMenu para:", current_player_character and current_player_character.name)
+	for child in attack_buttons_container.get_children():
+		child.queue_free()
+
+	if current_player_character == null:
+		print("⚠️ show_attack_menu: current_player_character é null")
+		attack_menu.visible = false
+		attack_buttons_container.visible = false
+		return
+
+	if current_player_character.combat_actions.is_empty():
+		print("⚠️", current_player_character.name, "sem ações de combate")
+		var label_empty = Label.new()
+		label_empty.text = "Sem ações disponíveis"
+		attack_buttons_container.add_child(label_empty)
+	else:
+		var count := 0
+		for action in current_player_character.combat_actions:
+			var can_pay := current_player_character.has_ap_for_action(action)
+			print("   ➕", action.name, "| custo:", action.ap_cost, "| AP:", current_player_character.current_ap, "| pode pagar?:", can_pay)
+			var button = Button.new()
+			var suffix := "" if can_pay else " (insuficiente)"
+			button.text = "%s\n%d AP%s" % [action.name, action.ap_cost, suffix]
+			button.disabled = not can_pay
+			button.custom_minimum_size = Vector2(220, 56)
+			button.pressed.connect(_on_attack_selected.bind(action))
+			attack_buttons_container.add_child(button)
+			count += 1
+		print("📋 Botões criados:", count)
+
+	attack_menu.visible = true
+	attack_buttons_container.visible = true
+	target_menu.visible = false
+	print("👁️ AttackMenu:", attack_menu.visible, "| TargetMenu:", target_menu.visible)
+
+func _on_attack_selected(action: Action):
+	if battle_ended:
+		return
+	print("🎯 Selecionado:", action.name, "por", current_player_character and current_player_character.name)
+	selected_action = action
+	show_target_menu(action)
+
+func show_target_menu(action: Action):
+	if battle_ended:
+		return
+	print("🎯 Mostrando alvos para:", action.name)
+	
+	# Limpa botões anteriores
+	for child in target_buttons_container.get_children():
+		child.queue_free()
+	
+	# Obtém alvos válidos baseado no target_type da ação
+	var valid_targets = get_valid_targets(action)
+	
+	if valid_targets.is_empty():
+		print("⚠️ Nenhum alvo válido para:", action.name)
+		var label_empty = Label.new()
+		label_empty.text = "Nenhum alvo disponível"
+		target_buttons_container.add_child(label_empty)
+	else:
+		print("🎯 Alvos válidos encontrados:", valid_targets.size())
+		for target in valid_targets:
+			# 🛡️ CORREÇÃO: Verifica se o target é válido antes de criar o botão
+			if target == null:
+				print("⚠️ Target inválido (null) encontrado, pulando...")
+				continue
+				
+			var button = Button.new()
+			var target_type_icon = get_target_type_icon(action.target_type)
+			var status = "💀 MORTO" if not target.is_alive() else "❤️ HP: %d/%d" % [target.current_hp, target.get_max_hp()]
+			
+			button.text = "%s %s\n%s" % [target_type_icon, target.name, status]
+			button.custom_minimum_size = Vector2(220, 56)
+			button.disabled = not target.is_alive()  # Desabilita se o alvo estiver morto
+			button.pressed.connect(_on_target_selected.bind(target))
+			target_buttons_container.add_child(button)
+			print("   ➕ Alvo:", target.name, "| Vivo:", target.is_alive())
+	
+	# Botão Voltar
+	var back_button = Button.new()
+	back_button.text = "⬅️ Voltar"
+	back_button.custom_minimum_size = Vector2(220, 40)
+	back_button.pressed.connect(_on_target_back_pressed)
+	target_buttons_container.add_child(back_button)
+	
+	# Mostra o menu de alvos
+	target_menu.visible = true
+	target_buttons_container.visible = true
+	attack_menu.visible = false
+	action_label.text = "Escolha um alvo para: %s" % action.name
+	
+	print("👁️ TargetMenu:", target_menu.visible, "| AttackMenu:", attack_menu.visible)
+
+func get_target_type_icon(target_type: String) -> String:
+	match target_type:
+		"enemy": return "💀"
+		"ally": return "🎯"
+		"self": return "⭐"
+		_: return "❓"
+
+func get_valid_targets(action: Action) -> Array:
+	if current_player_character == null:
+		return []
+	
+	var is_player_ally = current_player_character in battle.allies_party.members
+	var targets = []
+	
+	match action.target_type:
+		"enemy":
+			# Se é aliado, ataca inimigos; se é inimigo, ataca aliados
+			targets = battle.enemies_party.alive() if is_player_ally else battle.allies_party.alive()
+		"ally":
+			# Se é aliado, cura/ajuda aliados; se é inimigo, cura/ajuda inimigos
+			targets = battle.allies_party.alive() if is_player_ally else battle.enemies_party.alive()
+		"self":
+			# 🛡️ CORREÇÃO: Para ações self, mostra apenas o próprio personagem
+			targets = [current_player_character]
+		_:
+			# Fallback: assume inimigo
+			targets = battle.enemies_party.alive() if is_player_ally else battle.allies_party.alive()
+	
+	print("🎯 Tipo:", action.target_type, "| Aliado?:", is_player_ally, "| Alvos:", targets.size())
+	
+	# 🛡️ CORREÇÃO: Filtra targets nulos
+	var valid_targets = []
+	for target in targets:
+		if target != null:
+			valid_targets.append(target)
+	
+	return valid_targets
+
+func _on_target_selected(target: Character):
+	if battle_ended:
+		return
+	# 🛡️ CORREÇÃO: Verifica se o target é válido
+	if target == null:
+		print("❌ Alvo inválido (null) para ação:", selected_action.name if selected_action else "Nenhuma ação")
+		return
+	
+	# 🛡️ CORREÇÃO: Verifica se a ação ainda existe
+	if selected_action == null:
+		print("❌ Nenhuma ação selecionada!")
+		return
+	
+	print("🎯 Alvo selecionado:", target.name, "para ação:", selected_action.name)
+	execute_player_action(selected_action, target)
+
+func _on_target_back_pressed():
+	if battle_ended:
+		return
+	print("⬅️ Voltando do menu de alvos")
+	# Volta para o menu anterior
+	if selected_action:
+		if selected_action in current_player_character.combat_actions:
+			# Se veio do menu de ataques, volta para lá
+			show_attack_menu()
+		else:
+			# Se veio do menu principal (defender), volta para o CommandMenu
+			hide_sub_menus()
+	else:
+		hide_sub_menus()
+
+func execute_player_action(action: Action, target: Character):
+	if battle_ended:
+		return
+	if current_player_character == null:
+		print("⚠️ execute_player_action: sem personagem ativo")
+		return
+	print("🚀 Executando:", action.name, "de", current_player_character.name, "em", target.name)
+	hide_sub_menus()
+	battle.on_player_select_action(action, target)
+	selected_action = null
+
+# ===== Utilitários =====
+
+func find_defend_action(character: Character) -> Action:
+	if character == null: return null
+	for action in character.basic_actions:
+		if action.name == "Defender":
+			return action
+	return null
+
+func find_skip_action(character: Character) -> Action:
+	if character == null: return null
+	for action in character.basic_actions:
+		if action.name == "Pular Turno":
+			return action
+	return null
+
+func update_character_status(character: Character):
+	if character == null:
+		print("⚠️ update_character_status: character null")
+		return
+	character_name.text = character.name
+	hp_bar.max_value = character.get_max_hp()
+	hp_bar.value = character.current_hp
+	hp_label.text = "%d/%d" % [character.current_hp, character.get_max_hp()]
+	ap_bar.max_value = character.get_max_ap()
+	ap_bar.value = character.current_ap
+	ap_label.text = "%d/%d" % [character.current_ap, character.get_max_ap()]
+
+func update_character_displays():
+	for character in battle.allies_party.members + battle.enemies_party.members:
+		if character.name in character_displays:
+			var display = character_displays[character.name]
+			var hp_value = display.get_node("VBoxContainer/HPRow/HPValue") as Label
+			var ap_value = display.get_node("VBoxContainer/APRow/APValue") as Label
+			hp_value.text = "%d/%d" % [character.current_hp, character.get_max_hp()]
+			ap_value.text = "%d/%d" % [character.current_ap, character.get_max_ap()]
+
+func highlight_active_character(character_name: String):
+	for name in character_displays:
+		var display = character_displays[name]
+		display.modulate = Color.WHITE
+	if character_name in character_displays:
+		var display = character_displays[character_name]
+		display.modulate = Color.YELLOW
+
+func remove_character_highlight(character_name: String):
+	if character_name in character_displays:
+		var display = character_displays[character_name]
+		display.modulate = Color.WHITE

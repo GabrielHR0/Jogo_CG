@@ -1,11 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2vkffksnltf4"]
+[gd_scene load_steps=2 format=3 uid="uid://c2vkffksnltf4"]
 
 [ext_resource type="Script" uid="uid://c004r4qmg3tjl" path="res://scenes/BattleScene/battle_scene.gd" id="1_3eieg"]
-[ext_resource type="Theme" uid="uid://bj7uhuxu7b8o2" path="res://assets/theme.css" id="2_8k8re"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gkmpl"]
-content_margin_left = 10.0
-bg_color = Color(0.13725491, 0.13725491, 0.13725491, 0.45490196)
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -18,136 +13,148 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_3eieg")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-stretch_mode = 5
 
-[node name="BattleCharactersArea" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.517
-offset_top = -254.0
-offset_bottom = 83.98398
-grow_horizontal = 2
-grow_vertical = 2
+anchor_bottom = 1.0
+offset_bottom = -220.0
 
-[node name="EnemiesArea" type="VBoxContainer" parent="BattleCharactersArea"]
+[node name="EnemiesArea" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 8
 
-[node name="AlliesArea" type="VBoxContainer" parent="BattleCharactersArea"]
+[node name="EnemyFrontRow" type="HBoxContainer" parent="HBoxContainer/EnemiesArea"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="EnemyBackRow" type="HBoxContainer" parent="HBoxContainer/EnemiesArea"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="AlliesArea" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 8
 
-[node name="BottomPanel" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(0, 160)
+[node name="AllyFrontRow" type="HBoxContainer" parent="HBoxContainer/AlliesArea"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="AllyBackRow" type="HBoxContainer" parent="HBoxContainer/AlliesArea"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="BottomPanel" type="Panel" parent="."]
 layout_mode = 1
-anchors_preset = 12
+anchors_preset = -1
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -36.0
-grow_horizontal = 2
-grow_vertical = 0
-theme = ExtResource("2_8k8re")
-theme_override_styles/panel = SubResource("StyleBoxFlat_gkmpl")
+offset_top = -220.0
 
-[node name="BottomContent" type="HBoxContainer" parent="BottomPanel"]
-layout_mode = 2
-theme = ExtResource("2_8k8re")
-
-[node name="ActionMenu" type="VBoxContainer" parent="BottomPanel/BottomContent"]
-custom_minimum_size = Vector2(0, 140)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 5
-
-[node name="ButonAtacar" type="Button" parent="BottomPanel/BottomContent/ActionMenu"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-size_flags_vertical = 3
-text = "Atacar"
-
-[node name="ButonHabilidade" type="Button" parent="BottomPanel/BottomContent/ActionMenu"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-size_flags_vertical = 3
-text = "Habilidade"
-
-[node name="ButonItem" type="Button" parent="BottomPanel/BottomContent/ActionMenu"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-size_flags_vertical = 3
-text = "Item"
-
-[node name="ButonDefender" type="Button" parent="BottomPanel/BottomContent/ActionMenu"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-size_flags_vertical = 3
-text = "Defender"
-
-[node name="CharacterStatusBar" type="HBoxContainer" parent="BottomPanel/BottomContent"]
-custom_minimum_size = Vector2(0, 140)
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="Icon" type="TextureRect" parent="BottomPanel/BottomContent/CharacterStatusBar"]
-custom_minimum_size = Vector2(160, 64)
-layout_mode = 2
-expand_mode = 1
-
-[node name="ActionMenu" type="VBoxContainer" parent="BottomPanel/BottomContent/CharacterStatusBar"]
-layout_mode = 2
-theme_override_constants/separation = 5
-
-[node name="NameLabel" type="Label" parent="BottomPanel/BottomContent/CharacterStatusBar/ActionMenu"]
-custom_minimum_size = Vector2(160, 0)
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="HPBar" type="ProgressBar" parent="BottomPanel/BottomContent/CharacterStatusBar/ActionMenu"]
-custom_minimum_size = Vector2(160, 25)
-layout_mode = 2
-size_flags_vertical = 4
-show_percentage = false
-
-[node name="Label" type="Label" parent="BottomPanel/BottomContent/CharacterStatusBar/ActionMenu/HPBar"]
-custom_minimum_size = Vector2(160, 0)
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="APBar" type="ProgressBar" parent="BottomPanel/BottomContent/CharacterStatusBar/ActionMenu"]
-custom_minimum_size = Vector2(160, 25)
+[node name="CharacterStatus" type="HBoxContainer" parent="BottomPanel/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
+
+[node name="CharacterIcon" type="TextureRect" parent="BottomPanel/HBoxContainer/CharacterStatus"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BottomPanel/HBoxContainer/CharacterStatus"]
+custom_minimum_size = Vector2(120, 90)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.3
+theme_override_constants/separation = 8
+
+[node name="CharacterName" type="Label" parent="BottomPanel/HBoxContainer/CharacterStatus/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HPBar" type="ProgressBar" parent="BottomPanel/HBoxContainer/CharacterStatus/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 show_percentage = false
 
-[node name="Label" type="Label" parent="BottomPanel/BottomContent/CharacterStatusBar/ActionMenu/APBar"]
-custom_minimum_size = Vector2(160, 25)
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -11.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="HPLabel" type="Label" parent="BottomPanel/HBoxContainer/CharacterStatus/VBoxContainer/HPBar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
 
-[node name="ActionLabel" type="Label" parent="BottomPanel/BottomContent/CharacterStatusBar/ActionMenu"]
+[node name="APBar" type="ProgressBar" parent="BottomPanel/HBoxContainer/CharacterStatus/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+show_percentage = false
+
+[node name="APLabel" type="Label" parent="BottomPanel/HBoxContainer/CharacterStatus/VBoxContainer/APBar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ActionLabel" type="Label" parent="BottomPanel/HBoxContainer/CharacterStatus"]
+layout_mode = 2
+
+[node name="CommandMenu" type="VBoxContainer" parent="BottomPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 12
+
+[node name="FightButton" type="Button" parent="BottomPanel/HBoxContainer/CommandMenu"]
+custom_minimum_size = Vector2(140, 44)
+layout_mode = 2
+
+[node name="DefendButton" type="Button" parent="BottomPanel/HBoxContainer/CommandMenu"]
+custom_minimum_size = Vector2(140, 44)
+layout_mode = 2
+
+[node name="ItemsButton" type="Button" parent="BottomPanel/HBoxContainer/CommandMenu"]
+custom_minimum_size = Vector2(140, 44)
+layout_mode = 2
+
+[node name="SkipButton" type="Button" parent="BottomPanel/HBoxContainer/CommandMenu"]
+custom_minimum_size = Vector2(140, 44)
+layout_mode = 2
+
+[node name="AttackMenu" type="ScrollContainer" parent="BottomPanel/HBoxContainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AttackButtons" type="VBoxContainer" parent="BottomPanel/HBoxContainer/AttackMenu"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="TargetMenu" type="ScrollContainer" parent="BottomPanel/HBoxContainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TargetButtons" type="VBoxContainer" parent="BottomPanel/HBoxContainer/TargetMenu"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 12

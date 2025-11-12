@@ -9,8 +9,8 @@ class_name SupportAction
 func apply_effects(user: Character, target: Character) -> void:
 	if heal_amount > 0:
 		target.current_hp = min(target.get_max_hp(), target.current_hp + heal_amount)
-		print("   💚 Cura " + str(heal_amount) + " HP em " + target.name)
+		print("   💚 Cura", heal_amount, "HP em", target.name)
 	
 	if buff_attribute != "" and buff_value > 0:
 		target.add_buff(buff_attribute, buff_value, buff_duration)
-		print("   📈 " + target.name + " ganhou +" + str(buff_value) + " " + buff_attribute + " por " + str(buff_duration) + " turnos")
+		print("   📈", target.name, "ganhou +", buff_value, buff_attribute, "por", buff_duration, "turnos")

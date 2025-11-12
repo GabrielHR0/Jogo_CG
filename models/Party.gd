@@ -5,14 +5,12 @@ class_name Party
 @export var max_size: int = 4
 @export var members: Array[Character] = []
 
-# Adicionar validação no add_member
 func add_member(c: Character) -> bool:
 	if members.size() >= max_size or c == null:
 		return false
 	members.append(c)
 	return true
 
-# Método mais genérico para remover
 func remove_member(character: Character) -> bool:
 	var index = members.find(character)
 	if index != -1:
@@ -27,17 +25,14 @@ func remove_member_by_name(n: String) -> bool:
 			return true
 	return false
 
-# Swap com validação mais robusta
 func swap(a: int, b: int) -> bool:
 	if a < 0 or b < 0 or a >= members.size() or b >= members.size() or a == b:
 		return false
-	
 	var tmp = members[a]
 	members[a] = members[b]
 	members[b] = tmp
 	return true
 
-# Métodos de filtro (seus estão ótimos!)
 func front_line() -> Array[Character]:
 	return members.filter(func(c): return c.position == "front")
 
@@ -53,7 +48,6 @@ func alive() -> Array[Character]:
 func is_full() -> bool:
 	return members.size() >= max_size
 
-# Métodos adicionais úteis:
 func get_member(index: int) -> Character:
 	if index >= 0 and index < members.size():
 		return members[index]
@@ -65,14 +59,8 @@ func is_empty() -> bool:
 func size() -> int:
 	return members.size()
 
-# Para debug
 func get_member_names() -> Array[String]:
-	return members.map(func(c): return c.name)
-
-# Para salvar/carregar estado da party
-func save_state() -> Dictionary:
-	return {
-		"name": name,
-		"max_size": max_size,
-		"members": members.map(func(c): return c.get_save_data())
-	}
+	var names: Array[String] = []
+	for c in members:
+		names.append(c.name)
+	return names

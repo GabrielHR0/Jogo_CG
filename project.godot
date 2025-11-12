@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 party_manager="*res://systems/party_manager.gd"
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/gdscript-templates/plugin.cfg", "res://addons/godot-css-theme/plugin.cfg")
