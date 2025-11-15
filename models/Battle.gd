@@ -63,12 +63,14 @@ func _execute_player_turn(character: Character):
 	current_player_character = character
 	waiting_for_player_input = true
 	
+	# 🎯 CORREÇÃO: Recupera AP ANTES de mostrar o menu
 	if current_round > 0:
 		var rec = character.restore_ap()
 		print("🔋", character.name, "recuperou", rec, "AP (", character.current_ap, "/", character.get_max_ap(), ")")
 	
 	player_turn_started.emit(character)
 	print("⏸️ Esperando ação do jogador:", character.name)
+	print("💰 AP disponível:", character.current_ap, "/", character.get_max_ap())
 	await self.player_action_selected
 	print("▶️ Ação recebida do jogador")
 
@@ -87,10 +89,20 @@ func _execute_ai_turn(character: Character):
 
 func on_player_select_action(action: Action, target: Character):
 	print("🖱️ player_select_action:", action and action.name, "->", target and target.name)
+	print("💰 AP antes da ação:", current_player_character.current_ap, "/", current_player_character.get_max_ap())
+	
 	if waiting_for_player_input and current_player_character:
 		waiting_for_player_input = false
 		var actor := current_player_character
 		current_player_character = null
+		
+		# Verifica se ainda tem AP suficiente (pode ter mudado)
+		if not actor.has_ap_for_action(action):
+			print("❌ AP insuficiente! AP atual:", actor.current_ap, "Custo necessário:", action.ap_cost)
+			# Recupera o turno para o jogador
+			await _execute_player_turn(actor)
+			return
+		
 		# Executa a ação do jogador no mesmo pipeline da IA
 		await _execute_action(actor, action, target)
 		turn_completed.emit(actor)
@@ -143,10 +155,13 @@ func _choose_target(character: Character, action: Action) -> Character:
 
 func _execute_action(character: Character, action: Action, target: Character):
 	print("🧮 Execute:", action.name, "| atacker:", character.name, "| target_type:", action.target_type, "| target:", target and target.name)
+	print("💰 AP antes:", character.current_ap, "/", character.get_max_ap())
 	await get_tree().create_timer(action_delay_sec).timeout
 	
 	action.execute(character, target)  # gasta AP e aplica dano/efeitos
 	action_executed.emit(character, action, target)
+	
+	print("💰 AP depois:", character.current_ap, "/", character.get_max_ap())
 	
 	if not target.is_alive():
 		print("💀", target.name, "morreu")
