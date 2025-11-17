@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AnimationData" load_steps=3 format=3 uid="uid://yi187hlo0nw5"]
+
+[ext_resource type="Script" uid="uid://dqnvu8j61mukh" path="res://models/AnimationData.gd" id="1_l4043"]
+[ext_resource type="SpriteFrames" uid="uid://dodrpxj2vjjdv" path="res://data/characters/sprites/bestas demoníacas.tres" id="2_1o3nr"]
+
+[resource]
+script = ExtResource("1_l4043")
+sprite_frames = ExtResource("2_1o3nr")
+metadata/_custom_type_script = "uid://dqnvu8j61mukh"

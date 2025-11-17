@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AnimationData" load_steps=3 format=3 uid="uid://cxrp0dlv722t6"]
+
+[ext_resource type="Script" uid="uid://dqnvu8j61mukh" path="res://models/AnimationData.gd" id="1_uqh1s"]
+[ext_resource type="SpriteFrames" uid="uid://cthnme8pen3wo" path="res://data/characters/sprites/masaru todo.tres" id="2_q0v0d"]
+
+[resource]
+script = ExtResource("1_uqh1s")
+sprite_frames = ExtResource("2_q0v0d")
+metadata/_custom_type_script = "uid://dqnvu8j61mukh"

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AnimationData" load_steps=3 format=3 uid="uid://ww5ub4mmbfjr"]
+
+[ext_resource type="Script" uid="uid://dqnvu8j61mukh" path="res://models/AnimationData.gd" id="1_vtjf3"]
+[ext_resource type="SpriteFrames" uid="uid://deyxs0x5tvtou" path="res://data/characters/sprites/humanos corrompidos.tres" id="2_o13km"]
+
+[resource]
+script = ExtResource("1_vtjf3")
+sprite_frames = ExtResource("2_o13km")
+metadata/_custom_type_script = "uid://dqnvu8j61mukh"

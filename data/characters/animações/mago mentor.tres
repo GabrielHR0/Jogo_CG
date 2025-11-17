@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AnimationData" load_steps=3 format=3 uid="uid://denbenwnuldku"]
+
+[ext_resource type="Script" uid="uid://dqnvu8j61mukh" path="res://models/AnimationData.gd" id="1_hwio4"]
+[ext_resource type="SpriteFrames" uid="uid://ywbyys43gpvf" path="res://data/characters/sprites/mago mentor.tres" id="2_uhqfx"]
+
+[resource]
+script = ExtResource("1_hwio4")
+sprite_frames = ExtResource("2_uhqfx")
+metadata/_custom_type_script = "uid://dqnvu8j61mukh"

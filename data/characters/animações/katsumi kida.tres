@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AnimationData" load_steps=3 format=3 uid="uid://dtem23180wns1"]
+
+[ext_resource type="Script" uid="uid://dqnvu8j61mukh" path="res://models/AnimationData.gd" id="1_2n1sm"]
+[ext_resource type="SpriteFrames" uid="uid://dnues31ax38dv" path="res://data/characters/sprites/katsumi kida.tres" id="2_8pixg"]
+
+[resource]
+script = ExtResource("1_2n1sm")
+sprite_frames = ExtResource("2_8pixg")
+metadata/_custom_type_script = "uid://dqnvu8j61mukh"

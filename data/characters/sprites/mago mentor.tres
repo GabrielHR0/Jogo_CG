@@ -1,0 +1,112 @@
+[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://ywbyys43gpvf"]
+
+[ext_resource type="Texture2D" uid="uid://desfp6xpye0lq" path="res://assets/Soichiro Akizuki (Mago Mentor)/Sprites/png/andando.png" id="1_ab8g2"]
+[ext_resource type="Texture2D" uid="uid://i8cusdeehyl0" path="res://assets/Soichiro Akizuki (Mago Mentor)/Sprites/png/ataque.png" id="2_7hgay"]
+[ext_resource type="Texture2D" uid="uid://deqyoe60r4c72" path="res://assets/Soichiro Akizuki (Mago Mentor)/Sprites/png/dano.png" id="3_7ys4b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6it2"]
+atlas = ExtResource("1_ab8g2")
+region = Rect2(0, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jqk61"]
+atlas = ExtResource("1_ab8g2")
+region = Rect2(384, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kagkm"]
+atlas = ExtResource("1_ab8g2")
+region = Rect2(768, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndqev"]
+atlas = ExtResource("1_ab8g2")
+region = Rect2(0, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dh3lf"]
+atlas = ExtResource("1_ab8g2")
+region = Rect2(384, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgobu"]
+atlas = ExtResource("1_ab8g2")
+region = Rect2(768, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xi52y"]
+atlas = ExtResource("2_7hgay")
+region = Rect2(0, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnq1h"]
+atlas = ExtResource("2_7hgay")
+region = Rect2(384, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0cth"]
+atlas = ExtResource("2_7hgay")
+region = Rect2(768, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xx53u"]
+atlas = ExtResource("2_7hgay")
+region = Rect2(1152, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fou3"]
+atlas = ExtResource("3_7ys4b")
+region = Rect2(0, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2i5k"]
+atlas = ExtResource("3_7ys4b")
+region = Rect2(384, 0, 384, 384)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6it2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jqk61")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kagkm")
+}],
+"loop": true,
+"name": &"andar",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ndqev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dh3lf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgobu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xi52y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fnq1h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0cth")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xx53u")
+}],
+"loop": true,
+"name": &"ataque",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8fou3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2i5k")
+}],
+"loop": true,
+"name": &"dano",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

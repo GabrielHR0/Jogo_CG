@@ -1,5 +1,7 @@
-Character
 AnimationData
+Animation
+SpriteFrames
+Character
 DefendAction
 Theme
 Party

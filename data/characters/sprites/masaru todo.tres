@@ -1,0 +1,32 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://cthnme8pen3wo"]
+
+[ext_resource type="Texture2D" uid="uid://ybdap6cryswa" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Forma normal/png/andando.png" id="1_otf1g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jm7g4"]
+atlas = ExtResource("1_otf1g")
+region = Rect2(0, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hktjb"]
+atlas = ExtResource("1_otf1g")
+region = Rect2(384, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqu1f"]
+atlas = ExtResource("1_otf1g")
+region = Rect2(768, 0, 384, 384)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jm7g4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hktjb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqu1f")
+}],
+"loop": true,
+"name": &"andar",
+"speed": 5.0
+}]

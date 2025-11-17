@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AnimationData" load_steps=3 format=3 uid="uid://dnxfgjqeg1dj5"]
+
+[ext_resource type="Script" uid="uid://dqnvu8j61mukh" path="res://models/AnimationData.gd" id="1_jygw0"]
+[ext_resource type="SpriteFrames" uid="uid://6x44hwa53upg" path="res://data/characters/sprites/nobuhiko akizuki.tres" id="2_dx1h0"]
+
+[resource]
+script = ExtResource("1_jygw0")
+sprite_frames = ExtResource("2_dx1h0")
+metadata/_custom_type_script = "uid://dqnvu8j61mukh"

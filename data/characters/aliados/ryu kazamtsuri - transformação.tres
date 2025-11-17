@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Character" load_steps=5 format=3 uid="uid://bprbjhsq5jmtq"]
+
+[ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_t367d"]
+[ext_resource type="Texture2D" uid="uid://hjgyy8mvpyk2" path="res://assets/Ícones/Ryu Kazamatsuri - Transformação.png" id="2_odyxn"]
+[ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_bvbix"]
+[ext_resource type="Texture2D" uid="uid://h7vr3i0rbnq0" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Ryu Kazamatsuri (Arqueiro  Furtivo) - Transformação.png" id="4_xrcwk"]
+
+[resource]
+script = ExtResource("3_bvbix")
+name = "Ryu Kazamatsuri - Transformação"
+icon = ExtResource("2_odyxn")
+texture = ExtResource("4_xrcwk")
+strength = 6
+agility = 10
+intelligence = 6
+position = "back"
+role = 2
+metadata/_custom_type_script = "uid://bbcihyrs4lcmp"
