@@ -16,6 +16,13 @@ offset_right = 391.0
 offset_bottom = 69.0
 text = "Iniciar Batalha de Teste"
 
+[node name="TestButton" type="Button" parent="."]
+offset_left = 441.0
+offset_top = 37.0
+offset_right = 630.0
+offset_bottom = 68.0
+text = "Testar personagens"
+
 [node name="StatusLabel" type="Label" parent="."]
 offset_left = 225.0
 offset_top = 75.0
@@ -25,6 +32,7 @@ text = "Clique para iniciar
 "
 
 [node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(204, 280)
 script = ExtResource("2_k2fmo")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
