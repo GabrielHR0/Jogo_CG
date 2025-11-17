@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Character" load_steps=5 format=3 uid="uid://dyae0d3l0ev27"]
+
+[ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_qqne4"]
+[ext_resource type="Texture2D" uid="uid://cfianqlrip01m" path="res://assets/Ícones/Issamu Minami  Noctis Rex (2).png" id="2_4iabv"]
+[ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_1y1bv"]
+[ext_resource type="Texture2D" uid="uid://cm7u7xtr70btq" path="res://data/characters/protagonista/Issamu Minami  Noctis Rex.png" id="4_jhw53"]
+
+[resource]
+script = ExtResource("3_1y1bv")
+name = "Issamu Minami"
+icon = ExtResource("2_4iabv")
+texture = ExtResource("4_jhw53")
+strength = 7
+constitution = 8
+agility = 6
+intelligence = 6
+role = 1
+metadata/_custom_type_script = "uid://bbcihyrs4lcmp"

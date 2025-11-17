@@ -1,0 +1,79 @@
+[gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://7rn66sqaxdiv"]
+
+[ext_resource type="Texture2D" uid="uid://bpx65ntbdyn0m" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/andando.png" id="1_wsltt"]
+[ext_resource type="Texture2D" uid="uid://dx345pcgd3uvc" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/ataque.png" id="2_7lwcr"]
+[ext_resource type="Texture2D" uid="uid://dy3c2s3ol8ck2" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/dano.png" id="3_drpph"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44li5"]
+atlas = ExtResource("1_wsltt")
+region = Rect2(0, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_myv4n"]
+atlas = ExtResource("1_wsltt")
+region = Rect2(384, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2kwqd"]
+atlas = ExtResource("1_wsltt")
+region = Rect2(768, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jdxn"]
+atlas = ExtResource("2_7lwcr")
+region = Rect2(0, 0, 500, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1vwf"]
+atlas = ExtResource("2_7lwcr")
+region = Rect2(500, 0, 500, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbm38"]
+atlas = ExtResource("2_7lwcr")
+region = Rect2(1000, 0, 500, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0t3ls"]
+atlas = ExtResource("3_drpph")
+region = Rect2(0, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lqn6w"]
+atlas = ExtResource("3_drpph")
+region = Rect2(384, 0, 384, 384)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44li5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_myv4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2kwqd")
+}],
+"loop": true,
+"name": &"andar",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jdxn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1vwf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbm38")
+}],
+"loop": true,
+"name": &"ataque",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0t3ls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lqn6w")
+}],
+"loop": true,
+"name": &"dano",
+"speed": 5.0
+}]

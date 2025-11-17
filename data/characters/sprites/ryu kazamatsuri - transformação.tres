@@ -1,0 +1,72 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://d4k277edrpnon"]
+
+[ext_resource type="Texture2D" uid="uid://ceg8wlmf56ufy" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/andnado.png" id="1_rrg5u"]
+[ext_resource type="Texture2D" uid="uid://rrifk7poh3b0" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/ataque.png" id="2_6wvxe"]
+[ext_resource type="Texture2D" uid="uid://ds3mfjooidgo8" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/dano.png" id="3_sua68"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fi407"]
+atlas = ExtResource("1_rrg5u")
+region = Rect2(0, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4ct2"]
+atlas = ExtResource("1_rrg5u")
+region = Rect2(320, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_or1q6"]
+atlas = ExtResource("1_rrg5u")
+region = Rect2(640, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrj33"]
+atlas = ExtResource("2_6wvxe")
+region = Rect2(0, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jpj3"]
+atlas = ExtResource("2_6wvxe")
+region = Rect2(320, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0phm0"]
+atlas = ExtResource("3_sua68")
+region = Rect2(0, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aj731"]
+atlas = ExtResource("3_sua68")
+region = Rect2(320, 0, 320, 320)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fi407")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4ct2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_or1q6")
+}],
+"loop": true,
+"name": &"andar",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xrj33")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jpj3")
+}],
+"loop": true,
+"name": &"ataque",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0phm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aj731")
+}],
+"loop": true,
+"name": &"dano",
+"speed": 5.0
+}]

@@ -1,0 +1,52 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://deyxs0x5tvtou"]
+
+[ext_resource type="Texture2D" uid="uid://dg2pldcb4g4ar" path="res://assets/Bishum (Alta Sacerdotisa de Gorgom﻿)/Sprites/png/ataque.png" id="1_n5dej"]
+[ext_resource type="Texture2D" uid="uid://bucjomv3kqx1v" path="res://assets/Bishum (Alta Sacerdotisa de Gorgom﻿)/Sprites/png/dano.png" id="2_ust0n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_36ok7"]
+atlas = ExtResource("1_n5dej")
+region = Rect2(0, 0, 800, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gi4x"]
+atlas = ExtResource("1_n5dej")
+region = Rect2(800, 0, 800, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25e0x"]
+atlas = ExtResource("1_n5dej")
+region = Rect2(1600, 0, 800, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bs54"]
+atlas = ExtResource("2_ust0n")
+region = Rect2(0, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hrfv"]
+atlas = ExtResource("2_ust0n")
+region = Rect2(384, 0, 384, 384)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_36ok7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gi4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25e0x")
+}],
+"loop": true,
+"name": &"ataque",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7bs54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hrfv")
+}],
+"loop": true,
+"name": &"dano",
+"speed": 5.0
+}]

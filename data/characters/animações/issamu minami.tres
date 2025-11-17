@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AnimationData" load_steps=3 format=3 uid="uid://dk6227jpq4lwj"]
+
+[ext_resource type="Script" uid="uid://dqnvu8j61mukh" path="res://models/AnimationData.gd" id="1_kekqh"]
+[ext_resource type="SpriteFrames" uid="uid://bb1eabj14fxqn" path="res://data/characters/sprites/issamu minami.tres" id="2_wvdqr"]
+
+[resource]
+script = ExtResource("1_kekqh")
+sprite_frames = ExtResource("2_wvdqr")
+metadata/_custom_type_script = "uid://dqnvu8j61mukh"

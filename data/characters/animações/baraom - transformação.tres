@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AnimationData" load_steps=3 format=3 uid="uid://3jblf2fjrif1"]
+
+[ext_resource type="Script" uid="uid://dqnvu8j61mukh" path="res://models/AnimationData.gd" id="1_0x204"]
+[ext_resource type="SpriteFrames" uid="uid://dpsq8uujomhi8" path="res://data/characters/sprites/baraom - transformação.tres" id="2_436uu"]
+
+[resource]
+script = ExtResource("1_0x204")
+sprite_frames = ExtResource("2_436uu")
+metadata/_custom_type_script = "uid://dqnvu8j61mukh"

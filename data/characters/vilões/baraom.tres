@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Character" load_steps=5 format=3 uid="uid://dkojj8e0svehg"]
+
+[ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_xrcv1"]
+[ext_resource type="Texture2D" uid="uid://e63y04ak00jh" path="res://assets/Ícones/Baraom.png" id="2_v4mdx"]
+[ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_vanra"]
+[ext_resource type="Texture2D" uid="uid://csecjk1baglnm" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Baraom (Sumo Sacerdote  Guerreiro Mutante).png" id="4_fle8u"]
+
+[resource]
+script = ExtResource("3_vanra")
+name = "Baraom"
+icon = ExtResource("2_v4mdx")
+texture = ExtResource("4_fle8u")
+strength = 9
+constitution = 8
+agility = 4
+intelligence = 3
+role = 1
+metadata/_custom_type_script = "uid://bbcihyrs4lcmp"

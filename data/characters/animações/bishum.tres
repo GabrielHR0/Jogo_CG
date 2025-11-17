@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AnimationData" load_steps=3 format=3 uid="uid://bkvl4tiiyo4vs"]
+
+[ext_resource type="Script" uid="uid://dqnvu8j61mukh" path="res://models/AnimationData.gd" id="1_74qjq"]
+[ext_resource type="SpriteFrames" uid="uid://b2ekfgjxavvj6" path="res://data/characters/sprites/bishum.tres" id="2_qqbdh"]
+
+[resource]
+script = ExtResource("1_74qjq")
+sprite_frames = ExtResource("2_qqbdh")
+metadata/_custom_type_script = "uid://dqnvu8j61mukh"

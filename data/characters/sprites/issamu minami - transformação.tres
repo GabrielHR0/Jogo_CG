@@ -1,0 +1,106 @@
+[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://b5qlr44fw8rst"]
+
+[ext_resource type="Texture2D" uid="uid://b0c1a53mb8u3l" path="res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/png/transformação andando.png" id="1_53lqu"]
+[ext_resource type="Texture2D" uid="uid://d1tbbh5xn2pai" path="res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/png/ataque transfromação.png" id="2_b37nc"]
+[ext_resource type="Texture2D" uid="uid://cgkhkhcq37faw" path="res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/png/transformação dano.png" id="3_1dmbx"]
+[ext_resource type="Texture2D" uid="uid://vktw6d013otc" path="res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/png/transformação.png" id="4_bbi3q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2436c"]
+atlas = ExtResource("1_53lqu")
+region = Rect2(0, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mp2k1"]
+atlas = ExtResource("1_53lqu")
+region = Rect2(384, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57sgk"]
+atlas = ExtResource("1_53lqu")
+region = Rect2(768, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wgs1"]
+atlas = ExtResource("2_b37nc")
+region = Rect2(0, 0, 800, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opr6p"]
+atlas = ExtResource("2_b37nc")
+region = Rect2(800, 0, 800, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ae4du"]
+atlas = ExtResource("2_b37nc")
+region = Rect2(1600, 0, 800, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dkw0"]
+atlas = ExtResource("3_1dmbx")
+region = Rect2(0, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nx5ty"]
+atlas = ExtResource("3_1dmbx")
+region = Rect2(384, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6oax"]
+atlas = ExtResource("4_bbi3q")
+region = Rect2(0, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1cg6"]
+atlas = ExtResource("4_bbi3q")
+region = Rect2(800, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dv83"]
+atlas = ExtResource("4_bbi3q")
+region = Rect2(1600, 0, 800, 800)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2436c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mp2k1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_57sgk")
+}],
+"loop": true,
+"name": &"andar",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wgs1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_opr6p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ae4du")
+}],
+"loop": true,
+"name": &"ataque",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dkw0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nx5ty")
+}],
+"loop": true,
+"name": &"dano",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6oax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1cg6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dv83")
+}],
+"loop": true,
+"name": &"transformação",
+"speed": 5.0
+}]

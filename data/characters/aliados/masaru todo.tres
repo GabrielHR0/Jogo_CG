@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Character" load_steps=5 format=3 uid="uid://bnwvga0fsorf6"]
+
+[ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_xexc4"]
+[ext_resource type="Texture2D" uid="uid://cj43iaxr2cn68" path="res://assets/Ícones/Masaru Todo.png" id="2_ktmlh"]
+[ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_4gbbp"]
+[ext_resource type="Texture2D" uid="uid://c4tjje7kkutfu" path="res://assets/Masaru Todo (Mago das Trevas)/Masaru Todo (Mago das Trevas).png" id="4_oil7b"]
+
+[resource]
+script = ExtResource("3_4gbbp")
+name = "Masaru Todo"
+icon = ExtResource("2_ktmlh")
+texture = ExtResource("4_oil7b")
+strength = 3
+agility = 4
+intelligence = 10
+position = "back"
+role = 2
+metadata/_custom_type_script = "uid://bbcihyrs4lcmp"
