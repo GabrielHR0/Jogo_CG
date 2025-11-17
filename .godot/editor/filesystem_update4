@@ -1,8 +1,5 @@
-res://scenes/BattleScene/BattleScene.tscn
-res://scenes/BattleScene/battle_scene.gd
-res://scenes/main/main.tscn
 res://addons/godot-css-theme/editor/css_syntax.tres
+res://scenes/character_view/CharacterView.tscn
 res://models/Character.gd
-res://models/actions/DefendAction.gd
-res://scenes/character_view/character_view.tscn
-res://models/Battle.gd
+res://models/AnimationData.gd
+res://scenes/character_view/character_view.gd

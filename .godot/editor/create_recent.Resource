@@ -1,4 +1,5 @@
-DefendAction
 Character
+AnimationData
+DefendAction
 Theme
 Party

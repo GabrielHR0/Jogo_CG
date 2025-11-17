@@ -24,10 +24,20 @@ class_name Character
 @export var basic_actions: Array[Action] = []
 @export var combat_actions: Array[Action] = []
 
+# NOVO: Sistema de animações
+@export_category("Animations")
+@export var animation_data: AnimationData
+
 var buffs := {}
 var is_defending: bool = false
 var defense_bonus: int = 0
 var dodge_chance: float = 0.0
+
+# NOVO: Sinais para controle de animações
+signal animation_requested(animation_name, attack_type)
+signal damage_animation_requested()
+signal defense_animation_requested()
+signal effect_requested(effect_name, position_offset)
 
 func _init():
 	calculate_stats()
@@ -57,7 +67,7 @@ func _setup_basic_actions():
 	basic_actions.append(use_item)
 
 func calculate_defend_ap_cost() -> int:
-	return int(get_max_ap() * 0.6)  # 60% do AP total
+	return int(get_max_ap() * 0.6)
 
 func calculate_stats():
 	melee_damage = calculate_melee_damage()
@@ -95,21 +105,25 @@ func restore_ap():
 	var recovered = calculate_ap_recovery()
 	current_ap = min(get_max_ap(), current_ap + recovered)
 	
-	# 🛡️ CORREÇÃO: Para de defender ao recuperar AP (início do turno)
 	if is_defending:
 		stop_defending()
 	
 	return recovered
 
 func take_damage(dmg: int) -> int:
-	# Verifica se esquiva completamente (15% de chance quando defendendo)
+	# Verifica se esquiva completamente
 	if is_defending and randf() < dodge_chance:
 		print("   🎯", name, "esquivou completamente do ataque!")
+		# NOVO: Efeito de esquiva
+		effect_requested.emit("dodge", Vector2.ZERO)
 		return 0
 	
 	var defense_reduction = int(get_defense() * 0.5)
 	var final_damage = max(0, dmg - defense_reduction)
 	current_hp = max(0, current_hp - final_damage)
+	
+	# NOVO: Solicita animação de dano
+	request_damage_animation()
 	
 	if defense_reduction > 0:
 		print("   🛡️ Defesa reduziu", defense_reduction, "de dano")
@@ -147,8 +161,12 @@ func get_attribute(attr_name: String) -> int:
 
 func start_defending():
 	is_defending = true
-	defense_bonus = int(get_attribute("constitution") * 1.5)  # Bônus baseado na constituição
-	dodge_chance = 0.15  # 15% de chance de esquiva
+	defense_bonus = int(get_attribute("constitution") * 1.5)
+	dodge_chance = 0.15
+	
+	# NOVO: Solicita animação de defesa
+	request_defense_animation()
+	
 	print("   🛡️", name, "está defendendo")
 	print("   📈 +", defense_bonus, "defesa")
 	print("   🎯 Chance de esquiva: 15%")
@@ -206,3 +224,68 @@ func get_all_actions() -> Array[Action]:
 
 func has_ap_for_action(action: Action) -> bool:
 	return current_ap >= action.ap_cost
+
+# ========== NOVOS MÉTODOS DE ANIMAÇÃO ==========
+
+func request_attack_animation(attack_type: String = "basic"):
+	animation_requested.emit("attack", attack_type)
+	
+	# Efeitos específicos por tipo de ataque
+	match attack_type:
+		"melee":
+			effect_requested.emit("slash", Vector2(50, 0))
+		"magic":
+			effect_requested.emit("magic", Vector2(0, -30))
+		"ranged":
+			effect_requested.emit("arrow", Vector2(40, -20))
+
+func request_damage_animation():
+	damage_animation_requested.emit()
+
+func request_defense_animation():
+	animation_requested.emit("defend", "")
+	effect_requested.emit("shield", Vector2(0, 0))
+
+func request_idle_animation():
+	animation_requested.emit("idle", "")
+
+func request_walk_animation():
+	animation_requested.emit("walk", "")
+
+func request_victory_animation():
+	animation_requested.emit("victory", "")
+	effect_requested.emit("sparkles", Vector2(0, -50))
+
+func request_defeat_animation():
+	animation_requested.emit("defeat", "")
+
+# Método para ações de combate
+func execute_combat_action(action: Action) -> String:
+	# Gasta AP
+	spend_ap(action.ap_cost)
+	
+	# Determina tipo de animação baseado na ação
+	var attack_type = "melee"  # padrão
+	
+	if action.has_method("get_damage_type"):
+		var damage_type = action.get_damage_type()
+		match damage_type:
+			"magic":
+				attack_type = "magic"
+			"ranged":
+				attack_type = "ranged"
+			_:
+				attack_type = "melee"
+	
+	# Solicita animação de ataque
+	request_attack_animation(attack_type)
+	
+	return attack_type
+
+# Método para quando o personagem é selecionado
+func on_selected():
+	effect_requested.emit("highlight", Vector2.ZERO)
+
+# Método para quando o personagem é curado
+func on_healed(amount: int):
+	effect_requested.emit("heal", Vector2(0, -30))
