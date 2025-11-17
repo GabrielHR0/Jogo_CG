@@ -1,16 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5dkxddale4vk"]
+[gd_scene load_steps=2 format=3 uid="uid://tdliu86nb58u"]
 
-[ext_resource type="Script" uid="uid://cyug4vnabq7cw" path="res://scenes/character_view/character_view.gd" id="1_b5qxt"]
+[sub_resource type="GDScript" id="GDScript_ux8jc"]
+script/source = "extends HBoxContainer
+class_name CharacterView
+
+var character: Character
+
+func setup(c: Character, side: String = \"ally\"):
+	character = c
+
+	var sprite_rect := get_node_or_null(\"SpriteRect\") as TextureRect
+	assert(sprite_rect != null, \"SpriteRect não encontrado em CharacterView.tscn\")
+
+	# Sprite corpo inteiro na área central
+	if c.texture != null:
+		sprite_rect.texture = c.texture
+	else:
+		# fallback: usa o icon se não tiver texture
+		sprite_rect.texture = c.icon
+
+	# Ajustes por lado (opcional)
+	if side == \"enemy\":
+		# exemplo: inverter horizontal via escala
+		sprite_rect.scale = Vector2(-abs(sprite_rect.scale.x), sprite_rect.scale.y)
+"
 
 [node name="CharacterView" type="HBoxContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_b5qxt")
-
-[node name="SpriteRect" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-expand_mode = 4
-
-[node name="Info" type="VBoxContainer" parent="."]
-layout_mode = 2
+script = SubResource("GDScript_ux8jc")

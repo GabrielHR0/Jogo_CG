@@ -1,3 +1,7 @@
+Node2D
+CollisionShape2D
+AnimationPlayer
+Sprite2D
 Label
 VBoxContainer
 HBoxContainer
@@ -7,8 +11,4 @@ ProgressBar
 TextureRect
 Panel
 ColorRect
-CollisionShape2D
-Sprite2D
 CharacterBody2D
-TabBar
-PanelContainer
