@@ -26,6 +26,8 @@ class_name Character
 
 var buffs := {}
 var is_defending: bool = false
+var defense_bonus: int = 0
+var dodge_chance: float = 0.0
 
 func _init():
 	calculate_stats()
@@ -40,11 +42,11 @@ func _setup_basic_actions():
 	skip_turn.description = "Não faz nada neste turno"
 	basic_actions.append(skip_turn)
 	
-	var defend = Action.new()
+	var defend = DefendAction.new()
 	defend.name = "Defender"
-	defend.ap_cost = 1
+	defend.ap_cost = calculate_defend_ap_cost()
 	defend.target_type = "self"
-	defend.description = "Assume postura defensiva"
+	defend.description = "Assume postura defensiva até seu próximo turno"
 	basic_actions.append(defend)
 	
 	var use_item = Action.new()
@@ -53,6 +55,9 @@ func _setup_basic_actions():
 	use_item.target_type = "ally"
 	use_item.description = "Usa um item do inventário"
 	basic_actions.append(use_item)
+
+func calculate_defend_ap_cost() -> int:
+	return int(get_max_ap() * 0.6)  # 60% do AP total
 
 func calculate_stats():
 	melee_damage = calculate_melee_damage()
@@ -80,9 +85,7 @@ func full_heal():
 	print("💚", name, "curado:", current_hp, "/", get_max_hp(), "HP")
 
 func get_defense() -> int:
-	var base_defense = defense
-	if is_defending:
-		base_defense += int(get_attribute("constitution") * 0.5)
+	var base_defense = defense + defense_bonus
 	return base_defense
 
 func calculate_ap_recovery() -> int:
@@ -91,15 +94,28 @@ func calculate_ap_recovery() -> int:
 func restore_ap():
 	var recovered = calculate_ap_recovery()
 	current_ap = min(get_max_ap(), current_ap + recovered)
+	
+	# 🛡️ CORREÇÃO: Para de defender ao recuperar AP (início do turno)
+	if is_defending:
+		stop_defending()
+	
 	return recovered
 
-func take_damage(dmg: int):
+func take_damage(dmg: int) -> int:
+	# Verifica se esquiva completamente (15% de chance quando defendendo)
+	if is_defending and randf() < dodge_chance:
+		print("   🎯", name, "esquivou completamente do ataque!")
+		return 0
+	
 	var defense_reduction = int(get_defense() * 0.5)
 	var final_damage = max(0, dmg - defense_reduction)
 	current_hp = max(0, current_hp - final_damage)
+	
 	if defense_reduction > 0:
 		print("   🛡️ Defesa reduziu", defense_reduction, "de dano")
 		print("   💥 Dano final:", final_damage, "(original:", dmg, ")")
+	
+	return final_damage
 
 func spend_ap(cost: int):
 	current_ap = max(0, current_ap - max(0, cost))
@@ -131,10 +147,19 @@ func get_attribute(attr_name: String) -> int:
 
 func start_defending():
 	is_defending = true
+	defense_bonus = int(get_attribute("constitution") * 1.5)  # Bônus baseado na constituição
+	dodge_chance = 0.15  # 15% de chance de esquiva
 	print("   🛡️", name, "está defendendo")
+	print("   📈 +", defense_bonus, "defesa")
+	print("   🎯 Chance de esquiva: 15%")
+	print("   ⏱️ Duração: Até seu próximo turno")
 
 func stop_defending():
-	is_defending = false
+	if is_defending:
+		is_defending = false
+		defense_bonus = 0
+		dodge_chance = 0.0
+		print("   🛡️", name, "saiu da posição defensiva")
 
 func add_buff(attr_name: String, buff_value: int, duration_turns: int):
 	if buffs.has(attr_name):
@@ -143,7 +168,14 @@ func add_buff(attr_name: String, buff_value: int, duration_turns: int):
 		current_buff[1] = max(current_buff[1], duration_turns)
 	else:
 		buffs[attr_name] = [buff_value, duration_turns]
-	calculate_stats()
+	
+	_recalculate_combat_stats_only()
+
+func _recalculate_combat_stats_only():
+	melee_damage = calculate_melee_damage()
+	magic_damage = calculate_magic_damage()
+	ranged_damage = calculate_ranged_damage()
+	defense = calculate_defense()
 
 func update_buffs():
 	var keys_to_remove = []
@@ -153,8 +185,8 @@ func update_buffs():
 			keys_to_remove.append(attr_name)
 	for attr_name in keys_to_remove:
 		buffs.erase(attr_name)
-	calculate_stats()
-	stop_defending()
+	
+	_recalculate_combat_stats_only()
 
 func add_combat_action(action: Action):
 	if combat_actions.size() < 4:

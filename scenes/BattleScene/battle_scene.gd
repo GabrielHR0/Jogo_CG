@@ -33,6 +33,12 @@ var character_displays := {}
 var current_player_character: Character = null
 var selected_action: Action = null
 var battle_ended: bool = false
+var waiting_for_update: bool = false
+
+# 🎯 NOVO: Configuração de delays
+@export var turn_start_delay: float = 0.3
+@export var action_execution_delay: float = 0.2
+@export var ui_update_delay: float = 0.1
 
 func _ready():
 	print("=== 🎮 BattleScene READY ===")
@@ -65,6 +71,7 @@ func connect_buttons():
 func setup_battle(allies_party: Party, enemies_party: Party):
 	print("⚔️ Setup battle:", allies_party.name, "vs", enemies_party.name)
 	battle_ended = false
+	waiting_for_update = false
 	
 	battle = Battle.new()
 	add_child(battle)
@@ -81,7 +88,7 @@ func setup_battle(allies_party: Party, enemies_party: Party):
 	battle.setup_battle(allies_party, enemies_party)
 	create_character_displays()
 
-	await get_tree().create_timer(0.25).timeout
+	await get_tree().create_timer(0.5).timeout
 	print("▶️ start_battle()")
 	battle.start_battle()
 
@@ -161,7 +168,22 @@ func _on_battle_started():
 func _on_player_turn_started(character: Character):
 	if battle_ended:
 		return
-		
+	
+	# 🎯 NOVO: Sistema de espera para garantir que tudo foi atualizado
+	waiting_for_update = true
+	action_label.text = "Atualizando..."
+	
+	print("⏳ Iniciando turno de:", character.name)
+	
+	# Delay para garantir que todos os campos foram atualizados
+	await get_tree().create_timer(turn_start_delay).timeout
+	
+	# Atualiza a UI completamente
+	await update_all_ui_elements()
+	
+	# Libera para interação
+	waiting_for_update = false
+	
 	current_player_character = character
 	print("🕐 Turno:", character.name, "| AP:", character.current_ap, "/", character.get_max_ap(), "| Ações:", character.combat_actions.size())
 	_print_actions(character)
@@ -170,6 +192,21 @@ func _on_player_turn_started(character: Character):
 	action_label.text = "Sua vez! Escolha uma ação"
 	hide_sub_menus() # fecha restos do turno anterior
 	print("🧭 CommandMenu pronto; Menus fechados")
+
+# 🎯 NOVO: Função para atualizar todos os elementos da UI
+func update_all_ui_elements():
+	print("🔄 Atualizando toda a UI...")
+	
+	# Atualiza displays de todos os personagens
+	update_character_displays()
+	
+	# Atualiza status do personagem atual se existir
+	if current_player_character:
+		update_character_status(current_player_character)
+	
+	# Pequeno delay para garantir que a UI foi atualizada
+	await get_tree().create_timer(ui_update_delay).timeout
+	print("✅ UI atualizada")
 
 func _print_actions(character: Character):
 	if character == null:
@@ -186,22 +223,37 @@ func _print_actions(character: Character):
 func _on_action_executed(character: Character, action: Action, target: Character):
 	if battle_ended:
 		return
+	
+	# 🎯 NOVO: Espera antes de atualizar a UI após ação
+	await get_tree().create_timer(action_execution_delay).timeout
 		
 	var action_text = "%s usa %s em %s" % [character.name, action.name, target.name]
 	print("✅ Executada:", action_text)
 	action_label.text = action_text
-	update_character_displays()
+	
+	# Atualiza a UI após a ação
+	await update_all_ui_elements()
 
 func _on_turn_completed(character: Character):
 	if battle_ended:
 		return
+	
+	# 🎯 NOVO: Espera antes de finalizar o turno
+	await get_tree().create_timer(action_execution_delay).timeout
 		
 	print("⏭️ Turno concluído:", character.name)
 	remove_character_highlight(character.name)
 	hide_sub_menus()
+	
+	# Atualiza a UI após o turno
+	await update_all_ui_elements()
 
 func _on_character_died(character: Character):
 	print("💀 Morte:", character.name)
+	
+	# 🎯 NOVO: Espera antes de remover o personagem
+	await get_tree().create_timer(action_execution_delay).timeout
+	
 	if character.name in character_displays:
 		var display = character_displays[character.name]
 		# 🎯 CORREÇÃO: Faz o personagem desaparecer em vez de escurecer
@@ -213,6 +265,7 @@ func _on_character_died(character: Character):
 func _on_battle_ended(victory: bool):
 	print("🎯 BattleScene: _on_battle_ended chamado - Vitória:", victory)
 	battle_ended = true
+	waiting_for_update = true
 	
 	if victory:
 		print("🎉 VITÓRIA!")
@@ -270,6 +323,8 @@ func try_alternative_scenes():
 # ===== Menus =====
 
 func show_command_menu():
+	if waiting_for_update:
+		return
 	hide_sub_menus()
 	print("🧭 CommandMenu visível; Sub-menus ocultos")
 
@@ -281,13 +336,13 @@ func hide_sub_menus():
 	print("🙈 Todos os sub-menus ocultados")
 
 func _on_fight_pressed():
-	if battle_ended:
+	if battle_ended or waiting_for_update:
 		return
 	print("🗡️ LUTAR por:", current_player_character and current_player_character.name)
 	show_attack_menu()
 
 func _on_defend_pressed():
-	if battle_ended:
+	if battle_ended or waiting_for_update:
 		return
 	print("🛡️ DEFENDER")
 	if current_player_character == null:
@@ -304,13 +359,13 @@ func _on_defend_pressed():
 		print("⚠️ 'Defender' não encontrada")
 
 func _on_items_pressed():
-	if battle_ended:
+	if battle_ended or waiting_for_update:
 		return
 	print("📦 ITENS (WIP)")
 	action_label.text = "Sistema de itens em desenvolvimento"
 
 func _on_skip_pressed():
-	if battle_ended:
+	if battle_ended or waiting_for_update:
 		return
 	print("⏭️ PULAR")
 	if current_player_character == null:
@@ -323,7 +378,7 @@ func _on_skip_pressed():
 		print("⚠️ 'Pular Turno' não encontrada")
 
 func show_attack_menu():
-	if battle_ended:
+	if battle_ended or waiting_for_update:
 		return
 	print("📂 AttackMenu para:", current_player_character and current_player_character.name)
 	for child in attack_buttons_container.get_children():
@@ -361,14 +416,14 @@ func show_attack_menu():
 	print("👁️ AttackMenu:", attack_menu.visible, "| TargetMenu:", target_menu.visible)
 
 func _on_attack_selected(action: Action):
-	if battle_ended:
+	if battle_ended or waiting_for_update:
 		return
 	print("🎯 Selecionado:", action.name, "por", current_player_character and current_player_character.name)
 	selected_action = action
 	show_target_menu(action)
 
 func show_target_menu(action: Action):
-	if battle_ended:
+	if battle_ended or waiting_for_update:
 		return
 	print("🎯 Mostrando alvos para:", action.name)
 	
@@ -457,7 +512,7 @@ func get_valid_targets(action: Action) -> Array:
 	return valid_targets
 
 func _on_target_selected(target: Character):
-	if battle_ended:
+	if battle_ended or waiting_for_update:
 		return
 	# 🛡️ CORREÇÃO: Verifica se o target é válido
 	if target == null:
@@ -473,7 +528,7 @@ func _on_target_selected(target: Character):
 	execute_player_action(selected_action, target)
 
 func _on_target_back_pressed():
-	if battle_ended:
+	if battle_ended or waiting_for_update:
 		return
 	print("⬅️ Voltando do menu de alvos")
 	# Volta para o menu anterior
@@ -488,12 +543,20 @@ func _on_target_back_pressed():
 		hide_sub_menus()
 
 func execute_player_action(action: Action, target: Character):
-	if battle_ended:
+	if battle_ended or waiting_for_update:
 		return
 	if current_player_character == null:
 		print("⚠️ execute_player_action: sem personagem ativo")
 		return
+	
+	# 🎯 CORREÇÃO: Verifica AP novamente antes de executar
+	if not current_player_character.has_ap_for_action(action):
+		print("❌ AP insuficiente! AP atual:", current_player_character.current_ap, "Custo necessário:", action.ap_cost)
+		action_label.text = "AP insuficiente! AP: " + str(current_player_character.current_ap) + "/" + str(current_player_character.get_max_ap())
+		return
+	
 	print("🚀 Executando:", action.name, "de", current_player_character.name, "em", target.name)
+	print("💰 AP disponível:", current_player_character.current_ap, "/", current_player_character.get_max_ap())
 	hide_sub_menus()
 	battle.on_player_select_action(action, target)
 	selected_action = null
