@@ -30,15 +30,20 @@ extends Control
 # Sistema de batalha
 var battle: Battle
 var character_displays := {}
+var character_views := {}  # 🆕 NOVO: Dicionário para armazenar as CharacterViews
 var current_player_character: Character = null
 var selected_action: Action = null
 var battle_ended: bool = false
 var waiting_for_update: bool = false
 
-# 🎯 NOVO: Configuração de delays
+# 🎯 Configuração de delays
 @export var turn_start_delay: float = 0.3
 @export var action_execution_delay: float = 0.2
 @export var ui_update_delay: float = 0.1
+
+# 🆕 NOVO: Configuração das CharacterViews
+@export var character_view_scene: PackedScene = preload("res://scenes/character_view/CharacterView.tscn")
+@export var character_view_scale: Vector2 = Vector2(0.3, 0.3)  # Escala para as views na batalha
 
 func _ready():
 	print("=== 🎮 BattleScene READY ===")
@@ -86,15 +91,71 @@ func setup_battle(allies_party: Party, enemies_party: Party):
 	battle.player_action_selected.connect(_on_player_action_selected)
 
 	battle.setup_battle(allies_party, enemies_party)
+	
+	# 🆕 NOVO: Cria as CharacterViews primeiro, depois os displays de UI
+	create_character_views()
 	create_character_displays()
 
 	await get_tree().create_timer(0.5).timeout
 	print("▶️ start_battle()")
 	battle.start_battle()
 
+# 🆕 NOVO: Função para criar as CharacterViews dos personagens
+func create_character_views():
+	print("👥 Criando CharacterViews...")
+	
+	# Limpa views anteriores
+	clear_character_views()
+	
+	# Cria views para inimigos
+	create_enemy_views()
+	
+	# Cria views para aliados
+	create_ally_views()
+	
+	print("✅ CharacterViews criadas: ", character_views.size())
+
+func create_enemy_views():
+	for character in battle.enemies_party.members:
+		var character_view = create_character_view(character)
+		if character.position == "front":
+			enemies_front_row.add_child(character_view)
+		else:
+			enemies_back_row.add_child(character_view)
+		character_views[character.name] = character_view
+		print("   💀 CharacterView inimiga criada:", character.name)
+
+func create_ally_views():
+	for character in battle.allies_party.members:
+		var character_view = create_character_view(character)
+		if character.position == "front":
+			allies_front_row.add_child(character_view)
+		else:
+			allies_back_row.add_child(character_view)
+		character_views[character.name] = character_view
+		print("   🎯 CharacterView aliada criada:", character.name)
+
+func create_character_view(character: Character) -> CharacterView:
+	var character_view = character_view_scene.instantiate()
+	character_view.character = character
+	character_view.scale = character_view_scale
+	character_view.auto_setup = true
+	
+	# 🆕 NOVO: Posiciona a CharacterView dentro do container
+	character_view.position = Vector2(60, 80)  # Posição central dentro do espaço do personagem
+	
+	return character_view
+
+func clear_character_views():
+	for view in character_views.values():
+		if is_instance_valid(view):
+			view.queue_free()
+	character_views.clear()
+	print("🧹 CharacterViews limpas")
+
 func create_character_displays():
 	clear_character_displays()
-	print("👥 Criando displays...")
+	print("📊 Criando displays de UI...")
 	create_enemy_displays()
 	create_ally_displays()
 
@@ -106,7 +167,7 @@ func create_enemy_displays():
 		else:
 			enemies_back_row.add_child(display)
 		character_displays[character.name] = display
-		print("   💀 Inimigo no grid:", character.name)
+		print("   💀 Display UI inimigo:", character.name)
 
 func create_ally_displays():
 	for character in battle.allies_party.members:
@@ -116,12 +177,12 @@ func create_ally_displays():
 		else:
 			allies_back_row.add_child(display)
 		character_displays[character.name] = display
-		print("   🎯 Aliado no grid:", character.name)
+		print("   🎯 Display UI aliado:", character.name)
 
 func create_character_display(character: Character) -> PanelContainer:
 	var panel = PanelContainer.new()
-	panel.custom_minimum_size = Vector2(120, 150)
-
+	panel.custom_minimum_size = Vector2(120, 60)  # 🆕 REDUZIDO: Agora só mostra status
+	
 	var vbox = VBoxContainer.new()
 	vbox.name = "VBoxContainer"
 	vbox.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -130,33 +191,42 @@ func create_character_display(character: Character) -> PanelContainer:
 	name_label.name = "Name"
 	name_label.text = character.name
 	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	name_label.add_theme_font_size_override("font_size", 14)
+	name_label.add_theme_font_size_override("font_size", 12)  # 🆕 Menor
 
 	var hp_container = HBoxContainer.new()
 	hp_container.name = "HPRow"
 	var hp_text = Label.new(); hp_text.text = "HP:"
+	hp_text.add_theme_font_size_override("font_size", 10)
 	var hp_value = Label.new(); hp_value.name = "HPValue"
 	hp_value.text = "%d/%d" % [character.current_hp, character.get_max_hp()]
+	hp_value.add_theme_font_size_override("font_size", 10)
 	hp_container.add_child(hp_text); hp_container.add_child(hp_value)
 
 	var ap_container = HBoxContainer.new()
 	ap_container.name = "APRow"
 	var ap_text = Label.new(); ap_text.text = "AP:"
+	ap_text.add_theme_font_size_override("font_size", 10)
 	var ap_value = Label.new(); ap_value.name = "APValue"
 	ap_value.text = "%d/%d" % [character.current_ap, character.get_max_ap()]
+	ap_value.add_theme_font_size_override("font_size", 10)
 	ap_container.add_child(ap_text); ap_container.add_child(ap_value)
 
 	vbox.add_child(name_label)
 	vbox.add_child(hp_container)
 	vbox.add_child(ap_container)
 	panel.add_child(vbox)
+	
+	# 🆕 NOVO: Posiciona o display abaixo da CharacterView
+	panel.position = Vector2(0, 120)
+	
 	return panel
 
 func clear_character_displays():
 	for display in character_displays.values():
-		display.queue_free()
+		if is_instance_valid(display):
+			display.queue_free()
 	character_displays.clear()
-	print("🧹 Displays limpos")
+	print("🧹 Displays UI limpos")
 
 # ===== Eventos/sinais =====
 
@@ -169,19 +239,14 @@ func _on_player_turn_started(character: Character):
 	if battle_ended:
 		return
 	
-	# 🎯 NOVO: Sistema de espera para garantir que tudo foi atualizado
 	waiting_for_update = true
 	action_label.text = "Atualizando..."
 	
 	print("⏳ Iniciando turno de:", character.name)
 	
-	# Delay para garantir que todos os campos foram atualizados
 	await get_tree().create_timer(turn_start_delay).timeout
-	
-	# Atualiza a UI completamente
 	await update_all_ui_elements()
 	
-	# Libera para interação
 	waiting_for_update = false
 	
 	current_player_character = character
@@ -190,10 +255,9 @@ func _on_player_turn_started(character: Character):
 	update_character_status(character)
 	highlight_active_character(character.name)
 	action_label.text = "Sua vez! Escolha uma ação"
-	hide_sub_menus() # fecha restos do turno anterior
+	hide_sub_menus()
 	print("🧭 CommandMenu pronto; Menus fechados")
 
-# 🎯 NOVO: Função para atualizar todos os elementos da UI
 func update_all_ui_elements():
 	print("🔄 Atualizando toda a UI...")
 	
@@ -204,7 +268,6 @@ func update_all_ui_elements():
 	if current_player_character:
 		update_character_status(current_player_character)
 	
-	# Pequeno delay para garantir que a UI foi atualizada
 	await get_tree().create_timer(ui_update_delay).timeout
 	print("✅ UI atualizada")
 
@@ -224,43 +287,55 @@ func _on_action_executed(character: Character, action: Action, target: Character
 	if battle_ended:
 		return
 	
-	# 🎯 NOVO: Espera antes de atualizar a UI após ação
 	await get_tree().create_timer(action_execution_delay).timeout
 		
 	var action_text = "%s usa %s em %s" % [character.name, action.name, target.name]
 	print("✅ Executada:", action_text)
 	action_label.text = action_text
 	
-	# Atualiza a UI após a ação
+	# 🆕 NOVO: Dispara animação na CharacterView
+	if character.name in character_views:
+		var attacker_view = character_views[character.name]
+		character.request_attack_animation("melee")  # Você pode ajustar o tipo baseado na ação
+	
+	if target.name in character_views:
+		var target_view = character_views[target.name]
+		if action.target_type == "enemy":  # Só anima dano se for ação ofensiva
+			target.request_damage_animation()
+	
 	await update_all_ui_elements()
 
 func _on_turn_completed(character: Character):
 	if battle_ended:
 		return
 	
-	# 🎯 NOVO: Espera antes de finalizar o turno
 	await get_tree().create_timer(action_execution_delay).timeout
 		
 	print("⏭️ Turno concluído:", character.name)
 	remove_character_highlight(character.name)
 	hide_sub_menus()
 	
-	# Atualiza a UI após o turno
 	await update_all_ui_elements()
 
 func _on_character_died(character: Character):
 	print("💀 Morte:", character.name)
 	
-	# 🎯 NOVO: Espera antes de remover o personagem
 	await get_tree().create_timer(action_execution_delay).timeout
+	
+	# 🆕 NOVO: Também remove a CharacterView
+	if character.name in character_views:
+		var view = character_views[character.name]
+		if is_instance_valid(view):
+			view.queue_free()
+		character_views.erase(character.name)
+		print("   👻 CharacterView removida:", character.name)
 	
 	if character.name in character_displays:
 		var display = character_displays[character.name]
-		# 🎯 CORREÇÃO: Faz o personagem desaparecer em vez de escurecer
-		display.visible = false
-		# Remove do dicionário para evitar acesso futuro
+		if is_instance_valid(display):
+			display.visible = false
 		character_displays.erase(character.name)
-		print("   👻 Personagem removido da tela:", character.name)
+		print("   👻 Display UI removido:", character.name)
 
 func _on_battle_ended(victory: bool):
 	print("🎯 BattleScene: _on_battle_ended chamado - Vitória:", victory)
@@ -270,38 +345,43 @@ func _on_battle_ended(victory: bool):
 	if victory:
 		print("🎉 VITÓRIA!")
 		action_label.text = "🎉 VITÓRIA!"
+		# 🆕 NOVO: Animação de vitória para aliados
+		for character in battle.allies_party.members:
+			if character.name in character_views:
+				character.request_victory_animation()
 	else:
 		print("💔 DERROTA!")
 		action_label.text = "💔 DERROTA!"
+		# 🆕 NOVO: Animação de derrota para aliados
+		for character in battle.allies_party.members:
+			if character.name in character_views:
+				character.request_defeat_animation()
 	
 	hide_sub_menus()
 	
-	# 🎯 CORREÇÃO: Voltar para a main após um delay
 	await get_tree().create_timer(2.0).timeout
 	return_to_main()
 
 func _on_player_action_selected():
 	print("🔄 Player action selected signal received")
-	# Este sinal é apenas para sincronização interna do Battle
-	# Não precisa fazer nada aqui
 
 func return_to_main():
 	print("🏠 Voltando para a tela principal...")
 	
-	# 🎯 CORREÇÃO: Abordagem direta para trocar de cena
+	# 🆕 NOVO: Limpa todas as views antes de sair
+	clear_character_views()
+	clear_character_displays()
+	
 	var main_scene_path = "res://scenes/main/main.tscn"
 	
-	# Verifica se o arquivo existe antes de tentar carregar
 	if FileAccess.file_exists(main_scene_path):
 		get_tree().change_scene_to_file(main_scene_path)
 		print("✅ Cena principal carregada: " + main_scene_path)
 	else:
 		print("❌ Arquivo da cena principal não encontrado: " + main_scene_path)
-		# Fallback: tentar carregar cena com nome comum
 		try_alternative_scenes()
 
 func try_alternative_scenes():
-	# Tenta carregar cenas com nomes alternativos comuns
 	var alternative_paths = [
 		"res://Main.tscn",
 		"res://scenes/main.tscn",
@@ -317,10 +397,8 @@ func try_alternative_scenes():
 			return
 	
 	print("❌ Nenhuma cena principal encontrada. Verifique o nome do arquivo.")
-	# Se não encontrar, pelo menos limpa a batalha
 	queue_free()
 
-# ===== Menus =====
 
 func show_command_menu():
 	if waiting_for_update:

@@ -1,16 +1,8 @@
 extends Resource
 class_name AnimationData
 
-@export_category("Animation Resources")
-@export var idle_animation: Animation
-@export var walk_animation: Animation
-@export var attack_melee_animation: Animation
-@export var attack_magic_animation: Animation
-@export var attack_ranged_animation: Animation
-@export var damage_animation: Animation
-@export var defense_animation: Animation
-@export var victory_animation: Animation
-@export var defeat_animation: Animation
+@export_category("Animation Data")
+@export var sprite_frames: SpriteFrames  # ← 1 SpriteFrames com TODAS as animações
 
 @export_category("Animation Settings")
 @export var attack_effect_offset: Vector2 = Vector2(50, 0)
