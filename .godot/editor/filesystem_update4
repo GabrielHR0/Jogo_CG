@@ -1,10 +1,2 @@
-res://addons/godot-css-theme/editor/css_syntax.tres
-res://scenes/character_view/CharacterView.tscn
-res://models/Character.gd
-res://models/AnimationData.gd
-res://scenes/character_view/character_view.gd
-res://scenes/character_view/AnimationSetup.gd
-res://scenes/main/main.gd
-res://scenes/main/main.tscn
 res://scenes/BattleScene/BattleScene.tscn
-res://scenes/BattleScene/battle_scene.gd
+res://addons/godot-css-theme/editor/css_syntax.tres
