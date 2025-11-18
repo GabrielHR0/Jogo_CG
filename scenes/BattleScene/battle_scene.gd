@@ -27,23 +27,24 @@ extends Control
 @onready var target_menu              = $BottomPanel/HBoxContainer/TargetMenu
 @onready var target_buttons_container = $BottomPanel/HBoxContainer/TargetMenu/TargetButtons
 
+@export var character_view_scale: Vector2 = Vector2(0.8, 0.8)  # 🆕 AUMENTADO: era 0.25
+@export var max_character_size: Vector2 = Vector2(120, 180)    # 🆕 AUMENTADO: era 60, 90
 # Sistema de batalha
 var battle: Battle
 var character_displays := {}
-var character_views := {}  # 🆕 NOVO: Dicionário para armazenar as CharacterViews
+var character_views := {}
 var current_player_character: Character = null
 var selected_action: Action = null
 var battle_ended: bool = false
 var waiting_for_update: bool = false
 
-# 🎯 Configuração de delays
+# Configuração de delays
 @export var turn_start_delay: float = 0.3
 @export var action_execution_delay: float = 0.2
 @export var ui_update_delay: float = 0.1
 
-# 🆕 NOVO: Configuração das CharacterViews
+# Configuração das CharacterViews
 @export var character_view_scene: PackedScene = preload("res://scenes/character_view/CharacterView.tscn")
-@export var character_view_scale: Vector2 = Vector2(0.3, 0.3)  # Escala para as views na batalha
 
 func _ready():
 	print("=== 🎮 BattleScene READY ===")
@@ -64,6 +65,11 @@ func setup_ui():
 	defend_button.text = "🛡️ DEFENDER"
 	items_button.text  = "📦 ITENS"
 	skip_button.text   = "⏭️ PULAR"
+	
+	# 🆕 NOVO: Configura o ícone inicial
+	character_icon.texture = null
+	character_icon.visible = false
+	
 	print("UI ▶️ Botões ok; Menus ocultos")
 
 func connect_buttons():
@@ -92,7 +98,7 @@ func setup_battle(allies_party: Party, enemies_party: Party):
 
 	battle.setup_battle(allies_party, enemies_party)
 	
-	# 🆕 NOVO: Cria as CharacterViews primeiro, depois os displays de UI
+	# Cria as CharacterViews e displays
 	create_character_views()
 	create_character_displays()
 
@@ -100,19 +106,11 @@ func setup_battle(allies_party: Party, enemies_party: Party):
 	print("▶️ start_battle()")
 	battle.start_battle()
 
-# 🆕 NOVO: Função para criar as CharacterViews dos personagens
 func create_character_views():
 	print("👥 Criando CharacterViews...")
-	
-	# Limpa views anteriores
 	clear_character_views()
-	
-	# Cria views para inimigos
 	create_enemy_views()
-	
-	# Cria views para aliados
 	create_ally_views()
-	
 	print("✅ CharacterViews criadas: ", character_views.size())
 
 func create_enemy_views():
@@ -135,14 +133,63 @@ func create_ally_views():
 		character_views[character.name] = character_view
 		print("   🎯 CharacterView aliada criada:", character.name)
 
+func create_health_bar(character: Character) -> Control:
+	var container = Control.new()
+	container.custom_minimum_size = Vector2(80, 6)
+	container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	# Barra de fundo (cinza)
+	var background = ColorRect.new()
+	background.size = Vector2(80, 4)
+	background.position = Vector2(0, 1)
+	background.color = Color(0.2, 0.2, 0.2, 0.8)
+	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	# Barra de vida (verde/vermelho)
+	var health_bar = ColorRect.new()
+	health_bar.size = Vector2(80, 4)
+	health_bar.position = Vector2(0, 1)
+	health_bar.color = Color.GREEN
+	health_bar.name = "HealthBar"
+	health_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	container.add_child(background)
+	container.add_child(health_bar)
+	
+	update_health_bar(character, health_bar)
+	
+	# 🆕 CORREÇÃO: Posição MAIS PARA CIMA - acima do personagem
+	container.position = Vector2(0, -70)  # 🆕 AUMENTADO: era -45
+	
+	return container
+
+func update_health_bar(character: Character, health_bar: ColorRect):
+	if not character or not health_bar:
+		return
+	
+	var health_ratio = float(character.current_hp) / float(character.get_max_hp())
+	health_ratio = max(0, health_ratio)
+	
+	health_bar.size.x = 80 * health_ratio
+	
+	if health_ratio > 0.6:
+		health_bar.color = Color.GREEN
+	elif health_ratio > 0.3:
+		health_bar.color = Color.YELLOW
+	else:
+		health_bar.color = Color.RED
+
 func create_character_view(character: Character) -> CharacterView:
 	var character_view = character_view_scene.instantiate()
 	character_view.character = character
-	character_view.scale = character_view_scale
+	character_view.character_scale = character_view_scale
+	character_view.max_character_size = max_character_size
 	character_view.auto_setup = true
 	
-	# 🆕 NOVO: Posiciona a CharacterView dentro do container
-	character_view.position = Vector2(60, 80)  # Posição central dentro do espaço do personagem
+	character_view.get_node("Icon").visible = false
+	
+	# Posição do personagem (mais para baixo para dar espaço para a barra)
+	character_view.position = Vector2(90, 100)  # 🆕 AJUSTADO: era 70
 	
 	return character_view
 
@@ -155,78 +202,43 @@ func clear_character_views():
 
 func create_character_displays():
 	clear_character_displays()
-	print("📊 Criando displays de UI...")
+	print("📊 Criando barras de vida...")
 	create_enemy_displays()
 	create_ally_displays()
 
 func create_enemy_displays():
 	for character in battle.enemies_party.members:
-		var display = create_character_display(character)
+		var display = create_health_bar(character)
 		if character.position == "front":
 			enemies_front_row.add_child(display)
 		else:
 			enemies_back_row.add_child(display)
 		character_displays[character.name] = display
-		print("   💀 Display UI inimigo:", character.name)
+		print("   💀 Barra de vida inimiga:", character.name)
 
 func create_ally_displays():
 	for character in battle.allies_party.members:
-		var display = create_character_display(character)
+		var display = create_health_bar(character)
 		if character.position == "front":
 			allies_front_row.add_child(display)
 		else:
 			allies_back_row.add_child(display)
 		character_displays[character.name] = display
-		print("   🎯 Display UI aliado:", character.name)
-
-func create_character_display(character: Character) -> PanelContainer:
-	var panel = PanelContainer.new()
-	panel.custom_minimum_size = Vector2(120, 60)  # 🆕 REDUZIDO: Agora só mostra status
-	
-	var vbox = VBoxContainer.new()
-	vbox.name = "VBoxContainer"
-	vbox.size_flags_vertical = Control.SIZE_EXPAND_FILL
-
-	var name_label = Label.new()
-	name_label.name = "Name"
-	name_label.text = character.name
-	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	name_label.add_theme_font_size_override("font_size", 12)  # 🆕 Menor
-
-	var hp_container = HBoxContainer.new()
-	hp_container.name = "HPRow"
-	var hp_text = Label.new(); hp_text.text = "HP:"
-	hp_text.add_theme_font_size_override("font_size", 10)
-	var hp_value = Label.new(); hp_value.name = "HPValue"
-	hp_value.text = "%d/%d" % [character.current_hp, character.get_max_hp()]
-	hp_value.add_theme_font_size_override("font_size", 10)
-	hp_container.add_child(hp_text); hp_container.add_child(hp_value)
-
-	var ap_container = HBoxContainer.new()
-	ap_container.name = "APRow"
-	var ap_text = Label.new(); ap_text.text = "AP:"
-	ap_text.add_theme_font_size_override("font_size", 10)
-	var ap_value = Label.new(); ap_value.name = "APValue"
-	ap_value.text = "%d/%d" % [character.current_ap, character.get_max_ap()]
-	ap_value.add_theme_font_size_override("font_size", 10)
-	ap_container.add_child(ap_text); ap_container.add_child(ap_value)
-
-	vbox.add_child(name_label)
-	vbox.add_child(hp_container)
-	vbox.add_child(ap_container)
-	panel.add_child(vbox)
-	
-	# 🆕 NOVO: Posiciona o display abaixo da CharacterView
-	panel.position = Vector2(0, 120)
-	
-	return panel
+		print("   🎯 Barra de vida aliada:", character.name)
 
 func clear_character_displays():
 	for display in character_displays.values():
 		if is_instance_valid(display):
 			display.queue_free()
 	character_displays.clear()
-	print("🧹 Displays UI limpos")
+	print("🧹 Barras de vida limpas")
+
+func update_character_displays():
+	for character in battle.allies_party.members + battle.enemies_party.members:
+		if character.name in character_displays:
+			var display = character_displays[character.name]
+			var health_bar = display.get_node("HealthBar") as ColorRect
+			update_health_bar(character, health_bar)
 
 # ===== Eventos/sinais =====
 
@@ -252,7 +264,10 @@ func _on_player_turn_started(character: Character):
 	current_player_character = character
 	print("🕐 Turno:", character.name, "| AP:", character.current_ap, "/", character.get_max_ap(), "| Ações:", character.combat_actions.size())
 	_print_actions(character)
+	
+	# 🆕 NOVO: Atualiza o Bottom Panel com as informações do personagem
 	update_character_status(character)
+	
 	highlight_active_character(character.name)
 	action_label.text = "Sua vez! Escolha uma ação"
 	hide_sub_menus()
@@ -260,16 +275,46 @@ func _on_player_turn_started(character: Character):
 
 func update_all_ui_elements():
 	print("🔄 Atualizando toda a UI...")
-	
-	# Atualiza displays de todos os personagens
 	update_character_displays()
 	
-	# Atualiza status do personagem atual se existir
 	if current_player_character:
 		update_character_status(current_player_character)
 	
 	await get_tree().create_timer(ui_update_delay).timeout
 	print("✅ UI atualizada")
+
+# 🆕 NOVO: Função atualizada para mostrar ícone no Bottom Panel
+func update_character_status(character: Character):
+	if character == null:
+		print("⚠️ update_character_status: character null")
+		character_icon.visible = false
+		return
+	
+	print("📊 Atualizando status no BottomPanel:", character.name)
+	
+	# Nome do personagem
+	character_name.text = character.name
+	
+	# 🆕 NOVO: Ícone do personagem
+	if character.icon:
+		character_icon.texture = character.icon
+		character_icon.visible = true
+		print("   🖼️ Ícone carregado:", character.icon.resource_path)
+	else:
+		character_icon.visible = false
+		print("   ⚠️ Personagem sem ícone")
+	
+	# Barra de HP
+	hp_bar.max_value = character.get_max_hp()
+	hp_bar.value = character.current_hp
+	hp_label.text = "%d/%d" % [character.current_hp, character.get_max_hp()]
+	
+	# Barra de AP
+	ap_bar.max_value = character.get_max_ap()
+	ap_bar.value = character.current_ap
+	ap_label.text = "%d/%d" % [character.current_ap, character.get_max_ap()]
+	
+	print("   ❤️ HP: %d/%d | ⚡ AP: %d/%d" % [character.current_hp, character.get_max_hp(), character.current_ap, character.get_max_ap()])
 
 func _print_actions(character: Character):
 	if character == null:
@@ -293,14 +338,14 @@ func _on_action_executed(character: Character, action: Action, target: Character
 	print("✅ Executada:", action_text)
 	action_label.text = action_text
 	
-	# 🆕 NOVO: Dispara animação na CharacterView
+	# Animações
 	if character.name in character_views:
 		var attacker_view = character_views[character.name]
-		character.request_attack_animation("melee")  # Você pode ajustar o tipo baseado na ação
+		character.request_attack_animation("melee")
 	
 	if target.name in character_views:
 		var target_view = character_views[target.name]
-		if action.target_type == "enemy":  # Só anima dano se for ação ofensiva
+		if action.target_type == "enemy":
 			target.request_damage_animation()
 	
 	await update_all_ui_elements()
@@ -322,7 +367,6 @@ func _on_character_died(character: Character):
 	
 	await get_tree().create_timer(action_execution_delay).timeout
 	
-	# 🆕 NOVO: Também remove a CharacterView
 	if character.name in character_views:
 		var view = character_views[character.name]
 		if is_instance_valid(view):
@@ -345,14 +389,12 @@ func _on_battle_ended(victory: bool):
 	if victory:
 		print("🎉 VITÓRIA!")
 		action_label.text = "🎉 VITÓRIA!"
-		# 🆕 NOVO: Animação de vitória para aliados
 		for character in battle.allies_party.members:
 			if character.name in character_views:
 				character.request_victory_animation()
 	else:
 		print("💔 DERROTA!")
 		action_label.text = "💔 DERROTA!"
-		# 🆕 NOVO: Animação de derrota para aliados
 		for character in battle.allies_party.members:
 			if character.name in character_views:
 				character.request_defeat_animation()
@@ -367,13 +409,10 @@ func _on_player_action_selected():
 
 func return_to_main():
 	print("🏠 Voltando para a tela principal...")
-	
-	# 🆕 NOVO: Limpa todas as views antes de sair
 	clear_character_views()
 	clear_character_displays()
 	
 	var main_scene_path = "res://scenes/main/main.tscn"
-	
 	if FileAccess.file_exists(main_scene_path):
 		get_tree().change_scene_to_file(main_scene_path)
 		print("✅ Cena principal carregada: " + main_scene_path)
@@ -399,7 +438,7 @@ func try_alternative_scenes():
 	print("❌ Nenhuma cena principal encontrada. Verifique o nome do arquivo.")
 	queue_free()
 
-
+# ... (o resto do código dos menus permanece igual)
 func show_command_menu():
 	if waiting_for_update:
 		return
@@ -654,27 +693,6 @@ func find_skip_action(character: Character) -> Action:
 		if action.name == "Pular Turno":
 			return action
 	return null
-
-func update_character_status(character: Character):
-	if character == null:
-		print("⚠️ update_character_status: character null")
-		return
-	character_name.text = character.name
-	hp_bar.max_value = character.get_max_hp()
-	hp_bar.value = character.current_hp
-	hp_label.text = "%d/%d" % [character.current_hp, character.get_max_hp()]
-	ap_bar.max_value = character.get_max_ap()
-	ap_bar.value = character.current_ap
-	ap_label.text = "%d/%d" % [character.current_ap, character.get_max_ap()]
-
-func update_character_displays():
-	for character in battle.allies_party.members + battle.enemies_party.members:
-		if character.name in character_displays:
-			var display = character_displays[character.name]
-			var hp_value = display.get_node("VBoxContainer/HPRow/HPValue") as Label
-			var ap_value = display.get_node("VBoxContainer/APRow/APValue") as Label
-			hp_value.text = "%d/%d" % [character.current_hp, character.get_max_hp()]
-			ap_value.text = "%d/%d" % [character.current_ap, character.get_max_ap()]
 
 func highlight_active_character(character_name: String):
 	for name in character_displays:
