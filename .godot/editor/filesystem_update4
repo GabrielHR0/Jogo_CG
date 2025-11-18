@@ -1,5 +1,13 @@
 res://scenes/BattleScene/BattleScene.tscn
-res://scenes/BattleScene/battle_scene.gd
+res://addons/godot-css-theme/editor/css_syntax.tres
+res://data/characters/sprites/issamu minami.tres
+res://data/characters/sprites/baraom - transformação.tres
+res://data/characters/sprites/baraom.tres
+res://data/characters/sprites/humanos corrompidos.tres
+res://data/characters/sprites/issamu minami - transformação.tres
+res://data/characters/sprites/mago mentor.tres
+res://data/characters/sprites/kyoko akizuki.tres
+res://data/characters/sprites/masaru todo.tres
+res://data/characters/sprites/nobuhiko akizuki - transformação.tres
 res://scenes/character_view/character_view.gd
-res://scenes/main/main.gd
 res://scenes/character_view/CharacterView.tscn
