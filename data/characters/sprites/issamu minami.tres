@@ -1,8 +1,9 @@
-[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://bb1eabj14fxqn"]
+[gd_resource type="SpriteFrames" load_steps=15 format=3 uid="uid://bb1eabj14fxqn"]
 
 [ext_resource type="Texture2D" uid="uid://o820he3q3oe2" path="res://assets/Issamu Minami - Noctis Rex/Forma normal - Sprites/png/andando.png" id="1_j1jcg"]
 [ext_resource type="Texture2D" uid="uid://1dk6gup8ea4o" path="res://assets/Issamu Minami - Noctis Rex/Forma normal - Sprites/png/atacando.png" id="2_5hqe2"]
 [ext_resource type="Texture2D" uid="uid://d3ag16d0vmjpl" path="res://assets/Issamu Minami - Noctis Rex/Forma normal - Sprites/png/dano.png" id="3_8oiiq"]
+[ext_resource type="Texture2D" uid="uid://vktw6d013otc" path="res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/png/transformação.png" id="4_5hqe2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e3wew"]
 atlas = ExtResource("1_j1jcg")
@@ -31,6 +32,18 @@ region = Rect2(0, 0, 384, 384)
 [sub_resource type="AtlasTexture" id="AtlasTexture_prwjc"]
 atlas = ExtResource("3_8oiiq")
 region = Rect2(384, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8oiiq"]
+atlas = ExtResource("4_5hqe2")
+region = Rect2(0, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bh873"]
+atlas = ExtResource("4_5hqe2")
+region = Rect2(800, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_il7mw"]
+atlas = ExtResource("4_5hqe2")
+region = Rect2(1600, 0, 800, 800)
 
 [resource]
 animations = [{
@@ -68,5 +81,19 @@ animations = [{
 }],
 "loop": true,
 "name": &"dano",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8oiiq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bh873")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_il7mw")
+}],
+"loop": true,
+"name": &"transformação",
 "speed": 5.0
 }]

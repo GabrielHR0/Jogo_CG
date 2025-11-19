@@ -1,39 +1,59 @@
-[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://deyxs0x5tvtou"]
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://deyxs0x5tvtou"]
 
-[ext_resource type="Texture2D" uid="uid://dg2pldcb4g4ar" path="res://assets/Bishum (Alta Sacerdotisa de Gorgom﻿)/Sprites/png/ataque.png" id="1_n5dej"]
-[ext_resource type="Texture2D" uid="uid://bucjomv3kqx1v" path="res://assets/Bishum (Alta Sacerdotisa de Gorgom﻿)/Sprites/png/dano.png" id="2_ust0n"]
+[ext_resource type="Texture2D" uid="uid://wt002pocahce" path="res://assets/Criaturas de Gorgom/Humanos corrompidos de Gorgom/Sprites/png/andando.png" id="1_ust0n"]
+[ext_resource type="Texture2D" uid="uid://1u2s7jo7kblj" path="res://assets/Criaturas de Gorgom/Humanos corrompidos de Gorgom/Sprites/png/ataque.png" id="2_36ok7"]
+[ext_resource type="Texture2D" uid="uid://cfjws7yopj178" path="res://assets/Criaturas de Gorgom/Humanos corrompidos de Gorgom/Sprites/png/dano.png" id="3_4gi4x"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_36ok7"]
-atlas = ExtResource("1_n5dej")
-region = Rect2(0, 0, 800, 384)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4gi4x"]
-atlas = ExtResource("1_n5dej")
-region = Rect2(800, 0, 800, 384)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_25e0x"]
-atlas = ExtResource("1_n5dej")
-region = Rect2(1600, 0, 800, 384)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7bs54"]
-atlas = ExtResource("2_ust0n")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ust0n"]
+atlas = ExtResource("1_ust0n")
 region = Rect2(0, 0, 384, 384)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_36ok7"]
+atlas = ExtResource("1_ust0n")
+region = Rect2(384, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gi4x"]
+atlas = ExtResource("1_ust0n")
+region = Rect2(768, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25e0x"]
+atlas = ExtResource("2_36ok7")
+region = Rect2(0, 0, 500, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bs54"]
+atlas = ExtResource("2_36ok7")
+region = Rect2(500, 0, 500, 384)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_1hrfv"]
-atlas = ExtResource("2_ust0n")
+atlas = ExtResource("3_4gi4x")
+region = Rect2(0, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2bkw"]
+atlas = ExtResource("3_4gi4x")
 region = Rect2(384, 0, 384, 384)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ust0n")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_36ok7")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4gi4x")
+}],
+"loop": true,
+"name": &"andar",
+"speed": 5.0
 }, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_25e0x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7bs54")
 }],
 "loop": true,
 "name": &"ataque",
@@ -41,10 +61,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7bs54")
+"texture": SubResource("AtlasTexture_1hrfv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1hrfv")
+"texture": SubResource("AtlasTexture_w2bkw")
 }],
 "loop": true,
 "name": &"dano",

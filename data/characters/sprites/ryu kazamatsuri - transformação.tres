@@ -1,48 +1,48 @@
 [gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://d4k277edrpnon"]
 
-[ext_resource type="Texture2D" uid="uid://ceg8wlmf56ufy" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/andnado.png" id="1_rrg5u"]
-[ext_resource type="Texture2D" uid="uid://rrifk7poh3b0" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/ataque.png" id="2_6wvxe"]
-[ext_resource type="Texture2D" uid="uid://ds3mfjooidgo8" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/dano.png" id="3_sua68"]
+[ext_resource type="Texture2D" uid="uid://dnj7j4mvtccaf" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Transformação/png/andando transformação.png" id="1_rrg5u"]
+[ext_resource type="Texture2D" uid="uid://66x3ocqoe3xo" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Transformação/png/ataque transformação.png" id="2_6wvxe"]
+[ext_resource type="Texture2D" uid="uid://dyk56hs3ksq1q" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Transformação/png/dano transformação.png" id="3_sua68"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fi407"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6f1a"]
 atlas = ExtResource("1_rrg5u")
-region = Rect2(0, 0, 320, 320)
+region = Rect2(0, 0, 384, 384)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_w4ct2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jdj5"]
 atlas = ExtResource("1_rrg5u")
-region = Rect2(320, 0, 320, 320)
+region = Rect2(384, 0, 384, 384)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_or1q6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_boan0"]
 atlas = ExtResource("1_rrg5u")
-region = Rect2(640, 0, 320, 320)
+region = Rect2(768, 0, 384, 384)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xrj33"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qchei"]
 atlas = ExtResource("2_6wvxe")
-region = Rect2(0, 0, 320, 320)
+region = Rect2(0, 0, 384, 384)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5jpj3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4t7yk"]
 atlas = ExtResource("2_6wvxe")
-region = Rect2(320, 0, 320, 320)
+region = Rect2(384, 0, 384, 384)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0phm0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_83wjj"]
 atlas = ExtResource("3_sua68")
-region = Rect2(0, 0, 320, 320)
+region = Rect2(0, 0, 384, 384)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_aj731"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6n8j"]
 atlas = ExtResource("3_sua68")
-region = Rect2(320, 0, 320, 320)
+region = Rect2(384, 0, 384, 384)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fi407")
+"texture": SubResource("AtlasTexture_q6f1a")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_w4ct2")
+"texture": SubResource("AtlasTexture_0jdj5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_or1q6")
+"texture": SubResource("AtlasTexture_boan0")
 }],
 "loop": true,
 "name": &"andar",
@@ -50,10 +50,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xrj33")
+"texture": SubResource("AtlasTexture_qchei")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5jpj3")
+"texture": SubResource("AtlasTexture_4t7yk")
 }],
 "loop": true,
 "name": &"ataque",
@@ -61,10 +61,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0phm0")
+"texture": SubResource("AtlasTexture_83wjj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_aj731")
+"texture": SubResource("AtlasTexture_t6n8j")
 }],
 "loop": true,
 "name": &"dano",

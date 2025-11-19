@@ -1,6 +1,9 @@
-[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://cthnme8pen3wo"]
+[gd_resource type="SpriteFrames" load_steps=17 format=3 uid="uid://cthnme8pen3wo"]
 
 [ext_resource type="Texture2D" uid="uid://ybdap6cryswa" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Forma normal/png/andando.png" id="1_otf1g"]
+[ext_resource type="Texture2D" uid="uid://cb0sxo8y0txve" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Forma normal/png/ataque.png" id="2_qqu1f"]
+[ext_resource type="Texture2D" uid="uid://bsxicb2cusmyj" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Forma normal/png/dano.png" id="3_ej8ms"]
+[ext_resource type="Texture2D" uid="uid://dj5puam64tk0q" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Transformação/png/transformacao.png" id="4_jmgck"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jm7g4"]
 atlas = ExtResource("1_otf1g")
@@ -12,6 +15,42 @@ region = Rect2(384, 0, 384, 384)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qqu1f"]
 atlas = ExtResource("1_otf1g")
+region = Rect2(768, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqp7g"]
+atlas = ExtResource("2_qqu1f")
+region = Rect2(0, 0, 700, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21bft"]
+atlas = ExtResource("2_qqu1f")
+region = Rect2(700, 0, 700, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbjvq"]
+atlas = ExtResource("2_qqu1f")
+region = Rect2(1400, 0, 700, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8j68i"]
+atlas = ExtResource("2_qqu1f")
+region = Rect2(2100, 0, 700, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1uen"]
+atlas = ExtResource("3_ej8ms")
+region = Rect2(0, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cxgy"]
+atlas = ExtResource("3_ej8ms")
+region = Rect2(384, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2oxq"]
+atlas = ExtResource("4_jmgck")
+region = Rect2(0, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bfrnl"]
+atlas = ExtResource("4_jmgck")
+region = Rect2(384, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oloif"]
+atlas = ExtResource("4_jmgck")
 region = Rect2(768, 0, 384, 384)
 
 [resource]
@@ -28,5 +67,47 @@ animations = [{
 }],
 "loop": true,
 "name": &"andar",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqp7g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21bft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vbjvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8j68i")
+}],
+"loop": true,
+"name": &"ataque",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1uen")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cxgy")
+}],
+"loop": true,
+"name": &"dano",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2oxq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bfrnl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oloif")
+}],
+"loop": true,
+"name": &"trasnformação",
 "speed": 5.0
 }]

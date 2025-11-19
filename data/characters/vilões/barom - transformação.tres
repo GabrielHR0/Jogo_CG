@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Character" load_steps=5 format=3 uid="uid://boie7dqqlox1v"]
+[gd_resource type="Resource" script_class="Character" load_steps=6 format=3 uid="uid://boie7dqqlox1v"]
 
+[ext_resource type="Resource" uid="uid://3jblf2fjrif1" path="res://data/characters/animações/baraom - transformação.tres" id="1_ah4bt"]
 [ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_hw50x"]
 [ext_resource type="Texture2D" uid="uid://lw313h6bbtr6" path="res://assets/Ícones/Baraom - Transformação.png" id="2_ah4bt"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_q6gyf"]
@@ -14,4 +15,5 @@ strength = 8
 constitution = 10
 agility = 3
 role = 1
+animation_data = ExtResource("1_ah4bt")
 metadata/_custom_type_script = "uid://bbcihyrs4lcmp"

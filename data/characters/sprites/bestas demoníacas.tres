@@ -1,3 +1,72 @@
-[gd_resource type="SpriteFrames" format=3 uid="uid://dodrpxj2vjjdv"]
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://dodrpxj2vjjdv"]
+
+[ext_resource type="Texture2D" uid="uid://d17fc1ilvkyjk" path="res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/Sprites/png/andando.png" id="1_0dh4r"]
+[ext_resource type="Texture2D" uid="uid://b4rjwsutns2yr" path="res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/Sprites/png/ataque.png" id="2_ta3rx"]
+[ext_resource type="Texture2D" uid="uid://dxcj11xxps3hr" path="res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/Sprites/png/dano.png" id="3_ar7eh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qho21"]
+atlas = ExtResource("1_0dh4r")
+region = Rect2(0, 0, 384, 576)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymuok"]
+atlas = ExtResource("1_0dh4r")
+region = Rect2(384, 0, 384, 576)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_10yad"]
+atlas = ExtResource("1_0dh4r")
+region = Rect2(768, 0, 384, 576)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ces6a"]
+atlas = ExtResource("2_ta3rx")
+region = Rect2(0, 0, 500, 576)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twptp"]
+atlas = ExtResource("2_ta3rx")
+region = Rect2(500, 0, 500, 576)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hc6nj"]
+atlas = ExtResource("3_ar7eh")
+region = Rect2(0, 0, 384, 576)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqmtm"]
+atlas = ExtResource("3_ar7eh")
+region = Rect2(384, 0, 384, 576)
 
 [resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qho21")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymuok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_10yad")
+}],
+"loop": true,
+"name": &"andar",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ces6a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twptp")
+}],
+"loop": true,
+"name": &"ataque",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hc6nj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqmtm")
+}],
+"loop": true,
+"name": &"dano",
+"speed": 5.0
+}]
