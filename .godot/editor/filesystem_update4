@@ -1,13 +1,24 @@
 res://scenes/BattleScene/BattleScene.tscn
 res://addons/godot-css-theme/editor/css_syntax.tres
 res://data/characters/sprites/issamu minami.tres
-res://data/characters/sprites/baraom - transformação.tres
-res://data/characters/sprites/baraom.tres
-res://data/characters/sprites/humanos corrompidos.tres
+res://scenes/BattleScene/battle_scene.gd
+res://data/characters/aliados/kyoko.tres
+res://data/characters/aliados/bishum.tres
+res://data/characters/aliados/masaru todo.tres
+res://data/characters/aliados/katsumi kida.tres
+res://data/characters/aliados/issamu minami - transformação.tres
 res://data/characters/sprites/issamu minami - transformação.tres
-res://data/characters/sprites/mago mentor.tres
 res://data/characters/sprites/kyoko akizuki.tres
+res://data/characters/aliados/masaru todo - transformação.tres
 res://data/characters/sprites/masaru todo.tres
-res://data/characters/sprites/nobuhiko akizuki - transformação.tres
+res://data/characters/aliados/ryu kazamatsuri.tres
+res://data/characters/sprites/ryu kazamatsuri.tres
+res://data/characters/aliados/ryu kazamtsuri - transformação.tres
+res://data/characters/sprites/ryu kazamatsuri - transformação.tres
+res://data/characters/sprites/mago mentor.tres
+res://data/characters/aliados/soichiro akizuki.tres
+res://scenes/main/main.tscn
+res://data/characters/animações/ryu kazamatsuri.tres
+res://scenes/main/main.gd
 res://scenes/character_view/character_view.gd
-res://scenes/character_view/CharacterView.tscn
+res://data/characters/animações/bishum.tres

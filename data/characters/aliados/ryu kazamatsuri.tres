@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Character" load_steps=5 format=3 uid="uid://b61qkl4aqetvg"]
+[gd_resource type="Resource" script_class="Character" load_steps=6 format=3 uid="uid://b61qkl4aqetvg"]
 
 [ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_kq8x3"]
+[ext_resource type="Resource" uid="uid://chd44kmhhpcxu" path="res://data/characters/animações/ryu kazamatsuri.tres" id="1_pyj4v"]
 [ext_resource type="Texture2D" uid="uid://siiot5kxxc0l" path="res://assets/Ícones/Ryu Kazamatsuri.png" id="2_pyj4v"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_2cm0e"]
 [ext_resource type="Texture2D" uid="uid://yr13glpub7ol" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Ryu Kazamatsuri (Arqueiro  Furtivo).png" id="4_kqsgh"]
@@ -14,4 +15,5 @@ agility = 8
 intelligence = 6
 position = "back"
 role = 2
+animation_data = ExtResource("1_pyj4v")
 metadata/_custom_type_script = "uid://bbcihyrs4lcmp"

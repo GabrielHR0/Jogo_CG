@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Character" load_steps=5 format=3 uid="uid://bnwvga0fsorf6"]
+[gd_resource type="Resource" script_class="Character" load_steps=6 format=3 uid="uid://bnwvga0fsorf6"]
 
+[ext_resource type="Resource" uid="uid://cxrp0dlv722t6" path="res://data/characters/animações/masaru todo.tres" id="1_ktmlh"]
 [ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_xexc4"]
 [ext_resource type="Texture2D" uid="uid://cj43iaxr2cn68" path="res://assets/Ícones/Masaru Todo.png" id="2_ktmlh"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_4gbbp"]
@@ -15,4 +16,5 @@ agility = 4
 intelligence = 10
 position = "back"
 role = 2
+animation_data = ExtResource("1_ktmlh")
 metadata/_custom_type_script = "uid://bbcihyrs4lcmp"

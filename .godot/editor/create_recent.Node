@@ -1,14 +1,14 @@
+CanvasLayer
+VBoxContainer
+TextureRect
 HBoxContainer
 Sprite2D
 Node2D
 CollisionShape2D
 AnimationPlayer
 Label
-VBoxContainer
 ScrollContainer
 Button
 ProgressBar
-TextureRect
 Panel
 ColorRect
-CharacterBody2D

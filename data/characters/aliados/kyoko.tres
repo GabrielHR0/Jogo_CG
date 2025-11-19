@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Character" load_steps=5 format=3 uid="uid://b068d3h4cxb6u"]
+[gd_resource type="Resource" script_class="Character" load_steps=6 format=3 uid="uid://b068d3h4cxb6u"]
 
 [ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_lqcti"]
+[ext_resource type="Resource" uid="uid://dpr4eaig3druj" path="res://data/characters/animações/kyoko akizuki.tres" id="1_mtfra"]
 [ext_resource type="Texture2D" uid="uid://ci2r2ghgebu13" path="res://assets/Ícones/Kyoko Akizuki.png" id="2_ptt3b"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_hxa5h"]
 [ext_resource type="Texture2D" uid="uid://t2nv28ioecae" path="res://assets/Kyoko Akizuki (Clériga  Suporte)/Kyoko Akizuki (Clériga  Suporte).png" id="4_crtmj"]
@@ -15,4 +16,5 @@ constitution = 6
 intelligence = 10
 position = "back"
 role = 4
+animation_data = ExtResource("1_mtfra")
 metadata/_custom_type_script = "uid://bbcihyrs4lcmp"

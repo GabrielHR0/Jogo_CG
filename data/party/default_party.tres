@@ -1,11 +1,14 @@
-[gd_resource type="Resource" script_class="Party" load_steps=5 format=3 uid="uid://bbykbm4cew1yg"]
+[gd_resource type="Resource" script_class="Party" load_steps=8 format=3 uid="uid://bbykbm4cew1yg"]
 
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="1_m4nj2"]
 [ext_resource type="Resource" uid="uid://dyae0d3l0ev27" path="res://data/characters/aliados/isamu minami.tres" id="2_qv1kt"]
 [ext_resource type="Script" uid="uid://rhljqyamkwai" path="res://models/Party.gd" id="3_1xy06"]
 [ext_resource type="Resource" uid="uid://b068d3h4cxb6u" path="res://data/characters/aliados/kyoko.tres" id="3_a5p8w"]
+[ext_resource type="Resource" uid="uid://bet3dghiioe25" path="res://data/characters/aliados/bishum.tres" id="4_wjs3h"]
+[ext_resource type="Resource" uid="uid://bnwvga0fsorf6" path="res://data/characters/aliados/masaru todo.tres" id="5_1xhgo"]
+[ext_resource type="Resource" uid="uid://bwc6p6wqb3y58" path="res://data/characters/aliados/katsumi kida.tres" id="6_18sp8"]
 
 [resource]
 script = ExtResource("3_1xy06")
-members = Array[ExtResource("1_m4nj2")]([ExtResource("2_qv1kt"), ExtResource("3_a5p8w")])
+members = Array[ExtResource("1_m4nj2")]([ExtResource("2_qv1kt"), ExtResource("3_a5p8w"), ExtResource("4_wjs3h"), ExtResource("5_1xhgo"), ExtResource("6_18sp8")])
 metadata/_custom_type_script = "uid://rhljqyamkwai"

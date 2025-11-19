@@ -83,7 +83,7 @@ func _on_damage_animation_requested():
 	play_damage_animation()
 
 func play_attack_animation(attack_type: String):
-	var anim_name = "ataque_" + attack_type
+	var anim_name = "ataque"
 	
 	if has_custom_animation(anim_name):
 		play_spriteframes_animation(anim_name, false)
