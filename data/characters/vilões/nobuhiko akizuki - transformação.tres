@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource("3_cm2da")
-name = "Nobuhiko Akizuki - Transformação"
+name = "Nobuhiko Akizuki"
 icon = ExtResource("2_khfdi")
 texture = ExtResource("4_ec7y3")
 strength = 8

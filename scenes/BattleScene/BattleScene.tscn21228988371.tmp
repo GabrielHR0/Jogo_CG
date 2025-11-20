@@ -1,20 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://c2vkffksnltf4"]
+[gd_scene load_steps=10 format=3 uid="uid://c2vkffksnltf4"]
 
 [ext_resource type="Script" uid="uid://c004r4qmg3tjl" path="res://scenes/BattleScene/battle_scene.gd" id="1_3eieg"]
 [ext_resource type="Texture2D" uid="uid://8pr4v8vmh0do" path="res://assets/bg-1.jpeg" id="2_3eieg"]
 [ext_resource type="Texture2D" uid="uid://d2f7q8ndqes88" path="res://assets/Ícones/bottom-pannel.png" id="3_8k8re"]
 [ext_resource type="Texture2D" uid="uid://dj1q64r2w16da" path="res://assets/moldura-melhor.png" id="3_th8rj"]
 [ext_resource type="Theme" uid="uid://blui5ab8achhi" path="res://assets/meu_tema.tres" id="4_i6wy2"]
-[ext_resource type="Texture2D" uid="uid://bcytntoxjq0ll" path="res://assets/bordas.png" id="5_1kx8p"]
-[ext_resource type="Texture2D" uid="uid://jlsq224evttm" path="res://assets/fundo-preto.png" id="5_erplg"]
+[ext_resource type="Texture2D" uid="uid://t4ak061wwdfp" path="res://assets/fundo-botão.png" id="4_tb71n"]
 [ext_resource type="Texture2D" uid="uid://d3ka2vaeu1nuo" path="res://assets/fundo-botão-hover.png" id="6_th8rj"]
-[ext_resource type="Texture2D" uid="uid://bojp58sxdodns" path="res://assets/progress-green.png" id="7_ilgx7"]
-[ext_resource type="Texture2D" uid="uid://cjwxpvp6b8iom" path="res://assets/botão-fundo-black.png" id="9_8ty6f"]
-[ext_resource type="Texture2D" uid="uid://be4g632xw6nvt" path="res://assets/icone-ataque.png" id="11_8ty6f"]
-[ext_resource type="Texture2D" uid="uid://bdf3rwhdsn7vp" path="res://assets/button-detactivated-sla.png" id="11_handr"]
-[ext_resource type="Texture2D" uid="uid://bc10bg2df2bgp" path="res://assets/icone-defender.png" id="12_handr"]
-[ext_resource type="Texture2D" uid="uid://y06tyjglw18v" path="res://assets/icone-item.png" id="13_888n0"]
-[ext_resource type="Texture2D" uid="uid://dm4de3i78g8t4" path="res://assets/icone-pular-turno1.png" id="14_mttxc"]
+[ext_resource type="Texture2D" uid="uid://cps1mflu2cdnh" path="res://assets/icon-espada.png" id="7_1kx8p"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i6wy2"]
 
@@ -43,14 +36,14 @@ expand_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.19500001
+anchor_left = 0.08515625
 anchor_top = 0.2680556
-anchor_right = 0.78700006
-anchor_bottom = 0.7456667
-offset_left = -0.6000061
+anchor_right = 0.9203125
+anchor_bottom = 1.0819445
+offset_left = 140.0
 offset_top = 18.0
-offset_right = 0.6398926
-offset_bottom = 0.11999512
+offset_right = -170.0
+offset_bottom = -218.0
 theme_override_constants/separation = 12
 metadata/_edit_use_anchors_ = true
 
@@ -94,13 +87,13 @@ theme_override_constants/separation = 0
 custom_minimum_size = Vector2(150, 150)
 anchors_preset = -1
 anchor_left = 0.076000005
-anchor_top = 0.771
+anchor_top = 0.77400005
 anchor_right = 0.193
-anchor_bottom = 0.97900003
+anchor_bottom = 0.98200005
 offset_left = -0.2800064
-offset_top = -0.11999512
+offset_top = -0.2800293
 offset_right = -0.040008545
-offset_bottom = 0.11999512
+offset_bottom = -0.040039063
 size_flags_horizontal = 8
 size_flags_vertical = 12
 texture = ExtResource("3_th8rj")
@@ -137,6 +130,7 @@ anchors_preset = -1
 anchor_top = 0.749
 anchor_right = 1.0020001
 anchor_bottom = 0.9990001
+offset_left = 2.0
 offset_top = -0.2800293
 offset_right = -0.5600586
 offset_bottom = -0.2800293
@@ -157,13 +151,13 @@ alignment = 1
 custom_minimum_size = Vector2(130, 130)
 anchors_preset = -1
 anchor_left = 0.08400001
-anchor_top = 0.78300005
+anchor_top = 0.786
 anchor_right = 0.185
-anchor_bottom = 0.96400005
+anchor_bottom = 0.96700007
 offset_left = -0.5200043
-offset_top = 0.23999023
+offset_top = 0.08001709
 offset_right = 0.19999695
-offset_bottom = -0.08001709
+offset_bottom = -0.24005127
 size_flags_horizontal = 8
 size_flags_vertical = 12
 expand_mode = 1
@@ -173,14 +167,14 @@ expand_mode = 1
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BottomPanel/HBoxContainer/CharacterStatus/VBoxContainer"]
 custom_minimum_size = Vector2(120, 90)
 anchors_preset = -1
-anchor_left = 0.201
-anchor_top = 0.79200006
-anchor_right = 0.31
-anchor_bottom = 0.95300007
-offset_left = -0.27999878
-offset_top = -0.24005127
-offset_right = 0.2000122
-offset_bottom = -0.16003418
+anchor_left = 0.19900002
+anchor_top = 0.79700005
+anchor_right = 0.293
+anchor_bottom = 0.94400007
+offset_left = 0.27998352
+offset_top = 0.15997314
+offset_right = -0.040008545
+offset_bottom = 0.3199463
 size_flags_horizontal = 4
 size_flags_vertical = 4
 size_flags_stretch_ratio = 0.3
@@ -189,18 +183,15 @@ theme_override_constants/separation = 8
 [node name="CharacterName" type="Label" parent="CanvasLayer/BottomPanel/HBoxContainer/CharacterStatus/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(40, 30)
 layout_mode = 2
-size_flags_vertical = 1
-theme = ExtResource("4_i6wy2")
+size_flags_vertical = 3
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HPBar" type="TextureProgressBar" parent="CanvasLayer/BottomPanel/HBoxContainer/CharacterStatus/VBoxContainer/VBoxContainer"]
+[node name="HPBar" type="ProgressBar" parent="CanvasLayer/BottomPanel/HBoxContainer/CharacterStatus/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(40, 30)
 layout_mode = 2
-texture_under = ExtResource("5_erplg")
-texture_over = ExtResource("5_1kx8p")
-texture_progress = ExtResource("7_ilgx7")
-texture_progress_offset = Vector2(0, 1)
+size_flags_vertical = 1
+show_percentage = false
 
 [node name="HPLabel" type="Label" parent="CanvasLayer/BottomPanel/HBoxContainer/CharacterStatus/VBoxContainer/VBoxContainer/HPBar"]
 layout_mode = 1
@@ -209,17 +200,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4_i6wy2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="APBar" type="TextureProgressBar" parent="CanvasLayer/BottomPanel/HBoxContainer/CharacterStatus/VBoxContainer/VBoxContainer"]
+[node name="APBar" type="ProgressBar" parent="CanvasLayer/BottomPanel/HBoxContainer/CharacterStatus/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(40, 30)
 layout_mode = 2
-texture_under = ExtResource("5_erplg")
-texture_over = ExtResource("5_1kx8p")
-texture_progress = ExtResource("7_ilgx7")
-texture_progress_offset = Vector2(0, 1)
+size_flags_vertical = 1
+show_percentage = false
 
 [node name="APLabel" type="Label" parent="CanvasLayer/BottomPanel/HBoxContainer/CharacterStatus/VBoxContainer/VBoxContainer/APBar"]
 layout_mode = 1
@@ -228,7 +216,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4_i6wy2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -262,13 +249,14 @@ theme_override_constants/separation = 12
 [node name="CommandMenu" type="VBoxContainer" parent="CanvasLayer/BottomPanel/HBoxContainer/CommandMenu"]
 custom_minimum_size = Vector2(0, 140)
 anchors_preset = -1
-anchor_left = 0.31800002
-anchor_top = 0.77500004
-anchor_right = 0.42700002
-anchor_bottom = 0.98200005
-offset_left = -0.040039063
-offset_right = 0.44000244
-offset_bottom = -0.040039063
+anchor_left = 0.30600002
+anchor_top = 0.772
+anchor_right = 0.416
+anchor_bottom = 0.957
+offset_left = 0.3199768
+offset_top = 0.15997314
+offset_right = -0.47998047
+offset_bottom = 15.959961
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
@@ -278,177 +266,69 @@ theme_override_constants/separation = 8
 custom_minimum_size = Vector2(140, 30)
 layout_mode = 2
 theme = ExtResource("4_i6wy2")
-texture_normal = ExtResource("9_8ty6f")
+texture_normal = ExtResource("4_tb71n")
 texture_hover = ExtResource("6_th8rj")
-texture_disabled = ExtResource("11_handr")
 ignore_texture_size = true
 stretch_mode = 3
 
 [node name="Label" type="Label" parent="CanvasLayer/BottomPanel/HBoxContainer/CommandMenu/CommandMenu/FightButton"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.279
-anchor_top = 0.033
-anchor_right = 0.97900003
-anchor_bottom = 0.90000004
-offset_left = -0.060001373
-offset_top = 0.00999999
-offset_right = -0.05999756
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.0
+offset_right = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_i6wy2")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
-text = "Atacar"
+theme_override_font_sizes/font_size = 21
+text = "   ATACAR"
+horizontal_alignment = 1
 vertical_alignment = 2
-uppercase = true
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/BottomPanel/HBoxContainer/CommandMenu/CommandMenu/FightButton"]
 custom_minimum_size = Vector2(12, 12)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.086
-anchor_top = 0.16700001
-anchor_right = 0.22900002
-anchor_bottom = 0.83300006
-offset_left = -0.03999996
-offset_top = -0.010000229
-offset_right = -0.060001373
-offset_bottom = 0.0099983215
-texture = ExtResource("11_8ty6f")
+anchor_left = 0.10700001
+anchor_top = 0.133
+anchor_right = 0.264
+anchor_bottom = 0.90000004
+offset_left = 0.01999855
+offset_top = 0.00999999
+offset_right = 0.040000916
+offset_bottom = -1.0000019
+texture = ExtResource("7_1kx8p")
 expand_mode = 1
 
 [node name="DefendButton" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer/CommandMenu/CommandMenu"]
 custom_minimum_size = Vector2(140, 30)
 layout_mode = 2
 theme = ExtResource("4_i6wy2")
-texture_normal = ExtResource("9_8ty6f")
+texture_normal = ExtResource("4_tb71n")
 texture_hover = ExtResource("6_th8rj")
-texture_disabled = ExtResource("11_handr")
 ignore_texture_size = true
 stretch_mode = 3
-
-[node name="Label" type="Label" parent="CanvasLayer/BottomPanel/HBoxContainer/CommandMenu/CommandMenu/DefendButton"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.279
-anchor_top = 0.033
-anchor_right = 0.97900003
-anchor_bottom = 0.90000004
-offset_left = -0.060001373
-offset_top = 0.00999999
-offset_right = -0.05999756
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("4_i6wy2")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
-text = "Defender"
-vertical_alignment = 2
-uppercase = true
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/BottomPanel/HBoxContainer/CommandMenu/CommandMenu/DefendButton"]
-custom_minimum_size = Vector2(12, 12)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.071
-anchor_top = 0.133
-anchor_right = 0.22900002
-anchor_bottom = 0.83300006
-offset_left = 2.0599995
-offset_top = 1.01
-offset_right = -0.060001373
-offset_bottom = 0.0099983215
-texture = ExtResource("12_handr")
-expand_mode = 1
 
 [node name="ItemsButton" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer/CommandMenu/CommandMenu"]
 custom_minimum_size = Vector2(140, 30)
 layout_mode = 2
 theme = ExtResource("4_i6wy2")
-texture_normal = ExtResource("9_8ty6f")
+texture_normal = ExtResource("4_tb71n")
 texture_hover = ExtResource("6_th8rj")
-texture_disabled = ExtResource("11_handr")
 ignore_texture_size = true
 stretch_mode = 3
-
-[node name="Label" type="Label" parent="CanvasLayer/BottomPanel/HBoxContainer/CommandMenu/CommandMenu/ItemsButton"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.279
-anchor_top = 0.033
-anchor_right = 0.97900003
-anchor_bottom = 0.90000004
-offset_left = -0.060001373
-offset_top = 0.00999999
-offset_right = -0.05999756
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("4_i6wy2")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
-text = "Items"
-vertical_alignment = 2
-uppercase = true
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/BottomPanel/HBoxContainer/CommandMenu/CommandMenu/ItemsButton"]
-custom_minimum_size = Vector2(12, 12)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.086
-anchor_top = 0.16700001
-anchor_right = 0.22900002
-anchor_bottom = 0.83300006
-offset_left = -0.03999996
-offset_top = -0.010000229
-offset_right = -0.060001373
-offset_bottom = 0.0099983215
-texture = ExtResource("13_888n0")
-expand_mode = 1
 
 [node name="SkipButton" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer/CommandMenu/CommandMenu"]
 custom_minimum_size = Vector2(140, 30)
 layout_mode = 2
 theme = ExtResource("4_i6wy2")
-texture_normal = ExtResource("9_8ty6f")
+texture_normal = ExtResource("4_tb71n")
 texture_hover = ExtResource("6_th8rj")
-texture_disabled = ExtResource("11_handr")
 ignore_texture_size = true
 stretch_mode = 3
-
-[node name="Label" type="Label" parent="CanvasLayer/BottomPanel/HBoxContainer/CommandMenu/CommandMenu/SkipButton"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.279
-anchor_top = 0.033
-anchor_right = 0.97900003
-anchor_bottom = 0.90000004
-offset_left = -0.060001373
-offset_top = 0.00999999
-offset_right = -0.05999756
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("4_i6wy2")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
-text = "Pular"
-vertical_alignment = 2
-uppercase = true
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/BottomPanel/HBoxContainer/CommandMenu/CommandMenu/SkipButton"]
-custom_minimum_size = Vector2(12, 12)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.086
-anchor_top = 0.16700001
-anchor_right = 0.22900002
-anchor_bottom = 0.83300006
-offset_left = -0.03999996
-offset_top = -0.010000229
-offset_right = -0.060001373
-offset_bottom = 0.0099983215
-texture = ExtResource("14_mttxc")
-expand_mode = 1
 
 [node name="TargetMenu" type="CanvasLayer" parent="CanvasLayer/BottomPanel/HBoxContainer"]
 
@@ -457,15 +337,14 @@ custom_minimum_size = Vector2(150, 0)
 anchors_preset = -1
 anchor_left = 0.44000003
 anchor_top = 0.771
-anchor_right = 0.591
+anchor_right = 0.55700004
 anchor_bottom = 0.9760001
 offset_left = -0.2000122
 offset_top = -0.11999512
-offset_right = -0.4800415
+offset_right = -9.960083
 offset_bottom = 0.27996826
 size_flags_horizontal = 4
 size_flags_vertical = 4
-horizontal_scroll_mode = 0
 
 [node name="TargetButtons" type="VBoxContainer" parent="CanvasLayer/BottomPanel/HBoxContainer/TargetMenu/TargetMenu"]
 layout_mode = 2
@@ -473,4 +352,3 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("4_i6wy2")
 theme_override_constants/separation = 8
-alignment = 1

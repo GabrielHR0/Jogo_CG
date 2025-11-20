@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource("3_q6gyf")
-name = "Barom - Transformação"
+name = "Barom"
 icon = ExtResource("2_ah4bt")
 texture = ExtResource("4_1xx05")
 strength = 8

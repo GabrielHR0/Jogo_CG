@@ -23,10 +23,11 @@ party_manager="*res://systems/party_manager.gd"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/mode=3
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gdscript-templates/plugin.cfg", "res://addons/godot-css-theme/plugin.cfg", "res://addons/ui_design_tool/plugin.cfg")
+enabled=PackedStringArray("res://addons/gdscript-templates/plugin.cfg", "res://addons/godot-css-theme/plugin.cfg")
 
 [input]
 

@@ -3,11 +3,13 @@ class_name Battle
 
 signal battle_started()
 signal player_turn_started(character: Character)
+signal ai_turn_started(character: Character)
 signal action_executed(character: Character, action: Action, target: Character)
 signal turn_completed(character: Character)
 signal character_died(character: Character)
 signal battle_ended(victory: bool)
 signal player_action_selected()
+signal ui_updated()  # ⭐ NOVO: Sinal para quando a UI termina de atualizar
 
 var allies_party: Party
 var enemies_party: Party
@@ -23,6 +25,8 @@ var current_player_character: Character = null
 @export var global_agility_order: bool = true
 @export var action_delay_sec: float = 0.20
 @export var between_actions_delay_sec: float = 0.20
+@export var ai_decision_delay: float = 1.0
+@export var ui_update_wait_time: float = 0.5  # ⭐ NOVO: Tempo para esperar a UI atualizar
 
 func setup_battle(allies: Party, enemies: Party):
 	allies_party = allies
@@ -63,27 +67,51 @@ func _execute_player_turn(character: Character):
 	current_player_character = character
 	waiting_for_player_input = true
 	
-	# 🎯 CORREÇÃO: Recupera AP ANTES de mostrar o menu
+	# Recupera AP ANTES de mostrar o menu
 	if current_round > 0:
 		var rec = character.restore_ap()
 		print("🔋", character.name, "recuperou", rec, "AP (", character.current_ap, "/", character.get_max_ap(), ")")
 	
 	player_turn_started.emit(character)
+	
+	# ⭐ CORREÇÃO: Emite sinal para UI atualizar
+	ui_updated.emit()
+	await get_tree().create_timer(ui_update_wait_time).timeout
+	
 	print("⏸️ Esperando ação do jogador:", character.name)
 	print("💰 AP disponível:", character.current_ap, "/", character.get_max_ap())
 	await self.player_action_selected
 	print("▶️ Ação recebida do jogador")
 
 func _execute_ai_turn(character: Character):
+	# Emite sinal para a UI mostrar que é turno da IA
+	ai_turn_started.emit(character)
+	
+	# ⭐ CORREÇÃO: Aguarda a UI atualizar completamente antes de continuar
+	print("🤖 Aguardando UI atualizar...")
+	ui_updated.emit()
+	await get_tree().create_timer(ui_update_wait_time).timeout
+	
+	# Recupera AP (isso será mostrado na UI)
 	if current_round > 0:
 		var rec = character.restore_ap()
 		print("🤖", character.name, "recuperou", rec, "AP (", character.current_ap, "/", character.get_max_ap(), ")")
+	
+	# ⭐ CORREÇÃO: Aguarda a UI atualizar novamente para mostrar o AP recuperado
+	ui_updated.emit()
+	await get_tree().create_timer(ui_update_wait_time).timeout
+	
+	# Aguarda um delay antes de tomar decisão
+	print("🤖 IA pensando...")
+	await get_tree().create_timer(ai_decision_delay).timeout
 	
 	var action = _choose_action(character)
 	var target = _choose_target(character, action)
 	
 	if action and target:
 		await _execute_action(character, action, target)
+	else:
+		print("🤖", character.name, "não encontrou ação válida")
 	
 	turn_completed.emit(character)
 
