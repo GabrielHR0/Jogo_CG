@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Character" load_steps=5 format=3 uid="uid://b4j2w2b5igrrp"]
+[gd_resource type="Resource" script_class="Character" load_steps=6 format=3 uid="uid://b4j2w2b5igrrp"]
 
 [ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_lp4co"]
+[ext_resource type="Resource" uid="uid://ww5ub4mmbfjr" path="res://data/characters/animações/humanos corrompidos.tres" id="1_wh3fa"]
 [ext_resource type="Texture2D" uid="uid://q0yhroi74c08" path="res://assets/Ícones/Humanos Corrompidos.png" id="2_wh3fa"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_w4vf4"]
 [ext_resource type="Texture2D" uid="uid://b8qr7igadt53i" path="res://assets/Criaturas de Gorgom/Humanos corrompidos de Gorgom/Humanos corrompidos de Gorgom.png" id="4_3qp7w"]
@@ -15,4 +16,5 @@ constitution = 6
 agility = 3
 intelligence = 2
 role = 1
+animation_data = ExtResource("1_wh3fa")
 metadata/_custom_type_script = "uid://bbcihyrs4lcmp"

@@ -1,8 +1,9 @@
-[gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://7rn66sqaxdiv"]
+[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://7rn66sqaxdiv"]
 
 [ext_resource type="Texture2D" uid="uid://bpx65ntbdyn0m" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/andando.png" id="1_wsltt"]
 [ext_resource type="Texture2D" uid="uid://dx345pcgd3uvc" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/ataque.png" id="2_7lwcr"]
 [ext_resource type="Texture2D" uid="uid://dy3c2s3ol8ck2" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/dano.png" id="3_drpph"]
+[ext_resource type="Texture2D" uid="uid://dmr16dwapsxgg" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Transformação/png/transformação.png" id="4_7lwcr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_44li5"]
 atlas = ExtResource("1_wsltt")
@@ -35,6 +36,18 @@ region = Rect2(0, 0, 384, 384)
 [sub_resource type="AtlasTexture" id="AtlasTexture_lqn6w"]
 atlas = ExtResource("3_drpph")
 region = Rect2(384, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drpph"]
+atlas = ExtResource("4_7lwcr")
+region = Rect2(0, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fm23j"]
+atlas = ExtResource("4_7lwcr")
+region = Rect2(384, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8idt"]
+atlas = ExtResource("4_7lwcr")
+region = Rect2(768, 0, 384, 384)
 
 [resource]
 animations = [{
@@ -75,5 +88,19 @@ animations = [{
 }],
 "loop": true,
 "name": &"dano",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drpph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fm23j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8idt")
+}],
+"loop": true,
+"name": &"transformação",
 "speed": 5.0
 }]

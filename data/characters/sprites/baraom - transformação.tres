@@ -1,38 +1,38 @@
 [gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://dpsq8uujomhi8"]
 
-[ext_resource type="Texture2D" uid="uid://bpx65ntbdyn0m" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/andando.png" id="1_6ycob"]
-[ext_resource type="Texture2D" uid="uid://dx345pcgd3uvc" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/ataque.png" id="2_03pkg"]
-[ext_resource type="Texture2D" uid="uid://dy3c2s3ol8ck2" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/dano.png" id="3_nt801"]
+[ext_resource type="Texture2D" uid="uid://dgfi7bhvpjdql" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Transformação/png/andando transformação.png" id="1_6ycob"]
+[ext_resource type="Texture2D" uid="uid://f08isewl3l4q" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Transformação/png/ataque transformação.png" id="2_03pkg"]
+[ext_resource type="Texture2D" uid="uid://guibpv6g2ul0" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Transformação/png/dano transformação.png" id="3_nt801"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_44li5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2flu"]
 atlas = ExtResource("1_6ycob")
 region = Rect2(0, 0, 384, 384)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_myv4n"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hp3j"]
 atlas = ExtResource("1_6ycob")
 region = Rect2(384, 0, 384, 384)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2kwqd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3qdm"]
 atlas = ExtResource("1_6ycob")
 region = Rect2(768, 0, 384, 384)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1jdxn"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vqy6"]
 atlas = ExtResource("2_03pkg")
-region = Rect2(0, 0, 500, 384)
+region = Rect2(0, 0, 384, 384)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d1vwf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmdwv"]
 atlas = ExtResource("2_03pkg")
-region = Rect2(500, 0, 500, 384)
+region = Rect2(384, 0, 384, 384)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fbm38"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5k3c"]
 atlas = ExtResource("2_03pkg")
-region = Rect2(1000, 0, 500, 384)
+region = Rect2(768, 0, 384, 384)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0t3ls"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1qp7"]
 atlas = ExtResource("3_nt801")
 region = Rect2(0, 0, 384, 384)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lqn6w"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3500"]
 atlas = ExtResource("3_nt801")
 region = Rect2(384, 0, 384, 384)
 
@@ -40,13 +40,13 @@ region = Rect2(384, 0, 384, 384)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_44li5")
+"texture": SubResource("AtlasTexture_w2flu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_myv4n")
+"texture": SubResource("AtlasTexture_0hp3j")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2kwqd")
+"texture": SubResource("AtlasTexture_l3qdm")
 }],
 "loop": true,
 "name": &"andar",
@@ -54,13 +54,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1jdxn")
+"texture": SubResource("AtlasTexture_2vqy6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d1vwf")
+"texture": SubResource("AtlasTexture_bmdwv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fbm38")
+"texture": SubResource("AtlasTexture_b5k3c")
 }],
 "loop": true,
 "name": &"ataque",
@@ -68,10 +68,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0t3ls")
+"texture": SubResource("AtlasTexture_a1qp7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lqn6w")
+"texture": SubResource("AtlasTexture_w3500")
 }],
 "loop": true,
 "name": &"dano",

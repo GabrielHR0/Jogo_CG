@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Character" load_steps=5 format=3 uid="uid://byd3edcogndhb"]
+[gd_resource type="Resource" script_class="Character" load_steps=6 format=3 uid="uid://byd3edcogndhb"]
 
+[ext_resource type="Resource" uid="uid://dnxfgjqeg1dj5" path="res://data/characters/animações/nobuhiko akizuki.tres" id="1_4uou0"]
 [ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_ragt3"]
 [ext_resource type="Texture2D" uid="uid://b3p54a3ajveo3" path="res://assets/Ícones/Nobuhiko Akizuki  Umbra Luna﻿.png" id="2_4uou0"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_oos1q"]
@@ -15,4 +16,5 @@ constitution = 7
 agility = 6
 intelligence = 9
 role = 2
+animation_data = ExtResource("1_4uou0")
 metadata/_custom_type_script = "uid://bbcihyrs4lcmp"

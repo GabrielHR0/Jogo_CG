@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Character" load_steps=5 format=3 uid="uid://5cagymcg5uln"]
+[gd_resource type="Resource" script_class="Character" load_steps=6 format=3 uid="uid://5cagymcg5uln"]
 
 [ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_hp2jg"]
+[ext_resource type="Resource" uid="uid://yi187hlo0nw5" path="res://data/characters/animações/bestas demoníacas.tres" id="1_s3aoj"]
 [ext_resource type="Texture2D" uid="uid://c4lklatdan3gc" path="res://assets/Ícones/Bestas Demoníacas.png" id="2_s3aoj"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_efe33"]
 [ext_resource type="Texture2D" uid="uid://svvxi7wh7rta" path="res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/Bestas demoníacas de Gorgom.png" id="4_mfsy4"]
@@ -14,4 +15,5 @@ strength = 6
 constitution = 4
 intelligence = 3
 role = 1
+animation_data = ExtResource("1_s3aoj")
 metadata/_custom_type_script = "uid://bbcihyrs4lcmp"

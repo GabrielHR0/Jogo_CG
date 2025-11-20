@@ -1,3 +1,107 @@
-[gd_resource type="SpriteFrames" format=3 uid="uid://cix8jqhp315yw"]
+[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://cix8jqhp315yw"]
+
+[ext_resource type="Texture2D" uid="uid://roxrq4mkgy1r" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Transformação/png/andando transformação.png" id="1_ktccf"]
+[ext_resource type="Texture2D" uid="uid://c08m6h65icopk" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Transformação/png/ataque transformação.png" id="2_1yrsf"]
+[ext_resource type="Texture2D" uid="uid://gpcoq68l3gr5" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Transformação/png/dano transformação.png" id="3_ehj7o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhcd4"]
+atlas = ExtResource("1_ktccf")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbpa0"]
+atlas = ExtResource("1_ktccf")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7cdd"]
+atlas = ExtResource("1_ktccf")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1spv7"]
+atlas = ExtResource("2_1yrsf")
+region = Rect2(0, 0, 900, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rvah"]
+atlas = ExtResource("2_1yrsf")
+region = Rect2(900, 0, 900, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pq67a"]
+atlas = ExtResource("2_1yrsf")
+region = Rect2(1800, 0, 900, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hvc4x"]
+atlas = ExtResource("2_1yrsf")
+region = Rect2(2700, 0, 900, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qffmh"]
+atlas = ExtResource("2_1yrsf")
+region = Rect2(3600, 0, 900, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vrhgd"]
+atlas = ExtResource("2_1yrsf")
+region = Rect2(4500, 0, 900, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhpas"]
+atlas = ExtResource("2_1yrsf")
+region = Rect2(5400, 0, 900, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cs0mk"]
+atlas = ExtResource("3_ehj7o")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o4sfw"]
+atlas = ExtResource("3_ehj7o")
+region = Rect2(512, 0, 512, 512)
 
 [resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhcd4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbpa0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7cdd")
+}],
+"loop": true,
+"name": &"andar",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1spv7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rvah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pq67a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hvc4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qffmh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vrhgd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhpas")
+}],
+"loop": true,
+"name": &"ataque",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cs0mk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o4sfw")
+}],
+"loop": true,
+"name": &"dano",
+"speed": 5.0
+}]

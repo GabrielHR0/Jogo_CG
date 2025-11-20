@@ -1,8 +1,9 @@
-[gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://b718i67mx4mp2"]
+[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://6x44hwa53upg"]
 
 [ext_resource type="Texture2D" uid="uid://ic1icm7fvaek" path="res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/png/andando.png" id="1_81ro5"]
 [ext_resource type="Texture2D" uid="uid://c8lrvma02nuhh" path="res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/png/ataque.png" id="2_v11ul"]
 [ext_resource type="Texture2D" uid="uid://cgkjcsm5sp3oe" path="res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/png/dano.png" id="3_j77tn"]
+[ext_resource type="Texture2D" uid="uid://dwr1ojqduqoxu" path="res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Transformação/png/transformação.png" id="4_m3150"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6dypl"]
 atlas = ExtResource("1_81ro5")
@@ -35,6 +36,18 @@ region = Rect2(0, 0, 384, 384)
 [sub_resource type="AtlasTexture" id="AtlasTexture_qo1bt"]
 atlas = ExtResource("3_j77tn")
 region = Rect2(384, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qf1op"]
+atlas = ExtResource("4_m3150")
+region = Rect2(0, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d72v7"]
+atlas = ExtResource("4_m3150")
+region = Rect2(384, 0, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63382"]
+atlas = ExtResource("4_m3150")
+region = Rect2(768, 0, 384, 384)
 
 [resource]
 animations = [{
@@ -75,5 +88,19 @@ animations = [{
 }],
 "loop": true,
 "name": &"dano",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qf1op")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d72v7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63382")
+}],
+"loop": true,
+"name": &"transformação",
 "speed": 5.0
 }]

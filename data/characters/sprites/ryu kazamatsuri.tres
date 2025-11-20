@@ -1,8 +1,9 @@
-[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://cfwqvksu4wih"]
+[gd_resource type="SpriteFrames" load_steps=15 format=3 uid="uid://cfwqvksu4wih"]
 
 [ext_resource type="Texture2D" uid="uid://ceg8wlmf56ufy" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/andnado.png" id="1_161e1"]
 [ext_resource type="Texture2D" uid="uid://rrifk7poh3b0" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/ataque.png" id="2_i14oe"]
 [ext_resource type="Texture2D" uid="uid://ds3mfjooidgo8" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/dano.png" id="3_tcqqh"]
+[ext_resource type="Texture2D" uid="uid://dtlfmbe5p8s7a" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Transformação/png/transformação.png" id="4_i14oe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fi407"]
 atlas = ExtResource("1_161e1")
@@ -31,6 +32,18 @@ region = Rect2(0, 0, 320, 320)
 [sub_resource type="AtlasTexture" id="AtlasTexture_aj731"]
 atlas = ExtResource("3_tcqqh")
 region = Rect2(320, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tcqqh"]
+atlas = ExtResource("4_i14oe")
+region = Rect2(0, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b7s5y"]
+atlas = ExtResource("4_i14oe")
+region = Rect2(320, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nlag1"]
+atlas = ExtResource("4_i14oe")
+region = Rect2(640, 0, 320, 320)
 
 [resource]
 animations = [{
@@ -68,5 +81,19 @@ animations = [{
 }],
 "loop": true,
 "name": &"dano",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tcqqh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b7s5y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nlag1")
+}],
+"loop": true,
+"name": &"transformação",
 "speed": 5.0
 }]
