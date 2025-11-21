@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MeleeAttack" load_steps=3 format=3 uid="uid://d2qxer3cg2puf"]
+
+[ext_resource type="Texture2D" uid="uid://dgwchnjjw4f6x" path="res://data/characters/ataques/png/meele/katsumi kida - meele.png" id="1_ls5po"]
+[ext_resource type="Script" uid="uid://be0b1oathrib4" path="res://models/actions/atacks/MeleeAttack.gd" id="2_0n5ei"]
+
+[resource]
+script = ExtResource("2_0n5ei")
+damage_multiplier = 1.8
+critical_chance = 0.07
+icon = ExtResource("1_ls5po")
+metadata/_custom_type_script = "uid://be0b1oathrib4"

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MagicAttack" load_steps=3 format=3 uid="uid://d7sfk0ctyp0t"]
+
+[ext_resource type="Texture2D" uid="uid://cebn0w734pkop" path="res://data/characters/ataques/png/magic/issamu minami transform - magic.png" id="1_g4cyo"]
+[ext_resource type="Script" uid="uid://cpw4jpb7pdqbv" path="res://models/actions/atacks/MagicAttack.gd" id="2_6sj6s"]
+
+[resource]
+script = ExtResource("2_6sj6s")
+element = "holy"
+damage_multiplier = 1.5
+critical_chance = 0.08
+critical_multiplier = 1.6
+icon = ExtResource("1_g4cyo")
+metadata/_custom_type_script = "uid://cpw4jpb7pdqbv"

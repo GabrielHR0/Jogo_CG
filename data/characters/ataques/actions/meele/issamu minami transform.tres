@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MeleeAttack" load_steps=3 format=3 uid="uid://1pi276br0o6x"]
+
+[ext_resource type="Texture2D" uid="uid://cjq5xsix3nwpl" path="res://data/characters/ataques/png/meele/issamu minami transform - meele.png" id="1_6hy5q"]
+[ext_resource type="Script" uid="uid://be0b1oathrib4" path="res://models/actions/atacks/MeleeAttack.gd" id="2_bi2sb"]
+
+[resource]
+script = ExtResource("2_bi2sb")
+damage_multiplier = 2.0
+critical_multiplier = 1.75
+icon = ExtResource("1_6hy5q")
+metadata/_custom_type_script = "uid://be0b1oathrib4"

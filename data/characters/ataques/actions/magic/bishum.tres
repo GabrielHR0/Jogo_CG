@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MagicAttack" load_steps=3 format=3 uid="uid://0adaejt4jxi0"]
+
+[ext_resource type="Texture2D" uid="uid://ca7pqffu0dx05" path="res://data/characters/ataques/png/magic/bishum - magic.png" id="1_eb5db"]
+[ext_resource type="Script" uid="uid://cpw4jpb7pdqbv" path="res://models/actions/atacks/MagicAttack.gd" id="2_8wdq1"]
+
+[resource]
+script = ExtResource("2_8wdq1")
+element = "illusion"
+damage_multiplier = 0.0
+critical_chance = 0.0
+critical_multiplier = 1.0
+icon = ExtResource("1_eb5db")
+metadata/_custom_type_script = "uid://cpw4jpb7pdqbv"

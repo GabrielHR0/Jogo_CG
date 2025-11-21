@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RangedAttack" load_steps=3 format=3 uid="uid://xsblo4it45dr"]
+
+[ext_resource type="Texture2D" uid="uid://b78gi1prn7ns" path="res://data/characters/ataques/png/ranged/masaru todo - ranged.png" id="1_tjmn0"]
+[ext_resource type="Script" uid="uid://d006vpi5yx8qh" path="res://models/actions/atacks/RangedAttack.gd" id="2_xgvat"]
+
+[resource]
+script = ExtResource("2_xgvat")
+damage_multiplier = 1.2
+critical_chance = 0.06
+critical_multiplier = 1.6
+icon = ExtResource("1_tjmn0")
+metadata/_custom_type_script = "uid://d006vpi5yx8qh"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RangedAttack" load_steps=3 format=3 uid="uid://csl6lc7fnaq7h"]
+
+[ext_resource type="Texture2D" uid="uid://dt0mqh5mi5iwm" path="res://data/characters/ataques/png/ranged/ryu kazamatsuri - ranged.png" id="1_3m7hg"]
+[ext_resource type="Script" uid="uid://d006vpi5yx8qh" path="res://models/actions/atacks/RangedAttack.gd" id="2_uk7sl"]
+
+[resource]
+script = ExtResource("2_uk7sl")
+damage_multiplier = 0.6
+critical_multiplier = 1.0
+icon = ExtResource("1_3m7hg")
+metadata/_custom_type_script = "uid://d006vpi5yx8qh"

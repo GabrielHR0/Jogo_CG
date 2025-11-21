@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RangedAttack" load_steps=3 format=3 uid="uid://co8b2vj2lgqkp"]
+
+[ext_resource type="Texture2D" uid="uid://bp3h1rmrp4oi2" path="res://data/characters/ataques/png/ranged/darom - ranged.png" id="1_cokqs"]
+[ext_resource type="Script" uid="uid://d006vpi5yx8qh" path="res://models/actions/atacks/RangedAttack.gd" id="2_7whxd"]
+
+[resource]
+script = ExtResource("2_7whxd")
+damage_multiplier = 0.8
+critical_chance = 0.05
+icon = ExtResource("1_cokqs")
+metadata/_custom_type_script = "uid://d006vpi5yx8qh"
