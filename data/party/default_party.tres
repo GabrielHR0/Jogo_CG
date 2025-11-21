@@ -4,9 +4,10 @@
 [ext_resource type="Resource" uid="uid://dyae0d3l0ev27" path="res://data/characters/aliados/isamu minami.tres" id="2_qv1kt"]
 [ext_resource type="Script" uid="uid://rhljqyamkwai" path="res://models/Party.gd" id="3_1xy06"]
 [ext_resource type="Resource" uid="uid://b068d3h4cxb6u" path="res://data/characters/aliados/kyoko.tres" id="3_a5p8w"]
-[ext_resource type="Resource" uid="uid://bet3dghiioe25" path="res://data/characters/aliados/bishum.tres" id="4_wjs3h"]
+[ext_resource type="Resource" uid="uid://bet3dghiioe25" path="res://data/characters/vilões/bishum.tres" id="4_wjs3h"]
 [ext_resource type="Resource" uid="uid://bnwvga0fsorf6" path="res://data/characters/aliados/masaru todo.tres" id="5_1xhgo"]
 [ext_resource type="Resource" uid="uid://bwc6p6wqb3y58" path="res://data/characters/aliados/katsumi kida.tres" id="6_18sp8"]
+
 
 [resource]
 script = ExtResource("3_1xy06")
