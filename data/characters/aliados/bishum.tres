@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="Character" load_steps=6 format=3 uid="uid://bet3dghiioe25"]
+[gd_resource type="Resource" script_class="Character" load_steps=8 format=3 uid="uid://bet3dghiioe25"]
 
 [ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_g70gw"]
 [ext_resource type="Resource" uid="uid://bkvl4tiiyo4vs" path="res://data/characters/animações/bishum.tres" id="1_ldhkq"]
 [ext_resource type="Texture2D" uid="uid://dada5vys6pamd" path="res://assets/Ícones/Bishum.png" id="2_ldhkq"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_7fc7j"]
+[ext_resource type="Resource" uid="uid://dg6g8eoppldj8" path="res://data/characters/ataques/actions/meele/bishum.tres" id="3_s6n1a"]
 [ext_resource type="Texture2D" uid="uid://vplupmlad3n8" path="res://assets/Bishum (Alta Sacerdotisa de Gorgom﻿)/Bishum (Alta Sacerdotisa de Gorgom﻿).png" id="4_s6n1a"]
+[ext_resource type="Resource" uid="uid://0adaejt4jxi0" path="res://data/characters/ataques/actions/magic/bishum.tres" id="4_y7b7n"]
 
 [resource]
 script = ExtResource("3_7fc7j")
@@ -16,5 +18,6 @@ constitution = 6
 intelligence = 9
 position = "back"
 role = 4
+combat_actions = Array[ExtResource("1_g70gw")]([ExtResource("3_s6n1a"), ExtResource("4_y7b7n")])
 animation_data = ExtResource("1_ldhkq")
 metadata/_custom_type_script = "uid://bbcihyrs4lcmp"

@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Character" load_steps=6 format=3 uid="uid://d1sqfgwabokee"]
+[gd_resource type="Resource" script_class="Character" load_steps=7 format=3 uid="uid://d1sqfgwabokee"]
 
 [ext_resource type="Resource" uid="uid://denbenwnuldku" path="res://data/characters/animações/mago mentor.tres" id="1_4347r"]
 [ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_ha46k"]
 [ext_resource type="Texture2D" uid="uid://b3mgxdk7cffe4" path="res://assets/Ícones/Soichiro Akizuki.png" id="2_4347r"]
+[ext_resource type="Resource" uid="uid://dt5w10butxjbp" path="res://data/characters/ataques/actions/magic/soichiro akizuki.tres" id="3_48vov"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_bripw"]
 [ext_resource type="Texture2D" uid="uid://d2h724i7ck3xf" path="res://assets/Soichiro Akizuki (Mago Mentor)/Soichiro Akizuki (Mago Mentor).png" id="4_48vov"]
 
@@ -17,5 +18,6 @@ agility = 4
 intelligence = 10
 position = "back"
 role = 4
+combat_actions = Array[ExtResource("1_ha46k")]([ExtResource("3_48vov")])
 animation_data = ExtResource("1_4347r")
 metadata/_custom_type_script = "uid://bbcihyrs4lcmp"

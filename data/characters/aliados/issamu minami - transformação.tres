@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="Character" load_steps=6 format=3 uid="uid://d2c4oft1e06dj"]
+[gd_resource type="Resource" script_class="Character" load_steps=8 format=3 uid="uid://d2c4oft1e06dj"]
 
 [ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_atlt0"]
 [ext_resource type="Resource" uid="uid://qfeb8jhrqjy2" path="res://data/characters/animações/issamu minami - transformação.tres" id="1_f1ljb"]
 [ext_resource type="Texture2D" uid="uid://bblk7yi80ls1c" path="res://assets/Ícones/Issamu Minami  Noctis Rex - Transformação (2).png" id="2_f1ljb"]
+[ext_resource type="Resource" uid="uid://d7sfk0ctyp0t" path="res://data/characters/ataques/actions/magic/issamu minami transform.tres" id="3_xqv41"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_xxwc7"]
 [ext_resource type="Texture2D" uid="uid://cct40lr1mueae" path="res://assets/Issamu Minami - Noctis Rex/Issamu Minami  Noctis Rex - Transformação.png" id="4_xqv41"]
+[ext_resource type="Resource" uid="uid://1pi276br0o6x" path="res://data/characters/ataques/actions/meele/issamu minami transform.tres" id="4_ysves"]
 
 [resource]
 script = ExtResource("3_xxwc7")
@@ -16,5 +18,6 @@ constitution = 10
 agility = 8
 intelligence = 8
 role = 2
+combat_actions = Array[ExtResource("1_atlt0")]([ExtResource("3_xqv41"), ExtResource("4_ysves")])
 animation_data = ExtResource("1_f1ljb")
 metadata/_custom_type_script = "uid://bbcihyrs4lcmp"

@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="Character" load_steps=6 format=3 uid="uid://bwc6p6wqb3y58"]
+[gd_resource type="Resource" script_class="Character" load_steps=7 format=3 uid="uid://bwc6p6wqb3y58"]
 
 [ext_resource type="Resource" uid="uid://dtem23180wns1" path="res://data/characters/animações/katsumi kida.tres" id="1_5rq3l"]
 [ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_vie8l"]
 [ext_resource type="Texture2D" uid="uid://dc3r7iv821yx4" path="res://assets/Ícones/Katsumi Kida.png" id="2_5rq3l"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_1nwb2"]
+[ext_resource type="Resource" uid="uid://d2qxer3cg2puf" path="res://data/characters/ataques/actions/meele/katsumi kida.tres" id="3_vmp8m"]
 [ext_resource type="Texture2D" uid="uid://bqig0e4mv873x" path="res://assets/Katsumi Kida (Bárbaro  Tanque)/Katsumi Kida (Bárbaro  Tanque).png" id="4_vmp8m"]
 
 [resource]
@@ -16,5 +17,6 @@ constitution = 9
 agility = 4
 intelligence = 3
 role = 1
+combat_actions = Array[ExtResource("1_vie8l")]([ExtResource("3_vmp8m")])
 animation_data = ExtResource("1_5rq3l")
 metadata/_custom_type_script = "uid://bbcihyrs4lcmp"
