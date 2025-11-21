@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://blui5ab8achhi"]
+
+[ext_resource type="FontFile" uid="uid://dpc7ujpfxaay6" path="res://assets/Star Crush.ttf" id="1_futjo"]
+
+[resource]
+default_font = ExtResource("1_futjo")
+default_font_size = 18
+Button/colors/font_color = Color(0, 0, 0, 1)

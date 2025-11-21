@@ -157,8 +157,11 @@ func _on_start_button_pressed():
 	
 	cleanup_test_character()
 	
-	var allies_party = create_allies_party_from_found()
-	var enemies_party = create_test_enemies()
+	#var allies_party = create_allies_party_from_found()
+	#var enemies_party = create_test_enemies()
+	var allies_party = preload("res://data/party/default_party.tres")
+	var enemies_party = preload("res://data/party/enemy_default_party.tres")
+
 	load_battle_scene(allies_party, enemies_party)
 
 func create_allies_party_from_found() -> Party:
