@@ -1,272 +1,272 @@
 e342ff4b7eca3c22cb19c57c403401fa
-::res://::1763555964
-icon.svg::CompressedTexture2D::7248202016562433731::1762948657::1763399132::1::::<><><>0<>0<>1492f381ecb0d5f1d84394cecf3c66fe<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
-README.md::TextFile::-1::1762948657::0::1::::<><><>0<>0<><>::
-::res://addons/::1762948657
-::res://addons/gdscript-templates/::1762948657
-plugin.cfg::TextFile::-1::1762948657::0::1::::<><><>0<>0<><>::
-plugin.gd::GDScript::1034040009910898845::1762948657::0::1::::<>EditorPlugin<><>0<>1<><>::
-README.md::TextFile::-1::1762948657::0::1::::<><><>0<>0<><>::
-::res://addons/gdscript-templates/images/::1763399133
-expanded.png::CompressedTexture2D::4931387849534305760::1762948657::1763399133::1::::<><><>0<>0<>3f66133d0ee1c5b6b59b4136b4e07cd2<>res://.godot/imported/expanded.png-a22203384e6723564a48bba601d33da7.ctex::
-keyword.png::CompressedTexture2D::5821192350447733313::1762948657::1763399133::1::::<><><>0<>0<>e279b93a21e3f93ba31d9855f0f156fe<>res://.godot/imported/keyword.png-6db914c98367731cae127191708173fb.ctex::
-templates.png::CompressedTexture2D::4914307282030192446::1762948657::1763399133::1::::<><><>0<>0<>06e512bae07795ebedf8d3572ccaec84<>res://.godot/imported/templates.png-ef28e83da92e84613299805d937f8d5a.ctex::
-::res://addons/gdscript-templates/scripts/::1762948657
-debug_utils.gd::GDScript::7362734399310989585::1762948657::0::1::::<>Object<><>0<>1<><>::
-file_utils.gd::GDScript::841106098566542653::1762948657::0::1::::<>Object<><>0<>1<><>::
-::res://addons/gdscript-templates/templates/::1762948657
-templates.json::JSON::-1::1762948657::0::1::::<><><>0<>0<><>::
-::res://addons/godot-css-theme/::1762948657
-convert.gd::GDScript::1706270155665421738::1762948657::0::1::::CSSConvert<>SceneTree<><>0<>0<><>::
-CSSParser.gd::GDScript::6756042168335808907::1762948657::0::1::::CSSParser<>RefCounted<><>0<>0<><>::
-CSSSimplifier.gd::GDScript::7115188376115351670::1762948657::0::1::::CSSSimplifier<>RefCounted<><>0<>0<><>::
-import_plugin.gd::GDScript::7463579569813851569::1762948657::0::1::::CSSImportPlugin<>EditorImportPlugin<><>0<>1<><>::
-Options.gd::GDScript::7742587958740376401::1762948657::0::1::::CSSCliOptions<>RefCounted<><>0<>0<><>::
-optparse.gd::GDScript::2782019550906521900::1762948657::0::1::::OptParseCustom<>RefCounted<><>0<>0<><>::
-plugin.cfg::TextFile::-1::1762948657::0::1::::<><><>0<>0<><>::
-plugin.gd::GDScript::4085419369983889529::1762948657::0::1::::<>EditorPlugin<><>0<>1<><>::
-Stylesheet.gd::GDScript::5867600147195846772::1762948657::0::1::::Stylesheet<>RefCounted<><>0<>0<><>::
-ThemeApplier.gd::GDScript::6643272155488072345::1762948657::0::1::::ThemeApplier<>RefCounted<><>0<>0<><>::
-::res://addons/godot-css-theme/editor/::1763555753
-css_code_edit.gd::GDScript::8298348357069444330::1762948657::0::1::::<>CodeEdit<><>0<>1<><>::
-css_editor.gd::GDScript::6499290630641355602::1762948657::0::1::::<>Control<><>0<>1<><>::
-css_editor.tscn::PackedScene::7325661863788011305::1762948657::0::1::::<><><>0<>0<><>::res://addons/godot-css-theme/editor/css_editor.gd<>res://addons/godot-css-theme/editor/EditorButton.gd<>uid://blglwyagrkxdm::::res://addons/godot-css-theme/editor/css_syntax.tres<>res://addons/godot-css-theme/editor/css_code_edit.gd
-css_syntax.tres::CodeHighlighter::3171592665478308206::1763555753::0::1::::<><><>0<>0<><>::
-EditorButton.gd::GDScript::134764124553615139::1762948657::0::1::::<>BaseButton<><>0<>1<><>::
-::res://assets/::1763555748
-bg-1-dg.jpeg::CompressedTexture2D::2196809490995711194::1763555709::1763555748::1::::<><><>0<>0<>8bb5d7e5013bff5cb34de9f3a2457990<>res://.godot/imported/bg-1-dg.jpeg-49ca85a5dc5c2364f4dfe737f89f54a9.ctex::
-bg-1.jpeg::CompressedTexture2D::2348282638205620016::1763555709::1763555748::1::::<><><>0<>0<>976abdf4361a77ce7b0a9b37702b7d3a<>res://.godot/imported/bg-1.jpeg-c3d8519cdbfe8c256dc9f11dfe3f911c.ctex::
-bottom_theme.tres::Theme::4531780262502888349::1762948657::0::1::::<><><>0<>0<><>::
-theme.css::Theme::3085408291927022531::1762948657::1763399133::1::::<><><>0<>0<>851ffe4cd54c51991f6a40f3a0f35117<>res://.godot/imported/theme.css-51a794e9235be64318b62c03d1a358e7.tres::
-::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/::1763399151
-Baraom (Sumo Sacerdote  Guerreiro Mutante) - Transformação.png::CompressedTexture2D::5166893834850802225::1763399149::1763399151::1::::<><><>0<>0<>af47e630b04e8cffb5f9be36569503bb<>res://.godot/imported/Baraom (Sumo Sacerdote  Guerreiro Mutante) - Transformação.png-259fd8cdc751c3852b46aabe4d3d0b96.ctex::
-Baraom (Sumo Sacerdote  Guerreiro Mutante).png::CompressedTexture2D::6044636135461801794::1763399149::1763399151::1::::<><><>0<>0<>b5f2a5a0dd4c299496825bb326919575<>res://.godot/imported/Baraom (Sumo Sacerdote  Guerreiro Mutante).png-dd04374f4ded31aa0b3ca4cb1a3d86a3.ctex::
-::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/::1763399149
-::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/::1763399151
-andando.png::CompressedTexture2D::3488670539405108322::1763399149::1763399151::1::::<><><>0<>0<>9e6606e27a78b3f798a515f6184cd2b3<>res://.godot/imported/andando.png-13dbd024d8acebb44f2b6472cc353e4a.ctex::
-ataque.png::CompressedTexture2D::8833223189692702956::1763399149::1763399151::1::::<><><>0<>0<>ffea60733bd2e92be74d74af6cccc23d<>res://.godot/imported/ataque.png-6358a721664e18213311ae7fa9ee3aca.ctex::
-dano.png::CompressedTexture2D::8901767515253640815::1763399149::1763399151::1::::<><><>0<>0<>946a1480cca735ace9a9523f504abc75<>res://.godot/imported/dano.png-220f1c3ad705f20a0fbaf19f26bd5020.ctex::
-::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Transformação/::1763399149
-::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Transformação/png/::1763399151
-andando transformação.png::CompressedTexture2D::7591259947336412495::1763399149::1763399151::1::::<><><>0<>0<>605e660489e8b39598ed5abd7fcc3dee<>res://.godot/imported/andando transformação.png-62f463c34af5614cf0b380feb7eedc2d.ctex::
-ataque transformação.png::CompressedTexture2D::404572561769102310::1763399149::1763399151::1::::<><><>0<>0<>e47999147899f765ed49c9cc7583ef17<>res://.godot/imported/ataque transformação.png-829efd15bc78a09d7c0d4120f511a377.ctex::
-dano transformação.png::CompressedTexture2D::462908960354172215::1763399149::1763399151::1::::<><><>0<>0<>02853d5bc12225fb4778f76963e3b279<>res://.godot/imported/dano transformação.png-57ceace9f0f2d318704ec8f7e50ae1ce.ctex::
-transformação.png::CompressedTexture2D::8038256789554214702::1763399149::1763399151::1::::<><><>0<>0<>cde79c63d03e87a900cd38a11489bc64<>res://.godot/imported/transformação.png-9a75a601437709a83ef459a753170fbb.ctex::
-::res://assets/Bishum (Alta Sacerdotisa de Gorgom﻿)/::1763399151
-Bishum (Alta Sacerdotisa de Gorgom﻿).png::CompressedTexture2D::1505635792395951299::1763399148::1763399151::1::::<><><>0<>0<>882f2acc2e38a403fdb3da0e924b4f5e<>res://.godot/imported/Bishum (Alta Sacerdotisa de Gorgom﻿).png-ca6cb6ab0a647bb47e5e83f8ee60e262.ctex::
-::res://assets/Bishum (Alta Sacerdotisa de Gorgom﻿)/Sprites/::1763399148
-::res://assets/Bishum (Alta Sacerdotisa de Gorgom﻿)/Sprites/png/::1763399151
-ataque.png::CompressedTexture2D::7637063871635680037::1763399148::1763399151::1::::<><><>0<>0<>bca2ff74d96f920f5e0e74950c2f8a30<>res://.godot/imported/ataque.png-4b68c1834b25e756fd3ca440758ce73e.ctex::
-dano.png::CompressedTexture2D::3794898430018741061::1763399148::1763399151::1::::<><><>0<>0<>653bcd326fc70c12729a8c1e4e9f7e0a<>res://.godot/imported/dano.png-2fa59700863488f07c0a721512103481.ctex::
-::res://assets/Criaturas de Gorgom/::1763399151
-Mutantes de Gorgom.png::CompressedTexture2D::2863038931874134152::1763399148::1763399151::1::::<><><>0<>0<>63886382b6e06dbeb3f1ac67a1229476<>res://.godot/imported/Mutantes de Gorgom.png-e5b303e068be93f668488a9aaa3a5327.ctex::
-::res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/::1763399151
-Bestas demoníacas de Gorgom.png::CompressedTexture2D::1308067719058500730::1763399148::1763399151::1::::<><><>0<>0<>afa30340a509cfb4be65da0884c9e496<>res://.godot/imported/Bestas demoníacas de Gorgom.png-eeb8d7403f1d485c8e0d5433aa8e52ea.ctex::
-::res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/Sprites/::1763399148
-::res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/Sprites/png/::1763399151
-andando.png::CompressedTexture2D::9050540608843512988::1763399148::1763399151::1::::<><><>0<>0<>89d6722211d72d28770ed8c23efcd461<>res://.godot/imported/andando.png-546182ad729395212c427b31dcf01c83.ctex::
-ataque.png::CompressedTexture2D::4457578288613638125::1763399148::1763399151::1::::<><><>0<>0<>6834fdadae9d7e8ee7b7b79aabf6917f<>res://.godot/imported/ataque.png-2efff836203bc20f445649a85c8b2c8e.ctex::
-dano.png::CompressedTexture2D::8778328496041998223::1763399148::1763399151::1::::<><><>0<>0<>2b2f218ad6e5fa75b8a51fbcf8e15328<>res://.godot/imported/dano.png-545d403fb0bcbe43f80cc2a191d70571.ctex::
-::res://assets/Criaturas de Gorgom/Humanos corrompidos de Gorgom/::1763399151
-Humanos corrompidos de Gorgom.png::CompressedTexture2D::4736772331555531776::1763399148::1763399151::1::::<><><>0<>0<>6338cde89ef5d1c74095fba0670d6fef<>res://.godot/imported/Humanos corrompidos de Gorgom.png-5d0a5da1314e80141fba2d874732194d.ctex::
-::res://assets/Criaturas de Gorgom/Humanos corrompidos de Gorgom/Sprites/::1763399148
-::res://assets/Criaturas de Gorgom/Humanos corrompidos de Gorgom/Sprites/png/::1763399151
-andando.png::CompressedTexture2D::1584941748971929092::1763399148::1763399151::1::::<><><>0<>0<>2b904459121c6094432c3355fa1ed673<>res://.godot/imported/andando.png-dd619a9c49d75da78338351b6644f98b.ctex::
-ataque.png::CompressedTexture2D::1867870688094717779::1763399148::1763399151::1::::<><><>0<>0<>c2b2d25275a09debee2ffd3ce4a1c7e1<>res://.godot/imported/ataque.png-ccca7995f71fe7492192882815c9d15f.ctex::
-dano.png::CompressedTexture2D::5143734621973088833::1763399148::1763399150::1::::<><><>0<>0<>2e9dc7a42f459aa0dac8288857ef43b8<>res://.godot/imported/dano.png-c7dc5ef2b5371d6bf6ad2d4549856a81.ctex::
-::res://assets/Darom (Sumo Sacerdote de Gorgom)/::1763399152
-Darom (Sumo Sacerdote de Gorgom).png::CompressedTexture2D::7720904430810700839::1763399149::1763399152::1::::<><><>0<>0<>4468954d7948552bf1ab21f87e322daf<>res://.godot/imported/Darom (Sumo Sacerdote de Gorgom).png-e310d875b8d5857cc445b49842d29ef8.ctex::
-::res://assets/Darom (Sumo Sacerdote de Gorgom)/Sprites/::1763399149
-::res://assets/Darom (Sumo Sacerdote de Gorgom)/Sprites/png/::1763399152
-andando.png::CompressedTexture2D::112271574204793632::1763399149::1763399150::1::::<><><>0<>0<>624ba132beab68046ccd2d84477d965c<>res://.godot/imported/andando.png-b683782769d0ea66ec93caa901de4606.ctex::
-ataque.png::CompressedTexture2D::4207802546983047791::1763399149::1763399152::1::::<><><>0<>0<>d1923a0affd9e6fc6cf2333b93c68d35<>res://.godot/imported/ataque.png-688749b96ac19924f6bfe4d92cf2e110.ctex::
-dano.png::CompressedTexture2D::1849542443539992025::1763399149::1763399152::1::::<><><>0<>0<>c3d9cca979d65c41455f17b9e507780f<>res://.godot/imported/dano.png-90a2f0c2ed8942fade6220b9bab67782.ctex::
-::res://assets/Issamu Minami - Noctis Rex/::1763399152
-Issamu Minami  Noctis Rex - Transformação.png::CompressedTexture2D::4954248274843926900::1763399149::1763399152::1::::<><><>0<>0<>432ccca4f64ef39b9e55ba6ffcee5e83<>res://.godot/imported/Issamu Minami  Noctis Rex - Transformação.png-e0695bb1f4c7d0940291df3388a6d36d.ctex::
-Issamu Minami  Noctis Rex.png::CompressedTexture2D::4389524295246118877::1763399149::1763399152::1::::<><><>0<>0<>2ecfb9f23aabec5127c9d3aec38c3bee<>res://.godot/imported/Issamu Minami  Noctis Rex.png-498e2c2d7a46d780dfc8f44afda188da.ctex::
-::res://assets/Issamu Minami - Noctis Rex/Forma normal - Sprites/::1763399149
-::res://assets/Issamu Minami - Noctis Rex/Forma normal - Sprites/png/::1763399152
-andando.png::CompressedTexture2D::1052452655606101691::1763399149::1763399152::1::::<><><>0<>0<>dee5ec9b813bd773c092d2db8c636e01<>res://.godot/imported/andando.png-d71a38ac9434f530c4521cb1c3222c47.ctex::
-atacando.png::CompressedTexture2D::1831765944151715576::1763399149::1763399152::1::::<><><>0<>0<>2bbd19e84d25f3dd27a34e44a2d0ae79<>res://.godot/imported/atacando.png-d0c83ce5d7c9cb88aa0f241ebab56565.ctex::
-dano.png::CompressedTexture2D::9124962039565034941::1763399149::1763399152::1::::<><><>0<>0<>4aa1d10c93089dd52efa4c606354baa3<>res://.godot/imported/dano.png-dbf35bbb2187c2bbca7c255bfadb9e7e.ctex::
-::res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/::1763399149
-::res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/png/::1763399152
-ataque transfromação.png::CompressedTexture2D::9023458080853001420::1763399149::1763399152::1::::<><><>0<>0<>44461a3cb03e4d7b20dceffcd5df23fd<>res://.godot/imported/ataque transfromação.png-92fd8b4f4dc33a243de25bf45f5cc4a0.ctex::
-transformação andando.png::CompressedTexture2D::4146850791466868779::1763399149::1763399152::1::::<><><>0<>0<>b9234543ec3eae6569ffbc0281642725<>res://.godot/imported/transformação andando.png-9b5db0f47ec17a5c0f2425af5bbab418.ctex::
-transformação dano.png::CompressedTexture2D::5215061455162115946::1763399149::1763399152::1::::<><><>0<>0<>aba3cfba35bd072a854b2be06654b02b<>res://.godot/imported/transformação dano.png-368ffeaa9c2bf90d4d99314bbbe11674.ctex::
-transformação.png::CompressedTexture2D::1495804038297763744::1763399149::1763399152::1::::<><><>0<>0<>6aa27189ba939c4154b70e8a9686b191<>res://.godot/imported/transformação.png-891d6a9a5cb73d748969f1137ea09cb8.ctex::
-::res://assets/Katsumi Kida (Bárbaro  Tanque)/::1763399152
-Katsumi Kida (Bárbaro  Tanque).png::CompressedTexture2D::3526366406205670375::1763399149::1763399152::1::::<><><>0<>0<>eec99231a921b9ca8626f8c70eec9c49<>res://.godot/imported/Katsumi Kida (Bárbaro  Tanque).png-f058812adf359899d2a2269a8749d0d5.ctex::
-::res://assets/Katsumi Kida (Bárbaro  Tanque)/Sprites/::1763399149
-::res://assets/Katsumi Kida (Bárbaro  Tanque)/Sprites/png/::1763399152
-andando.png::CompressedTexture2D::5328060559551954582::1763399149::1763399152::1::::<><><>0<>0<>91f4c2e1ff79cb7cf9ef33a8d07ad01c<>res://.godot/imported/andando.png-03be705a282c2165d1d3f16faff955ec.ctex::
-ataque.png::CompressedTexture2D::3921345431591911263::1763399149::1763399152::1::::<><><>0<>0<>195cd457764633a55e6a01f2dcbe2eb1<>res://.godot/imported/ataque.png-2d6c3f698da1b6133ad27cd938cd235c.ctex::
-dano.png::CompressedTexture2D::5451938276919502755::1763399149::1763399152::1::::<><><>0<>0<>560f5877c2f62fd01d24d849fef8be49<>res://.godot/imported/dano.png-a42db38a4daad1da690adf48e2909a89.ctex::
-::res://assets/Kyoko Akizuki (Clériga  Suporte)/::1763399152
-Kyoko Akizuki (Clériga  Suporte).png::CompressedTexture2D::1390154520551547340::1763399149::1763399152::1::::<><><>0<>0<>ed1e2aca148bb32958bbe7283bfa220a<>res://.godot/imported/Kyoko Akizuki (Clériga  Suporte).png-50c67e50b6924633e2e8fae63fc2487b.ctex::
-::res://assets/Kyoko Akizuki (Clériga  Suporte)/Sprites/::1763399149
-::res://assets/Kyoko Akizuki (Clériga  Suporte)/Sprites/png/::1763399151
-andando.png::CompressedTexture2D::3768339781133227448::1763399149::1763399151::1::::<><><>0<>0<>d740c8913822d575a7ed39c3fd045904<>res://.godot/imported/andando.png-4d03f499a9b0561d505a88de785f54bd.ctex::
-ataque.png::CompressedTexture2D::5273121648687040347::1763399149::1763399151::1::::<><><>0<>0<>6127b955b52a2b88a0a517d949e69a02<>res://.godot/imported/ataque.png-a9f788467fbecbb39f9026c81be54d71.ctex::
-dano.png::CompressedTexture2D::7077166820264518908::1763399149::1763399151::1::::<><><>0<>0<>8f2596dc75e08e3c5f9cb288a2b018f7<>res://.godot/imported/dano.png-1f418e9da5bc7b5557ca2e98b2679a75.ctex::
-::res://assets/Masaru Todo (Mago das Trevas)/::1763399150
-Masaru Todo (Mago das Trevas) - Transformação.png::CompressedTexture2D::4569458900700251859::1763399149::1763399150::1::::<><><>0<>0<>e01606711b46913fdc86b6cb49bc2489<>res://.godot/imported/Masaru Todo (Mago das Trevas) - Transformação.png-28017a2a3e37cff526236c6b625f5325.ctex::
-Masaru Todo (Mago das Trevas).png::CompressedTexture2D::6848103795291986954::1763399149::1763399150::1::::<><><>0<>0<>a4418af66af5df80e37c9f30417d4e43<>res://.godot/imported/Masaru Todo (Mago das Trevas).png-af1f8ce6f146973ef210358943b3da8e.ctex::
-::res://assets/Masaru Todo (Mago das Trevas)/Sprites - Forma normal/::1763399149
-::res://assets/Masaru Todo (Mago das Trevas)/Sprites - Forma normal/png/::1763399152
-andando.png::CompressedTexture2D::1686779611898878852::1763399149::1763399151::1::::<><><>0<>0<>941fd0768db54e439b57976d725cf898<>res://.godot/imported/andando.png-75f00170b69fb79fe8e9ef07ba1c70a4.ctex::
-ataque.png::CompressedTexture2D::4895774421435418258::1763399149::1763399152::1::::<><><>0<>0<>1a39a6aea57518dd207f1edfef20f956<>res://.godot/imported/ataque.png-1ea772e58167e31d8df83107bfd5f19f.ctex::
-dano.png::CompressedTexture2D::3697789959402389433::1763399149::1763399151::1::::<><><>0<>0<>78756665879d3a2468655a985965d1d9<>res://.godot/imported/dano.png-f7c9658b79b1a0df0cf327cdb218b618.ctex::
-::res://assets/Masaru Todo (Mago das Trevas)/Sprites - Transformação/::1763399149
-::res://assets/Masaru Todo (Mago das Trevas)/Sprites - Transformação/png/::1763399151
-andando transformação.png::CompressedTexture2D::1223539365465182581::1763399149::1763399150::1::::<><><>0<>0<>efa6ea9cdba9a2c09908d6736ac1ebb6<>res://.godot/imported/andando transformação.png-54044e799da1a08c6a1b5a57dcea4097.ctex::
-ataque transformação.png::CompressedTexture2D::6596471304671470288::1763399149::1763399151::1::::<><><>0<>0<>e819a1b01f768557e2f11c82b831dea9<>res://.godot/imported/ataque transformação.png-bb78ba01e7fff73eb37d90b8ca491156.ctex::
-dano transformação.png::CompressedTexture2D::452246053017008360::1763399149::1763399150::1::::<><><>0<>0<>67325e4833eda83282988818abb2313f<>res://.godot/imported/dano transformação.png-64b5fbb07510fdc95916cc1ce2e9567f.ctex::
-transformacao.png::CompressedTexture2D::7853839467198646866::1763399149::1763399150::1::::<><><>0<>0<>d8b044b4e68c7da0150f659e47ec277e<>res://.godot/imported/transformacao.png-8166e1865c4e7f0338acb02babfe92c2.ctex::
-::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/::1763399150
-Nobuhiko Akizuki  Umbra Luna﻿ - Transformação.png::CompressedTexture2D::7008094837462740771::1763399148::1763399150::1::::<><><>0<>0<>31bd33577c632a2a2abc14399c8c34ab<>res://.godot/imported/Nobuhiko Akizuki  Umbra Luna﻿ - Transformação.png-d2c9e6e910cc3da651b8afee0a95cc9d.ctex::
-Nobuhiko Akizuki  Umbra Luna﻿.png::CompressedTexture2D::8187652920289903142::1763399148::1763399150::1::::<><><>0<>0<>da3e19ca97c6dac23d36b42e540de7b3<>res://.godot/imported/Nobuhiko Akizuki  Umbra Luna﻿.png-fea93ec9529081ae737ba860f98976fe.ctex::
-::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/::1763399148
-::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/png/::1763399150
-andando.png::CompressedTexture2D::567232557821339914::1763399148::1763399150::1::::<><><>0<>0<>2c8a12ab9df08535bb0584040b173b44<>res://.godot/imported/andando.png-16e0a0f21ed7a176a08b4dcb4090c680.ctex::
-ataque.png::CompressedTexture2D::7112851684737663741::1763399148::1763399150::1::::<><><>0<>0<>bbf59a9051f44c5b5a35cda0d0c8fb1f<>res://.godot/imported/ataque.png-ec1a709f50b2da046d9d5224d7ad8cc7.ctex::
-dano.png::CompressedTexture2D::5215169196623396904::1763399148::1763399150::1::::<><><>0<>0<>02581c36e3e61626c76c4466caeeb22f<>res://.godot/imported/dano.png-5b79a6b1bbc53fa49c1b465a646b54bf.ctex::
-::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Transformação/::1763399149
-::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Transformação/png/::1763399150
-andando transformação.png::CompressedTexture2D::3941320576763547094::1763399149::1763399150::1::::<><><>0<>0<>3e36cafd64aac59b2ff0825edbb48149<>res://.godot/imported/andando transformação.png-9731dc0944c89880d190042a8ebd66be.ctex::
-ataque transformação.png::CompressedTexture2D::4583401828291658132::1763399149::1763399150::1::::<><><>0<>0<>291f425e974332ff904e9d2675f7c270<>res://.godot/imported/ataque transformação.png-aa8bbcf9ad742c26ead0442bd4f946da.ctex::
-dano transformação.png::CompressedTexture2D::7620924906505106539::1763399149::1763399150::1::::<><><>0<>0<>00de0e72d682e670065baaa1eb0888b7<>res://.godot/imported/dano transformação.png-521f6948749c57254c979ae9e549f589.ctex::
-transformação.png::CompressedTexture2D::8740115173452329210::1763399149::1763399150::1::::<><><>0<>0<>217e6b0ba0e78de01b40b8c8002390b3<>res://.godot/imported/transformação.png-37fd2db0163d7cf555a3cefffd7d70b6.ctex::
-::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/::1763399151
-Ryu Kazamatsuri (Arqueiro  Furtivo) - Transformação.png::CompressedTexture2D::558688893111516069::1763399148::1763399151::1::::<><><>0<>0<>62cd369b973dad7d5649ce250caa0fc1<>res://.godot/imported/Ryu Kazamatsuri (Arqueiro  Furtivo) - Transformação.png-568594ba3dcfd4d4513ae04ac3dc504a.ctex::
-Ryu Kazamatsuri (Arqueiro  Furtivo).png::CompressedTexture2D::1721255646014342863::1763399148::1763399151::1::::<><><>0<>0<>62a5863fb76fca1fc7f467cae6084a58<>res://.godot/imported/Ryu Kazamatsuri (Arqueiro  Furtivo).png-fbd08a05a650e5e148360ae8c2e35f0e.ctex::
-::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/::1763399148
-::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/::1763399149
-andnado.png::CompressedTexture2D::5068026553252904842::1763399148::1763399149::1::::<><><>0<>0<>8f29d2a8b68629578fa47aaa8e2ead77<>res://.godot/imported/andnado.png-e72c1743266cbb9464011a7800ad86d6.ctex::
-ataque.png::CompressedTexture2D::1228800003945013283::1763399148::1763399149::1::::<><><>0<>0<>2ef5658cf577773e7515694b6a06d4b1<>res://.godot/imported/ataque.png-7379da58cbfcef690965beb0200ac244.ctex::
-dano.png::CompressedTexture2D::8481201841544606957::1763399148::1763399149::1::::<><><>0<>0<>cfa855908fa6fd74421b493ae9ce95d7<>res://.godot/imported/dano.png-368bebe2512ce8a8325ce1df64daa849.ctex::
-::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Transformação/::1763399148
-::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Transformação/png/::1763399149
-andando transformação.png::CompressedTexture2D::8092256976768355437::1763399148::1763399149::1::::<><><>0<>0<>2ad15f56e9033f9babec579f2e968191<>res://.godot/imported/andando transformação.png-d17ff1ea33a82838212d7891ba537e09.ctex::
-ataque transformação.png::CompressedTexture2D::2241297095380199436::1763399148::1763399149::1::::<><><>0<>0<>461a55faaa40f3ed4089a2593dcc3a07<>res://.godot/imported/ataque transformação.png-2ca37056569e9a773d24c700a6682c91.ctex::
-dano transformação.png::CompressedTexture2D::8866315342082936436::1763399148::1763399149::1::::<><><>0<>0<>f4153cbfd96031ad97fc72f06c2e2cbd<>res://.godot/imported/dano transformação.png-b23ce1fdbd756e19031e4dc41d026d9c.ctex::
-transformação.png::CompressedTexture2D::8515883310074261568::1763399148::1763399149::1::::<><><>0<>0<>5f921d1f8d8da0926fc57025e46387c3<>res://.godot/imported/transformação.png-dd13687e9d602fb8b38fcf5df0a84b1b.ctex::
-::res://assets/Soichiro Akizuki (Mago Mentor)/::1763399150
-Soichiro Akizuki (Mago Mentor).png::CompressedTexture2D::9070804170781176947::1763399149::1763399150::1::::<><><>0<>0<>1bdad2c6d56092c769b49f56473b66a1<>res://.godot/imported/Soichiro Akizuki (Mago Mentor).png-757c7f6e9eb669cc6fac6d21fe5c6b3b.ctex::
-::res://assets/Soichiro Akizuki (Mago Mentor)/Sprites/::1763399149
-::res://assets/Soichiro Akizuki (Mago Mentor)/Sprites/png/::1763399150
-andando.png::CompressedTexture2D::7477508261545060394::1763399149::1763399150::1::::<><><>0<>0<>0b1f7b732bf9ba2804531a2dac943e93<>res://.godot/imported/andando.png-371b1a05cc6dd2541cc380d8d8c869cc.ctex::
-ataque.png::CompressedTexture2D::629793315093968679::1763399149::1763399150::1::::<><><>0<>0<>d23eb06fe91af7020059e2cbb98706f0<>res://.godot/imported/ataque.png-7ed0904bd78d6e0e6cb34af2106b7016.ctex::
-dano.png::CompressedTexture2D::7474529937779536827::1763399149::1763399150::1::::<><><>0<>0<>e6cc1730197cb1ef57cbc8707d583edb<>res://.godot/imported/dano.png-9a345df269bd9c73c1e1ff9a24c45f66.ctex::
-::res://assets/Ícones/::1763399150
-Baraom - Transformação.png::CompressedTexture2D::819241579923990885::1763399149::1763399150::1::::<><><>0<>0<>efa125c3140097386e7475bae908d88d<>res://.godot/imported/Baraom - Transformação.png-f7ab51bd35b8d6df8fe3ba88e1710a8e.ctex::
-Baraom.png::CompressedTexture2D::346495377676617925::1763399149::1763399150::1::::<><><>0<>0<>5b8ac95301c0666edb80124249fd3b07<>res://.godot/imported/Baraom.png-2df0937fa672d83c4b69e916b85e0964.ctex::
-Bestas Demoníacas.png::CompressedTexture2D::6831652831332550982::1763399149::1763399150::1::::<><><>0<>0<>309bb63c156b42680cb64a9b26f1232d<>res://.godot/imported/Bestas Demoníacas.png-dbe6c93211cb567e8944835628951147.ctex::
-Bishum.png::CompressedTexture2D::7165509899084142403::1763399149::1763399150::1::::<><><>0<>0<>985fddb4b237bca422e07037904f13dc<>res://.godot/imported/Bishum.png-cd843e1906b143c772fccb4e0e6a251e.ctex::
-Darom.png::CompressedTexture2D::4806324217108197684::1763399149::1763399150::1::::<><><>0<>0<>2155fa9de069a6cd460141bc74d75797<>res://.godot/imported/Darom.png-f44f4d3d938d3ba297218964bcde49a6.ctex::
-Humanos Corrompidos.png::CompressedTexture2D::1176101565375345379::1763399149::1763399150::1::::<><><>0<>0<>042923fdf444d9d6e5fbc156ddb511dc<>res://.godot/imported/Humanos Corrompidos.png-972f9a49cc3086d131942fb22ee9e74a.ctex::
-Issamu Minami  Noctis Rex (2).png::CompressedTexture2D::5140324681079769020::1763399149::1763399150::1::::<><><>0<>0<>01130cc99bf4636578304285e8ed39ce<>res://.godot/imported/Issamu Minami  Noctis Rex (2).png-5368536e40c1cde9699187a06d24c188.ctex::
-Issamu Minami  Noctis Rex - Transformação (2).png::CompressedTexture2D::2479983272410482502::1763399149::1763399150::1::::<><><>0<>0<>5cec8e34f46ce59cb61367f345aac59c<>res://.godot/imported/Issamu Minami  Noctis Rex - Transformação (2).png-a75dce82db0febb1bcb13601f65e610c.ctex::
-Katsumi Kida.png::CompressedTexture2D::7358532103915222635::1763399149::1763399150::1::::<><><>0<>0<>3a2c243714ea77b775499d318fcffc66<>res://.godot/imported/Katsumi Kida.png-6a887cbc0ea119f66f0730e2605db60b.ctex::
-Kyoko Akizuki.png::CompressedTexture2D::5391171047394290216::1763399149::1763399150::1::::<><><>0<>0<>7ac50367fdbbf085f75789f799ce3f98<>res://.godot/imported/Kyoko Akizuki.png-5c15cc08cb73f93f31c800eb8da655ac.ctex::
-Masaru Todo - Transformação.png::CompressedTexture2D::5073779322420492271::1763399149::1763399150::1::::<><><>0<>0<>0db4b4b0a4e39f80331fd895674c403a<>res://.godot/imported/Masaru Todo - Transformação.png-d1aefc9cb49501fba4ceb1b0c9058c80.ctex::
-Masaru Todo.png::CompressedTexture2D::5466122313484006803::1763399149::1763399150::1::::<><><>0<>0<>df3a4d390f464b78d739fcf4173aeed7<>res://.godot/imported/Masaru Todo.png-6e2e4150646662d0d70916f51eb77649.ctex::
-Nobuhiko Akizuki  Umbra Luna - Transformação.png::CompressedTexture2D::2369326184862284713::1763399149::1763399150::1::::<><><>0<>0<>5bf7cfb2cff04afc5e0d41083c250b35<>res://.godot/imported/Nobuhiko Akizuki  Umbra Luna - Transformação.png-7d7465fa5afa9bbe57febeff9f03b4ce.ctex::
-Nobuhiko Akizuki  Umbra Luna﻿.png::CompressedTexture2D::4384547312942521536::1763399149::1763399150::1::::<><><>0<>0<>a9bdffcd68f90c6b72ce13ed419195f8<>res://.godot/imported/Nobuhiko Akizuki  Umbra Luna﻿.png-366c149cfe727567f2ada78031e5a8c1.ctex::
-Ryu Kazamatsuri - Transformação.png::CompressedTexture2D::510309778375935959::1763399149::1763399150::1::::<><><>0<>0<>c394a9526384dbcdc2e4d56c116efc73<>res://.godot/imported/Ryu Kazamatsuri - Transformação.png-738fa374f11beb87cf246e2676505a99.ctex::
-Ryu Kazamatsuri.png::CompressedTexture2D::1280425989347643725::1763399149::1763399150::1::::<><><>0<>0<>9e86e3123d40be61cf539e0f26b29014<>res://.godot/imported/Ryu Kazamatsuri.png-4c489be6534f4cae06769537e571ef6b.ctex::
-Soichiro Akizuki.png::CompressedTexture2D::4376886388298039809::1763399149::1763399150::1::::<><><>0<>0<>4dea280830f869a54ce2de7c14d18550<>res://.godot/imported/Soichiro Akizuki.png-7ce4908dddadecad0d4aef553148ba56.ctex::
-::res://data/::1762948657
-roles.gd::GDScript::5428309800363920395::1762948657::0::1::::Roles<>Resource<><>0<>0<><>::
-::res://data/characters/::1763407466
-::res://data/characters/aliados/::1763555753
-bishum.tres::Resource/Character::2708104995080003700::1763555753::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://bkvl4tiiyo4vs::::res://data/characters/animações/bishum.tres<>uid://dada5vys6pamd::::res://assets/Ícones/Bishum.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://vplupmlad3n8::::res://assets/Bishum (Alta Sacerdotisa de Gorgom﻿)/Bishum (Alta Sacerdotisa de Gorgom﻿).png
-isamu minami.tres::Resource/Character::8844082012568723226::1763554938::0::1::::<><><>0<>0<><>::uid://dk6227jpq4lwj::::res://data/characters/animações/issamu minami.tres<>uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://cfianqlrip01m::::res://assets/Ícones/Issamu Minami  Noctis Rex (2).png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://cm7u7xtr70btq::::res://data/characters/protagonista/Issamu Minami  Noctis Rex.png
-issamu minami - transformação.tres::Resource/Character::9060275671874912627::1763555709::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://qfeb8jhrqjy2::::res://data/characters/animações/issamu minami - transformação.tres<>uid://bblk7yi80ls1c::::res://assets/Ícones/Issamu Minami  Noctis Rex - Transformação (2).png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://cct40lr1mueae::::res://assets/Issamu Minami - Noctis Rex/Issamu Minami  Noctis Rex - Transformação.png
-katsumi kida.tres::Resource/Character::3936614675861250925::1763555709::0::1::::<><><>0<>0<><>::uid://dtem23180wns1::::res://data/characters/animações/katsumi kida.tres<>uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://dc3r7iv821yx4::::res://assets/Ícones/Katsumi Kida.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://bqig0e4mv873x::::res://assets/Katsumi Kida (Bárbaro  Tanque)/Katsumi Kida (Bárbaro  Tanque).png
-kyoko.tres::Resource/Character::4207147985951412846::1763555710::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://ci2r2ghgebu13::::res://assets/Ícones/Kyoko Akizuki.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://t2nv28ioecae::::res://assets/Kyoko Akizuki (Clériga  Suporte)/Kyoko Akizuki (Clériga  Suporte).png
-masaru todo - transformação.tres::Resource/Character::651357144237897310::1763555710::0::1::::<><><>0<>0<><>::uid://cssb0aqjy1gw6::::res://data/characters/animações/masaru todo - transformação.tres<>uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://cej1n0g1vyuj4::::res://assets/Ícones/Masaru Todo - Transformação.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://b6dqk5qp70da6::::res://assets/Masaru Todo (Mago das Trevas)/Masaru Todo (Mago das Trevas) - Transformação.png
-masaru todo.tres::Resource/Character::3345577772060273917::1763555710::0::1::::<><><>0<>0<><>::uid://cxrp0dlv722t6::::res://data/characters/animações/masaru todo.tres<>uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://cj43iaxr2cn68::::res://assets/Ícones/Masaru Todo.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://c4tjje7kkutfu::::res://assets/Masaru Todo (Mago das Trevas)/Masaru Todo (Mago das Trevas).png
-ryu kazamatsuri.tres::Resource/Character::4616938610478712444::1763555710::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://chd44kmhhpcxu::::res://data/characters/animações/ryu kazamatsuri.tres<>uid://siiot5kxxc0l::::res://assets/Ícones/Ryu Kazamatsuri.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://yr13glpub7ol::::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Ryu Kazamatsuri (Arqueiro  Furtivo).png
-ryu kazamtsuri - transformação.tres::Resource/Character::3474424945457869166::1763555753::0::1::::<><><>0<>0<><>::uid://dss2oa6cdposm::::res://data/characters/animações/ryu kazamatsuri - transformação.tres<>uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://hjgyy8mvpyk2::::res://assets/Ícones/Ryu Kazamatsuri - Transformação.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://h7vr3i0rbnq0::::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Ryu Kazamatsuri (Arqueiro  Furtivo) - Transformação.png
-soichiro akizuki.tres::Resource/Character::9022311535222705332::1763555710::0::1::::<><><>0<>0<><>::uid://denbenwnuldku::::res://data/characters/animações/mago mentor.tres<>uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://b3mgxdk7cffe4::::res://assets/Ícones/Soichiro Akizuki.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://d2h724i7ck3xf::::res://assets/Soichiro Akizuki (Mago Mentor)/Soichiro Akizuki (Mago Mentor).png
-::res://data/characters/animações/::1763555964
-baraom - transformação.tres::Resource/AnimationData::1983947686943516764::1763407796::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://dpsq8uujomhi8::::res://data/characters/sprites/baraom - transformação.tres
-baraom.tres::Resource/AnimationData::7336524128909764987::1763407530::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://7rn66sqaxdiv::::res://data/characters/sprites/baraom.tres
-bestas demoníacas.tres::Resource/AnimationData::1702686534436377350::1763407748::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://dodrpxj2vjjdv::::res://data/characters/sprites/bestas demoníacas.tres
-bishum.tres::Resource/AnimationData::3132381738550581312::1763555964::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://b2ekfgjxavvj6::::res://data/characters/sprites/humanos corrompidos.tres
-darom.tres::Resource/AnimationData::2946097338477405008::1763407498::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://dgdbxo4mcnwlf::::res://data/characters/sprites/darom.tres
-humanos corrompidos.tres::Resource/AnimationData::1591428194171104095::1763555956::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://deyxs0x5tvtou::::res://data/characters/sprites/bish.tres
-issamu minami - transformação.tres::Resource/AnimationData::1133589788258988063::1763407839::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://b5qlr44fw8rst::::res://data/characters/sprites/issamu minami - transformação.tres
-issamu minami.tres::Resource/AnimationData::7926835468430117161::1763407660::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://bb1eabj14fxqn::::res://data/characters/sprites/issamu minami.tres
-katsumi kida.tres::Resource/AnimationData::8501885923919163922::1763407625::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://dnues31ax38dv::::res://data/characters/sprites/katsumi kida.tres
-kyoko akizuki.tres::Resource/AnimationData::8248957076103255693::1763407682::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://4g5ef01r6g8b::::res://data/characters/sprites/kyoko akizuki.tres
-mago mentor.tres::Resource/AnimationData::7466922914009668268::1763407590::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://ywbyys43gpvf::::res://data/characters/sprites/mago mentor.tres
-masaru todo - transformação.tres::Resource/AnimationData::6073504739443141011::1763407817::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://cix8jqhp315yw::::res://data/characters/sprites/masaru todo - transformação.tres
-masaru todo.tres::Resource/AnimationData::6423234768179981257::1763407640::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://cthnme8pen3wo::::res://data/characters/sprites/masaru todo.tres
-nobuhiko akizuki - transformação.tres::Resource/AnimationData::7521087784579509932::1763408016::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://6x44hwa53upg::::res://data/characters/sprites/nobuhiko akizuki - transformação.tres
-nobuhiko akizuki.tres::Resource/AnimationData::8119512504062168076::1763407727::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://6x44hwa53upg::::res://data/characters/sprites/nobuhiko akizuki.tres
-ryu kazamatsuri - transformação.tres::Resource/AnimationData::8461484444040748240::1763407869::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://d4k277edrpnon::::res://data/characters/sprites/ryu kazamatsuri - transformação.tres
-ryu kazamatsuri.tres::Resource/AnimationData::5272169531027226994::1763407709::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://cfwqvksu4wih::::res://data/characters/sprites/ryu kazamatsuri.tres
-::res://data/characters/protagonista/::1763400532
-character.tres::Resource/Character::4952780043054674111::1762948657::0::1::::<><><>0<>0<><>::uid://ep4f0cea61dd::::res://data/characters/protagonista/icone.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://cm7u7xtr70btq::::res://data/characters/protagonista/Issamu Minami  Noctis Rex.png
-icone.png::CompressedTexture2D::313492078979130825::1762948657::1763399133::1::::<><><>0<>0<>a95f600c3f8ae0f823fe72f60b41a068<>res://.godot/imported/icone.png-9611f26ffd525d85454b0edfaa85c417.ctex::
-Issamu Minami  Noctis Rex.png::CompressedTexture2D::5682440302637276098::1762948657::1763399133::1::::<><><>0<>0<>b952bd82f9f723441593223e8ee5b829<>res://.godot/imported/Issamu Minami  Noctis Rex.png-d1b00e442ad3c1d02a9e9dd61e3df210.ctex::
-::res://data/characters/sprites/::1763555964
-baraom - transformação.tres::SpriteFrames::8250284990097188653::1763555753::0::1::::<><><>0<>0<><>::uid://bpx65ntbdyn0m::::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/andando.png<>uid://dx345pcgd3uvc::::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/ataque.png<>uid://dy3c2s3ol8ck2::::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/dano.png
-baraom.tres::SpriteFrames::2281983755511276777::1763555753::0::1::::<><><>0<>0<><>::uid://bpx65ntbdyn0m::::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/andando.png<>uid://dx345pcgd3uvc::::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/ataque.png<>uid://dy3c2s3ol8ck2::::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/dano.png
-bestas demoníacas.tres::SpriteFrames::8149159194255016023::1763554938::0::1::::<><><>0<>0<><>::uid://d17fc1ilvkyjk::::res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/Sprites/png/andando.png<>uid://b4rjwsutns2yr::::res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/Sprites/png/ataque.png<>uid://dxcj11xxps3hr::::res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/Sprites/png/dano.png
-bish.tres::SpriteFrames::7490992476856340244::1763555753::0::1::::<><><>0<>0<><>::uid://dg2pldcb4g4ar::::res://assets/Bishum (Alta Sacerdotisa de Gorgom﻿)/Sprites/png/ataque.png<>uid://bucjomv3kqx1v::::res://assets/Bishum (Alta Sacerdotisa de Gorgom﻿)/Sprites/png/dano.png
-darom.tres::SpriteFrames::7586690817096920475::1763554938::0::1::::<><><>0<>0<><>::uid://bundjp37sgm7::::res://assets/Darom (Sumo Sacerdote de Gorgom)/Sprites/png/andando.png<>uid://b07j5mrue61eh::::res://assets/Darom (Sumo Sacerdote de Gorgom)/Sprites/png/ataque.png<>uid://1l6xucboeft6::::res://assets/Darom (Sumo Sacerdote de Gorgom)/Sprites/png/dano.png
-humanos corrompidos.tres::SpriteFrames::4290393401922609005::1763554938::0::1::::<><><>0<>0<><>::
-issamu minami - transformação.tres::SpriteFrames::4525815850550219395::1763555753::0::1::::<><><>0<>0<><>::uid://b0c1a53mb8u3l::::res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/png/transformação andando.png<>uid://d1tbbh5xn2pai::::res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/png/ataque transfromação.png<>uid://cgkhkhcq37faw::::res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/png/transformação dano.png<>uid://vktw6d013otc::::res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/png/transformação.png
-issamu minami.tres::SpriteFrames::2510526284554641793::1763555753::0::1::::<><><>0<>0<><>::uid://o820he3q3oe2::::res://assets/Issamu Minami - Noctis Rex/Forma normal - Sprites/png/andando.png<>uid://1dk6gup8ea4o::::res://assets/Issamu Minami - Noctis Rex/Forma normal - Sprites/png/atacando.png<>uid://d3ag16d0vmjpl::::res://assets/Issamu Minami - Noctis Rex/Forma normal - Sprites/png/dano.png
-katsumi kida.tres::SpriteFrames::8113281096566867023::1763554938::0::1::::<><><>0<>0<><>::uid://ch57m5dj322uk::::res://assets/Katsumi Kida (Bárbaro  Tanque)/Sprites/png/andando.png<>uid://bv4r8shhdndil::::res://assets/Katsumi Kida (Bárbaro  Tanque)/Sprites/png/ataque.png<>uid://cjw7vkw8641rb::::res://assets/Katsumi Kida (Bárbaro  Tanque)/Sprites/png/dano.png
-kyoko akizuki.tres::SpriteFrames::2049691687428037635::1763404332::0::1::::<><><>0<>0<><>::uid://btxoagro3c70w::::res://assets/Kyoko Akizuki (Clériga  Suporte)/Sprites/png/andando.png<>uid://chelsp4vc674j::::res://assets/Kyoko Akizuki (Clériga  Suporte)/Sprites/png/ataque.png<>uid://c73h5yq3xwyo7::::res://assets/Kyoko Akizuki (Clériga  Suporte)/Sprites/png/dano.png
-mago mentor.tres::SpriteFrames::1730053423670757787::1763404331::0::1::::<><><>0<>0<><>::uid://desfp6xpye0lq::::res://assets/Soichiro Akizuki (Mago Mentor)/Sprites/png/andando.png<>uid://i8cusdeehyl0::::res://assets/Soichiro Akizuki (Mago Mentor)/Sprites/png/ataque.png<>uid://deqyoe60r4c72::::res://assets/Soichiro Akizuki (Mago Mentor)/Sprites/png/dano.png
-masaru todo - transformação.tres::SpriteFrames::5383853389647512814::1763554938::0::1::::<><><>0<>0<><>::uid://roxrq4mkgy1r::::res://assets/Masaru Todo (Mago das Trevas)/Sprites - Transformação/png/andando transformação.png<>uid://c08m6h65icopk::::res://assets/Masaru Todo (Mago das Trevas)/Sprites - Transformação/png/ataque transformação.png<>uid://gpcoq68l3gr5::::res://assets/Masaru Todo (Mago das Trevas)/Sprites - Transformação/png/dano transformação.png<>uid://dj5puam64tk0q::::res://assets/Masaru Todo (Mago das Trevas)/Sprites - Transformação/png/transformacao.png
-masaru todo.tres::SpriteFrames::6121691052979425714::1763554938::0::1::::<><><>0<>0<><>::uid://ybdap6cryswa::::res://assets/Masaru Todo (Mago das Trevas)/Sprites - Forma normal/png/andando.png<>uid://cb0sxo8y0txve::::res://assets/Masaru Todo (Mago das Trevas)/Sprites - Forma normal/png/ataque.png<>uid://bsxicb2cusmyj::::res://assets/Masaru Todo (Mago das Trevas)/Sprites - Forma normal/png/dano.png
-nobuhiko akizuki - transformação.tres::SpriteFrames::2225147823626210580::1763554938::0::1::::<><><>0<>0<><>::uid://bwfg8eawlhq8m::::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Transformação/png/andando transformação.png<>uid://b6kh7t8wcewlg::::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Transformação/png/ataque transformação.png<>uid://dgtvrw4nqxo56::::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Transformação/png/dano transformação.png<>uid://dwr1ojqduqoxu::::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Transformação/png/transformação.png
-nobuhiko akizuki.tres::SpriteFrames::2225147823626210580::1763554938::0::1::::<><><>0<>0<><>::uid://ic1icm7fvaek::::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/png/andando.png<>uid://c8lrvma02nuhh::::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/png/ataque.png<>uid://cgkjcsm5sp3oe::::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/png/dano.png
-ryu kazamatsuri - transformação.tres::SpriteFrames::9217080485418542597::1763555753::0::1::::<><><>0<>0<><>::uid://ceg8wlmf56ufy::::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/andnado.png<>uid://rrifk7poh3b0::::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/ataque.png<>uid://ds3mfjooidgo8::::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/dano.png
-ryu kazamatsuri.tres::SpriteFrames::152065041873831255::1763555753::0::1::::<><><>0<>0<><>::uid://ceg8wlmf56ufy::::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/andnado.png<>uid://rrifk7poh3b0::::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/ataque.png<>uid://ds3mfjooidgo8::::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/dano.png
-::res://data/characters/vilões/::1763554938
-baraom.tres::Resource/Character::7890616041707048428::1763554938::0::1::::<><><>0<>0<><>::uid://dcr4qlqq6oidv::::res://data/characters/animações/baraom.tres<>uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://e63y04ak00jh::::res://assets/Ícones/Baraom.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://csecjk1baglnm::::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Baraom (Sumo Sacerdote  Guerreiro Mutante).png
-barom - transformação.tres::Resource/Character::3385879713063220485::1763554938::0::1::::<><><>0<>0<><>::uid://3jblf2fjrif1::::res://data/characters/animações/baraom - transformação.tres<>uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://lw313h6bbtr6::::res://assets/Ícones/Baraom - Transformação.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://cfu48sqbqefr2::::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Baraom (Sumo Sacerdote  Guerreiro Mutante) - Transformação.png
-bestas demoníacas.tres::Resource/Character::2109806058610668387::1763554938::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://yi187hlo0nw5::::res://data/characters/animações/bestas demoníacas.tres<>uid://c4lklatdan3gc::::res://assets/Ícones/Bestas Demoníacas.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://svvxi7wh7rta::::res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/Bestas demoníacas de Gorgom.png
-darom.tres::Resource/Character::1788065117380919897::1763554938::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://bh8d17nvw2j5y::::res://data/characters/animações/darom.tres<>uid://caqhptbg3puue::::res://assets/Ícones/Darom.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://diacfyeur1kmh::::res://assets/Darom (Sumo Sacerdote de Gorgom)/Darom (Sumo Sacerdote de Gorgom).png
-humanos corrompidos.tres::Resource/Character::4442156616302448197::1763554938::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://ww5ub4mmbfjr::::res://data/characters/animações/humanos corrompidos.tres<>uid://q0yhroi74c08::::res://assets/Ícones/Humanos Corrompidos.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://b8qr7igadt53i::::res://assets/Criaturas de Gorgom/Humanos corrompidos de Gorgom/Humanos corrompidos de Gorgom.png
-nobuhiko akizuki - transformação.tres::Resource/Character::4963309546756008097::1763554938::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://dffjhm2xjoapo::::res://data/characters/animações/nobuhiko akizuki - transformação.tres<>uid://80yprivinrc0::::res://assets/Ícones/Nobuhiko Akizuki  Umbra Luna - Transformação.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://c631ketv0qp44::::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Nobuhiko Akizuki  Umbra Luna﻿ - Transformação.png
-nobuhiko akizuki.tres::Resource/Character::4078853444545426051::1763554938::0::1::::<><><>0<>0<><>::uid://dnxfgjqeg1dj5::::res://data/characters/animações/nobuhiko akizuki.tres<>uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://b3p54a3ajveo3::::res://assets/Ícones/Nobuhiko Akizuki  Umbra Luna﻿.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://dowfphfjo8yli::::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Nobuhiko Akizuki  Umbra Luna﻿.png
-::res://data/party/::1763555710
-default_party.tres::Resource/Party::2506764224326779150::1763555710::0::1::::<><><>0<>0<><>::uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://dyae0d3l0ev27::::res://data/characters/aliados/isamu minami.tres<>uid://rhljqyamkwai::::res://models/Party.gd<>uid://b068d3h4cxb6u::::res://data/characters/aliados/kyoko.tres
-::res://models/::1763404340
-AnimationData.gd::GDScript::8310432981434324555::1763404340::0::1::::AnimationData<>Resource<><>0<>0<><>::
-Battle.gd::GDScript::4507512310833247912::1763399031::0::1::::Battle<>Node<><>0<>0<><>::
-Character.gd::GDScript::2461237807017823959::1763399031::0::1::::Character<>Resource<><>0<>0<><>::
-Party.gd::GDScript::1208345822655906928::1762948669::0::1::::Party<>Resource<><>0<>0<><>::
-Turn.gd::GDScript::5752234021190533059::1762948657::0::1::::Turn<>RefCounted<><>0<>0<><>::
-::res://models/actions/::1763399031
-Action.gd::GDScript::1867795371721797327::1762948669::0::1::::Action<>Resource<><>0<>0<><>::
-DefendAction.gd::GDScript::6950225483298594024::1763399031::0::1::::DefendAction<>Action<><>0<>0<><>::
-SupportAction.gd::GDScript::9047605591571519043::1762948669::0::1::::SupportAction<>Action<><>0<>0<><>::
-::res://models/actions/atacks/::1762948669
-AttackAction.gd::GDScript::3837340765156035903::1762948669::0::1::::AttackAction<>Action<><>0<>0<><>::
-MagicAttack.gd::GDScript::5872867988350546111::1762948657::0::1::::MagicAttack<>AttackAction<><>0<>0<><>::
-MeleeAttack.gd::GDScript::2718893385931225655::1762948657::0::1::::MeleeAttack<>AttackAction<><>0<>0<><>::
-RangedAttack.gd::GDScript::8967513115934135331::1762948657::0::1::::RangedAttack<>AttackAction<><>0<>0<><>::
-SpecialAttack.gd::GDScript::8947762045112727098::1762948657::0::1::::SpecialAttack<>AttackAction<><>0<>0<><>::
-::res://scenes/::1762948657
-::res://scenes/BattleScene/::1763555710
-BattleScene.tscn::PackedScene::6711908456245980283::1763555710::0::1::::<><><>0<>0<><>::uid://c004r4qmg3tjl::::res://scenes/BattleScene/battle_scene.gd<>uid://8pr4v8vmh0do::::res://assets/bg-1.jpeg
-battle_scene.gd::GDScript::6580964601923507529::1763555710::0::1::::<>Control<><>0<>0<><>::
-::res://scenes/character_view/::1763555753
-CharacterView.tscn::PackedScene::8703165747603988418::1763554938::0::1::::<><><>0<>0<><>::uid://ba8565vqpb7f7::::res://scenes/character_view/character_view.gd
-character_view.gd::GDScript::2456423627859604738::1763555710::0::1::::CharacterView<>Node2D<><>0<>0<><>::
-character_view.tscn::PackedScene::4498927531503083992::1763555753::0::1::::<><><>0<>0<><>::
-::res://scenes/main/::1763555710
-main.gd::GDScript::8496878118616571467::1763555710::0::1::::<>Node2D<><>0<>0<><>::
-main.tscn::PackedScene::5253363080799960020::1763554938::0::1::::<><><>0<>0<><>::uid://dtb7luoxo3uvr::::res://scenes/main/main.gd<>uid://dbjc3fpbhcegh::::res://icon.svg<>uid://cawmqmytk8cxh::::res://scenes/main/player.gd
-player.gd::GDScript::4819015522824637349::1762948657::0::1::::<>CharacterBody2D<><>0<>0<><>::
-::res://systems/::1762948657
-party_manager.gd::GDScript::4491797779194794764::1762948657::0::1::::PartyManager<>Node<><>0<>0<><>::
+::res://::1763688182
+icon.svg::CompressedTexture2D::7248202016562433731::1762512983::1763688194::1::::<><><>0<>0<>1492f381ecb0d5f1d84394cecf3c66fe<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+README.md::TextFile::-1::1762633718::0::1::::<><><>0<>0<><>::
+::res://addons/::1762628234
+::res://addons/gdscript-templates/::1762534857
+plugin.cfg::TextFile::-1::1762534857::0::1::::<><><>0<>0<><>::
+plugin.gd::GDScript::1034040009910898845::1762534857::0::1::::<>EditorPlugin<><>0<>1<><>::
+README.md::TextFile::-1::1762534857::0::1::::<><><>0<>0<><>::
+::res://addons/gdscript-templates/images/::1763688182
+expanded.png::CompressedTexture2D::4931387849534305760::1762534857::1763688195::1::::<><><>0<>0<>3f66133d0ee1c5b6b59b4136b4e07cd2<>res://.godot/imported/expanded.png-a22203384e6723564a48bba601d33da7.ctex::
+keyword.png::CompressedTexture2D::5821192350447733313::1762534857::1763688194::1::::<><><>0<>0<>e279b93a21e3f93ba31d9855f0f156fe<>res://.godot/imported/keyword.png-6db914c98367731cae127191708173fb.ctex::
+templates.png::CompressedTexture2D::4914307282030192446::1762534857::1763688194::1::::<><><>0<>0<>06e512bae07795ebedf8d3572ccaec84<>res://.godot/imported/templates.png-ef28e83da92e84613299805d937f8d5a.ctex::
+::res://addons/gdscript-templates/scripts/::1762534857
+debug_utils.gd::GDScript::7362734399310989585::1762534857::0::1::::<>Object<><>0<>1<><>::
+file_utils.gd::GDScript::841106098566542653::1762534857::0::1::::<>Object<><>0<>1<><>::
+::res://addons/gdscript-templates/templates/::1762534857
+templates.json::JSON::-1::1762534857::0::1::::<><><>0<>0<><>::
+::res://addons/godot-css-theme/::1762614409
+convert.gd::GDScript::1706270155665421738::1762614409::0::1::::CSSConvert<>SceneTree<><>0<>0<><>::
+CSSParser.gd::GDScript::6756042168335808907::1762614409::0::1::::CSSParser<>RefCounted<><>0<>0<><>::
+CSSSimplifier.gd::GDScript::7115188376115351670::1762614409::0::1::::CSSSimplifier<>RefCounted<><>0<>0<><>::
+import_plugin.gd::GDScript::7463579569813851569::1762614409::0::1::::CSSImportPlugin<>EditorImportPlugin<><>0<>1<><>::
+Options.gd::GDScript::7742587958740376401::1762614409::0::1::::CSSCliOptions<>RefCounted<><>0<>0<><>::
+optparse.gd::GDScript::2782019550906521900::1762614409::0::1::::OptParseCustom<>RefCounted<><>0<>0<><>::
+plugin.cfg::TextFile::-1::1762614409::0::1::::<><><>0<>0<><>::
+plugin.gd::GDScript::4085419369983889529::1762614409::0::1::::<>EditorPlugin<><>0<>1<><>::
+Stylesheet.gd::GDScript::5867600147195846772::1762614409::0::1::::Stylesheet<>RefCounted<><>0<>0<><>::
+ThemeApplier.gd::GDScript::6643272155488072345::1762614409::0::1::::ThemeApplier<>RefCounted<><>0<>0<><>::
+::res://addons/godot-css-theme/editor/::1763644768
+css_code_edit.gd::GDScript::8298348357069444330::1762614409::0::1::::<>CodeEdit<><>0<>1<><>::
+css_editor.gd::GDScript::6499290630641355602::1762614409::0::1::::<>Control<><>0<>1<><>::
+css_editor.tscn::PackedScene::7325661863788011305::1762614409::0::1::::<><><>0<>0<><>::res://addons/godot-css-theme/editor/css_editor.gd<>res://addons/godot-css-theme/editor/EditorButton.gd<>uid://blglwyagrkxdm::::res://addons/godot-css-theme/editor/css_syntax.tres<>res://addons/godot-css-theme/editor/css_code_edit.gd
+css_syntax.tres::CodeHighlighter::3171592665478308206::1763644768::0::1::::<><><>0<>0<><>::
+EditorButton.gd::GDScript::134764124553615139::1762614409::0::1::::<>BaseButton<><>0<>1<><>::
+::res://assets/::1763688182
+bg-1-dg.jpeg::CompressedTexture2D::2196809490995711194::1763579798::1763688194::1::::<><><>0<>0<>8bb5d7e5013bff5cb34de9f3a2457990<>res://.godot/imported/bg-1-dg.jpeg-49ca85a5dc5c2364f4dfe737f89f54a9.ctex::
+bg-1.jpeg::CompressedTexture2D::2348282638205620016::1763579798::1763688194::1::::<><><>0<>0<>976abdf4361a77ce7b0a9b37702b7d3a<>res://.godot/imported/bg-1.jpeg-c3d8519cdbfe8c256dc9f11dfe3f911c.ctex::
+bottom_theme.tres::Theme::-1::1763688182::0::1::::<><><>0<>0<><>::
+theme.css::Theme::3085408291927022531::1763687698::1763688196::1::::<><><>0<>0<>851ffe4cd54c51991f6a40f3a0f35117<>res://.godot/imported/theme.css-51a794e9235be64318b62c03d1a358e7.tres::
+::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/::1763688182
+Baraom (Sumo Sacerdote  Guerreiro Mutante) - Transformação.png::CompressedTexture2D::5166893834850802225::1763422440::1763688193::1::::<><><>0<>0<>af47e630b04e8cffb5f9be36569503bb<>res://.godot/imported/Baraom (Sumo Sacerdote  Guerreiro Mutante) - Transformação.png-259fd8cdc751c3852b46aabe4d3d0b96.ctex::
+Baraom (Sumo Sacerdote  Guerreiro Mutante).png::CompressedTexture2D::6044636135461801794::1763422440::1763688193::1::::<><><>0<>0<>b5f2a5a0dd4c299496825bb326919575<>res://.godot/imported/Baraom (Sumo Sacerdote  Guerreiro Mutante).png-dd04374f4ded31aa0b3ca4cb1a3d86a3.ctex::
+::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/::1763422440
+::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/::1763688182
+andando.png::CompressedTexture2D::3488670539405108322::1763422440::1763688193::1::::<><><>0<>0<>9e6606e27a78b3f798a515f6184cd2b3<>res://.godot/imported/andando.png-13dbd024d8acebb44f2b6472cc353e4a.ctex::
+ataque.png::CompressedTexture2D::8833223189692702956::1763422440::1763688193::1::::<><><>0<>0<>ffea60733bd2e92be74d74af6cccc23d<>res://.godot/imported/ataque.png-6358a721664e18213311ae7fa9ee3aca.ctex::
+dano.png::CompressedTexture2D::8901767515253640815::1763422440::1763688193::1::::<><><>0<>0<>946a1480cca735ace9a9523f504abc75<>res://.godot/imported/dano.png-220f1c3ad705f20a0fbaf19f26bd5020.ctex::
+::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Transformação/::1763422440
+::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Transformação/png/::1763688182
+andando transformação.png::CompressedTexture2D::7591259947336412495::1763422440::1763688193::1::::<><><>0<>0<>605e660489e8b39598ed5abd7fcc3dee<>res://.godot/imported/andando transformação.png-62f463c34af5614cf0b380feb7eedc2d.ctex::
+ataque transformação.png::CompressedTexture2D::404572561769102310::1763422440::1763688193::1::::<><><>0<>0<>e47999147899f765ed49c9cc7583ef17<>res://.godot/imported/ataque transformação.png-829efd15bc78a09d7c0d4120f511a377.ctex::
+dano transformação.png::CompressedTexture2D::462908960354172215::1763422440::1763688193::1::::<><><>0<>0<>02853d5bc12225fb4778f76963e3b279<>res://.godot/imported/dano transformação.png-57ceace9f0f2d318704ec8f7e50ae1ce.ctex::
+transformação.png::CompressedTexture2D::8038256789554214702::1763422440::1763688193::1::::<><><>0<>0<>cde79c63d03e87a900cd38a11489bc64<>res://.godot/imported/transformação.png-9a75a601437709a83ef459a753170fbb.ctex::
+::res://assets/Bishum (Alta Sacerdotisa de Gorgom﻿)/::1763688182
+Bishum (Alta Sacerdotisa de Gorgom﻿).png::CompressedTexture2D::1505635792395951299::1763422440::1763688193::1::::<><><>0<>0<>882f2acc2e38a403fdb3da0e924b4f5e<>res://.godot/imported/Bishum (Alta Sacerdotisa de Gorgom﻿).png-ca6cb6ab0a647bb47e5e83f8ee60e262.ctex::
+::res://assets/Bishum (Alta Sacerdotisa de Gorgom﻿)/Sprites/::1763422440
+::res://assets/Bishum (Alta Sacerdotisa de Gorgom﻿)/Sprites/png/::1763688182
+ataque.png::CompressedTexture2D::7637063871635680037::1763422440::1763688193::1::::<><><>0<>0<>bca2ff74d96f920f5e0e74950c2f8a30<>res://.godot/imported/ataque.png-4b68c1834b25e756fd3ca440758ce73e.ctex::
+dano.png::CompressedTexture2D::3794898430018741061::1763422440::1763688193::1::::<><><>0<>0<>653bcd326fc70c12729a8c1e4e9f7e0a<>res://.godot/imported/dano.png-2fa59700863488f07c0a721512103481.ctex::
+::res://assets/Criaturas de Gorgom/::1763688182
+Mutantes de Gorgom.png::CompressedTexture2D::2863038931874134152::1763422440::1763688193::1::::<><><>0<>0<>63886382b6e06dbeb3f1ac67a1229476<>res://.godot/imported/Mutantes de Gorgom.png-e5b303e068be93f668488a9aaa3a5327.ctex::
+::res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/::1763688182
+Bestas demoníacas de Gorgom.png::CompressedTexture2D::1308067719058500730::1763422440::1763688193::1::::<><><>0<>0<>afa30340a509cfb4be65da0884c9e496<>res://.godot/imported/Bestas demoníacas de Gorgom.png-eeb8d7403f1d485c8e0d5433aa8e52ea.ctex::
+::res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/Sprites/::1763422440
+::res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/Sprites/png/::1763688182
+andando.png::CompressedTexture2D::9050540608843512988::1763422440::1763688192::1::::<><><>0<>0<>89d6722211d72d28770ed8c23efcd461<>res://.godot/imported/andando.png-546182ad729395212c427b31dcf01c83.ctex::
+ataque.png::CompressedTexture2D::4457578288613638125::1763422440::1763688192::1::::<><><>0<>0<>6834fdadae9d7e8ee7b7b79aabf6917f<>res://.godot/imported/ataque.png-2efff836203bc20f445649a85c8b2c8e.ctex::
+dano.png::CompressedTexture2D::8778328496041998223::1763422440::1763688192::1::::<><><>0<>0<>2b2f218ad6e5fa75b8a51fbcf8e15328<>res://.godot/imported/dano.png-545d403fb0bcbe43f80cc2a191d70571.ctex::
+::res://assets/Criaturas de Gorgom/Humanos corrompidos de Gorgom/::1763688182
+Humanos corrompidos de Gorgom.png::CompressedTexture2D::4736772331555531776::1763422440::1763688192::1::::<><><>0<>0<>6338cde89ef5d1c74095fba0670d6fef<>res://.godot/imported/Humanos corrompidos de Gorgom.png-5d0a5da1314e80141fba2d874732194d.ctex::
+::res://assets/Criaturas de Gorgom/Humanos corrompidos de Gorgom/Sprites/::1763422440
+::res://assets/Criaturas de Gorgom/Humanos corrompidos de Gorgom/Sprites/png/::1763688182
+andando.png::CompressedTexture2D::1584941748971929092::1763422440::1763688196::1::::<><><>0<>0<>2b904459121c6094432c3355fa1ed673<>res://.godot/imported/andando.png-dd619a9c49d75da78338351b6644f98b.ctex::
+ataque.png::CompressedTexture2D::1867870688094717779::1763422440::1763688195::1::::<><><>0<>0<>c2b2d25275a09debee2ffd3ce4a1c7e1<>res://.godot/imported/ataque.png-ccca7995f71fe7492192882815c9d15f.ctex::
+dano.png::CompressedTexture2D::5143734621973088833::1763422440::1763688195::1::::<><><>0<>0<>2e9dc7a42f459aa0dac8288857ef43b8<>res://.godot/imported/dano.png-c7dc5ef2b5371d6bf6ad2d4549856a81.ctex::
+::res://assets/Darom (Sumo Sacerdote de Gorgom)/::1763688182
+Darom (Sumo Sacerdote de Gorgom).png::CompressedTexture2D::7720904430810700839::1763422440::1763688196::1::::<><><>0<>0<>4468954d7948552bf1ab21f87e322daf<>res://.godot/imported/Darom (Sumo Sacerdote de Gorgom).png-e310d875b8d5857cc445b49842d29ef8.ctex::
+::res://assets/Darom (Sumo Sacerdote de Gorgom)/Sprites/::1763422440
+::res://assets/Darom (Sumo Sacerdote de Gorgom)/Sprites/png/::1763688182
+andando.png::CompressedTexture2D::112271574204793632::1763422440::1763688195::1::::<><><>0<>0<>624ba132beab68046ccd2d84477d965c<>res://.godot/imported/andando.png-b683782769d0ea66ec93caa901de4606.ctex::
+ataque.png::CompressedTexture2D::4207802546983047791::1763422440::1763688195::1::::<><><>0<>0<>d1923a0affd9e6fc6cf2333b93c68d35<>res://.godot/imported/ataque.png-688749b96ac19924f6bfe4d92cf2e110.ctex::
+dano.png::CompressedTexture2D::1849542443539992025::1763422440::1763688195::1::::<><><>0<>0<>c3d9cca979d65c41455f17b9e507780f<>res://.godot/imported/dano.png-90a2f0c2ed8942fade6220b9bab67782.ctex::
+::res://assets/Issamu Minami - Noctis Rex/::1763688182
+Issamu Minami  Noctis Rex - Transformação.png::CompressedTexture2D::4954248274843926900::1763422440::1763688195::1::::<><><>0<>0<>432ccca4f64ef39b9e55ba6ffcee5e83<>res://.godot/imported/Issamu Minami  Noctis Rex - Transformação.png-e0695bb1f4c7d0940291df3388a6d36d.ctex::
+Issamu Minami  Noctis Rex.png::CompressedTexture2D::4389524295246118877::1763422440::1763688195::1::::<><><>0<>0<>2ecfb9f23aabec5127c9d3aec38c3bee<>res://.godot/imported/Issamu Minami  Noctis Rex.png-498e2c2d7a46d780dfc8f44afda188da.ctex::
+::res://assets/Issamu Minami - Noctis Rex/Forma normal - Sprites/::1763422440
+::res://assets/Issamu Minami - Noctis Rex/Forma normal - Sprites/png/::1763688182
+andando.png::CompressedTexture2D::1052452655606101691::1763422440::1763688195::1::::<><><>0<>0<>dee5ec9b813bd773c092d2db8c636e01<>res://.godot/imported/andando.png-d71a38ac9434f530c4521cb1c3222c47.ctex::
+atacando.png::CompressedTexture2D::1831765944151715576::1763422440::1763688195::1::::<><><>0<>0<>2bbd19e84d25f3dd27a34e44a2d0ae79<>res://.godot/imported/atacando.png-d0c83ce5d7c9cb88aa0f241ebab56565.ctex::
+dano.png::CompressedTexture2D::9124962039565034941::1763422440::1763688195::1::::<><><>0<>0<>4aa1d10c93089dd52efa4c606354baa3<>res://.godot/imported/dano.png-dbf35bbb2187c2bbca7c255bfadb9e7e.ctex::
+::res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/::1763422440
+::res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/png/::1763688182
+ataque transfromação.png::CompressedTexture2D::9023458080853001420::1763422440::1763688195::1::::<><><>0<>0<>44461a3cb03e4d7b20dceffcd5df23fd<>res://.godot/imported/ataque transfromação.png-92fd8b4f4dc33a243de25bf45f5cc4a0.ctex::
+transformação andando.png::CompressedTexture2D::4146850791466868779::1763422440::1763688195::1::::<><><>0<>0<>b9234543ec3eae6569ffbc0281642725<>res://.godot/imported/transformação andando.png-9b5db0f47ec17a5c0f2425af5bbab418.ctex::
+transformação dano.png::CompressedTexture2D::5215061455162115946::1763422440::1763688195::1::::<><><>0<>0<>aba3cfba35bd072a854b2be06654b02b<>res://.godot/imported/transformação dano.png-368ffeaa9c2bf90d4d99314bbbe11674.ctex::
+transformação.png::CompressedTexture2D::1495804038297763744::1763422440::1763688195::1::::<><><>0<>0<>6aa27189ba939c4154b70e8a9686b191<>res://.godot/imported/transformação.png-891d6a9a5cb73d748969f1137ea09cb8.ctex::
+::res://assets/Katsumi Kida (Bárbaro  Tanque)/::1763688182
+Katsumi Kida (Bárbaro  Tanque).png::CompressedTexture2D::3526366406205670375::1763422440::1763688195::1::::<><><>0<>0<>eec99231a921b9ca8626f8c70eec9c49<>res://.godot/imported/Katsumi Kida (Bárbaro  Tanque).png-f058812adf359899d2a2269a8749d0d5.ctex::
+::res://assets/Katsumi Kida (Bárbaro  Tanque)/Sprites/::1763422440
+::res://assets/Katsumi Kida (Bárbaro  Tanque)/Sprites/png/::1763688182
+andando.png::CompressedTexture2D::5328060559551954582::1763422440::1763688195::1::::<><><>0<>0<>91f4c2e1ff79cb7cf9ef33a8d07ad01c<>res://.godot/imported/andando.png-03be705a282c2165d1d3f16faff955ec.ctex::
+ataque.png::CompressedTexture2D::3921345431591911263::1763422440::1763688195::1::::<><><>0<>0<>195cd457764633a55e6a01f2dcbe2eb1<>res://.godot/imported/ataque.png-2d6c3f698da1b6133ad27cd938cd235c.ctex::
+dano.png::CompressedTexture2D::5451938276919502755::1763422440::1763688194::1::::<><><>0<>0<>560f5877c2f62fd01d24d849fef8be49<>res://.godot/imported/dano.png-a42db38a4daad1da690adf48e2909a89.ctex::
+::res://assets/Kyoko Akizuki (Clériga  Suporte)/::1763688182
+Kyoko Akizuki (Clériga  Suporte).png::CompressedTexture2D::1390154520551547340::1763422440::1763688195::1::::<><><>0<>0<>ed1e2aca148bb32958bbe7283bfa220a<>res://.godot/imported/Kyoko Akizuki (Clériga  Suporte).png-50c67e50b6924633e2e8fae63fc2487b.ctex::
+::res://assets/Kyoko Akizuki (Clériga  Suporte)/Sprites/::1763422440
+::res://assets/Kyoko Akizuki (Clériga  Suporte)/Sprites/png/::1763688182
+andando.png::CompressedTexture2D::3768339781133227448::1763422440::1763688194::1::::<><><>0<>0<>d740c8913822d575a7ed39c3fd045904<>res://.godot/imported/andando.png-4d03f499a9b0561d505a88de785f54bd.ctex::
+ataque.png::CompressedTexture2D::5273121648687040347::1763422440::1763688194::1::::<><><>0<>0<>6127b955b52a2b88a0a517d949e69a02<>res://.godot/imported/ataque.png-a9f788467fbecbb39f9026c81be54d71.ctex::
+dano.png::CompressedTexture2D::7077166820264518908::1763422440::1763688194::1::::<><><>0<>0<>8f2596dc75e08e3c5f9cb288a2b018f7<>res://.godot/imported/dano.png-1f418e9da5bc7b5557ca2e98b2679a75.ctex::
+::res://assets/Masaru Todo (Mago das Trevas)/::1763688182
+Masaru Todo (Mago das Trevas) - Transformação.png::CompressedTexture2D::4569458900700251859::1763422440::1763688194::1::::<><><>0<>0<>e01606711b46913fdc86b6cb49bc2489<>res://.godot/imported/Masaru Todo (Mago das Trevas) - Transformação.png-28017a2a3e37cff526236c6b625f5325.ctex::
+Masaru Todo (Mago das Trevas).png::CompressedTexture2D::6848103795291986954::1763422440::1763688192::1::::<><><>0<>0<>a4418af66af5df80e37c9f30417d4e43<>res://.godot/imported/Masaru Todo (Mago das Trevas).png-af1f8ce6f146973ef210358943b3da8e.ctex::
+::res://assets/Masaru Todo (Mago das Trevas)/Sprites - Forma normal/::1763422440
+::res://assets/Masaru Todo (Mago das Trevas)/Sprites - Forma normal/png/::1763688182
+andando.png::CompressedTexture2D::1686779611898878852::1763422440::1763688191::1::::<><><>0<>0<>941fd0768db54e439b57976d725cf898<>res://.godot/imported/andando.png-75f00170b69fb79fe8e9ef07ba1c70a4.ctex::
+ataque.png::CompressedTexture2D::4895774421435418258::1763422440::1763688192::1::::<><><>0<>0<>1a39a6aea57518dd207f1edfef20f956<>res://.godot/imported/ataque.png-1ea772e58167e31d8df83107bfd5f19f.ctex::
+dano.png::CompressedTexture2D::3697789959402389433::1763422440::1763688191::1::::<><><>0<>0<>78756665879d3a2468655a985965d1d9<>res://.godot/imported/dano.png-f7c9658b79b1a0df0cf327cdb218b618.ctex::
+::res://assets/Masaru Todo (Mago das Trevas)/Sprites - Transformação/::1763422440
+::res://assets/Masaru Todo (Mago das Trevas)/Sprites - Transformação/png/::1763688182
+andando transformação.png::CompressedTexture2D::1223539365465182581::1763422440::1763688191::1::::<><><>0<>0<>efa6ea9cdba9a2c09908d6736ac1ebb6<>res://.godot/imported/andando transformação.png-54044e799da1a08c6a1b5a57dcea4097.ctex::
+ataque transformação.png::CompressedTexture2D::6596471304671470288::1763422440::1763688192::1::::<><><>0<>0<>e819a1b01f768557e2f11c82b831dea9<>res://.godot/imported/ataque transformação.png-bb78ba01e7fff73eb37d90b8ca491156.ctex::
+dano transformação.png::CompressedTexture2D::452246053017008360::1763422440::1763688191::1::::<><><>0<>0<>67325e4833eda83282988818abb2313f<>res://.godot/imported/dano transformação.png-64b5fbb07510fdc95916cc1ce2e9567f.ctex::
+transformacao.png::CompressedTexture2D::7853839467198646866::1763422440::1763688191::1::::<><><>0<>0<>d8b044b4e68c7da0150f659e47ec277e<>res://.godot/imported/transformacao.png-8166e1865c4e7f0338acb02babfe92c2.ctex::
+::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/::1763688182
+Nobuhiko Akizuki  Umbra Luna﻿ - Transformação.png::CompressedTexture2D::7008094837462740771::1763422440::1763688191::1::::<><><>0<>0<>31bd33577c632a2a2abc14399c8c34ab<>res://.godot/imported/Nobuhiko Akizuki  Umbra Luna﻿ - Transformação.png-d2c9e6e910cc3da651b8afee0a95cc9d.ctex::
+Nobuhiko Akizuki  Umbra Luna﻿.png::CompressedTexture2D::8187652920289903142::1763422440::1763688191::1::::<><><>0<>0<>da3e19ca97c6dac23d36b42e540de7b3<>res://.godot/imported/Nobuhiko Akizuki  Umbra Luna﻿.png-fea93ec9529081ae737ba860f98976fe.ctex::
+::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/::1763422440
+::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/png/::1763688182
+andando.png::CompressedTexture2D::567232557821339914::1763422440::1763688191::1::::<><><>0<>0<>2c8a12ab9df08535bb0584040b173b44<>res://.godot/imported/andando.png-16e0a0f21ed7a176a08b4dcb4090c680.ctex::
+ataque.png::CompressedTexture2D::7112851684737663741::1763422440::1763688191::1::::<><><>0<>0<>bbf59a9051f44c5b5a35cda0d0c8fb1f<>res://.godot/imported/ataque.png-ec1a709f50b2da046d9d5224d7ad8cc7.ctex::
+dano.png::CompressedTexture2D::5215169196623396904::1763422440::1763688191::1::::<><><>0<>0<>02581c36e3e61626c76c4466caeeb22f<>res://.godot/imported/dano.png-5b79a6b1bbc53fa49c1b465a646b54bf.ctex::
+::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Transformação/::1763422440
+::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Transformação/png/::1763688182
+andando transformação.png::CompressedTexture2D::3941320576763547094::1763422440::1763688191::1::::<><><>0<>0<>3e36cafd64aac59b2ff0825edbb48149<>res://.godot/imported/andando transformação.png-9731dc0944c89880d190042a8ebd66be.ctex::
+ataque transformação.png::CompressedTexture2D::4583401828291658132::1763422440::1763688191::1::::<><><>0<>0<>291f425e974332ff904e9d2675f7c270<>res://.godot/imported/ataque transformação.png-aa8bbcf9ad742c26ead0442bd4f946da.ctex::
+dano transformação.png::CompressedTexture2D::7620924906505106539::1763422440::1763688191::1::::<><><>0<>0<>00de0e72d682e670065baaa1eb0888b7<>res://.godot/imported/dano transformação.png-521f6948749c57254c979ae9e549f589.ctex::
+transformação.png::CompressedTexture2D::8740115173452329210::1763422440::1763688191::1::::<><><>0<>0<>217e6b0ba0e78de01b40b8c8002390b3<>res://.godot/imported/transformação.png-37fd2db0163d7cf555a3cefffd7d70b6.ctex::
+::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/::1763688182
+Ryu Kazamatsuri (Arqueiro  Furtivo) - Transformação.png::CompressedTexture2D::558688893111516069::1763422440::1763688191::1::::<><><>0<>0<>62cd369b973dad7d5649ce250caa0fc1<>res://.godot/imported/Ryu Kazamatsuri (Arqueiro  Furtivo) - Transformação.png-568594ba3dcfd4d4513ae04ac3dc504a.ctex::
+Ryu Kazamatsuri (Arqueiro  Furtivo).png::CompressedTexture2D::1721255646014342863::1763422441::1763688191::1::::<><><>0<>0<>62a5863fb76fca1fc7f467cae6084a58<>res://.godot/imported/Ryu Kazamatsuri (Arqueiro  Furtivo).png-fbd08a05a650e5e148360ae8c2e35f0e.ctex::
+::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/::1763422441
+::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/::1763688182
+andnado.png::CompressedTexture2D::5068026553252904842::1763422441::1763688190::1::::<><><>0<>0<>8f29d2a8b68629578fa47aaa8e2ead77<>res://.godot/imported/andnado.png-e72c1743266cbb9464011a7800ad86d6.ctex::
+ataque.png::CompressedTexture2D::1228800003945013283::1763422441::1763688190::1::::<><><>0<>0<>2ef5658cf577773e7515694b6a06d4b1<>res://.godot/imported/ataque.png-7379da58cbfcef690965beb0200ac244.ctex::
+dano.png::CompressedTexture2D::8481201841544606957::1763422441::1763688190::1::::<><><>0<>0<>cfa855908fa6fd74421b493ae9ce95d7<>res://.godot/imported/dano.png-368bebe2512ce8a8325ce1df64daa849.ctex::
+::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Transformação/::1763422441
+::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Transformação/png/::1763688182
+andando transformação.png::CompressedTexture2D::8092256976768355437::1763422441::1763688190::1::::<><><>0<>0<>2ad15f56e9033f9babec579f2e968191<>res://.godot/imported/andando transformação.png-d17ff1ea33a82838212d7891ba537e09.ctex::
+ataque transformação.png::CompressedTexture2D::2241297095380199436::1763422441::1763688190::1::::<><><>0<>0<>461a55faaa40f3ed4089a2593dcc3a07<>res://.godot/imported/ataque transformação.png-2ca37056569e9a773d24c700a6682c91.ctex::
+dano transformação.png::CompressedTexture2D::8866315342082936436::1763422441::1763688192::1::::<><><>0<>0<>f4153cbfd96031ad97fc72f06c2e2cbd<>res://.godot/imported/dano transformação.png-b23ce1fdbd756e19031e4dc41d026d9c.ctex::
+transformação.png::CompressedTexture2D::8515883310074261568::1763422441::1763688192::1::::<><><>0<>0<>5f921d1f8d8da0926fc57025e46387c3<>res://.godot/imported/transformação.png-dd13687e9d602fb8b38fcf5df0a84b1b.ctex::
+::res://assets/Soichiro Akizuki (Mago Mentor)/::1763688182
+Soichiro Akizuki (Mago Mentor).png::CompressedTexture2D::9070804170781176947::1763422441::1763688192::1::::<><><>0<>0<>1bdad2c6d56092c769b49f56473b66a1<>res://.godot/imported/Soichiro Akizuki (Mago Mentor).png-757c7f6e9eb669cc6fac6d21fe5c6b3b.ctex::
+::res://assets/Soichiro Akizuki (Mago Mentor)/Sprites/::1763422441
+::res://assets/Soichiro Akizuki (Mago Mentor)/Sprites/png/::1763688182
+andando.png::CompressedTexture2D::7477508261545060394::1763422441::1763688192::1::::<><><>0<>0<>0b1f7b732bf9ba2804531a2dac943e93<>res://.godot/imported/andando.png-371b1a05cc6dd2541cc380d8d8c869cc.ctex::
+ataque.png::CompressedTexture2D::629793315093968679::1763422441::1763688192::1::::<><><>0<>0<>d23eb06fe91af7020059e2cbb98706f0<>res://.godot/imported/ataque.png-7ed0904bd78d6e0e6cb34af2106b7016.ctex::
+dano.png::CompressedTexture2D::7474529937779536827::1763422441::1763688192::1::::<><><>0<>0<>e6cc1730197cb1ef57cbc8707d583edb<>res://.godot/imported/dano.png-9a345df269bd9c73c1e1ff9a24c45f66.ctex::
+::res://assets/Ícones/::1763688182
+Baraom - Transformação.png::CompressedTexture2D::819241579923990885::1763422441::1763688192::1::::<><><>0<>0<>efa125c3140097386e7475bae908d88d<>res://.godot/imported/Baraom - Transformação.png-f7ab51bd35b8d6df8fe3ba88e1710a8e.ctex::
+Baraom.png::CompressedTexture2D::346495377676617925::1763422441::1763688192::1::::<><><>0<>0<>5b8ac95301c0666edb80124249fd3b07<>res://.godot/imported/Baraom.png-2df0937fa672d83c4b69e916b85e0964.ctex::
+Bestas Demoníacas.png::CompressedTexture2D::6831652831332550982::1763422441::1763688192::1::::<><><>0<>0<>309bb63c156b42680cb64a9b26f1232d<>res://.godot/imported/Bestas Demoníacas.png-dbe6c93211cb567e8944835628951147.ctex::
+Bishum.png::CompressedTexture2D::7165509899084142403::1763422441::1763688192::1::::<><><>0<>0<>985fddb4b237bca422e07037904f13dc<>res://.godot/imported/Bishum.png-cd843e1906b143c772fccb4e0e6a251e.ctex::
+Darom.png::CompressedTexture2D::4806324217108197684::1763422441::1763688192::1::::<><><>0<>0<>2155fa9de069a6cd460141bc74d75797<>res://.godot/imported/Darom.png-f44f4d3d938d3ba297218964bcde49a6.ctex::
+Humanos Corrompidos.png::CompressedTexture2D::1176101565375345379::1763422441::1763688192::1::::<><><>0<>0<>042923fdf444d9d6e5fbc156ddb511dc<>res://.godot/imported/Humanos Corrompidos.png-972f9a49cc3086d131942fb22ee9e74a.ctex::
+Issamu Minami  Noctis Rex (2).png::CompressedTexture2D::5140324681079769020::1763422441::1763688192::1::::<><><>0<>0<>01130cc99bf4636578304285e8ed39ce<>res://.godot/imported/Issamu Minami  Noctis Rex (2).png-5368536e40c1cde9699187a06d24c188.ctex::
+Issamu Minami  Noctis Rex - Transformação (2).png::CompressedTexture2D::2479983272410482502::1763422441::1763688192::1::::<><><>0<>0<>5cec8e34f46ce59cb61367f345aac59c<>res://.godot/imported/Issamu Minami  Noctis Rex - Transformação (2).png-a75dce82db0febb1bcb13601f65e610c.ctex::
+Katsumi Kida.png::CompressedTexture2D::7358532103915222635::1763422441::1763688192::1::::<><><>0<>0<>3a2c243714ea77b775499d318fcffc66<>res://.godot/imported/Katsumi Kida.png-6a887cbc0ea119f66f0730e2605db60b.ctex::
+Kyoko Akizuki.png::CompressedTexture2D::5391171047394290216::1763422441::1763688192::1::::<><><>0<>0<>7ac50367fdbbf085f75789f799ce3f98<>res://.godot/imported/Kyoko Akizuki.png-5c15cc08cb73f93f31c800eb8da655ac.ctex::
+Masaru Todo - Transformação.png::CompressedTexture2D::5073779322420492271::1763422441::1763688192::1::::<><><>0<>0<>0db4b4b0a4e39f80331fd895674c403a<>res://.godot/imported/Masaru Todo - Transformação.png-d1aefc9cb49501fba4ceb1b0c9058c80.ctex::
+Masaru Todo.png::CompressedTexture2D::5466122313484006803::1763422441::1763688192::1::::<><><>0<>0<>df3a4d390f464b78d739fcf4173aeed7<>res://.godot/imported/Masaru Todo.png-6e2e4150646662d0d70916f51eb77649.ctex::
+Nobuhiko Akizuki  Umbra Luna - Transformação.png::CompressedTexture2D::2369326184862284713::1763422441::1763688192::1::::<><><>0<>0<>5bf7cfb2cff04afc5e0d41083c250b35<>res://.godot/imported/Nobuhiko Akizuki  Umbra Luna - Transformação.png-7d7465fa5afa9bbe57febeff9f03b4ce.ctex::
+Nobuhiko Akizuki  Umbra Luna﻿.png::CompressedTexture2D::4384547312942521536::1763422441::1763688192::1::::<><><>0<>0<>a9bdffcd68f90c6b72ce13ed419195f8<>res://.godot/imported/Nobuhiko Akizuki  Umbra Luna﻿.png-366c149cfe727567f2ada78031e5a8c1.ctex::
+Ryu Kazamatsuri - Transformação.png::CompressedTexture2D::510309778375935959::1763422441::1763688192::1::::<><><>0<>0<>c394a9526384dbcdc2e4d56c116efc73<>res://.godot/imported/Ryu Kazamatsuri - Transformação.png-738fa374f11beb87cf246e2676505a99.ctex::
+Ryu Kazamatsuri.png::CompressedTexture2D::1280425989347643725::1763422441::1763688192::1::::<><><>0<>0<>9e86e3123d40be61cf539e0f26b29014<>res://.godot/imported/Ryu Kazamatsuri.png-4c489be6534f4cae06769537e571ef6b.ctex::
+Soichiro Akizuki.png::CompressedTexture2D::4376886388298039809::1763422441::1763688192::1::::<><><>0<>0<>4dea280830f869a54ce2de7c14d18550<>res://.godot/imported/Soichiro Akizuki.png-7ce4908dddadecad0d4aef553148ba56.ctex::
+::res://data/::1762620691
+roles.gd::GDScript::5428309800363920395::1762616759::0::1::::Roles<>Resource<><>0<>0<><>::
+::res://data/characters/::1763422441
+::res://data/characters/aliados/::1763579798
+bishum.tres::Resource/Character::2708104995080003700::1763579798::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://dada5vys6pamd::::res://assets/Ícones/Bishum.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://vplupmlad3n8::::res://assets/Bishum (Alta Sacerdotisa de Gorgom﻿)/Bishum (Alta Sacerdotisa de Gorgom﻿).png
+isamu minami.tres::Resource/Character::8844082012568723226::1763579798::0::1::::<><><>0<>0<><>::uid://dk6227jpq4lwj::::res://data/characters/animações/issamu minami.tres<>uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://cfianqlrip01m::::res://assets/Ícones/Issamu Minami  Noctis Rex (2).png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://cm7u7xtr70btq::::res://data/characters/protagonista/Issamu Minami  Noctis Rex.png
+issamu minami - transformação.tres::Resource/Character::9060275671874912627::1763579798::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://bblk7yi80ls1c::::res://assets/Ícones/Issamu Minami  Noctis Rex - Transformação (2).png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://cct40lr1mueae::::res://assets/Issamu Minami - Noctis Rex/Issamu Minami  Noctis Rex - Transformação.png
+katsumi kida.tres::Resource/Character::3936614675861250925::1763579798::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://dc3r7iv821yx4::::res://assets/Ícones/Katsumi Kida.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://bqig0e4mv873x::::res://assets/Katsumi Kida (Bárbaro  Tanque)/Katsumi Kida (Bárbaro  Tanque).png
+kyoko.tres::Resource/Character::4207147985951412846::1763579798::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://ci2r2ghgebu13::::res://assets/Ícones/Kyoko Akizuki.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://t2nv28ioecae::::res://assets/Kyoko Akizuki (Clériga  Suporte)/Kyoko Akizuki (Clériga  Suporte).png
+masaru todo - transformação.tres::Resource/Character::651357144237897310::1763579798::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://cej1n0g1vyuj4::::res://assets/Ícones/Masaru Todo - Transformação.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://b6dqk5qp70da6::::res://assets/Masaru Todo (Mago das Trevas)/Masaru Todo (Mago das Trevas) - Transformação.png
+masaru todo.tres::Resource/Character::3345577772060273917::1763579798::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://cj43iaxr2cn68::::res://assets/Ícones/Masaru Todo.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://c4tjje7kkutfu::::res://assets/Masaru Todo (Mago das Trevas)/Masaru Todo (Mago das Trevas).png
+ryu kazamatsuri.tres::Resource/Character::4616938610478712444::1763579798::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://siiot5kxxc0l::::res://assets/Ícones/Ryu Kazamatsuri.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://yr13glpub7ol::::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Ryu Kazamatsuri (Arqueiro  Furtivo).png
+ryu kazamtsuri - transformação.tres::Resource/Character::3474424945457869166::1763579798::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://hjgyy8mvpyk2::::res://assets/Ícones/Ryu Kazamatsuri - Transformação.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://h7vr3i0rbnq0::::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Ryu Kazamatsuri (Arqueiro  Furtivo) - Transformação.png
+soichiro akizuki.tres::Resource/Character::9022311535222705332::1763579798::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://b3mgxdk7cffe4::::res://assets/Ícones/Soichiro Akizuki.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://d2h724i7ck3xf::::res://assets/Soichiro Akizuki (Mago Mentor)/Soichiro Akizuki (Mago Mentor).png
+::res://data/characters/animações/::1763687698
+baraom - transformação.tres::Resource/AnimationData::1983947686943516764::1763422441::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://dpsq8uujomhi8::::res://data/characters/sprites/baraom - transformação.tres
+baraom.tres::Resource/AnimationData::7336524128909764987::1763422441::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://7rn66sqaxdiv::::res://data/characters/sprites/baraom.tres
+bestas demoníacas.tres::Resource/AnimationData::1702686534436377350::1763422441::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://dodrpxj2vjjdv::::res://data/characters/sprites/bestas demoníacas.tres
+bishum.tres::Resource/AnimationData::3132381738550581312::1763422441::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://b2ekfgjxavvj6::::res://data/characters/sprites/bishum.tres
+darom.tres::Resource/AnimationData::2946097338477405008::1763422441::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://dgdbxo4mcnwlf::::res://data/characters/sprites/darom.tres
+humanos corrompidos.tres::Resource/AnimationData::1591428194171104095::1763687698::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://deyxs0x5tvtou::::res://data/characters/sprites/humanos corrompidos.tres
+issamu minami - transformação.tres::Resource/AnimationData::1133589788258988063::1763422441::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://b5qlr44fw8rst::::res://data/characters/sprites/issamu minami - transformação.tres
+issamu minami.tres::Resource/AnimationData::7926835468430117161::1763422441::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://bb1eabj14fxqn::::res://data/characters/sprites/issamu minami.tres
+katsumi kida.tres::Resource/AnimationData::8501885923919163922::1763422441::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://dnues31ax38dv::::res://data/characters/sprites/katsumi kida.tres
+kyoko akizuki.tres::Resource/AnimationData::8248957076103255693::1763422441::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://4g5ef01r6g8b::::res://data/characters/sprites/kyoko akizuki.tres
+mago mentor.tres::Resource/AnimationData::7466922914009668268::1763422441::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://ywbyys43gpvf::::res://data/characters/sprites/mago mentor.tres
+masaru todo - transformação.tres::Resource/AnimationData::6073504739443141011::1763422441::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://cix8jqhp315yw::::res://data/characters/sprites/masaru todo - transformação.tres
+masaru todo.tres::Resource/AnimationData::6423234768179981257::1763422441::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://cthnme8pen3wo::::res://data/characters/sprites/masaru todo.tres
+nobuhiko akizuki - transformação.tres::Resource/AnimationData::7521087784579509932::1763687698::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://6x44hwa53upg::::res://data/characters/sprites/nobuhiko akizuki - transformação.tres
+nobuhiko akizuki.tres::Resource/AnimationData::8119512504062168076::1763422441::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://6x44hwa53upg::::res://data/characters/sprites/nobuhiko akizuki.tres
+ryu kazamatsuri - transformação.tres::Resource/AnimationData::8461484444040748240::1763422441::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://d4k277edrpnon::::res://data/characters/sprites/ryu kazamatsuri - transformação.tres
+ryu kazamatsuri.tres::Resource/AnimationData::5272169531027226994::1763422441::0::1::::<><><>0<>0<><>::uid://dqnvu8j61mukh::::res://models/AnimationData.gd<>uid://cfwqvksu4wih::::res://data/characters/sprites/ryu kazamatsuri.tres
+::res://data/characters/protagonista/::1763688182
+character.tres::Resource/Character::4952780043054674111::1762620691::0::1::::<><><>0<>0<><>::uid://ep4f0cea61dd::::res://data/characters/protagonista/icone.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://cm7u7xtr70btq::::res://data/characters/protagonista/Issamu Minami  Noctis Rex.png
+icone.png::CompressedTexture2D::313492078979130825::1762515141::1763688192::1::::<><><>0<>0<>a95f600c3f8ae0f823fe72f60b41a068<>res://.godot/imported/icone.png-9611f26ffd525d85454b0edfaa85c417.ctex::
+Issamu Minami  Noctis Rex.png::CompressedTexture2D::5682440302637276098::1762515182::1763688192::1::::<><><>0<>0<>b952bd82f9f723441593223e8ee5b829<>res://.godot/imported/Issamu Minami  Noctis Rex.png-d1b00e442ad3c1d02a9e9dd61e3df210.ctex::
+::res://data/characters/sprites/::1763687698
+baraom - transformação.tres::SpriteFrames::8250284990097188653::1763687698::0::1::::<><><>0<>0<><>::uid://bpx65ntbdyn0m::::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/andando.png<>uid://dx345pcgd3uvc::::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/ataque.png<>uid://dy3c2s3ol8ck2::::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/dano.png
+baraom.tres::SpriteFrames::2281983755511276777::1763687698::0::1::::<><><>0<>0<><>::uid://bpx65ntbdyn0m::::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/andando.png<>uid://dx345pcgd3uvc::::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/ataque.png<>uid://dy3c2s3ol8ck2::::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/dano.png
+bestas demoníacas.tres::SpriteFrames::8149159194255016023::1763687698::0::1::::<><><>0<>0<><>::
+bishum.tres::SpriteFrames::4290393401922609005::1763687698::0::1::::<><><>0<>0<><>::
+darom.tres::SpriteFrames::7586690817096920475::1763687698::0::1::::<><><>0<>0<><>::
+humanos corrompidos.tres::SpriteFrames::7490992476856340244::1763687698::0::1::::<><><>0<>0<><>::uid://dg2pldcb4g4ar::::res://assets/Bishum (Alta Sacerdotisa de Gorgom﻿)/Sprites/png/ataque.png<>uid://bucjomv3kqx1v::::res://assets/Bishum (Alta Sacerdotisa de Gorgom﻿)/Sprites/png/dano.png
+issamu minami - transformação.tres::SpriteFrames::4525815850550219395::1763687698::0::1::::<><><>0<>0<><>::uid://b0c1a53mb8u3l::::res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/png/transformação andando.png<>uid://d1tbbh5xn2pai::::res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/png/ataque transfromação.png<>uid://cgkhkhcq37faw::::res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/png/transformação dano.png<>uid://vktw6d013otc::::res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/png/transformação.png
+issamu minami.tres::SpriteFrames::2510526284554641793::1763687698::0::1::::<><><>0<>0<><>::uid://o820he3q3oe2::::res://assets/Issamu Minami - Noctis Rex/Forma normal - Sprites/png/andando.png<>uid://1dk6gup8ea4o::::res://assets/Issamu Minami - Noctis Rex/Forma normal - Sprites/png/atacando.png<>uid://d3ag16d0vmjpl::::res://assets/Issamu Minami - Noctis Rex/Forma normal - Sprites/png/dano.png
+katsumi kida.tres::SpriteFrames::8113281096566867023::1763687698::0::1::::<><><>0<>0<><>::
+kyoko akizuki.tres::SpriteFrames::2049691687428037635::1763644768::0::1::::<><><>0<>0<><>::uid://btxoagro3c70w::::res://assets/Kyoko Akizuki (Clériga  Suporte)/Sprites/png/andando.png<>uid://chelsp4vc674j::::res://assets/Kyoko Akizuki (Clériga  Suporte)/Sprites/png/ataque.png<>uid://c73h5yq3xwyo7::::res://assets/Kyoko Akizuki (Clériga  Suporte)/Sprites/png/dano.png
+mago mentor.tres::SpriteFrames::1730053423670757787::1763491676::0::1::::<><><>0<>0<><>::uid://desfp6xpye0lq::::res://assets/Soichiro Akizuki (Mago Mentor)/Sprites/png/andando.png<>uid://i8cusdeehyl0::::res://assets/Soichiro Akizuki (Mago Mentor)/Sprites/png/ataque.png<>uid://deqyoe60r4c72::::res://assets/Soichiro Akizuki (Mago Mentor)/Sprites/png/dano.png
+masaru todo - transformação.tres::SpriteFrames::5383853389647512814::1763687698::0::1::::<><><>0<>0<><>::
+masaru todo.tres::SpriteFrames::6121691052979425714::1763687698::0::1::::<><><>0<>0<><>::uid://ybdap6cryswa::::res://assets/Masaru Todo (Mago das Trevas)/Sprites - Forma normal/png/andando.png
+nobuhiko akizuki - transformação.tres::SpriteFrames::2225147823626210580::1763687698::0::1::::<><><>0<>0<><>::uid://ic1icm7fvaek::::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/png/andando.png<>uid://c8lrvma02nuhh::::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/png/ataque.png<>uid://cgkjcsm5sp3oe::::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/png/dano.png
+nobuhiko akizuki.tres::SpriteFrames::4688157127062934817::1763687698::0::1::::<><><>0<>0<><>::uid://ic1icm7fvaek::::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/png/andando.png<>uid://c8lrvma02nuhh::::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/png/ataque.png<>uid://cgkjcsm5sp3oe::::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/png/dano.png
+ryu kazamatsuri - transformação.tres::SpriteFrames::9217080485418542597::1763687698::0::1::::<><><>0<>0<><>::uid://ceg8wlmf56ufy::::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/andnado.png<>uid://rrifk7poh3b0::::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/ataque.png<>uid://ds3mfjooidgo8::::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/dano.png
+ryu kazamatsuri.tres::SpriteFrames::152065041873831255::1763687698::0::1::::<><><>0<>0<><>::uid://ceg8wlmf56ufy::::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/andnado.png<>uid://rrifk7poh3b0::::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/ataque.png<>uid://ds3mfjooidgo8::::res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/dano.png
+::res://data/characters/vilões/::1763687698
+baraom.tres::Resource/Character::7890616041707048428::1763687698::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://e63y04ak00jh::::res://assets/Ícones/Baraom.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://csecjk1baglnm::::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Baraom (Sumo Sacerdote  Guerreiro Mutante).png
+barom - transformação.tres::Resource/Character::3385879713063220485::1763687698::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://lw313h6bbtr6::::res://assets/Ícones/Baraom - Transformação.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://cfu48sqbqefr2::::res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Baraom (Sumo Sacerdote  Guerreiro Mutante) - Transformação.png
+bestas demoníacas.tres::Resource/Character::2109806058610668387::1763687698::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://c4lklatdan3gc::::res://assets/Ícones/Bestas Demoníacas.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://svvxi7wh7rta::::res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/Bestas demoníacas de Gorgom.png
+darom.tres::Resource/Character::1788065117380919897::1763687698::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://caqhptbg3puue::::res://assets/Ícones/Darom.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://diacfyeur1kmh::::res://assets/Darom (Sumo Sacerdote de Gorgom)/Darom (Sumo Sacerdote de Gorgom).png
+humanos corrompidos.tres::Resource/Character::4442156616302448197::1763687698::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://q0yhroi74c08::::res://assets/Ícones/Humanos Corrompidos.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://b8qr7igadt53i::::res://assets/Criaturas de Gorgom/Humanos corrompidos de Gorgom/Humanos corrompidos de Gorgom.png
+nobuhiko akizuki - transformação.tres::Resource/Character::4963309546756008097::1763687698::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://80yprivinrc0::::res://assets/Ícones/Nobuhiko Akizuki  Umbra Luna - Transformação.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://c631ketv0qp44::::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Nobuhiko Akizuki  Umbra Luna﻿ - Transformação.png
+nobuhiko akizuki.tres::Resource/Character::4078853444545426051::1763687698::0::1::::<><><>0<>0<><>::uid://1u1k1k2oek3p::::res://models/actions/Action.gd<>uid://b3p54a3ajveo3::::res://assets/Ícones/Nobuhiko Akizuki  Umbra Luna﻿.png<>uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://dowfphfjo8yli::::res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Nobuhiko Akizuki  Umbra Luna﻿.png
+::res://data/party/::1763687698
+default_party.tres::Resource/Party::2506764224326779150::1763579798::0::1::::<><><>0<>0<><>::uid://bbcihyrs4lcmp::::res://models/Character.gd<>uid://dyae0d3l0ev27::::res://data/characters/aliados/isamu minami.tres<>uid://rhljqyamkwai::::res://models/Party.gd<>uid://b068d3h4cxb6u::::res://data/characters/aliados/kyoko.tres
+::res://models/::1763687698
+AnimationData.gd::GDScript::8310432981434324555::1763422441::0::1::::AnimationData<>Resource<><>0<>0<><>::
+Battle.gd::GDScript::4507512310833247912::1763687698::0::1::::Battle<>Node<><>0<>0<><>::
+Character.gd::GDScript::2461237807017823959::1763422441::0::1::::Character<>Resource<><>0<>0<><>::
+Party.gd::GDScript::1208345822655906928::1762803663::0::1::::Party<>Resource<><>0<>0<><>::
+Turn.gd::GDScript::5752234021190533059::1762625369::0::1::::Turn<>RefCounted<><>0<>0<><>::
+::res://models/actions/::1763422439
+Action.gd::GDScript::1867795371721797327::1763422439::0::1::::Action<>Resource<><>0<>0<><>::
+DefendAction.gd::GDScript::6950225483298594024::1763229880::0::1::::DefendAction<>Action<><>0<>0<><>::
+SupportAction.gd::GDScript::9047605591571519043::1762803416::0::1::::SupportAction<>Action<><>0<>0<><>::
+::res://models/actions/atacks/::1762803408
+AttackAction.gd::GDScript::3837340765156035903::1762803408::0::1::::AttackAction<>Action<><>0<>0<><>::
+MagicAttack.gd::GDScript::5872867988350546111::1762626886::0::1::::MagicAttack<>AttackAction<><>0<>0<><>::
+MeleeAttack.gd::GDScript::2718893385931225655::1762626894::0::1::::MeleeAttack<>AttackAction<><>0<>0<><>::
+RangedAttack.gd::GDScript::8967513115934135331::1762626949::0::1::::RangedAttack<>AttackAction<><>0<>0<><>::
+SpecialAttack.gd::GDScript::8947762045112727098::1762626949::0::1::::SpecialAttack<>AttackAction<><>0<>0<><>::
+::res://scenes/::1763688182
+::res://scenes/BattleScene/::1763688182
+BattleScene.tscn::PackedScene::6711908456245980283::1763687698::0::1::::<><><>0<>0<><>::uid://c004r4qmg3tjl::::res://scenes/BattleScene/battle_scene.gd<>uid://8pr4v8vmh0do::::res://assets/bg-1.jpeg
+battle_scene.gd::GDScript::6580964601923507529::1763687698::0::1::::<>Control<><>0<>0<><>::
+::res://scenes/character_view/::1763688182
+CharacterView.tscn::PackedScene::8703165747603988418::1763583950::0::1::::<><><>0<>0<><>::uid://ba8565vqpb7f7::::res://scenes/character_view/character_view.gd
+character_view.gd::GDScript::2456423627859604738::1763579798::0::1::::CharacterView<>Node2D<><>0<>0<><>::
+character_view.tscn::PackedScene::4498927531503083992::1763422441::0::1::::<><><>0<>0<><>::
+::res://scenes/main/::1763687698
+main.gd::GDScript::8496878118616571467::1763687698::0::1::::<>Node2D<><>0<>0<><>::
+main.tscn::PackedScene::5253363080799960020::1763422818::0::1::::<><><>0<>0<><>::uid://dtb7luoxo3uvr::::res://scenes/main/main.gd<>uid://dbjc3fpbhcegh::::res://icon.svg<>uid://cawmqmytk8cxh::::res://scenes/main/player.gd
+player.gd::GDScript::4819015522824637349::1762774432::0::1::::<>CharacterBody2D<><>0<>0<><>::
+::res://systems/::1762626264
+party_manager.gd::GDScript::4491797779194794764::1762625997::0::1::::PartyManager<>Node<><>0<>0<><>::
