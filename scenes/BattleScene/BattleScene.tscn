@@ -1,20 +1,20 @@
 [gd_scene load_steps=17 format=3 uid="uid://c2vkffksnltf4"]
 
 [ext_resource type="Script" uid="uid://c004r4qmg3tjl" path="res://scenes/BattleScene/battle_scene.gd" id="1_3eieg"]
-[ext_resource type="Texture2D" uid="uid://8pr4v8vmh0do" path="res://assets/bg-1.jpeg" id="2_3eieg"]
-[ext_resource type="Texture2D" uid="uid://d2f7q8ndqes88" path="res://assets/Ícones/bottom-pannel.png" id="3_8k8re"]
-[ext_resource type="Texture2D" uid="uid://d1fbcbai5joti" path="res://assets/moldura-melhor.png" id="3_th8rj"]
+[ext_resource type="Texture2D" uid="uid://cpdilkdsa0kem" path="res://assets/bg-1.jpeg" id="2_3eieg"]
+[ext_resource type="Texture2D" uid="uid://w4ivctrc2kww" path="res://assets/Ícones/bottom-pannel.png" id="3_8k8re"]
+[ext_resource type="Texture2D" uid="uid://bcw2dmmjjv5np" path="res://assets/moldura-melhor.png" id="3_th8rj"]
 [ext_resource type="Theme" uid="uid://blui5ab8achhi" path="res://assets/meu_tema.tres" id="4_i6wy2"]
-[ext_resource type="Texture2D" uid="uid://bcytntoxjq0ll" path="res://assets/bordas.png" id="5_1kx8p"]
-[ext_resource type="Texture2D" uid="uid://jlsq224evttm" path="res://assets/fundo-preto.png" id="5_erplg"]
-[ext_resource type="Texture2D" uid="uid://d3ka2vaeu1nuo" path="res://assets/fundo-botão-hover.png" id="6_th8rj"]
-[ext_resource type="Texture2D" uid="uid://bojp58sxdodns" path="res://assets/progress-green.png" id="7_ilgx7"]
-[ext_resource type="Texture2D" uid="uid://bi71ewu2tyw3l" path="res://assets/botão-fundo-black.png" id="9_8ty6f"]
-[ext_resource type="Texture2D" uid="uid://be4g632xw6nvt" path="res://assets/icone-ataque.png" id="11_8ty6f"]
-[ext_resource type="Texture2D" uid="uid://bdf3rwhdsn7vp" path="res://assets/button-detactivated-sla.png" id="11_handr"]
-[ext_resource type="Texture2D" uid="uid://bc10bg2df2bgp" path="res://assets/icone-defender.png" id="12_handr"]
-[ext_resource type="Texture2D" uid="uid://y06tyjglw18v" path="res://assets/icone-item.png" id="13_888n0"]
-[ext_resource type="Texture2D" uid="uid://dm4de3i78g8t4" path="res://assets/icone-pular-turno1.png" id="14_mttxc"]
+[ext_resource type="Texture2D" uid="uid://ckf3osw6i1wnj" path="res://assets/bordas.png" id="5_1kx8p"]
+[ext_resource type="Texture2D" uid="uid://dulbik85st24n" path="res://assets/fundo-preto.png" id="5_erplg"]
+[ext_resource type="Texture2D" uid="uid://bvfsgl7focejt" path="res://assets/fundo-botão-hover.png" id="6_th8rj"]
+[ext_resource type="Texture2D" uid="uid://dt36eav1itcmc" path="res://assets/progress-green.png" id="7_ilgx7"]
+[ext_resource type="Texture2D" uid="uid://cv3jw1x1g7g3a" path="res://assets/botão-fundo-black.png" id="9_8ty6f"]
+[ext_resource type="Texture2D" uid="uid://ddjfb7a3c02wn" path="res://assets/icone-ataque.png" id="11_8ty6f"]
+[ext_resource type="Texture2D" uid="uid://6kvmclpc14vf" path="res://assets/button-detactivated-sla.png" id="11_handr"]
+[ext_resource type="Texture2D" uid="uid://dlh0q8mxp1jnl" path="res://assets/icone-defender.png" id="12_handr"]
+[ext_resource type="Texture2D" uid="uid://bbawsvcdlio52" path="res://assets/icone-item.png" id="13_888n0"]
+[ext_resource type="Texture2D" uid="uid://brfu5hylb6e8a" path="res://assets/icone-pular-turno1.png" id="14_mttxc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i6wy2"]
 
@@ -156,17 +156,17 @@ alignment = 1
 [node name="CharacterIcon" type="TextureRect" parent="CanvasLayer/BottomPanel/HBoxContainer/CharacterStatus/CharacterIcon"]
 custom_minimum_size = Vector2(130, 130)
 anchors_preset = -1
-anchor_left = 0.08400001
+anchor_left = 0.083000004
 anchor_top = 0.78300005
-anchor_right = 0.185
-anchor_bottom = 0.96400005
-offset_left = -0.5200043
+anchor_right = 0.186
+anchor_bottom = 0.96700007
+offset_left = -0.2400055
 offset_top = 0.23999023
-offset_right = 0.19999695
-offset_bottom = -0.08001709
+offset_right = -0.08000183
+offset_bottom = -0.24005127
 size_flags_horizontal = 8
 size_flags_vertical = 12
-expand_mode = 1
+expand_mode = 2
 
 [node name="VBoxContainer" type="CanvasLayer" parent="CanvasLayer/BottomPanel/HBoxContainer/CharacterStatus"]
 
@@ -239,22 +239,24 @@ custom_minimum_size = Vector2(140, 0)
 anchors_preset = -1
 anchor_left = 0.44000003
 anchor_top = 0.771
-anchor_right = 0.549
+anchor_right = 0.61200005
 anchor_bottom = 0.9760001
 offset_left = -0.2000122
-offset_top = -1.1199951
-offset_right = 0.27996826
+offset_top = -0.11999512
+offset_right = 0.6399536
 offset_bottom = 0.27996826
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+vertical_scroll_mode = 0
 
 [node name="AttackButtons" type="VBoxContainer" parent="CanvasLayer/BottomPanel/HBoxContainer/AttackMenu/AttackMenu"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("4_i6wy2")
 theme_override_constants/separation = 12
 
 [node name="CommandMenu" type="CanvasLayer" parent="CanvasLayer/BottomPanel/HBoxContainer"]
@@ -453,24 +455,24 @@ expand_mode = 1
 [node name="TargetMenu" type="CanvasLayer" parent="CanvasLayer/BottomPanel/HBoxContainer"]
 
 [node name="TargetMenu" type="ScrollContainer" parent="CanvasLayer/BottomPanel/HBoxContainer/TargetMenu"]
-custom_minimum_size = Vector2(150, 0)
 anchors_preset = -1
 anchor_left = 0.44000003
 anchor_top = 0.771
-anchor_right = 0.591
+anchor_right = 0.61200005
 anchor_bottom = 0.9760001
 offset_left = -0.2000122
 offset_top = -0.11999512
-offset_right = -0.4800415
+offset_right = -0.3600464
 offset_bottom = 0.27996826
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 horizontal_scroll_mode = 0
 
 [node name="TargetButtons" type="VBoxContainer" parent="CanvasLayer/BottomPanel/HBoxContainer/TargetMenu/TargetMenu"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 0
+size_flags_vertical = 4
 theme = ExtResource("4_i6wy2")
 theme_override_constants/separation = 8
-alignment = 1

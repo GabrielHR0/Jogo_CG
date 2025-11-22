@@ -27,11 +27,10 @@ extends Control
 @onready var target_buttons_container = $CanvasLayer/BottomPanel/HBoxContainer/TargetMenu/TargetMenu/TargetButtons
 
 @export var character_view_scale: Vector2 = Vector2(1, 1)
-@export var max_character_size: Vector2 = Vector2(180, 220)
+@export var max_character_size: Vector2 = Vector2(170, 200)
 
 # Sistema de batalha
 var battle: Battle
-var character_displays := {}
 var character_views := {}
 var current_player_character: Character = null
 var selected_action: Action = null
@@ -150,7 +149,6 @@ func setup_battle(allies_party: Party, enemies_party: Party):
 	battle.setup_battle(allies_party, enemies_party)
 	
 	create_character_views()
-	create_character_displays()
 
 	await get_tree().create_timer(0.5).timeout
 	print("start_battle()")
@@ -178,10 +176,8 @@ func create_ally_views():
 func _create_character_display(character: Character, is_enemy: bool):
 	var character_container = create_character_container()
 	var character_view = create_character_view(character, is_enemy)
-	var health_bar = create_health_bar(character)
 	
 	character_container.add_child(character_view)
-	character_container.add_child(health_bar)
 	
 	if character.position == "front":
 		if is_enemy:
@@ -195,7 +191,6 @@ func _create_character_display(character: Character, is_enemy: bool):
 			allies_back_row.add_child(character_container)
 	
 	character_views[character.name] = character_view
-	character_displays[character.name] = health_bar
 	print("   CharacterView criada:", character.name, "| Inimigo:", is_enemy)
 
 func create_character_container() -> Control:
@@ -239,63 +234,12 @@ func calculate_character_position(character: Character, is_enemy: bool) -> float
 	else:
 		return base_x + (character_index * spacing)
 
-func create_health_bar(character: Character) -> Control:
-	var container = Control.new()
-	container.custom_minimum_size = Vector2(100, 15)
-	container.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
-	var health_bar = ColorRect.new()
-	health_bar.size = Vector2(100, 10)
-	health_bar.position = Vector2(0, 0)
-	health_bar.color = Color.GREEN
-	health_bar.name = "HealthBar"
-	health_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
-	container.add_child(health_bar)
-	update_health_bar(character, health_bar)
-	container.position = Vector2(10, 100)
-	
-	return container
-
-func update_health_bar(character: Character, health_bar: ColorRect):
-	if not character or not health_bar:
-		return
-	
-	var health_ratio = float(character.current_hp) / float(character.get_max_hp())
-	health_ratio = max(0, health_ratio)
-	health_bar.size.x = 100 * health_ratio
-	
-	if health_ratio > 0.6:
-		health_bar.color = Color.GREEN
-	elif health_ratio > 0.3:
-		health_bar.color = Color.YELLOW
-	else:
-		health_bar.color = Color.RED
-
 func clear_character_views():
 	for view in character_views.values():
 		if is_instance_valid(view):
 			view.queue_free()
 	character_views.clear()
 	print("CharacterViews limpas")
-
-func create_character_displays():
-	clear_character_displays()
-	print("Criando barras de vida...")
-
-func clear_character_displays():
-	for display in character_displays.values():
-		if is_instance_valid(display):
-			display.queue_free()
-	character_displays.clear()
-	print("Barras de vida limpas")
-
-func update_character_displays():
-	for character in battle.allies_party.members + battle.enemies_party.members:
-		if character.name in character_displays:
-			var display = character_displays[character.name]
-			var health_bar = display.get_node("HealthBar") as ColorRect
-			update_health_bar(character, health_bar)
 
 # ===== EVENTOS/ SINAIS =====
 
@@ -319,7 +263,6 @@ func _on_player_turn_started(character: Character):
 	
 	print_actions(character)
 	update_character_status(character)
-	highlight_active_character(character.name)
 	hide_sub_menus()
 	
 	print("🎮 Turno do jogador pronto - Botões habilitados")
@@ -339,7 +282,6 @@ func _on_ai_turn_started(character: Character):
 	await update_all_ui_elements()
 	
 	update_character_status(character)
-	highlight_active_character(character.name)
 	
 	print("🤖 Turno da IA - Botões desabilitados")
 
@@ -373,7 +315,6 @@ func _on_turn_completed(character: Character):
 	print("✅ Turno concluído:", character.name)
 	current_ui_state = UIState.IDLE
 	set_buttons_enabled(false)
-	remove_character_highlight(character.name)
 	hide_sub_menus()
 	
 	await get_tree().create_timer(action_execution_delay).timeout
@@ -390,13 +331,6 @@ func _on_character_died(character: Character):
 			view.queue_free()
 		character_views.erase(character.name)
 		print("   CharacterView removida:", character.name)
-	
-	if character.name in character_displays:
-		var display = character_displays[character.name]
-		if is_instance_valid(display):
-			display.visible = false
-		character_displays.erase(character.name)
-		print("   Display UI removido:", character.name)
 
 func _on_battle_ended(victory: bool):
 	print("🏁 BattleScene: _on_battle_ended - Vitória:", victory)
@@ -424,7 +358,6 @@ func _on_player_action_selected():
 
 func update_all_ui_elements():
 	print("Atualizando toda a UI...")
-	update_character_displays()
 	
 	if current_player_character:
 		update_character_status(current_player_character)
@@ -473,7 +406,6 @@ func print_actions(character: Character):
 func return_to_main():
 	print("Voltando para a tela principal...")
 	clear_character_views()
-	clear_character_displays()
 	
 	var main_scene_path = "res://scenes/main/main.tscn"
 	if FileAccess.file_exists(main_scene_path):
@@ -633,6 +565,10 @@ func show_target_menu(action: Action):
 	current_ui_state = UIState.MENU_OPEN
 	print("TargetMenu aberto")
 
+# ⭐ CORREÇÃO: Função create_textured_button melhorada para centralizar o texto
+# ⭐ CORREÇÃO: Função create_textured_button melhorada para centralizar o texto
+# ⭐ CORREÇÃO ALTERNATIVA: Usando CenterContainer corretamente
+# ⭐ CORREÇÃO SIMPLES: Abordagem direta
 func create_textured_button(text: String, size: Vector2) -> TextureButton:
 	var button = TextureButton.new()
 	
@@ -643,13 +579,25 @@ func create_textured_button(text: String, size: Vector2) -> TextureButton:
 	
 	button.custom_minimum_size = size
 	button.size = size
+	button.stretch_mode = TextureButton.STRETCH_SCALE
 	
-	var container = CenterContainer.new()
-	container.size = size
-	container.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
+	# Label que preenche todo o botão
 	var label = Label.new()
 	label.text = text
+	
+	# Configurar anchors para preencher todo o botão
+	label.anchor_left = 0.0
+	label.anchor_top = 0.0
+	label.anchor_right = 1.0
+	label.anchor_bottom = 1.0
+	
+	# Configurar offsets para 0 (preencher completamente)
+	label.offset_left = 0
+	label.offset_top = 0
+	label.offset_right = 0
+	label.offset_bottom = 0
+	
+	# Centralização do texto
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	
@@ -659,8 +607,7 @@ func create_textured_button(text: String, size: Vector2) -> TextureButton:
 	if custom_font:
 		label.add_theme_font_override("font", custom_font)
 	
-	container.add_child(label)
-	button.add_child(container)
+	button.add_child(label)
 	
 	return button
 
@@ -790,19 +737,6 @@ func find_skip_action(character: Character) -> Action:
 	
 	print("❌ Ação 'Pular Turno' não encontrada")
 	return null
-
-func highlight_active_character(character_name: String):
-	for name in character_displays:
-		var display = character_displays[name]
-		display.modulate = Color.WHITE
-	if character_name in character_displays:
-		var display = character_displays[character_name]
-		display.modulate = Color.YELLOW
-
-func remove_character_highlight(character_name: String):
-	if character_name in character_displays:
-		var display = character_displays[character_name]
-		display.modulate = Color.WHITE
 
 # Debug function
 func _process(delta):

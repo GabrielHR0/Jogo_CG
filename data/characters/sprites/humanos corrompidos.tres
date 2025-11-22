@@ -1,8 +1,8 @@
 [gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://deyxs0x5tvtou"]
 
-[ext_resource type="Texture2D" uid="uid://wt002pocahce" path="res://assets/Criaturas de Gorgom/Humanos corrompidos de Gorgom/Sprites/png/andando.png" id="1_ust0n"]
-[ext_resource type="Texture2D" uid="uid://1u2s7jo7kblj" path="res://assets/Criaturas de Gorgom/Humanos corrompidos de Gorgom/Sprites/png/ataque.png" id="2_36ok7"]
-[ext_resource type="Texture2D" uid="uid://cfjws7yopj178" path="res://assets/Criaturas de Gorgom/Humanos corrompidos de Gorgom/Sprites/png/dano.png" id="3_4gi4x"]
+[ext_resource type="Texture2D" uid="uid://rq04ll1o3ifg" path="res://assets/Criaturas de Gorgom/Humanos corrompidos de Gorgom/Sprites/png/andando.png" id="1_ust0n"]
+[ext_resource type="Texture2D" uid="uid://byj602w7wdq3u" path="res://assets/Criaturas de Gorgom/Humanos corrompidos de Gorgom/Sprites/png/ataque.png" id="2_36ok7"]
+[ext_resource type="Texture2D" uid="uid://wdyvsuwemkon" path="res://assets/Criaturas de Gorgom/Humanos corrompidos de Gorgom/Sprites/png/dano.png" id="3_4gi4x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ust0n"]
 atlas = ExtResource("1_ust0n")

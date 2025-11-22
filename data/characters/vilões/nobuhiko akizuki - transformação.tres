@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_fqc26"]
 [ext_resource type="Resource" uid="uid://dffjhm2xjoapo" path="res://data/characters/animações/nobuhiko akizuki - transformação.tres" id="1_khfdi"]
-[ext_resource type="Texture2D" uid="uid://80yprivinrc0" path="res://assets/Ícones/Nobuhiko Akizuki  Umbra Luna - Transformação.png" id="2_khfdi"]
+[ext_resource type="Texture2D" uid="uid://kuhx1jrhmyw7" path="res://assets/Ícones/Nobuhiko Akizuki  Umbra Luna - Transformação.png" id="2_khfdi"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_cm2da"]
 [ext_resource type="Resource" uid="uid://bnxxekhx3hgkd" path="res://data/characters/ataques/actions/magic/nobuhiko akizuki transform.tres" id="3_ec7y3"]
-[ext_resource type="Texture2D" uid="uid://c631ketv0qp44" path="res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Nobuhiko Akizuki  Umbra Luna﻿ - Transformação.png" id="4_ec7y3"]
+[ext_resource type="Texture2D" uid="uid://cgfqsvql7xs0f" path="res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Nobuhiko Akizuki  Umbra Luna﻿ - Transformação.png" id="4_ec7y3"]
 [ext_resource type="Resource" uid="uid://bcyydsslycqyh" path="res://data/characters/ataques/actions/meele/nobuhiko akizuki transform.tres" id="4_ugsqw"]
 
 [resource]

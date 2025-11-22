@@ -1,9 +1,9 @@
 [gd_resource type="SpriteFrames" load_steps=17 format=3 uid="uid://cthnme8pen3wo"]
 
-[ext_resource type="Texture2D" uid="uid://d4glbp3em051g" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Forma normal/png/andando.png" id="1_otf1g"]
-[ext_resource type="Texture2D" uid="uid://ciuydftrhu8au" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Forma normal/png/ataque.png" id="2_qqu1f"]
-[ext_resource type="Texture2D" uid="uid://dr1ylc476gae" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Forma normal/png/dano.png" id="3_ej8ms"]
-[ext_resource type="Texture2D" uid="uid://bp64jpxi0kg1v" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Transformação/png/transformacao.png" id="4_jmgck"]
+[ext_resource type="Texture2D" uid="uid://bogiiloidnueb" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Forma normal/png/andando.png" id="1_otf1g"]
+[ext_resource type="Texture2D" uid="uid://c22ft4rgn80h6" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Forma normal/png/ataque.png" id="2_qqu1f"]
+[ext_resource type="Texture2D" uid="uid://ms46jup2ik04" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Forma normal/png/dano.png" id="3_ej8ms"]
+[ext_resource type="Texture2D" uid="uid://bmxq34ouq8nio" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Transformação/png/transformacao.png" id="4_jmgck"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qqu1f"]
 atlas = ExtResource("1_otf1g")
