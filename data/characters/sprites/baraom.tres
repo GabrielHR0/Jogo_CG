@@ -1,9 +1,9 @@
 [gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://7rn66sqaxdiv"]
 
-[ext_resource type="Texture2D" uid="uid://bpx65ntbdyn0m" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/andando.png" id="1_wsltt"]
-[ext_resource type="Texture2D" uid="uid://dx345pcgd3uvc" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/ataque.png" id="2_7lwcr"]
-[ext_resource type="Texture2D" uid="uid://dy3c2s3ol8ck2" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/dano.png" id="3_drpph"]
-[ext_resource type="Texture2D" uid="uid://dmr16dwapsxgg" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Transformação/png/transformação.png" id="4_7lwcr"]
+[ext_resource type="Texture2D" uid="uid://0vld5s4ohyhb" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/andando.png" id="1_wsltt"]
+[ext_resource type="Texture2D" uid="uid://bh27mvdpkb2vv" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/ataque.png" id="2_7lwcr"]
+[ext_resource type="Texture2D" uid="uid://0mbqvgmsxojl" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Forma normal/png/dano.png" id="3_drpph"]
+[ext_resource type="Texture2D" uid="uid://cb58o8mpmmq8l" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Sprites - Transformação/png/transformação.png" id="4_7lwcr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_44li5"]
 atlas = ExtResource("1_wsltt")

@@ -2,10 +2,10 @@
 
 [ext_resource type="Resource" uid="uid://cxrp0dlv722t6" path="res://data/characters/animações/masaru todo.tres" id="1_ktmlh"]
 [ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_xexc4"]
-[ext_resource type="Texture2D" uid="uid://cj43iaxr2cn68" path="res://assets/Ícones/Masaru Todo.png" id="2_ktmlh"]
+[ext_resource type="Texture2D" uid="uid://ipi263viabtu" path="res://assets/Ícones/Masaru Todo.png" id="2_ktmlh"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_4gbbp"]
 [ext_resource type="Resource" uid="uid://xsblo4it45dr" path="res://data/characters/ataques/actions/ranged/masaru todo.tres" id="3_oil7b"]
-[ext_resource type="Texture2D" uid="uid://b3auusnu7jwd3" path="res://assets/Masaru Todo (Mago das Trevas)/Masaru Todo (Mago das Trevas).png" id="4_oil7b"]
+[ext_resource type="Texture2D" uid="uid://dcsu6ardgd3r4" path="res://assets/Masaru Todo (Mago das Trevas)/Masaru Todo (Mago das Trevas).png" id="4_oil7b"]
 
 [resource]
 script = ExtResource("3_4gbbp")

@@ -1,8 +1,8 @@
 [gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://6x44hwa53upg"]
 
-[ext_resource type="Texture2D" uid="uid://bwfg8eawlhq8m" path="res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Transformação/png/andando transformação.png" id="1_81ro5"]
-[ext_resource type="Texture2D" uid="uid://b6kh7t8wcewlg" path="res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Transformação/png/ataque transformação.png" id="2_v11ul"]
-[ext_resource type="Texture2D" uid="uid://dgtvrw4nqxo56" path="res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Transformação/png/dano transformação.png" id="3_j77tn"]
+[ext_resource type="Texture2D" uid="uid://b6g3siatig8ei" path="res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Transformação/png/andando transformação.png" id="1_81ro5"]
+[ext_resource type="Texture2D" uid="uid://cr2527fek1aw0" path="res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Transformação/png/ataque transformação.png" id="2_v11ul"]
+[ext_resource type="Texture2D" uid="uid://clqjcskg3acyj" path="res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Transformação/png/dano transformação.png" id="3_j77tn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w8gi6"]
 atlas = ExtResource("1_81ro5")

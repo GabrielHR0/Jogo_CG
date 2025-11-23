@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_hp2jg"]
 [ext_resource type="Resource" uid="uid://yi187hlo0nw5" path="res://data/characters/animações/bestas demoníacas.tres" id="1_s3aoj"]
-[ext_resource type="Texture2D" uid="uid://c4lklatdan3gc" path="res://assets/Ícones/Bestas Demoníacas.png" id="2_s3aoj"]
+[ext_resource type="Texture2D" uid="uid://dxg271onh2txe" path="res://assets/Ícones/Bestas Demoníacas.png" id="2_s3aoj"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_efe33"]
 [ext_resource type="Resource" uid="uid://74ix0lwbu40w" path="res://data/characters/ataques/actions/meele/bestas demoníacas.tres" id="3_mfsy4"]
-[ext_resource type="Texture2D" uid="uid://svvxi7wh7rta" path="res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/Bestas demoníacas de Gorgom.png" id="4_mfsy4"]
+[ext_resource type="Texture2D" uid="uid://qnk24cvef7yp" path="res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/Bestas demoníacas de Gorgom.png" id="4_mfsy4"]
 
 [resource]
 script = ExtResource("3_efe33")
