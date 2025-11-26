@@ -8,6 +8,10 @@ class_name AttackAction
 @export var critical_multiplier: float = 1.5
 @export var formula: String = "melee"  # "melee", "magic", "ranged"
 
+@export_category("Melee Animation Settings")
+@export var melee_dash_speed: float = 300.0  # 🆕 NOVO: Velocidade do dash
+@export var melee_approach_distance: float = 0.7  # 🆕 NOVO: Quão próximo chega do alvo
+
 @export_category("Animation Settings")
 
 func apply_effects(user: Character, target: Character) -> void:

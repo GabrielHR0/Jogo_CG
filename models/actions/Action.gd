@@ -37,6 +37,10 @@ extends Resource
 @export var slash_lifetime: float = 0.8
 @export var slash_z_index: int = 100
 
+@export_category("Melee Settings")
+@export var melee_dash_enabled: bool = true  # 🆕 NOVO: Controla se usa dash para melee
+@export var melee_dash_distance: float = 0.7  # 🆕 NOVO: Percentual da distância para dash
+
 # 🆕 NOVO: Classe interna para efeitos
 class ActionEffect:
 	var sprite_frames: SpriteFrames

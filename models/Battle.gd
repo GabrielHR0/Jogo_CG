@@ -12,7 +12,7 @@ signal battle_ended(victory: bool)
 signal player_action_selected()
 signal ui_updated()
 
-# 🆕 NOVO: Sinais para animações específicas
+# 🆕 Sinais para animações
 signal slash_effect_requested(action: Action, target_character: Character)
 signal action_animation_requested(user: Character, action: Action, target: Character)
 
@@ -33,47 +33,17 @@ var current_player_character: Character = null
 @export var ai_decision_delay: float = 1.0
 @export var ui_update_wait_time: float = 0.5
 
-# 🆕 NOVO: Referência para a BattleScene para acessar CharacterViews
-var battle_scene: Node = null
-
 func setup_battle(allies: Party, enemies: Party):
 	allies_party = allies
 	enemies_party = enemies
 	battle_active = true
 	print("🔧 setup_battle | allies:", allies_party.get_member_names(), "| enemies:", enemies_party.get_member_names())
 	_initialize_characters()
-	
-	# 🆕 NOVO: Conectar sinais das ações de todos os personagens
-	_connect_all_action_signals()
 
 func _initialize_characters():
 	for character in allies_party.members + enemies_party.members:
 		character.calculate_stats()
 		character.full_heal()
-
-# 🆕 NOVO: Conectar sinais de todas as ações
-func _connect_all_action_signals():
-	for character in allies_party.members + enemies_party.members:
-		for action in character.get_all_actions():
-			if action and action.has_signal("slash_effect_requested"):
-				if not action.slash_effect_requested.is_connected(_on_action_slash_requested):
-					action.slash_effect_requested.connect(_on_action_slash_requested)
-			
-			if action and action.has_signal("animation_requested"):
-				if not action.animation_requested.is_connected(_on_action_animation_requested):
-					action.animation_requested.connect(_on_action_animation_requested)
-	
-	print("✅ Sinais das ações conectados no Battle")
-
-# 🆕 NOVO: Manipulador de slash effects das ações
-func _on_action_slash_requested(action: Action, target_character: Character):
-	print("🗡️ Battle: Slash effect solicitado para ", action.name, " em ", target_character.name)
-	slash_effect_requested.emit(action, target_character)
-
-# 🆕 NOVO: Manipulador de animações gerais das ações
-func _on_action_animation_requested(user: Character, action: Action, target: Character):
-	print("🎬 Battle: Animação solicitada para ", action.name, " de ", user.name, " em ", target.name)
-	action_animation_requested.emit(user, action, target)
 
 func start_battle():
 	battle_started.emit()
@@ -216,25 +186,29 @@ func on_player_select_action(action: Action, target: Character):
 	
 	player_action_selected.emit()
 
-# 🆕 ATUALIZADO: Método _execute_action com sistema de dash
+# 🆕 MÉTODO SIMPLIFICADO: Emite sinal e executa ação
 func _execute_action(character: Character, action: Action, target: Character):
 	print("🧮 Execute:", action.name, "| atacker:", character.name, "| target:", target and target.name)
 	
 	await get_tree().create_timer(action_delay_sec).timeout
 	
-	# 🆕 NOVO: Executar animação de dash para ataques melee
-	if action is AttackAction and action.animation_type == "melee" and target:
-		await _execute_melee_dash_animation(character, action, target)
+	# 🆕 GARANTIR que emite o sinal de animação
+	print("🎬 EMITINDO sinal de animação para BattleScene")
+	action_animation_requested.emit(character, action, target)
+	
+	# Aguardar animação
+	if action is AttackAction and action.formula == "melee":
+		print("⏳ Aguardando animação melee...")
+		await get_tree().create_timer(1.0).timeout  # Tempo para dash
 	else:
-		# Para outros tipos de ação, apenas solicitar animação normal
-		action_animation_requested.emit(character, action, target)
-		await get_tree().create_timer(0.3).timeout  # Pequeno delay para animação básica
+		print("⏳ Aguardando animação normal...")
+		await get_tree().create_timer(0.5).timeout
 	
 	# Guardar HP/AP antes da ação
 	var target_hp_before = target.current_hp if target else 0
 	var character_ap_before = character.current_ap
 	
-	# Executar ação - isso emitirá os sinais de animação automaticamente
+	# Executar ação real
 	action.execute(character, target)
 	action_executed.emit(character, action, target)
 	
@@ -267,26 +241,6 @@ func _execute_action(character: Character, action: Action, target: Character):
 	print("💰 AP após ação:", character.current_ap, "/", character.get_max_ap())
 	if target and target.is_alive():
 		print("❤️", target.name, "HP:", target.current_hp, "/", target.get_max_hp())
-
-# 🆕 NOVA FUNÇÃO: Executar animação de dash para ataques melee
-func _execute_melee_dash_animation(character: Character, action: Action, target: Character):
-	print("⚔️ Executando animação de dash melee para", character.name)
-	
-	# 🆕 1. Solicitar animação de dash
-	action_animation_requested.emit(character, action, target)
-	
-	# 🆕 2. Aguardar um pouco para o dash acontecer
-	await get_tree().create_timer(0.5).timeout
-	
-	# 🆕 3. Solicitar slash effect no alvo
-	if action.slash_sprite_frames:
-		print("🗡️ Solicitando slash effect durante dash")
-		slash_effect_requested.emit(action, target)
-		
-		# 🆕 4. Aguardar animação do slash
-		await get_tree().create_timer(0.5).timeout
-	
-	print("✅ Animação de dash melee concluída")
 
 func _calculate_turn_order():
 	if global_agility_order:
@@ -386,28 +340,3 @@ func force_next_turn():
 	print("🔄 Battle: forçando próximo turno")
 	if waiting_for_player_input and current_player_character:
 		force_end_player_turn()
-
-# 🆕 NOVO: Método para adicionar ações dinamicamente a personagens
-func add_action_to_character(character_name: String, action: Action):
-	for character in allies_party.members + enemies_party.members:
-		if character.name == character_name:
-			character.add_combat_action(action)
-			# Reconectar sinais da nova ação
-			if action.has_signal("slash_effect_requested"):
-				action.slash_effect_requested.connect(_on_action_slash_requested)
-			if action.has_signal("animation_requested"):
-				action.animation_requested.connect(_on_action_animation_requested)
-			print("✅ Ação", action.name, "adicionada a", character_name)
-			return
-	
-	print("❌ Personagem", character_name, "não encontrado")
-
-# 🆕 NOVO: Método para obter informações da batalha atual
-func get_battle_info() -> Dictionary:
-	return {
-		"current_round": current_round,
-		"allies_alive": allies_party.alive().size(),
-		"enemies_alive": enemies_party.alive().size(),
-		"current_turn": current_turn_index if current_turn_index < turn_order.size() else -1,
-		"waiting_player_input": waiting_for_player_input
-	}

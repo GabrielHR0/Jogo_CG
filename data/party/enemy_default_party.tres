@@ -1,15 +1,13 @@
-[gd_resource type="Resource" script_class="Party" load_steps=9 format=3 uid="uid://dybqa4how2afl"]
+[gd_resource type="Resource" script_class="Party" load_steps=7 format=3 uid="uid://dybqa4how2afl"]
 
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="1_6rnio"]
 [ext_resource type="Script" uid="uid://rhljqyamkwai" path="res://models/Party.gd" id="2_nnm5p"]
 [ext_resource type="Resource" uid="uid://0qff27tdiewn" path="res://data/characters/vilões/darom.tres" id="2_x7ng7"]
 [ext_resource type="Resource" uid="uid://byd3edcogndhb" path="res://data/characters/vilões/nobuhiko akizuki.tres" id="3_lux0x"]
-[ext_resource type="Resource" uid="uid://ccyi8oph3wm78" path="res://data/characters/vilões/nobuhiko akizuki - transformação.tres" id="4_75sio"]
 [ext_resource type="Resource" uid="uid://b4j2w2b5igrrp" path="res://data/characters/vilões/humanos corrompidos.tres" id="5_2j6dd"]
 [ext_resource type="Resource" uid="uid://5cagymcg5uln" path="res://data/characters/vilões/bestas demoníacas.tres" id="6_phd6d"]
-[ext_resource type="Resource" uid="uid://boie7dqqlox1v" path="res://data/characters/vilões/barom - transformação.tres" id="7_wdleb"]
 
 [resource]
 script = ExtResource("2_nnm5p")
-members = Array[ExtResource("1_6rnio")]([ExtResource("2_x7ng7"), ExtResource("3_lux0x"), ExtResource("4_75sio"), ExtResource("5_2j6dd"), ExtResource("6_phd6d"), ExtResource("7_wdleb")])
+members = Array[ExtResource("1_6rnio")]([ExtResource("2_x7ng7"), ExtResource("3_lux0x"), ExtResource("5_2j6dd"), ExtResource("6_phd6d")])
 metadata/_custom_type_script = "uid://rhljqyamkwai"
