@@ -3,7 +3,7 @@
 [ext_resource type="Resource" uid="uid://dcr4qlqq6oidv" path="res://data/characters/animações/baraom.tres" id="1_v4mdx"]
 [ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_xrcv1"]
 [ext_resource type="Texture2D" uid="uid://e63y04ak00jh" path="res://assets/Ícones/Baraom.png" id="2_v4mdx"]
-[ext_resource type="Resource" uid="uid://dou21w78nk6l0" path="res://data/characters/ataques/actions/meele/baraom.tres" id="3_fle8u"]
+[ext_resource type="Resource" uid="uid://dou21w78nk6l0" path="res://data/characters/ataques/actions/meele/corteBrutal.tres" id="3_fle8u"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_vanra"]
 [ext_resource type="Texture2D" uid="uid://csecjk1baglnm" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Baraom (Sumo Sacerdote  Guerreiro Mutante).png" id="4_fle8u"]
 

@@ -1,0 +1,60 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://1x4miu2cobr5"]
+
+[ext_resource type="Texture2D" uid="uid://dgwchnjjw4f6x" path="res://data/characters/ataques/png/meele/katsumi kida - meele.png" id="1_72gmw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5fdp2"]
+atlas = ExtResource("1_72gmw")
+region = Rect2(0, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fobtx"]
+atlas = ExtResource("1_72gmw")
+region = Rect2(64, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c12gj"]
+atlas = ExtResource("1_72gmw")
+region = Rect2(128, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nas2"]
+atlas = ExtResource("1_72gmw")
+region = Rect2(192, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_coceg"]
+atlas = ExtResource("1_72gmw")
+region = Rect2(256, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8x16"]
+atlas = ExtResource("1_72gmw")
+region = Rect2(320, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgmm3"]
+atlas = ExtResource("1_72gmw")
+region = Rect2(384, 0, 64, 48)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5fdp2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fobtx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c12gj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3nas2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_coceg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8x16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jgmm3")
+}],
+"loop": true,
+"name": &"Golpe Rasgador",
+"speed": 5.0
+}]

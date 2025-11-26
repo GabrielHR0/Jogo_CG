@@ -1,0 +1,102 @@
+[gd_resource type="SpriteFrames" load_steps=15 format=3 uid="uid://ds0tqiqmdxcvu"]
+
+[ext_resource type="Texture2D" uid="uid://ccltfe2imk5k3" path="res://data/characters/ataques/png/meele/bestas demoníacas - meele.png" id="1_nji0h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i815f"]
+atlas = ExtResource("1_nji0h")
+region = Rect2(768, 0, 64, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogkbj"]
+atlas = ExtResource("1_nji0h")
+region = Rect2(0, 0, 64, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5t7m"]
+atlas = ExtResource("1_nji0h")
+region = Rect2(64, 0, 64, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11ant"]
+atlas = ExtResource("1_nji0h")
+region = Rect2(128, 0, 64, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8jgg"]
+atlas = ExtResource("1_nji0h")
+region = Rect2(192, 0, 64, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wx7jk"]
+atlas = ExtResource("1_nji0h")
+region = Rect2(256, 0, 64, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hxure"]
+atlas = ExtResource("1_nji0h")
+region = Rect2(320, 0, 64, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p484p"]
+atlas = ExtResource("1_nji0h")
+region = Rect2(384, 0, 64, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svh7q"]
+atlas = ExtResource("1_nji0h")
+region = Rect2(448, 0, 64, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jmxv"]
+atlas = ExtResource("1_nji0h")
+region = Rect2(512, 0, 64, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_086xt"]
+atlas = ExtResource("1_nji0h")
+region = Rect2(576, 0, 64, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xtisd"]
+atlas = ExtResource("1_nji0h")
+region = Rect2(640, 0, 64, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tl46y"]
+atlas = ExtResource("1_nji0h")
+region = Rect2(704, 0, 64, 52)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i815f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogkbj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e5t7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11ant")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8jgg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wx7jk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hxure")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p484p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_svh7q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jmxv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_086xt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xtisd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tl46y")
+}],
+"loop": true,
+"name": &"Arranho Sangrento",
+"speed": 5.0
+}]

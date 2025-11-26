@@ -1,0 +1,81 @@
+[gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://kcg7t2aiy2v6"]
+
+[ext_resource type="Texture2D" uid="uid://c0ut3b7s24kx6" path="res://data/characters/ataques/png/meele/nobuhiko akizuki transform - meele.png" id="1_oxw4c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpqro"]
+atlas = ExtResource("1_oxw4c")
+region = Rect2(0, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kuw0a"]
+atlas = ExtResource("1_oxw4c")
+region = Rect2(64, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpvwl"]
+atlas = ExtResource("1_oxw4c")
+region = Rect2(128, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgt4w"]
+atlas = ExtResource("1_oxw4c")
+region = Rect2(192, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vw7et"]
+atlas = ExtResource("1_oxw4c")
+region = Rect2(256, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntxm5"]
+atlas = ExtResource("1_oxw4c")
+region = Rect2(320, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m62uu"]
+atlas = ExtResource("1_oxw4c")
+region = Rect2(384, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0p1wi"]
+atlas = ExtResource("1_oxw4c")
+region = Rect2(448, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_01req"]
+atlas = ExtResource("1_oxw4c")
+region = Rect2(512, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bfdef"]
+atlas = ExtResource("1_oxw4c")
+region = Rect2(576, 0, 64, 66)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rpqro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kuw0a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kpvwl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bgt4w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vw7et")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ntxm5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m62uu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0p1wi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_01req")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bfdef")
+}],
+"loop": true,
+"name": &"Corte Umbral",
+"speed": 5.0
+}]

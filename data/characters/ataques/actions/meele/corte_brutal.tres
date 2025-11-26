@@ -1,0 +1,109 @@
+[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://dr14bchnj6l3e"]
+
+[ext_resource type="Texture2D" uid="uid://bwlv8piof75n0" path="res://data/characters/ataques/png/meele/baraom - meele.png" id="1_gtppt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_to4k5"]
+atlas = ExtResource("1_gtppt")
+region = Rect2(0, 0, 50, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4646"]
+atlas = ExtResource("1_gtppt")
+region = Rect2(50, 0, 50, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bepnf"]
+atlas = ExtResource("1_gtppt")
+region = Rect2(100, 0, 50, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4eym"]
+atlas = ExtResource("1_gtppt")
+region = Rect2(150, 0, 50, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6wx8"]
+atlas = ExtResource("1_gtppt")
+region = Rect2(200, 0, 50, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7fk5"]
+atlas = ExtResource("1_gtppt")
+region = Rect2(250, 0, 50, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ra4qc"]
+atlas = ExtResource("1_gtppt")
+region = Rect2(300, 0, 50, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p2hp6"]
+atlas = ExtResource("1_gtppt")
+region = Rect2(350, 0, 50, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxa0q"]
+atlas = ExtResource("1_gtppt")
+region = Rect2(400, 0, 50, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvo75"]
+atlas = ExtResource("1_gtppt")
+region = Rect2(450, 0, 50, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5h6g4"]
+atlas = ExtResource("1_gtppt")
+region = Rect2(500, 0, 50, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1scnc"]
+atlas = ExtResource("1_gtppt")
+region = Rect2(550, 0, 50, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pm6nh"]
+atlas = ExtResource("1_gtppt")
+region = Rect2(600, 0, 50, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20mar"]
+atlas = ExtResource("1_gtppt")
+region = Rect2(650, 0, 50, 66)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_to4k5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e4646")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bepnf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p4eym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6wx8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u7fk5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ra4qc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p2hp6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxa0q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvo75")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5h6g4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1scnc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pm6nh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_20mar")
+}],
+"loop": true,
+"name": &"Corte Brutal",
+"speed": 5.0
+}]

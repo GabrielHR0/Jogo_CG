@@ -1,0 +1,116 @@
+[gd_resource type="SpriteFrames" load_steps=17 format=3 uid="uid://dmi0br7awa2mu"]
+
+[ext_resource type="Texture2D" uid="uid://cebn0w734pkop" path="res://data/characters/ataques/png/magic/issamu minami transform - magic.png" id="1_cyup8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d188y"]
+atlas = ExtResource("1_cyup8")
+region = Rect2(0, 0, 64, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7aop8"]
+atlas = ExtResource("1_cyup8")
+region = Rect2(64, 0, 64, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16p0c"]
+atlas = ExtResource("1_cyup8")
+region = Rect2(128, 0, 64, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p2jer"]
+atlas = ExtResource("1_cyup8")
+region = Rect2(192, 0, 64, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwkew"]
+atlas = ExtResource("1_cyup8")
+region = Rect2(256, 0, 64, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jj6ch"]
+atlas = ExtResource("1_cyup8")
+region = Rect2(320, 0, 64, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_824gs"]
+atlas = ExtResource("1_cyup8")
+region = Rect2(384, 0, 64, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_not7c"]
+atlas = ExtResource("1_cyup8")
+region = Rect2(448, 0, 64, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htb0l"]
+atlas = ExtResource("1_cyup8")
+region = Rect2(512, 0, 64, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dssyj"]
+atlas = ExtResource("1_cyup8")
+region = Rect2(576, 0, 64, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1okj"]
+atlas = ExtResource("1_cyup8")
+region = Rect2(640, 0, 64, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_336mn"]
+atlas = ExtResource("1_cyup8")
+region = Rect2(704, 0, 64, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08eoh"]
+atlas = ExtResource("1_cyup8")
+region = Rect2(768, 0, 64, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hyqwm"]
+atlas = ExtResource("1_cyup8")
+region = Rect2(832, 0, 64, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ataru"]
+atlas = ExtResource("1_cyup8")
+region = Rect2(896, 0, 64, 65)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d188y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7aop8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16p0c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p2jer")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwkew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jj6ch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_824gs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_not7c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htb0l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dssyj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1okj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_336mn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08eoh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hyqwm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ataru")
+}],
+"loop": true,
+"name": &"Julgamento Sagrado",
+"speed": 5.0
+}]

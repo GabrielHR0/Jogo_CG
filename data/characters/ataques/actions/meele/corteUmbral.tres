@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MeleeAttack" load_steps=4 format=3 uid="uid://bcyydsslycqyh"]
+
+[ext_resource type="Script" uid="uid://be0b1oathrib4" path="res://models/actions/atacks/MeleeAttack.gd" id="1_rm2q1"]
+[ext_resource type="SpriteFrames" uid="uid://kcg7t2aiy2v6" path="res://data/characters/ataques/actions/meele/corte_umbral.tres" id="2_ssijk"]
+[ext_resource type="AudioStream" uid="uid://dofdiwgukpomh" path="res://data/characters/ataques/sons/sangueRetorcidoEcorteBrutalEumbral.mp3" id="3_ssijk"]
+
+[resource]
+script = ExtResource("1_rm2q1")
+damage_multiplier = 2.8
+critical_chance = 0.15
+critical_multiplier = 1.4
+ap_cost = 6
+sound_effect = ExtResource("3_ssijk")
+slash_sprite_frames = ExtResource("2_ssijk")
+metadata/_custom_type_script = "uid://be0b1oathrib4"

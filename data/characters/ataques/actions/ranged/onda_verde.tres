@@ -1,0 +1,88 @@
+[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://dn42oi6316hq2"]
+
+[ext_resource type="Texture2D" uid="uid://w5luagjqmhk4" path="res://data/characters/ataques/png/ranged/kyoko akizuki - ranged.png" id="1_mm7md"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4yli"]
+atlas = ExtResource("1_mm7md")
+region = Rect2(0, 0, 58, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3qcl"]
+atlas = ExtResource("1_mm7md")
+region = Rect2(58, 0, 58, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qi0a"]
+atlas = ExtResource("1_mm7md")
+region = Rect2(116, 0, 58, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_05veq"]
+atlas = ExtResource("1_mm7md")
+region = Rect2(174, 0, 58, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qg05w"]
+atlas = ExtResource("1_mm7md")
+region = Rect2(232, 0, 58, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hatqt"]
+atlas = ExtResource("1_mm7md")
+region = Rect2(290, 0, 58, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpjvr"]
+atlas = ExtResource("1_mm7md")
+region = Rect2(348, 0, 58, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxth5"]
+atlas = ExtResource("1_mm7md")
+region = Rect2(406, 0, 58, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_psbvg"]
+atlas = ExtResource("1_mm7md")
+region = Rect2(464, 0, 58, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trs68"]
+atlas = ExtResource("1_mm7md")
+region = Rect2(522, 0, 58, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7jxbj"]
+atlas = ExtResource("1_mm7md")
+region = Rect2(580, 0, 58, 56)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4yli")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3qcl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qi0a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_05veq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qg05w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hatqt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tpjvr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxth5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_psbvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trs68")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7jxbj")
+}],
+"loop": true,
+"name": &"Onda Verde",
+"speed": 5.0
+}]

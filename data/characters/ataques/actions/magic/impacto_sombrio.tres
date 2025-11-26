@@ -1,0 +1,88 @@
+[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://dep2m5j86vpkh"]
+
+[ext_resource type="Texture2D" uid="uid://cligroghpblsp" path="res://data/characters/ataques/png/magic/nobuhiko akizuki transform - magic.png" id="1_uqdp2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4oa6"]
+atlas = ExtResource("1_uqdp2")
+region = Rect2(0, 0, 64, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cddex"]
+atlas = ExtResource("1_uqdp2")
+region = Rect2(64, 0, 64, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tw1f"]
+atlas = ExtResource("1_uqdp2")
+region = Rect2(128, 0, 64, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16x4d"]
+atlas = ExtResource("1_uqdp2")
+region = Rect2(192, 0, 64, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8q5b"]
+atlas = ExtResource("1_uqdp2")
+region = Rect2(256, 0, 64, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3wc7"]
+atlas = ExtResource("1_uqdp2")
+region = Rect2(320, 0, 64, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4gxf"]
+atlas = ExtResource("1_uqdp2")
+region = Rect2(384, 0, 64, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dugl"]
+atlas = ExtResource("1_uqdp2")
+region = Rect2(448, 0, 64, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opx0e"]
+atlas = ExtResource("1_uqdp2")
+region = Rect2(512, 0, 64, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xchd4"]
+atlas = ExtResource("1_uqdp2")
+region = Rect2(576, 0, 64, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4gex"]
+atlas = ExtResource("1_uqdp2")
+region = Rect2(640, 0, 64, 58)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4oa6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cddex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tw1f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16x4d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8q5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q3wc7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k4gxf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dugl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_opx0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xchd4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4gex")
+}],
+"loop": true,
+"name": &"Impacto Sombrio",
+"speed": 5.0
+}]

@@ -1,0 +1,74 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://bkmbp1pyi6c20"]
+
+[ext_resource type="Texture2D" uid="uid://bmb6u541lcdtx" path="res://data/characters/ataques/png/ranged/ryu kazamatsuri transform - ranged.png" id="1_uy6kp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k5d3w"]
+atlas = ExtResource("1_uy6kp")
+region = Rect2(0, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nodrm"]
+atlas = ExtResource("1_uy6kp")
+region = Rect2(64, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tt3n1"]
+atlas = ExtResource("1_uy6kp")
+region = Rect2(128, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50rca"]
+atlas = ExtResource("1_uy6kp")
+region = Rect2(192, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1iuvg"]
+atlas = ExtResource("1_uy6kp")
+region = Rect2(256, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tk4vg"]
+atlas = ExtResource("1_uy6kp")
+region = Rect2(320, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7dkw"]
+atlas = ExtResource("1_uy6kp")
+region = Rect2(384, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgg30"]
+atlas = ExtResource("1_uy6kp")
+region = Rect2(448, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8hnu"]
+atlas = ExtResource("1_uy6kp")
+region = Rect2(512, 0, 64, 63)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k5d3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nodrm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tt3n1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50rca")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1iuvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tk4vg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7dkw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgg30")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8hnu")
+}],
+"loop": true,
+"name": &"Flecha Envenenada",
+"speed": 5.0
+}]

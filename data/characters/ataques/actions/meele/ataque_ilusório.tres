@@ -1,0 +1,95 @@
+[gd_resource type="SpriteFrames" load_steps=14 format=3 uid="uid://c0glww7qj2oam"]
+
+[ext_resource type="Texture2D" uid="uid://dudfnnp16u8us" path="res://data/characters/ataques/png/meele/bishum - meele.png" id="1_uh5pk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thbf5"]
+atlas = ExtResource("1_uh5pk")
+region = Rect2(0, 0, 64, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh8qd"]
+atlas = ExtResource("1_uh5pk")
+region = Rect2(64, 0, 64, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2lym7"]
+atlas = ExtResource("1_uh5pk")
+region = Rect2(128, 0, 64, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8pj8"]
+atlas = ExtResource("1_uh5pk")
+region = Rect2(192, 0, 64, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1h76e"]
+atlas = ExtResource("1_uh5pk")
+region = Rect2(256, 0, 64, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0vnl"]
+atlas = ExtResource("1_uh5pk")
+region = Rect2(320, 0, 64, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpimp"]
+atlas = ExtResource("1_uh5pk")
+region = Rect2(384, 0, 64, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4bn2"]
+atlas = ExtResource("1_uh5pk")
+region = Rect2(448, 0, 64, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8l2sf"]
+atlas = ExtResource("1_uh5pk")
+region = Rect2(512, 0, 64, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wqxk"]
+atlas = ExtResource("1_uh5pk")
+region = Rect2(576, 0, 64, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6mew"]
+atlas = ExtResource("1_uh5pk")
+region = Rect2(640, 0, 64, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2gwb"]
+atlas = ExtResource("1_uh5pk")
+region = Rect2(704, 0, 64, 41)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thbf5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yh8qd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2lym7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r8pj8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1h76e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0vnl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rpimp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4bn2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8l2sf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0wqxk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6mew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2gwb")
+}],
+"loop": true,
+"name": &"Ataque Ilusório",
+"speed": 5.0
+}]

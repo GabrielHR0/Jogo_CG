@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="RangedAttack" load_steps=4 format=3 uid="uid://csl6lc7fnaq7h"]
+
+[ext_resource type="Script" uid="uid://d006vpi5yx8qh" path="res://models/actions/atacks/RangedAttack.gd" id="1_0mtiw"]
+[ext_resource type="SpriteFrames" uid="uid://b6hxwj7u1uhbl" path="res://data/characters/ataques/actions/ranged/flechas_duplas.tres" id="2_xdg8j"]
+[ext_resource type="AudioStream" uid="uid://cogm4nxl38tkk" path="res://data/characters/ataques/sons/flechas.mp3" id="3_xdg8j"]
+
+[resource]
+script = ExtResource("1_0mtiw")
+damage_multiplier = 2.1
+critical_chance = 0.18
+critical_multiplier = 1.2
+ap_cost = 12
+sound_effect = ExtResource("3_xdg8j")
+slash_sprite_frames = ExtResource("2_xdg8j")
+metadata/_custom_type_script = "uid://d006vpi5yx8qh"

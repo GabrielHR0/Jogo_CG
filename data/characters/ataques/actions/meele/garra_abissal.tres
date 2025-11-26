@@ -1,0 +1,74 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://dsugkxa0awu2k"]
+
+[ext_resource type="Texture2D" uid="uid://caqapilocajt8" path="res://data/characters/ataques/png/meele/baraom transform - meele.png" id="1_ip1ke"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvfy0"]
+atlas = ExtResource("1_ip1ke")
+region = Rect2(0, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_werho"]
+atlas = ExtResource("1_ip1ke")
+region = Rect2(64, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ct3f1"]
+atlas = ExtResource("1_ip1ke")
+region = Rect2(128, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_okjil"]
+atlas = ExtResource("1_ip1ke")
+region = Rect2(192, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crmtg"]
+atlas = ExtResource("1_ip1ke")
+region = Rect2(256, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmey5"]
+atlas = ExtResource("1_ip1ke")
+region = Rect2(320, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olvvv"]
+atlas = ExtResource("1_ip1ke")
+region = Rect2(384, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_av58x"]
+atlas = ExtResource("1_ip1ke")
+region = Rect2(448, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fq3nn"]
+atlas = ExtResource("1_ip1ke")
+region = Rect2(512, 0, 64, 66)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvfy0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_werho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ct3f1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_okjil")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crmtg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mmey5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olvvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_av58x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fq3nn")
+}],
+"loop": true,
+"name": &"Garra Abissal",
+"speed": 5.0
+}]

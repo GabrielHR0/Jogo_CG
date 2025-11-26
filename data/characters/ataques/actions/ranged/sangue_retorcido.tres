@@ -1,0 +1,74 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://cvmq3nlxkbnwg"]
+
+[ext_resource type="Texture2D" uid="uid://bp3h1rmrp4oi2" path="res://data/characters/ataques/png/ranged/darom - ranged.png" id="1_r7y7i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdfo5"]
+atlas = ExtResource("1_r7y7i")
+region = Rect2(0, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fes0y"]
+atlas = ExtResource("1_r7y7i")
+region = Rect2(64, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nefv0"]
+atlas = ExtResource("1_r7y7i")
+region = Rect2(128, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8l21d"]
+atlas = ExtResource("1_r7y7i")
+region = Rect2(192, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjc6d"]
+atlas = ExtResource("1_r7y7i")
+region = Rect2(256, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1mgh"]
+atlas = ExtResource("1_r7y7i")
+region = Rect2(320, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lebuu"]
+atlas = ExtResource("1_r7y7i")
+region = Rect2(384, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqkm5"]
+atlas = ExtResource("1_r7y7i")
+region = Rect2(448, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sw71i"]
+atlas = ExtResource("1_r7y7i")
+region = Rect2(512, 0, 64, 62)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdfo5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fes0y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nefv0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8l21d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cjc6d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1mgh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lebuu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqkm5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sw71i")
+}],
+"loop": true,
+"name": &"Sangue Retorcido",
+"speed": 5.0
+}]

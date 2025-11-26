@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RangedAttack" load_steps=3 format=3 uid="uid://cf04egynx25t7"]
+
+[ext_resource type="Script" uid="uid://d006vpi5yx8qh" path="res://models/actions/atacks/RangedAttack.gd" id="1_06xfx"]
+[ext_resource type="AudioStream" uid="uid://o07nsew4dwe4" path="res://data/characters/ataques/sons/flechasEnvenenadas.mp3" id="2_geeuo"]
+
+[resource]
+script = ExtResource("1_06xfx")
+damage_multiplier = 1.5
+critical_chance = 0.15
+critical_multiplier = 1.3
+ap_cost = 11
+sound_effect = ExtResource("2_geeuo")
+metadata/_custom_type_script = "uid://d006vpi5yx8qh"

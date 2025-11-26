@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MagicAttack" load_steps=4 format=3 uid="uid://0adaejt4jxi0"]
+
+[ext_resource type="Script" uid="uid://cpw4jpb7pdqbv" path="res://models/actions/atacks/MagicAttack.gd" id="1_rw0p5"]
+[ext_resource type="SpriteFrames" uid="uid://3gdr2anlsa0b" path="res://data/characters/ataques/actions/magic/reflexo_sombrio.tres" id="2_ixuen"]
+[ext_resource type="AudioStream" uid="uid://cqyesmt60tqi1" path="res://data/characters/ataques/sons/reflexoSombrioEataqueIlusório.mp3" id="3_ixuen"]
+
+[resource]
+script = ExtResource("1_rw0p5")
+element = "illusion"
+damage_multiplier = 1.4
+critical_chance = 0.08
+critical_multiplier = 1.2
+ap_cost = 8
+sound_effect = ExtResource("3_ixuen")
+slash_sprite_frames = ExtResource("2_ixuen")
+metadata/_custom_type_script = "uid://cpw4jpb7pdqbv"

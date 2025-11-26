@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MagicAttack" load_steps=4 format=3 uid="uid://bnxxekhx3hgkd"]
+
+[ext_resource type="Script" uid="uid://cpw4jpb7pdqbv" path="res://models/actions/atacks/MagicAttack.gd" id="1_mpgv8"]
+[ext_resource type="SpriteFrames" uid="uid://dep2m5j86vpkh" path="res://data/characters/ataques/actions/magic/impacto_sombrio.tres" id="2_tcxsb"]
+[ext_resource type="AudioStream" uid="uid://dvo7qkl431e8p" path="res://data/characters/ataques/sons/explosãoDasTrevasEimpactoSombrio.mp3" id="3_tcxsb"]
+
+[resource]
+script = ExtResource("1_mpgv8")
+element = "shadow"
+damage_multiplier = 2.3
+critical_chance = 0.15
+critical_multiplier = 1.7
+ap_cost = 9
+sound_effect = ExtResource("3_tcxsb")
+slash_sprite_frames = ExtResource("2_tcxsb")
+metadata/_custom_type_script = "uid://cpw4jpb7pdqbv"

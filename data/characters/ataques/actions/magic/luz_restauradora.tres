@@ -1,0 +1,116 @@
+[gd_resource type="SpriteFrames" load_steps=17 format=3 uid="uid://cssp8gtjbdoce"]
+
+[ext_resource type="Texture2D" uid="uid://bla3cxoxji0d3" path="res://data/characters/ataques/png/magic/kyoko akizuki - magic.png" id="1_vr8iy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ks7j6"]
+atlas = ExtResource("1_vr8iy")
+region = Rect2(0, 0, 63, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ek1d4"]
+atlas = ExtResource("1_vr8iy")
+region = Rect2(63, 0, 63, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pidqd"]
+atlas = ExtResource("1_vr8iy")
+region = Rect2(126, 0, 63, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mb1cx"]
+atlas = ExtResource("1_vr8iy")
+region = Rect2(189, 0, 63, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hj1ex"]
+atlas = ExtResource("1_vr8iy")
+region = Rect2(252, 0, 63, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0x5ko"]
+atlas = ExtResource("1_vr8iy")
+region = Rect2(315, 0, 63, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12rgk"]
+atlas = ExtResource("1_vr8iy")
+region = Rect2(378, 0, 63, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hug57"]
+atlas = ExtResource("1_vr8iy")
+region = Rect2(441, 0, 63, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nl4wp"]
+atlas = ExtResource("1_vr8iy")
+region = Rect2(504, 0, 63, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2df67"]
+atlas = ExtResource("1_vr8iy")
+region = Rect2(567, 0, 63, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8nmu0"]
+atlas = ExtResource("1_vr8iy")
+region = Rect2(630, 0, 63, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3ll7"]
+atlas = ExtResource("1_vr8iy")
+region = Rect2(693, 0, 63, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vej4r"]
+atlas = ExtResource("1_vr8iy")
+region = Rect2(756, 0, 63, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hc0pk"]
+atlas = ExtResource("1_vr8iy")
+region = Rect2(819, 0, 63, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s38wu"]
+atlas = ExtResource("1_vr8iy")
+region = Rect2(882, 0, 63, 65)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ks7j6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ek1d4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pidqd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mb1cx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hj1ex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0x5ko")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_12rgk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hug57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nl4wp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2df67")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8nmu0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3ll7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vej4r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hc0pk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s38wu")
+}],
+"loop": true,
+"name": &"Luz Restauradora",
+"speed": 5.0
+}]

@@ -1,0 +1,88 @@
+[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://cuhctseamxccs"]
+
+[ext_resource type="Texture2D" uid="uid://bm8tvcd2axox5" path="res://data/characters/ataques/png/meele/nobuhiko akizuki - meele.png" id="1_17mhr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdfvi"]
+atlas = ExtResource("1_17mhr")
+region = Rect2(0, 0, 64, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_408f1"]
+atlas = ExtResource("1_17mhr")
+region = Rect2(64, 0, 64, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83606"]
+atlas = ExtResource("1_17mhr")
+region = Rect2(128, 0, 64, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3vch"]
+atlas = ExtResource("1_17mhr")
+region = Rect2(192, 0, 64, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bj5e"]
+atlas = ExtResource("1_17mhr")
+region = Rect2(256, 0, 64, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8867s"]
+atlas = ExtResource("1_17mhr")
+region = Rect2(320, 0, 64, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypja5"]
+atlas = ExtResource("1_17mhr")
+region = Rect2(384, 0, 64, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8bbbi"]
+atlas = ExtResource("1_17mhr")
+region = Rect2(448, 0, 64, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bsn4o"]
+atlas = ExtResource("1_17mhr")
+region = Rect2(512, 0, 64, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwsqd"]
+atlas = ExtResource("1_17mhr")
+region = Rect2(576, 0, 64, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3chrn"]
+atlas = ExtResource("1_17mhr")
+region = Rect2(640, 0, 64, 54)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kdfvi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_408f1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_83606")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3vch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7bj5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8867s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ypja5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8bbbi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bsn4o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwsqd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3chrn")
+}],
+"loop": true,
+"name": &"Corte Sombrio",
+"speed": 5.0
+}]
