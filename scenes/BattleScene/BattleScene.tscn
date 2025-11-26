@@ -44,11 +44,11 @@ expand_mode = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.19500001
-anchor_top = 0.2680556
+anchor_top = 0.293
 anchor_right = 0.78700006
 anchor_bottom = 0.7456667
 offset_left = -0.6000061
-offset_top = 18.0
+offset_top = 0.040023804
 offset_right = 0.6398926
 offset_bottom = 0.11999512
 theme_override_constants/separation = 12
@@ -471,8 +471,25 @@ size_flags_vertical = 4
 horizontal_scroll_mode = 0
 
 [node name="TargetButtons" type="VBoxContainer" parent="CanvasLayer/BottomPanel/HBoxContainer/TargetMenu/TargetMenu"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("4_i6wy2")
-theme_override_constants/separation = 8
+theme_override_constants/separation = 12
+
+[node name="ActionsLabel" type="Label" parent="CanvasLayer/BottomPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.623
+anchor_top = 0.14
+anchor_right = 0.93100005
+anchor_bottom = 0.84400004
+offset_left = 0.5599365
+offset_top = -0.059999466
+offset_right = 0.3199463
+offset_bottom = -0.07600403
+theme = ExtResource("4_i6wy2")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true

@@ -1,8 +1,8 @@
 [gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://cix8jqhp315yw"]
 
-[ext_resource type="Texture2D" uid="uid://b6jv37u1ml1qs" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Transformação/png/andando transformação.png" id="1_ktccf"]
-[ext_resource type="Texture2D" uid="uid://ccckb8obdhhy2" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Transformação/png/ataque transformação.png" id="2_1yrsf"]
-[ext_resource type="Texture2D" uid="uid://b3kauxe3tsd1" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Transformação/png/dano transformação.png" id="3_ehj7o"]
+[ext_resource type="Texture2D" uid="uid://dr15iu1ulg0ed" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Transformação/png/andando transformação.png" id="1_ktccf"]
+[ext_resource type="Texture2D" uid="uid://yoommd5lbpbk" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Transformação/png/ataque transformação.png" id="2_1yrsf"]
+[ext_resource type="Texture2D" uid="uid://c2nham1ceftvk" path="res://assets/Masaru Todo (Mago das Trevas)/Sprites - Transformação/png/dano transformação.png" id="3_ehj7o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ktccf"]
 atlas = ExtResource("1_ktccf")

@@ -5,11 +5,16 @@ signal battle_started()
 signal player_turn_started(character: Character)
 signal ai_turn_started(character: Character)
 signal action_executed(character: Character, action: Action, target: Character)
+signal action_detailed_executed(character: Character, action: Action, target: Character, damage: int, healing: int, ap_used: int)
 signal turn_completed(character: Character)
 signal character_died(character: Character)
 signal battle_ended(victory: bool)
 signal player_action_selected()
-signal ui_updated()  # ⭐ NOVO: Sinal para quando a UI termina de atualizar
+signal ui_updated()
+
+# 🆕 Sinais para animações
+signal slash_effect_requested(action: Action, target_character: Character)
+signal action_animation_requested(user: Character, action: Action, target: Character)
 
 var allies_party: Party
 var enemies_party: Party
@@ -26,7 +31,7 @@ var current_player_character: Character = null
 @export var action_delay_sec: float = 0.20
 @export var between_actions_delay_sec: float = 0.20
 @export var ai_decision_delay: float = 1.0
-@export var ui_update_wait_time: float = 0.5  # ⭐ NOVO: Tempo para esperar a UI atualizar
+@export var ui_update_wait_time: float = 0.5
 
 func setup_battle(allies: Party, enemies: Party):
 	allies_party = allies
@@ -43,65 +48,93 @@ func _initialize_characters():
 func start_battle():
 	battle_started.emit()
 	print("🎲 Batalha iniciada")
+	
 	while battle_active:
 		await _execute_round()
 		current_round += 1
+		_check_battle_end()
 
 func _execute_round():
 	_calculate_turn_order()
 	current_turn_index = 0
 	
+	print("🔄 Rodada", current_round, "iniciada com", turn_order.size(), "personagens")
+	
 	while current_turn_index < turn_order.size() and battle_active:
 		var character = turn_order[current_turn_index]
+		
 		if character.is_alive():
+			print("🎯 Turno", current_turn_index, ":", character.name)
+			
 			if character in allies_party.members:
 				await _execute_player_turn(character)
 			else:
 				await _execute_ai_turn(character)
+		else:
+			print("💀", character.name, "está morto - pulando turno")
+		
 		current_turn_index += 1
+		print("➡️ Avançando para próximo turno. Índice:", current_turn_index)
+		
+		_check_battle_end()
+		if not battle_active:
+			print("🏁 Batalha terminou durante a rodada")
+			break
 	
+	print("✅ Rodada", current_round, "concluída")
 	_update_all_buffs()
-	_check_battle_end()
 
 func _execute_player_turn(character: Character):
+	print("🎮 INICIANDO TURNO DO JOGADOR:", character.name)
+	
 	current_player_character = character
 	waiting_for_player_input = true
 	
-	# Recupera AP ANTES de mostrar o menu
+	# Restaurar AP no início do turno
 	if current_round > 0:
 		var rec = character.restore_ap()
-		print("🔋", character.name, "recuperou", rec, "AP (", character.current_ap, "/", character.get_max_ap(), ")")
+		print("🔋", character.name, "recuperou", rec, "AP")
 	
 	player_turn_started.emit(character)
 	
-	# ⭐ CORREÇÃO: Emite sinal para UI atualizar
 	ui_updated.emit()
 	await get_tree().create_timer(ui_update_wait_time).timeout
 	
 	print("⏸️ Esperando ação do jogador:", character.name)
 	print("💰 AP disponível:", character.current_ap, "/", character.get_max_ap())
+	
+	# Se não tem AP, pular turno automaticamente
+	if character.current_ap <= 0:
+		print("❌", character.name, "sem AP - pulando turno automaticamente")
+		waiting_for_player_input = false
+		current_player_character = null
+		turn_completed.emit(character)
+		return
+	
+	# Aguardar ação do jogador
+	print("⏳ Aguardando input do jogador...")
 	await self.player_action_selected
-	print("▶️ Ação recebida do jogador")
+	print("✅ Ação recebida do jogador")
 
 func _execute_ai_turn(character: Character):
-	# Emite sinal para a UI mostrar que é turno da IA
-	ai_turn_started.emit(character)
+	print("🤖 INICIANDO TURNO DA IA:", character.name)
 	
-	# ⭐ CORREÇÃO: Aguarda a UI atualizar completamente antes de continuar
-	print("🤖 Aguardando UI atualizar...")
-	ui_updated.emit()
-	await get_tree().create_timer(ui_update_wait_time).timeout
-	
-	# Recupera AP (isso será mostrado na UI)
+	# Restaurar AP no início do turno
 	if current_round > 0:
 		var rec = character.restore_ap()
-		print("🤖", character.name, "recuperou", rec, "AP (", character.current_ap, "/", character.get_max_ap(), ")")
+		print("🤖", character.name, "recuperou", rec, "AP")
 	
-	# ⭐ CORREÇÃO: Aguarda a UI atualizar novamente para mostrar o AP recuperado
+	ai_turn_started.emit(character)
+	
 	ui_updated.emit()
 	await get_tree().create_timer(ui_update_wait_time).timeout
 	
-	# Aguarda um delay antes de tomar decisão
+	# Se não tem AP, pular turno automaticamente
+	if character.current_ap <= 0:
+		print("❌", character.name, "sem AP - pulando turno")
+		turn_completed.emit(character)
+		return
+	
 	print("🤖 IA pensando...")
 	await get_tree().create_timer(ai_decision_delay).timeout
 	
@@ -109,32 +142,105 @@ func _execute_ai_turn(character: Character):
 	var target = _choose_target(character, action)
 	
 	if action and target:
+		print("🤖 IA escolheu:", action.name, "em", target.name)
 		await _execute_action(character, action, target)
 	else:
 		print("🤖", character.name, "não encontrou ação válida")
 	
+	# SEMPRE finalizar turno da IA
+	print("🤖 FINALIZANDO TURNO DA IA:", character.name)
 	turn_completed.emit(character)
 
 func on_player_select_action(action: Action, target: Character):
-	print("🖱️ player_select_action:", action and action.name, "->", target and target.name)
-	print("💰 AP antes da ação:", current_player_character.current_ap, "/", current_player_character.get_max_ap())
+	print("🖱️ player_select_action chamado:", action and action.name, "->", target and target.name)
 	
-	if waiting_for_player_input and current_player_character:
-		waiting_for_player_input = false
-		var actor := current_player_character
-		current_player_character = null
-		
-		# Verifica se ainda tem AP suficiente (pode ter mudado)
-		if not actor.has_ap_for_action(action):
-			print("❌ AP insuficiente! AP atual:", actor.current_ap, "Custo necessário:", action.ap_cost)
-			# Recupera o turno para o jogador
-			await _execute_player_turn(actor)
-			return
-		
-		# Executa a ação do jogador no mesmo pipeline da IA
-		await _execute_action(actor, action, target)
+	if not waiting_for_player_input or not current_player_character:
+		print("❌ player_select_action rejeitado - não está esperando input")
+		return
+	
+	waiting_for_player_input = false
+	var actor := current_player_character
+	current_player_character = null
+	
+	# Verificar se ainda está vivo
+	if not actor.is_alive():
+		print("💀", actor.name, "morreu durante seleção de ação")
 		turn_completed.emit(actor)
 		player_action_selected.emit()
+		return
+	
+	# Verificar AP
+	if not actor.has_ap_for_action(action):
+		print("❌ AP insuficiente! AP atual:", actor.current_ap, "Custo:", action.ap_cost)
+		turn_completed.emit(actor)
+		player_action_selected.emit()
+		return
+	
+	# Executar ação
+	print("🎮 Executando ação do jogador...")
+	await _execute_action(actor, action, target)
+	
+	# SEMPRE finalizar turno após ação do jogador
+	print("🎮 FINALIZANDO TURNO DO JOGADOR:", actor.name)
+	turn_completed.emit(actor)
+	
+	player_action_selected.emit()
+
+# 🆕 MÉTODO SIMPLIFICADO: Emite sinal e executa ação
+func _execute_action(character: Character, action: Action, target: Character):
+	print("🧮 Execute:", action.name, "| atacker:", character.name, "| target:", target and target.name)
+	
+	await get_tree().create_timer(action_delay_sec).timeout
+	
+	# 🆕 GARANTIR que emite o sinal de animação
+	print("🎬 EMITINDO sinal de animação para BattleScene")
+	action_animation_requested.emit(character, action, target)
+	
+	# Aguardar animação
+	if action is AttackAction and action.formula == "melee":
+		print("⏳ Aguardando animação melee...")
+		await get_tree().create_timer(1.0).timeout  # Tempo para dash
+	else:
+		print("⏳ Aguardando animação normal...")
+		await get_tree().create_timer(0.5).timeout
+	
+	# Guardar HP/AP antes da ação
+	var target_hp_before = target.current_hp if target else 0
+	var character_ap_before = character.current_ap
+	
+	# Executar ação real
+	action.execute(character, target)
+	action_executed.emit(character, action, target)
+	
+	# Calcular dano/efeito
+	var damage_dealt = 0
+	var healing_done = 0
+	var ap_used = character_ap_before - character.current_ap
+	
+	if target:
+		if action is AttackAction:
+			damage_dealt = target_hp_before - target.current_hp
+			if damage_dealt > 0:
+				print("💥 Dano causado:", damage_dealt)
+		elif action.name == "Curar" or action.name.contains("Cura"):
+			healing_done = target.current_hp - target_hp_before
+			if healing_done > 0:
+				print("❤️ Cura realizada:", healing_done)
+	
+	# Emitir sinal com detalhes
+	action_detailed_executed.emit(character, action, target, damage_dealt, healing_done, ap_used)
+	
+	# Verificar se o personagem morreu durante a ação
+	if not character.is_alive():
+		print("💀", character.name, "morreu durante a execução da ação!")
+		character_died.emit(character)
+	
+	await get_tree().create_timer(between_actions_delay_sec).timeout
+	
+	# Log do estado final
+	print("💰 AP após ação:", character.current_ap, "/", character.get_max_ap())
+	if target and target.is_alive():
+		print("❤️", target.name, "HP:", target.current_hp, "/", target.get_max_hp())
 
 func _calculate_turn_order():
 	if global_agility_order:
@@ -148,7 +254,10 @@ func _calculate_turn_order():
 		enemies.sort_custom(_sort_by_agility)
 		turn_order.append_array(players)
 		turn_order.append_array(enemies)
-	print("🧭 Ordem de turnos:", turn_order.map(func(c): return c.name))
+	
+	print("🧭 Ordem de turnos calculada com", turn_order.size(), "personagens:")
+	for i in turn_order.size():
+		print("   ", i, ":", turn_order[i].name, "(AGI:", turn_order[i].get_attribute("agility"), ")")
 
 func _sort_by_agility(a: Character, b: Character) -> bool:
 	return a.get_attribute("agility") > b.get_attribute("agility")
@@ -158,44 +267,44 @@ func _choose_action(character: Character) -> Action:
 	for action in character.get_all_actions():
 		if character.has_ap_for_action(action):
 			valid_actions.append(action)
+	
 	if valid_actions.is_empty():
-		print("⚠️", character.name, "sem AP — pulando")
+		print("🤖", character.name, "não tem ações válidas (AP insuficiente)")
 		return null
+	
 	var attacks := valid_actions.filter(func(a): return a is AttackAction)
 	if not attacks.is_empty():
-		return attacks[randi() % attacks.size()]
-	return valid_actions[randi() % valid_actions.size()]
+		var chosen = attacks[randi() % attacks.size()]
+		print("🤖", character.name, "escolheu ataque:", chosen.name)
+		return chosen
+	
+	var chosen = valid_actions[randi() % valid_actions.size()]
+	print("🤖", character.name, "escolheu:", chosen.name)
+	return chosen
 
 func _choose_target(character: Character, action: Action) -> Character:
 	if not action:
 		return null
+	
+	var targets: Array[Character] = []
+	
 	match action.target_type:
 		"enemy":
-			var targets = enemies_party.alive() if character in allies_party.members else allies_party.alive()
-			return targets[randi() % targets.size()] if not targets.is_empty() else null
+			targets = enemies_party.alive() if character in allies_party.members else allies_party.alive()
 		"ally":
-			var targets = allies_party.alive() if character in allies_party.members else enemies_party.alive()
-			return targets[randi() % targets.size()] if not targets.is_empty() else null
+			targets = allies_party.alive() if character in allies_party.members else enemies_party.alive()
 		"self":
 			return character
 		_:
-			return character
-
-func _execute_action(character: Character, action: Action, target: Character):
-	print("🧮 Execute:", action.name, "| atacker:", character.name, "| target_type:", action.target_type, "| target:", target and target.name)
-	print("💰 AP antes:", character.current_ap, "/", character.get_max_ap())
-	await get_tree().create_timer(action_delay_sec).timeout
+			targets = enemies_party.alive() if character in allies_party.members else allies_party.alive()
 	
-	action.execute(character, target)  # gasta AP e aplica dano/efeitos
-	action_executed.emit(character, action, target)
+	if targets.is_empty():
+		print("🤖 Nenhum alvo disponível para", action.name)
+		return null
 	
-	print("💰 AP depois:", character.current_ap, "/", character.get_max_ap())
-	
-	if not target.is_alive():
-		print("💀", target.name, "morreu")
-		character_died.emit(target)
-	
-	await get_tree().create_timer(between_actions_delay_sec).timeout
+	var target = targets[randi() % targets.size()]
+	print("🤖 Alvo escolhido:", target.name)
+	return target
 
 func _update_all_buffs():
 	for character in turn_order:
@@ -205,11 +314,29 @@ func _update_all_buffs():
 func _check_battle_end():
 	var allies_alive = not allies_party.alive().is_empty()
 	var enemies_alive = not enemies_party.alive().is_empty()
-	if not allies_alive:
-		print("🏁 Fim da batalha: DERROTA")
-		battle_ended.emit(false)
+	
+	if not allies_alive or not enemies_alive:
 		battle_active = false
-	elif not enemies_alive:
-		print("🏁 Fim da batalha: VITÓRIA")
-		battle_ended.emit(true)
-		battle_active = false
+		
+		if not allies_alive:
+			print("🏁 Fim da batalha: DERROTA")
+			battle_ended.emit(false)
+		elif not enemies_alive:
+			print("🏁 Fim da batalha: VITÓRIA")
+			battle_ended.emit(true)
+
+# Função para forçar fim do turno do jogador
+func force_end_player_turn():
+	if waiting_for_player_input and current_player_character:
+		print("🔄 Forçando fim do turno do jogador:", current_player_character.name)
+		waiting_for_player_input = false
+		var character = current_player_character
+		current_player_character = null
+		turn_completed.emit(character)
+		player_action_selected.emit()
+
+# Função para forçar próximo turno
+func force_next_turn():
+	print("🔄 Battle: forçando próximo turno")
+	if waiting_for_player_input and current_player_character:
+		force_end_player_turn()
