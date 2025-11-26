@@ -26,6 +26,9 @@ extends Control
 @onready var target_menu              = $CanvasLayer/BottomPanel/HBoxContainer/TargetMenu/TargetMenu
 @onready var target_buttons_container = $CanvasLayer/BottomPanel/HBoxContainer/TargetMenu/TargetMenu/TargetButtons
 
+# Actions Label
+@onready var actions_label = $CanvasLayer/BottomPanel/ActionsLabel
+
 @export var character_view_scale: Vector2 = Vector2(1, 1)
 @export var max_character_size: Vector2 = Vector2(170, 200)
 
@@ -52,7 +55,7 @@ var current_ui_state: UIState = UIState.IDLE
 @export var ui_update_delay: float = 0.1
 
 # Configuração das CharacterViews
-@export var character_view_scene: PackedScene = preload("res://scenes/character_view/CharacterView.tscn")
+var character_view_scene: PackedScene
 
 # Fonte personalizada
 @export var custom_font: FontFile
@@ -65,15 +68,47 @@ var current_ui_state: UIState = UIState.IDLE
 var button_texture_normal = preload("res://assets/fundo-botão.png")
 var button_texture_hover = preload("res://assets/fundo-botão-hover.png")
 
+# Sistema anti-travamento
+var stuck_timer: float = 0.0
+
 func _ready():
 	print("=== BattleScene READY ===")
 	_setup_root_layout()
+	_load_character_view_scene()
 	setup_ui()
 	connect_buttons()
 	apply_font_to_all_text()
 
 func _setup_root_layout():
 	set_anchors_preset(Control.PRESET_FULL_RECT)
+
+func _load_character_view_scene():
+	var possible_paths = [
+		"res://scenes/character_view/CharacterView.tscn",
+		"res://CharacterView.tscn", 
+		"res://scenes/CharacterView.tscn",
+		"res://character_view/CharacterView.tscn"
+	]
+	
+	for path in possible_paths:
+		if ResourceLoader.exists(path):
+			character_view_scene = load(path)
+			if character_view_scene:
+				print("✅ CharacterView carregada de: ", path)
+				return
+	
+	print("❌ CharacterView.tscn não encontrada. Criando fallback...")
+	_create_fallback_character_view()
+
+func _create_fallback_character_view():
+	var scene = PackedScene.new()
+	var node = Control.new()
+	var script_path = "res://scripts/character_view/CharacterView.gd"
+	if ResourceLoader.exists(script_path):
+		node.set_script(load(script_path))
+	scene.pack(node)
+	character_view_scene = scene
+	print("⚠️ Usando CharacterView fallback")
 
 func setup_ui():
 	attack_menu.visible = false
@@ -84,7 +119,9 @@ func setup_ui():
 	character_icon.texture = null
 	character_icon.visible = false
 	
-	# Inicia com botões desabilitados
+	if actions_label:
+		actions_label.text = "Preparando batalha..."
+	
 	set_buttons_enabled(false)
 	print("UI Botões ok; Menus ocultos")
 
@@ -104,11 +141,12 @@ func apply_font_to_all_text():
 		character_name.add_theme_font_override("font", custom_font)
 		hp_label.add_theme_font_override("font", custom_font)
 		ap_label.add_theme_font_override("font", custom_font)
+		if actions_label:
+			actions_label.add_theme_font_override("font", custom_font)
 		print("Fonte personalizada aplicada")
 	else:
 		print("Nenhuma fonte personalizada definida")
 
-# Controle simplificado de botões
 func set_buttons_enabled(enabled: bool):
 	fight_button.disabled = not enabled
 	defend_button.disabled = not enabled
@@ -116,16 +154,20 @@ func set_buttons_enabled(enabled: bool):
 	skip_button.disabled = not enabled
 	print("Botões " + ("✅ habilitados" if enabled else "❌ desabilitados"))
 
-# ⭐ CORREÇÃO: Verificação de estado melhorada
 func can_process_player_input() -> bool:
-	# Permite input durante turno do jogador E quando menus estão abertos
+	if battle_ended:
+		return false
+	if current_player_character == null:
+		return false
+	if current_player_character not in battle.allies_party.members:
+		return false
+	if not current_player_character.is_alive():
+		return false
+	
 	var valid_state = (current_ui_state == UIState.PLAYER_TURN or 
 					  current_ui_state == UIState.MENU_OPEN)
 	
-	return (not battle_ended and 
-			current_player_character != null and
-			current_player_character in battle.allies_party.members and
-			valid_state)
+	return valid_state
 
 func setup_battle(allies_party: Party, enemies_party: Party):
 	print("Setup battle:", allies_party.name, "vs", enemies_party.name)
@@ -133,18 +175,8 @@ func setup_battle(allies_party: Party, enemies_party: Party):
 	current_ui_state = UIState.IDLE
 	
 	battle = Battle.new()
+	_connect_battle_signals()
 	add_child(battle)
-
-	# Conecta sinais
-	battle.battle_started.connect(_on_battle_started)
-	battle.player_turn_started.connect(_on_player_turn_started)
-	battle.ai_turn_started.connect(_on_ai_turn_started)
-	battle.action_executed.connect(_on_action_executed)
-	battle.turn_completed.connect(_on_turn_completed)
-	battle.character_died.connect(_on_character_died)
-	battle.battle_ended.connect(_on_battle_ended)
-	battle.player_action_selected.connect(_on_player_action_selected)
-	battle.ui_updated.connect(_on_ui_updated)  # ⭐ NOVO: Conecta o sinal de UI atualizada
 
 	battle.setup_battle(allies_party, enemies_party)
 	
@@ -154,7 +186,111 @@ func setup_battle(allies_party: Party, enemies_party: Party):
 	print("start_battle()")
 	battle.start_battle()
 
-# ⭐ NOVO: Função para quando a UI termina de atualizar
+# 🆕 ATUALIZADO: Conectar todos os sinais do Battle
+func _connect_battle_signals():
+	if not battle:
+		print("❌ Battle não existe para conectar sinais")
+		return
+	
+	# Conectar sinais principais do Battle
+	battle.battle_started.connect(_on_battle_started)
+	battle.player_turn_started.connect(_on_player_turn_started)
+	battle.ai_turn_started.connect(_on_ai_turn_started)
+	battle.action_executed.connect(_on_action_executed)
+	battle.action_detailed_executed.connect(_on_action_detailed_executed)
+	battle.turn_completed.connect(_on_turn_completed)
+	battle.character_died.connect(_on_character_died)
+	battle.battle_ended.connect(_on_battle_ended)
+	battle.player_action_selected.connect(_on_player_action_selected)
+	battle.ui_updated.connect(_on_ui_updated)
+	
+	# 🆕 NOVO: Conectar sinais de animação do Battle
+	battle.slash_effect_requested.connect(_on_battle_slash_requested)
+	battle.action_animation_requested.connect(_on_battle_action_animation_requested)
+	
+	print("✅ Todos os sinais do Battle conectados")
+
+# 🆕 NOVO: Manipulador de slash effects do Battle COM DELAY
+func _on_battle_slash_requested(action: Action, target_character: Character):
+	print("🗡️ BattleScene: Slash effect recebido para ", action.name, " em ", target_character.name)
+	
+	# Aplicar slash effect na CharacterView do alvo
+	if target_character.name in character_views:
+		var target_view = character_views[target_character.name]
+		var slash_config = action.get_slash_config()
+		
+		# 🆕 CORREÇÃO: Garantir z-index alto
+		slash_config["z_index"] = 1000
+		
+		print("   Aplicando slash e AGUARDANDO animação...")
+		target_view.apply_slash_effect(slash_config)
+		
+		# 🆕 AGUARDAR a animação de slash (tempo estimado)
+		await get_tree().create_timer(0.8).timeout
+		
+		print("   ✅ Animação de slash concluída")
+	else:
+		print("❌ CharacterView não encontrada para ", target_character.name)
+
+# 🆕 ATUALIZADO: Manipulador de animações gerais do Battle com DASH CORRIGIDO
+func _on_battle_action_animation_requested(user: Character, action: Action, target: Character):
+	print("🎬 BattleScene: Animação geral recebida para ", action.name)
+	print("   User:", user.name, " | Target:", target.name, " | Animation Type:", action.animation_type)
+	
+	# Animar o usuário da ação se necessário
+	if user.name in character_views:
+		var user_view = character_views[user.name]
+		
+		# 🆕 NOVO: Sistema de dash para ataques melee
+		if action.animation_type == "melee" and target and target.name in character_views:
+			await _execute_melee_dash_sequence(user_view, target, action)
+		else:
+			# Para outros tipos de ataque, usar animação normal
+			user_view._on_animation_requested("attack", action.animation_type)
+
+# 🆕 ATUALIZADO: Executar sequência completa de dash melee COM POSICIONAMENTO CORRETO
+func _execute_melee_dash_sequence(user_view: CharacterView, target: Character, action: Action):
+	print("⚔️ Iniciando sequência de dash melee")
+	
+	# 🆕 CORREÇÃO: Obter posição CORRETA do alvo (posição global do CharacterView)
+	var target_view = character_views[target.name]
+	
+	# 🆕 CORREÇÃO: Calcular posição de dash (chegar perto do alvo, não em cima)
+	var user_position = user_view.global_position
+	var target_position = target_view.global_position
+	
+	# Calcular direção e distância
+	var direction = (target_position - user_position).normalized()
+	var dash_distance = min(user_position.distance_to(target_position) * 0.7, 200.0)  # 70% da distância, máximo 200
+	
+	# 🆕 CORREÇÃO: Posição de dash (parar a uma distância do alvo)
+	var dash_target_position = user_position + (direction * dash_distance)
+	
+	print("   🎯 Dash de ", user_position, " para ", dash_target_position)
+	print("   📏 Distância: ", dash_distance, " | Direção: ", direction)
+	
+	# 🆕 1. Executar dash em direção ao alvo
+	print("   💨 Executando dash em direção ao alvo")
+	user_view.dash_towards_target(dash_target_position)
+	
+	# 🆕 2. Aguardar o dash chegar perto do alvo
+	await get_tree().create_timer(0.4).timeout
+	
+	# 🆕 3. Executar animação de ataque durante o dash
+	print("   🗡️ Executando animação de ataque durante dash")
+	user_view._on_animation_requested("attack", "melee")
+	
+	# 🆕 4. Aguardar a animação de ataque terminar ANTES de voltar
+	await get_tree().create_timer(0.4).timeout
+	
+	# 🆕 5. O slash effect será aplicado automaticamente pelo Battle
+	# através do sinal slash_effect_requested (já conectado)
+	
+	# 🆕 6. Aguardar um pouco para o slash aparecer
+	await get_tree().create_timer(0.3).timeout
+	
+	print("   ✅ Sequência de dash melee concluída")
+
 func _on_ui_updated():
 	print("✅ UI atualizada - Battle.gd pode continuar")
 
@@ -163,7 +299,19 @@ func create_character_views():
 	clear_character_views()
 	create_enemy_views()
 	create_ally_views()
+	
+	# 🆕 NOVO: Conectar sinais das CharacterViews após criação
+	_connect_character_views_signals()
+	
 	print("CharacterViews criadas: ", character_views.size())
+
+# 🆕 NOVO: Conectar sinais das CharacterViews
+func _connect_character_views_signals():
+	for character_name in character_views:
+		var character_view = character_views[character_name]
+		if character_view.has_method("connect_action_signals"):
+			character_view.connect_action_signals()
+			print("✅ Sinais conectados para CharacterView: ", character_name)
 
 func create_enemy_views():
 	for character in battle.enemies_party.members:
@@ -176,6 +324,10 @@ func create_ally_views():
 func _create_character_display(character: Character, is_enemy: bool):
 	var character_container = create_character_container()
 	var character_view = create_character_view(character, is_enemy)
+	
+	if not character_view:
+		print("❌ Falha ao criar CharacterView para: ", character.name)
+		return
 	
 	character_container.add_child(character_view)
 	
@@ -200,13 +352,21 @@ func create_character_container() -> Control:
 	return container
 
 func create_character_view(character: Character, is_enemy: bool) -> CharacterView:
+	if character_view_scene == null:
+		print("❌ character_view_scene é null - não é possível criar CharacterView")
+		return null
+	
 	var character_view = character_view_scene.instantiate()
+	
+	if not character_view is CharacterView:
+		print("❌ Nó instanciado não é CharacterView: ", character_view.get_class())
+		return null
+	
 	character_view.character = character
 	character_view.character_scale = character_view_scale
 	character_view.max_character_size = max_character_size
 	character_view.auto_setup = true
 	
-	# CALCULAR POSIÇÃO COM PERSPECTIVA
 	var position_x = calculate_character_position(character, is_enemy)
 	character_view.position = Vector2(position_x, 85)
 	
@@ -241,10 +401,9 @@ func clear_character_views():
 	character_views.clear()
 	print("CharacterViews limpas")
 
-# ===== EVENTOS/ SINAIS =====
-
 func _on_battle_started():
 	print("Batalha iniciada")
+	actions_label.text = "🎲 Batalha iniciada!"
 	hide_sub_menus()
 
 func _on_player_turn_started(character: Character):
@@ -252,15 +411,14 @@ func _on_player_turn_started(character: Character):
 		return
 	
 	print("🎮 Iniciando turno do JOGADOR:", character.name)
+	actions_label.text = "🎮 Turno de " + character.name + " [AP: %d/%d]" % [character.current_ap, character.get_max_ap()]
 	current_ui_state = UIState.PLAYER_TURN
 	current_player_character = character
 	
 	await get_tree().create_timer(turn_start_delay).timeout
 	await update_all_ui_elements()
 	
-	# Habilita botões APÓS a atualização da UI
 	set_buttons_enabled(true)
-	
 	print_actions(character)
 	update_character_status(character)
 	hide_sub_menus()
@@ -272,10 +430,10 @@ func _on_ai_turn_started(character: Character):
 		return
 	
 	print("🤖 Iniciando turno da IA:", character.name)
+	actions_label.text = "🤖 Turno de " + character.name
 	current_ui_state = UIState.AI_TURN
 	current_player_character = character
 	
-	# Desabilita botões imediatamente
 	set_buttons_enabled(false)
 	
 	await get_tree().create_timer(turn_start_delay).timeout
@@ -293,35 +451,69 @@ func _on_action_executed(character: Character, action: Action, target: Character
 	set_buttons_enabled(false)
 	
 	await get_tree().create_timer(action_execution_delay).timeout
-		
+	
 	var action_text = "%s usa %s em %s" % [character.name, action.name, target.name]
 	print("Executada:", action_text)
-	
-	if character.name in character_views:
-		var attacker_view = character_views[character.name]
-		character.request_attack_animation("melee")
-	
-	if target.name in character_views:
-		var target_view = character_views[target.name]
-		if action.target_type == "enemy":
-			target.request_damage_animation()
+	actions_label.text = action_text
 	
 	await update_all_ui_elements()
+
+func _on_action_detailed_executed(character: Character, action: Action, target: Character, damage: int, healing: int, ap_used: int):
+	if battle_ended:
+		return
+	
+	var action_text = ""
+	
+	if action.name == "Pular Turno":
+		action_text = "⏭️ %s pulou o turno" % character.name
+	elif action.name == "Defender":
+		action_text = "🛡️ %s está se defendendo" % character.name
+	elif damage > 0:
+		action_text = "💥 %s usou %s em %s e causou %d de dano!" % [character.name, action.name, target.name, damage]
+	elif healing > 0:
+		action_text = "❤️ %s usou %s em %s e curou %d de HP!" % [character.name, action.name, target.name, healing]
+	elif damage == 0 and action is AttackAction:
+		action_text = "⚔️ %s usou %s em %s, mas não causou dano" % [character.name, action.name, target.name]
+	else:
+		action_text = "✨ %s usou %s em %s" % [character.name, action.name, target.name]
+	
+	if ap_used > 0:
+		action_text += " [%d AP]" % ap_used
+	
+	print("📝 " + action_text)
+	actions_label.text = action_text
+	
+	# Apenas animações básicas de dano/cura são mantidas aqui
+	if target.name in character_views:
+		if damage > 0:
+			target.request_damage_animation()
+		elif healing > 0:
+			target.on_healed(healing)
 
 func _on_turn_completed(character: Character):
 	if battle_ended:
 		return
 	
 	print("✅ Turno concluído:", character.name)
+	
+	if battle.current_round > 0 and character.current_ap > 0:
+		actions_label.text = "✅ %s concluiu o turno [AP: %d/%d]" % [character.name, character.current_ap, character.get_max_ap()]
+	else:
+		actions_label.text = "✅ %s concluiu o turno" % character.name
+	
 	current_ui_state = UIState.IDLE
 	set_buttons_enabled(false)
 	hide_sub_menus()
+	
+	if current_player_character == character:
+		current_player_character = null
 	
 	await get_tree().create_timer(action_execution_delay).timeout
 	await update_all_ui_elements()
 
 func _on_character_died(character: Character):
 	print("💀 Morte:", character.name)
+	actions_label.text = "💀 %s foi derrotado!" % character.name
 	
 	await get_tree().create_timer(action_execution_delay).timeout
 	
@@ -334,25 +526,28 @@ func _on_character_died(character: Character):
 
 func _on_battle_ended(victory: bool):
 	print("🏁 BattleScene: _on_battle_ended - Vitória:", victory)
-	battle_ended = true
-	current_ui_state = UIState.IDLE
-	set_buttons_enabled(false)
 	
 	if victory:
+		actions_label.text = "🎉 Vitória! Todos os inimigos foram derrotados!"
 		print("🎉 VITORIA!")
 		for character in battle.allies_party.members:
 			if character.name in character_views:
 				character.request_victory_animation()
 	else:
+		actions_label.text = "💔 Derrota! Todos os aliados foram derrotados!"
 		print("💔 DERROTA!")
 		for character in battle.allies_party.members:
 			if character.name in character_views:
 				character.request_defeat_animation()
 	
+	battle_ended = true
+	current_ui_state = UIState.IDLE
+	set_buttons_enabled(false)
+	
 	hide_sub_menus()
 	await get_tree().create_timer(2.0).timeout
 	return_to_main()
-
+	
 func _on_player_action_selected():
 	print("Player action selected signal received")
 
@@ -433,8 +628,6 @@ func try_alternative_scenes():
 	print("Nenhuma cena principal encontrada. Verifique o nome do arquivo.")
 	queue_free()
 
-# ===== MENUS =====
-
 func show_command_menu():
 	if current_ui_state != UIState.PLAYER_TURN:
 		return
@@ -450,15 +643,19 @@ func hide_sub_menus():
 func _on_fight_pressed():
 	if not can_process_player_input():
 		print("❌ Botão Lutar bloqueado")
+		actions_label.text = "❌ Não é possível agir agora"
 		return
 	print("🥊 LUTAR por:", current_player_character.name)
+	actions_label.text = "🥊 " + current_player_character.name + " prepara um ataque..."
 	show_attack_menu()
 
 func _on_defend_pressed():
 	if not can_process_player_input():
 		print("❌ Botão Defender bloqueado")
+		actions_label.text = "❌ Não é possível agir agora"
 		return
 	print("🛡️ DEFENDER")
+	actions_label.text = "🛡️ " + current_player_character.name + " se prepara para defender"
 	var defend_action = find_defend_action(current_player_character)
 	if defend_action:
 		print("Defender - mostrando menu de alvos")
@@ -466,24 +663,30 @@ func _on_defend_pressed():
 		show_target_menu(defend_action)
 	else:
 		print("'Defender' não encontrada")
+		actions_label.text = "❌ Ação Defender não disponível"
 
 func _on_items_pressed():
 	if not can_process_player_input():
 		print("❌ Botão Itens bloqueado")
+		actions_label.text = "❌ Não é possível agir agora"
 		return
 	print("🎒 ITENS (WIP)")
+	actions_label.text = "🎒 " + current_player_character.name + " abre o inventário..."
 
 func _on_skip_pressed():
 	if not can_process_player_input():
 		print("❌ Botão Pular bloqueado")
+		actions_label.text = "❌ Não é possível agir agora"
 		return
 	print("⏭️ PULAR")
+	actions_label.text = "⏭️ " + current_player_character.name + " pula o turno"
 	var skip_action = find_skip_action(current_player_character)
 	if skip_action:
 		print("Ação Pular encontrada - executando")
 		execute_player_action(skip_action, current_player_character)
 	else:
 		print("'Pular Turno' não encontrada")
+		actions_label.text = "❌ Ação Pular não disponível"
 
 func show_attack_menu():
 	if not can_process_player_input():
@@ -519,8 +722,10 @@ func show_attack_menu():
 func _on_attack_selected(action: Action):
 	if not can_process_player_input():
 		print("❌ Seleção de ataque bloqueada")
+		actions_label.text = "❌ Não é possível agir agora"
 		return
 	print("🎯 Selecionado:", action.name, "por", current_player_character.name)
+	actions_label.text = "🎯 " + current_player_character.name + " selecionou: " + action.name
 	selected_action = action
 	show_target_menu(action)
 
@@ -565,10 +770,6 @@ func show_target_menu(action: Action):
 	current_ui_state = UIState.MENU_OPEN
 	print("TargetMenu aberto")
 
-# ⭐ CORREÇÃO: Função create_textured_button melhorada para centralizar o texto
-# ⭐ CORREÇÃO: Função create_textured_button melhorada para centralizar o texto
-# ⭐ CORREÇÃO ALTERNATIVA: Usando CenterContainer corretamente
-# ⭐ CORREÇÃO SIMPLES: Abordagem direta
 func create_textured_button(text: String, size: Vector2) -> TextureButton:
 	var button = TextureButton.new()
 	
@@ -581,23 +782,19 @@ func create_textured_button(text: String, size: Vector2) -> TextureButton:
 	button.size = size
 	button.stretch_mode = TextureButton.STRETCH_SCALE
 	
-	# Label que preenche todo o botão
 	var label = Label.new()
 	label.text = text
 	
-	# Configurar anchors para preencher todo o botão
 	label.anchor_left = 0.0
 	label.anchor_top = 0.0
 	label.anchor_right = 1.0
 	label.anchor_bottom = 1.0
 	
-	# Configurar offsets para 0 (preencher completamente)
 	label.offset_left = 0
 	label.offset_top = 0
 	label.offset_right = 0
 	label.offset_bottom = 0
 	
-	# Centralização do texto
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	
@@ -644,27 +841,26 @@ func get_valid_targets(action: Action) -> Array:
 	
 	return valid_targets
 
-# ⭐ CORREÇÃO: Função _on_target_selected melhorada
 func _on_target_selected(target: Character):
 	print("🎯 Tentando selecionar alvo:", target and target.name)
 	
 	if not can_process_player_input():
 		print("❌ Seleção de alvo bloqueada")
-		print("   - Battle ended:", battle_ended)
-		print("   - Current state:", UIState.keys()[current_ui_state])
-		print("   - Current character:", current_player_character and current_player_character.name)
-		print("   - Is ally:", current_player_character and current_player_character in battle.allies_party.members)
+		actions_label.text = "❌ Não é possível agir agora"
 		return
 	
 	if target == null:
 		print("❌ Alvo inválido")
+		actions_label.text = "❌ Alvo inválido"
 		return
 	
 	if selected_action == null:
 		print("❌ Nenhuma ação selecionada!")
+		actions_label.text = "❌ Nenhuma ação selecionada"
 		return
 	
 	print("✅ Alvo selecionado:", target.name, "para ação:", selected_action.name)
+	actions_label.text = "🎯 " + current_player_character.name + " mira em " + target.name + " com " + selected_action.name
 	execute_player_action(selected_action, target)
 
 func _on_target_back_pressed():
@@ -682,38 +878,33 @@ func _on_target_back_pressed():
 		hide_sub_menus()
 		current_ui_state = UIState.PLAYER_TURN
 
-# ⭐ CORREÇÃO: Função execute_player_action melhorada
 func execute_player_action(action: Action, target: Character):
 	print("🚀 Iniciando execução de ação...")
 	
 	if not can_process_player_input():
 		print("❌ Execução de ação bloqueada")
-		print("   - Battle ended:", battle_ended)
-		print("   - Current state:", UIState.keys()[current_ui_state])
-		print("   - Current character:", current_player_character and current_player_character.name)
+		actions_label.text = "❌ Não é possível agir agora"
 		return
 	
 	if current_player_character == null:
 		print("❌ Sem personagem ativo")
+		actions_label.text = "❌ Sem personagem ativo"
 		return
 	
-	# Para ação de pular, não verifica AP
 	if action.name != "Pular Turno" and not current_player_character.has_ap_for_action(action):
 		print("❌ AP insuficiente! AP atual:", current_player_character.current_ap, "Custo necessário:", action.ap_cost)
+		actions_label.text = "❌ AP insuficiente para " + action.name
 		return
 	
 	print("✅ Executando:", action.name, "de", current_player_character.name, "em", target.name)
 	print("💰 AP disponível:", current_player_character.current_ap, "/", current_player_character.get_max_ap())
 	
-	# Desabilita botões durante execução
 	set_buttons_enabled(false)
 	hide_sub_menus()
 	current_ui_state = UIState.ACTION_EXECUTING
 	
 	battle.on_player_select_action(action, target)
 	selected_action = null
-
-# ===== UTILITÁRIOS =====
 
 func find_defend_action(character: Character) -> Action:
 	if character == null: return null
@@ -725,12 +916,10 @@ func find_defend_action(character: Character) -> Action:
 func find_skip_action(character: Character) -> Action:
 	if character == null: return null
 	
-	# Procura em basic_actions primeiro
 	for action in character.basic_actions:
 		if action.name == "Pular Turno":
 			return action
 	
-	# Depois procura em combat_actions
 	for action in character.combat_actions:
 		if action.name == "Pular Turno":
 			return action
@@ -738,11 +927,32 @@ func find_skip_action(character: Character) -> Action:
 	print("❌ Ação 'Pular Turno' não encontrada")
 	return null
 
-# Debug function
 func _process(delta):
+	if current_ui_state == UIState.ACTION_EXECUTING or current_ui_state == UIState.PLAYER_TURN:
+		stuck_timer += delta
+		if stuck_timer > 5.0:
+			print("⚠️ UI travada por", stuck_timer, "segundos - forçando próximo turno")
+			actions_label.text = "⚠️ Sistema destravado automaticamente"
+			_unstick_ui()
+			stuck_timer = 0.0
+	else:
+		stuck_timer = 0.0
+	
 	if Input.is_action_just_pressed("ui_accept"):
-		print("=== DEBUG ===")
+		print("=== DEBUG BATTLE SCENE ===")
 		print("Estado UI:", UIState.keys()[current_ui_state])
 		print("Battle ended:", battle_ended)
 		print("Current character:", current_player_character and current_player_character.name)
 		print("Botões habilitados:", not fight_button.disabled)
+
+func _unstick_ui():
+	print("🔧 Destravando UI...")
+	current_ui_state = UIState.IDLE
+	set_buttons_enabled(false)
+	hide_sub_menus()
+	
+	if current_player_character:
+		current_player_character = null
+	
+	if battle and battle.has_method("force_next_turn"):
+		battle.force_next_turn()

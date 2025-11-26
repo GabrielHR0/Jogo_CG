@@ -15,6 +15,11 @@ class_name CharacterView
 var current_animated_sprite: AnimatedSprite2D = null
 var current_damage_tween: Tween = null
 
+# 🆕 NOVO: Variáveis para sistema de dash
+var original_position: Vector2 = Vector2.ZERO
+var is_dashing: bool = false
+var dash_tween: Tween = null
+
 # 🆕 NOVO: Guarda o tamanho original do sprite principal
 var original_sprite_size: Vector2 = Vector2.ZERO
 
@@ -42,6 +47,9 @@ func setup_character():
 		center_sprite()
 		# 🆕 GUARDA o tamanho original
 		original_sprite_size = sprite.texture.get_size() * sprite.scale
+	
+	# 🆕 NOVO: Guarda a posição original
+	original_position = position
 	
 	# Configurações do AnimationData
 	if character.animation_data:
@@ -76,7 +84,7 @@ func _process(delta):
 			last_known_max_hp = character.get_max_hp()
 			update_health_bar()
 
-# 🆕 NOVO: Função para criar a barra de vida (APENAS UMA VEZ)
+# 🆕 NOVO: Função para criar a barra de vida (APENAS UMA VES)
 func create_health_bar():
 	# Container principal
 	health_bar_container = Control.new()
@@ -188,6 +196,7 @@ func _on_damage_animation_requested():
 	# 🆕 CORREÇÃO: Remove a atualização duplicada da barra de vida aqui
 	# A barra já é atualizada automaticamente no _process
 
+# 🆕 ATUALIZADO: Função de ataque com sistema de dash
 func play_attack_animation(attack_type: String):
 	var anim_name = "ataque"
 	
@@ -195,16 +204,146 @@ func play_attack_animation(attack_type: String):
 		play_spriteframes_animation(anim_name, false)
 		return
 	
-	var tween = create_tween()
-	tween.tween_property(sprite, "position", sprite.position + Vector2(15, -8), 0.1)
-	tween.tween_property(sprite, "position", sprite.position, 0.1)
+	print("🎬 CharacterView: Ataque iniciado - tipo: ", attack_type)
+	
+	# 🆕 NOVO: Sistema de dash apenas para melee
+	if attack_type == "melee":
+		perform_melee_dash_attack()
+	else:
+		# Para outros tipos de ataque, usa animação básica
+		var tween = create_tween()
+		tween.tween_property(sprite, "position", sprite.position + Vector2(10, -5), 0.1)
+		tween.tween_property(sprite, "position", sprite.position, 0.1)
 	
 	# 🆕 CORREÇÃO: Reposiciona a barra apenas se necessário
 	if health_bar_created:
 		reposition_health_bar()
 
+# 🆕 NOVA FUNÇÃO: Sistema de dash para ataques melee
+func perform_melee_dash_attack():
+	if is_dashing:
+		return
+	
+	print("⚔️ Iniciando dash de ataque melee")
+	is_dashing = true
+	
+	# 🆕 1. Pequeno movimento para trás (preparação)
+	var prep_tween = create_tween()
+	prep_tween.tween_property(self, "position", position + Vector2(-20, 0), 0.1)
+	prep_tween.tween_callback(perform_dash_forward)
+
+# 🆕 NOVA FUNÇÃO: Executar dash para frente
+func perform_dash_forward():
+	print("   💨 Dash para frente")
+	
+	# 🆕 2. Dash rápido para frente
+	var dash_distance = 150.0  # Distância do dash
+	var dash_duration = 0.2    # Duração rápida
+	
+	dash_tween = create_tween()
+	dash_tween.tween_property(self, "position", position + Vector2(dash_distance, 0), dash_duration)
+	dash_tween.tween_callback(perform_attack_animation)
+
+# 🆕 NOVA FUNÇÃO: Executar animação de ataque durante o dash
+func perform_attack_animation():
+	print("   🗡️ Executando animação de ataque durante dash")
+	
+	# 🆕 3. Animação de ataque durante o pico do dash
+	var attack_tween = create_tween()
+	attack_tween.tween_property(sprite, "position", sprite.position + Vector2(15, -8), 0.1)
+	attack_tween.tween_property(sprite, "position", sprite.position, 0.1)
+	attack_tween.tween_callback(return_from_dash)
+
+# 🆕 NOVA FUNÇÃO: Retornar da posição de dash
+func return_from_dash():
+	print("   ↩️ Retornando da posição de dash")
+	
+	# 🆕 4. Retornar para posição original
+	var return_tween = create_tween()
+	return_tween.tween_property(self, "position", original_position, 0.3)
+	return_tween.tween_callback(finish_dash_attack)
+
+# 🆕 NOVA FUNÇÃO: Finalizar sequência de dash
+func finish_dash_attack():
+	print("   ✅ Sequência de dash concluída")
+	is_dashing = false
+	
+	# Garantir que está na posição exata original
+	position = original_position
+	
+	# Voltar para animação idle
+	play_idle_animation()
+
+# 🆕 NOVA FUNÇÃO: Dash em direção a um alvo específico
+func dash_towards_target(target_position: Vector2, dash_speed: float = 300.0):
+	if is_dashing:
+		return
+	
+	print("🎯 Dash em direção ao alvo: ", target_position)
+	is_dashing = true
+	
+	# Calcular direção e distância
+	var direction = (target_position - position).normalized()
+	var dash_distance = min(position.distance_to(target_position) * 0.7, 200.0)  # 70% da distância, máximo 200
+	
+	var dash_target = position + (direction * dash_distance)
+	
+	# 🆕 1. Pequena preparação para trás
+	var prep_tween = create_tween()
+	prep_tween.tween_property(self, "position", position - (direction * 30), 0.1)
+	prep_tween.tween_callback(perform_targeted_dash.bind(dash_target, direction))
+
+# 🆕 NOVA FUNÇÃO: Dash direcionado
+func perform_targeted_dash(dash_target: Vector2, direction: Vector2):
+	print("   💨 Dash direcionado")
+	
+	# 🆕 2. Dash para o alvo
+	var dash_duration = 0.25
+	
+	dash_tween = create_tween()
+	dash_tween.tween_property(self, "position", dash_target, dash_duration)
+	dash_tween.tween_callback(perform_targeted_attack.bind(direction))
+
+# 🆕 NOVA FUNÇÃO: Ataque durante dash direcionado
+func perform_targeted_attack(direction: Vector2):
+	print("   🗡️ Ataque durante dash direcionado")
+	
+	# 🆕 3. Animação de ataque
+	var attack_tween = create_tween()
+	attack_tween.tween_property(sprite, "position", sprite.position + (direction * 20), 0.1)
+	attack_tween.tween_property(sprite, "position", sprite.position, 0.1)
+	attack_tween.tween_callback(return_from_targeted_dash)
+
+# 🆕 NOVA FUNÇÃO: Retornar de dash direcionado
+func return_from_targeted_dash():
+	print("   ↩️ Retornando de dash direcionado")
+	
+	# 🆕 4. Retornar para posição original
+	var return_tween = create_tween()
+	return_tween.tween_property(self, "position", original_position, 0.4)
+	return_tween.tween_callback(finish_targeted_dash)
+
+# 🆕 NOVA FUNÇÃO: Finalizar dash direcionado
+func finish_targeted_dash():
+	print("   ✅ Dash direcionado concluído")
+	is_dashing = false
+	position = original_position
+	play_idle_animation()
+
+# 🆕 NOVA FUNÇÃO: Parar dash se necessário
+func stop_dash():
+	if dash_tween and dash_tween.is_valid():
+		dash_tween.kill()
+	
+	if is_dashing:
+		# Retornar imediatamente para posição original
+		var return_tween = create_tween()
+		return_tween.tween_property(self, "position", original_position, 0.2)
+		return_tween.tween_callback(func(): is_dashing = false)
+
 func play_damage_animation():
 	stop_damage_tween()
+	stop_dash()  # 🆕 Parar dash se estiver acontecendo
 	
 	if has_custom_animation("dano"):
 		play_spriteframes_animation("dano", false)
@@ -234,6 +373,8 @@ func play_defend_animation():
 	tween.tween_property(sprite, "scale", sprite.scale, 0.1)
 
 func play_idle_animation():
+	stop_dash()  # 🆕 Garantir que não está em dash
+	
 	if has_custom_animation("parado"):
 		play_spriteframes_animation("parado", true)
 		return
@@ -303,7 +444,7 @@ func play_spriteframes_animation(animation_name: String, should_loop: bool = fal
 	# 🆕 CORREÇÃO: CALCULA ESCALA EXATA para ficar do MESMO TAMANHO do sprite principal
 	adjust_animated_sprite_to_exact_size()
 	
-	current_animated_sprite.z_index = sprite.z_index
+	current_animated_sprite.z_index = sprite.z_index + 1  # 🆕 CORREÇÃO: Fica acima do sprite principal
 	
 	sprite.visible = false
 	add_child(current_animated_sprite)
@@ -344,6 +485,7 @@ func _on_animation_finished_once():
 
 func stop_current_animation():
 	stop_damage_tween()
+	stop_dash()  # 🆕 Parar dash também
 	
 	if current_animated_sprite and is_instance_valid(current_animated_sprite):
 		if current_animated_sprite.animation_finished.is_connected(_on_animation_finished_once):
@@ -435,3 +577,123 @@ func cleanup():
 		health_bar_container.queue_free()
 		health_bar_created = false
 	stop_current_animation()
+
+# 🆕 NOVO: SISTEMA DE SLASH EFFECTS - CORREÇÃO CRÍTICA
+func apply_slash_effect(slash_config: Dictionary):
+	if not is_instance_valid(sprite):
+		return
+	
+	print("🗡️ Aplicando slash effect em ", character.name)
+	print("   Personagem position:", position)
+	print("   Sprite position:", sprite.position)
+	print("   Sprite global position:", sprite.global_position)
+	
+	# Criar o AnimatedSprite2D para o slash
+	var slash_sprite = AnimatedSprite2D.new()
+	slash_sprite.sprite_frames = slash_config.get("sprite_frames")
+	slash_sprite.scale = slash_config.get("scale", Vector2(1, 1))
+	slash_sprite.modulate = slash_config.get("color", Color.WHITE)
+	slash_sprite.flip_h = slash_config.get("flip_h", false)
+	slash_sprite.flip_v = slash_config.get("flip_v", false)
+	slash_sprite.z_index = slash_config.get("z_index", 1000)
+	slash_sprite.centered = true
+	
+	# 🆕 CORREÇÃO CRÍTICA: Usar top_level para ficar acima de TUDO
+	slash_sprite.top_level = true
+	slash_sprite.z_as_relative = false
+	
+	# 🆕 CORREÇÃO: Calcular posição GLOBAL correta
+	var slash_offset = slash_config.get("offset", Vector2.ZERO)
+	var global_slash_position = global_position + sprite.position + slash_offset
+	
+	slash_sprite.global_position = global_slash_position
+	
+	print("   Slash global position:", slash_sprite.global_position)
+	print("   Slash z-index:", slash_sprite.z_index)
+	print("   Slash top_level:", slash_sprite.top_level)
+	
+	# Adicionar à cena raiz para garantir visibilidade
+	get_tree().current_scene.add_child(slash_sprite)
+	
+	# Verificar animação
+	if slash_sprite.sprite_frames:
+		var anim_names = slash_sprite.sprite_frames.get_animation_names()
+		print("   Animations available:", anim_names)
+		
+		if anim_names.size() > 0:
+			var anim_to_play = "default" if slash_sprite.sprite_frames.has_animation("default") else anim_names[0]
+			
+			# 🆕 CORREÇÃO CRÍTICA: DESABILITAR LOOP da animação
+			slash_sprite.sprite_frames.set_animation_loop(anim_to_play, false)
+			
+			slash_sprite.play(anim_to_play)
+			print("   Playing animation (NO LOOP):", anim_to_play)
+	else:
+		print("   ❌ NO SPRITE FRAMES!")
+		slash_sprite.queue_free()
+		return
+	
+	# Conectar sinal de animação terminada
+	slash_sprite.animation_finished.connect(_on_slash_animation_finished.bind(slash_sprite))
+	
+	print("   ✅ Slash sprite criado")
+
+func _on_slash_animation_finished(slash_sprite: AnimatedSprite2D):
+	print("   🗑️ Animação de slash terminada - removendo sprite")
+	if slash_sprite and is_instance_valid(slash_sprite):
+		slash_sprite.queue_free()
+
+# 🆕 NOVO: Método para aplicar múltiplos slashes (efeitos especiais)
+func apply_multiple_slash_effects(slash_config: Dictionary, count: int = 1, spread: float = 20.0):
+	for i in count:
+		var modified_config = slash_config.duplicate()
+		
+		# Pequenas variações para múltiplos slashes
+		if count > 1:
+			var angle = (float(i) / count) * TAU
+			var offset_variation = Vector2(cos(angle), sin(angle)) * spread
+			modified_config["offset"] = modified_config.get("offset", Vector2.ZERO) + offset_variation
+			
+			# Variação de escala
+			var scale_variation = 0.8 + (i * 0.1)
+			modified_config["scale"] = modified_config.get("scale", Vector2(1, 1)) * scale_variation
+		
+		# Aplicar com delay
+		await get_tree().create_timer(i * 0.1).timeout
+		apply_slash_effect(modified_config)
+
+# 🆕 NOVO: Método para conectar sinais de ações (chamado pela BattleScene)
+func connect_action_signals():
+	# Conectar ações do personagem para slash effects
+	for action in character.get_all_actions():
+		if action and action.has_signal("slash_effect_requested"):
+			if not action.slash_effect_requested.is_connected(_on_action_slash_requested):
+				action.slash_effect_requested.connect(_on_action_slash_requested)
+
+# 🆕 NOVO: Manipulador de slash effects das ações
+func _on_action_slash_requested(action: Action, target_character: Character):
+	# Só aplicar se este CharacterView for o alvo
+	if target_character == character:
+		print("🎯 Recebendo slash effect de ", action.name, " em ", character.name)
+		var slash_config = action.get_slash_config()
+		apply_slash_effect(slash_config)
+
+# 🆕 FUNÇÃO DE TESTE DIRETO - Remove depois
+func test_slash_directly():
+	print("🔧 TESTE DIRETO DE SLASH")
+	
+	# Criar config manual para teste
+	var test_config = {
+		"sprite_frames": load("res://assets/effects/slash_effect.tres"),  # Ajuste o caminho
+		"offset": Vector2(50, 0),
+		"scale": Vector2(2, 2),  # 🆕 Aumentar escala
+		"color": Color(1, 0, 0, 1),  # 🆕 Vermelho brilhante
+		"z_index": 9999  # 🆕 Z-index extremamente alto
+	}
+	
+	apply_slash_effect(test_config)
+
+# Chamar no _input para teste
+func _input(event):
+	if event.is_action_pressed("ui_accept"):  # Pressione ENTER
+		test_slash_directly()

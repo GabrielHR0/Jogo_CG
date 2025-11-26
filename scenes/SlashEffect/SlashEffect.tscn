@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce4q7nyeysfwm"]
+
+[ext_resource type="Script" uid="uid://dlsyrhhmcl3u5" path="res://scenes/SlashEffect/SlashEffect.gd" id="1_f8mts"]
+
+[node name="SlashEffect" type="AnimatedSprite2D"]
+script = ExtResource("1_f8mts")

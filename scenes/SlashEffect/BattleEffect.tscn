@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://woq6ujt4sblv"]
+
+[node name="BattleEffect" type="Node2D"]

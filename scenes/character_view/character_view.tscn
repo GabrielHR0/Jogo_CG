@@ -25,7 +25,7 @@ func setup(c: Character, side: String = \"ally\"):
 		sprite_rect.scale = Vector2(-abs(sprite_rect.scale.x), sprite_rect.scale.y)
 "
 
-[node name="CharacterView" type="HBoxContainer"]
+[node name="CharacterView2" type="HBoxContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
 script = SubResource("GDScript_ux8jc")

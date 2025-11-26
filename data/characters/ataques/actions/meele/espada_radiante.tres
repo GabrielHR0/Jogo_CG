@@ -1,0 +1,88 @@
+[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://kbcaww01u63"]
+
+[ext_resource type="Texture2D" uid="uid://h1ejr8rmn51n" path="res://data/characters/ataques/png/meele/issamu minami - meele.png" id="1_b1t7o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtkmn"]
+atlas = ExtResource("1_b1t7o")
+region = Rect2(0, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3ne0"]
+atlas = ExtResource("1_b1t7o")
+region = Rect2(64, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5yn1"]
+atlas = ExtResource("1_b1t7o")
+region = Rect2(128, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_inwnj"]
+atlas = ExtResource("1_b1t7o")
+region = Rect2(192, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukgp0"]
+atlas = ExtResource("1_b1t7o")
+region = Rect2(256, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7igwr"]
+atlas = ExtResource("1_b1t7o")
+region = Rect2(320, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iufhy"]
+atlas = ExtResource("1_b1t7o")
+region = Rect2(384, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30qwv"]
+atlas = ExtResource("1_b1t7o")
+region = Rect2(448, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqeyb"]
+atlas = ExtResource("1_b1t7o")
+region = Rect2(512, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bfyat"]
+atlas = ExtResource("1_b1t7o")
+region = Rect2(576, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ugno3"]
+atlas = ExtResource("1_b1t7o")
+region = Rect2(640, 0, 64, 63)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtkmn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3ne0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5yn1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_inwnj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukgp0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7igwr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iufhy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30qwv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqeyb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bfyat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ugno3")
+}],
+"loop": true,
+"name": &"Espada Radiante",
+"speed": 12.0
+}]

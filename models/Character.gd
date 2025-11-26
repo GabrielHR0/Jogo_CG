@@ -1,3 +1,4 @@
+# Character.gd
 extends Resource
 class_name Character
 
@@ -24,20 +25,25 @@ class_name Character
 @export var basic_actions: Array[Action] = []
 @export var combat_actions: Array[Action] = []
 
-# NOVO: Sistema de animações
 @export_category("Animations")
 @export var animation_data: AnimationData
+@export var animation_prefab: PackedScene
 
 var buffs := {}
 var is_defending: bool = false
 var defense_bonus: int = 0
 var dodge_chance: float = 0.0
 
-# NOVO: Sinais para controle de animações
+var animation_system: AnimationSystem = null
+var battle_position: Vector2 = Vector2.ZERO
+
 signal animation_requested(animation_name, attack_type)
 signal damage_animation_requested()
 signal defense_animation_requested()
 signal effect_requested(effect_name, position_offset)
+signal position_updated(new_position: Vector2)
+signal animation_system_ready(system: AnimationSystem)
+signal character_died()  # 🆕 NOVO: Sinal de morte
 
 func _init():
 	calculate_stats()
@@ -114,7 +120,6 @@ func take_damage(dmg: int) -> int:
 	# Verifica se esquiva completamente
 	if is_defending and randf() < dodge_chance:
 		print("   🎯", name, "esquivou completamente do ataque!")
-		# NOVO: Efeito de esquiva
 		effect_requested.emit("dodge", Vector2.ZERO)
 		return 0
 	
@@ -122,7 +127,11 @@ func take_damage(dmg: int) -> int:
 	var final_damage = max(0, dmg - defense_reduction)
 	current_hp = max(0, current_hp - final_damage)
 	
-	# NOVO: Solicita animação de dano
+	# 🆕 NOVO: Emite sinal de morte se HP chegou a zero
+	if current_hp <= 0:
+		character_died.emit()
+	
+	# Solicita animação de dano
 	request_damage_animation()
 	
 	if defense_reduction > 0:
@@ -164,7 +173,6 @@ func start_defending():
 	defense_bonus = int(get_attribute("constitution") * 1.5)
 	dodge_chance = 0.15
 	
-	# NOVO: Solicita animação de defesa
 	request_defense_animation()
 	
 	print("   🛡️", name, "está defendendo")
@@ -225,49 +233,97 @@ func get_all_actions() -> Array[Action]:
 func has_ap_for_action(action: Action) -> bool:
 	return current_ap >= action.ap_cost
 
-# ========== NOVOS MÉTODOS DE ANIMAÇÃO ==========
+func setup_animation_system(system: AnimationSystem):
+	animation_system = system
+	animation_system_ready.emit(system)
 
-func request_attack_animation(attack_type: String = "basic"):
+func create_animation_system(parent: Node) -> AnimationSystem:
+	if animation_prefab:
+		var system = animation_prefab.instantiate()
+		parent.add_child(system)
+		animation_system = system
+		animation_system_ready.emit(system)
+		return system
+	return null
+
+func set_battle_position(new_position: Vector2):
+	battle_position = new_position
+	position_updated.emit(new_position)
+
+func get_battle_position() -> Vector2:
+	return battle_position
+	
+
+func request_attack_animation(attack_type: String = "basic", target_position: Vector2 = Vector2.ZERO):
 	animation_requested.emit("attack", attack_type)
 	
-	# Efeitos específicos por tipo de ataque
-	match attack_type:
-		"melee":
-			effect_requested.emit("slash", Vector2(50, 0))
-		"magic":
-			effect_requested.emit("magic", Vector2(0, -30))
-		"ranged":
-			effect_requested.emit("arrow", Vector2(40, -20))
+	if animation_system and target_position != Vector2.ZERO:
+		animation_system.play_attack_animation(attack_type, target_position)
+	else:
+		match attack_type:
+			"melee":
+				effect_requested.emit("slash", Vector2(50, 0))
+			"magic":
+				effect_requested.emit("magic", Vector2(0, -30))
+			"ranged":
+				effect_requested.emit("arrow", Vector2(40, -20))
+			"special":
+				effect_requested.emit("sparkles", Vector2(0, -50))
 
+func request_heal_animation():
+	# Usar o sistema de sinais existente
+	effect_requested.emit("heal", Vector2(0, -30))
+	
+	if animation_system:
+		animation_system.play_heal_animation()
+		
 func request_damage_animation():
 	damage_animation_requested.emit()
+	effect_requested.emit("damage", Vector2(0, -20))
+	
+	if animation_system:
+		animation_system.play_damage_animation()
 
 func request_defense_animation():
 	animation_requested.emit("defend", "")
 	effect_requested.emit("shield", Vector2(0, 0))
+	
+	if animation_system:
+		animation_system.play_defense_animation()
 
 func request_idle_animation():
 	animation_requested.emit("idle", "")
+	
+	if animation_system:
+		animation_system.play_idle_animation()
 
 func request_walk_animation():
 	animation_requested.emit("walk", "")
+	
+	if animation_system:
+		animation_system.play_walk_animation()
 
 func request_victory_animation():
 	animation_requested.emit("victory", "")
 	effect_requested.emit("sparkles", Vector2(0, -50))
+	
+	if animation_system:
+		animation_system.play_victory_animation()
 
 func request_defeat_animation():
 	animation_requested.emit("defeat", "")
+	
+	if animation_system:
+		animation_system.play_defeat_animation()
 
-# Método para ações de combate
-func execute_combat_action(action: Action) -> String:
-	# Gasta AP
+func execute_combat_action(action: Action, target: Character = null) -> String:
 	spend_ap(action.ap_cost)
 	
-	# Determina tipo de animação baseado na ação
-	var attack_type = "melee"  # padrão
+	var attack_type = "melee"
 	
-	if action.has_method("get_damage_type"):
+	if action is AttackAction:
+		attack_type = action.formula
+	elif action.has_method("get_damage_type"):
 		var damage_type = action.get_damage_type()
 		match damage_type:
 			"magic":
@@ -277,15 +333,79 @@ func execute_combat_action(action: Action) -> String:
 			_:
 				attack_type = "melee"
 	
-	# Solicita animação de ataque
-	request_attack_animation(attack_type)
+	if target and target.battle_position != Vector2.ZERO:
+		request_attack_animation(attack_type, target.battle_position)
+	else:
+		request_attack_animation(attack_type)
 	
 	return attack_type
 
-# Método para quando o personagem é selecionado
 func on_selected():
 	effect_requested.emit("highlight", Vector2.ZERO)
+	
+	if animation_system:
+		animation_system.play_highlight_animation()
 
-# Método para quando o personagem é curado
 func on_healed(amount: int):
 	effect_requested.emit("heal", Vector2(0, -30))
+	
+	if animation_system:
+		animation_system.play_heal_animation()
+
+func receive_healing(amount: int):
+	var actual_healing = min(amount, get_max_hp() - current_hp)
+	current_hp += actual_healing
+	
+	on_healed(actual_healing)
+	
+	print("   💚", name, "curado em", actual_healing, "HP")
+	print("   ❤️ HP atual:", current_hp, "/", get_max_hp())
+	
+	return actual_healing
+
+func can_act() -> bool:
+	return is_alive() and current_ap > 0
+
+func reset_battle_state():
+	is_defending = false
+	defense_bonus = 0
+	dodge_chance = 0.0
+	buffs.clear()
+	_recalculate_combat_stats_only()
+
+func get_status_info() -> Dictionary:
+	return {
+		"name": name,
+		"hp": current_hp,
+		"max_hp": get_max_hp(),
+		"ap": current_ap,
+		"max_ap": get_max_ap(),
+		"is_defending": is_defending,
+		"buffs": buffs.duplicate(),
+		"is_alive": is_alive(),
+		"battle_position": battle_position
+	}
+
+func print_status():
+	print("=== STATUS %s ===" % name)
+	print("❤️ HP: %d/%d" % [current_hp, get_max_hp()])
+	print("⚡ AP: %d/%d" % [current_ap, get_max_ap()])
+	print("💪 Força: %d" % get_attribute("strength"))
+	print("🛡️ Constituição: %d" % get_attribute("constitution"))
+	print("🎯 Agilidade: %d" % get_attribute("agility"))
+	print("🧠 Inteligência: %d" % get_attribute("intelligence"))
+	print("🗡️ Dano Corpo-a-Corpo: %d" % melee_damage)
+	print("🔮 Dano Mágico: %d" % magic_damage)
+	print("🏹 Dano à Distância: %d" % ranged_damage)
+	print("🛡️ Defesa: %d" % defense)
+	print("🛡️ Defendendo: %s" % ("Sim" if is_defending else "Não"))
+	print("📍 Posição: %s" % battle_position)
+	print("📈 Buffs Ativos: %d" % buffs.size())
+	for buff in buffs:
+		print("   - %s: +%d (%d turnos)" % [buff, buffs[buff][0], buffs[buff][1]])
+	print("================")
+
+func cleanup():
+	if animation_system:
+		animation_system.queue_free()
+		animation_system = null

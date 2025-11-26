@@ -1,8 +1,8 @@
 [gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://b5qlr44fw8rst"]
 
-[ext_resource type="Texture2D" uid="uid://b0c1a53mb8u3l" path="res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/png/transformação andando.png" id="1_53lqu"]
-[ext_resource type="Texture2D" uid="uid://d1tbbh5xn2pai" path="res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/png/ataque transfromação.png" id="2_b37nc"]
-[ext_resource type="Texture2D" uid="uid://cgkhkhcq37faw" path="res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/png/transformação dano.png" id="3_1dmbx"]
+[ext_resource type="Texture2D" uid="uid://c7smb3vvan42g" path="res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/png/transformação andando.png" id="1_53lqu"]
+[ext_resource type="Texture2D" uid="uid://cbkjuwbvgmyln" path="res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/png/ataque transfromação.png" id="2_b37nc"]
+[ext_resource type="Texture2D" uid="uid://hhdr44lslqeb" path="res://assets/Issamu Minami - Noctis Rex/Transformação - Sprites/png/transformação dano.png" id="3_1dmbx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2436c"]
 atlas = ExtResource("1_53lqu")

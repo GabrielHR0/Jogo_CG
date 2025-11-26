@@ -12,6 +12,9 @@ var current_character: Character = null
 # Array para armazenar os personagens encontrados
 var found_characters: Array[Dictionary] = []
 
+# 🆕 NOVO: Array para armazenar ataques carregados
+var loaded_attacks: Array[Dictionary] = []
+
 func _ready():
 	print("=== 🎮 MENU PRINCIPAL ===")
 	if start_button:
@@ -20,10 +23,82 @@ func _ready():
 	if test_button:
 		test_button.pressed.connect(_on_test_button_pressed)
 	
-	status_label.text = "Procurando personagens..."
+	status_label.text = "Procurando personagens e ataques..."
+	
+	# 🆕 NOVO: Carregar ataques primeiro
+	load_all_attacks()
 	
 	# Procura e carrega personagens automaticamente
 	find_and_load_characters()
+
+# 🆕 NOVA FUNÇÃO: Carregar todos os ataques disponíveis
+func load_all_attacks():
+	print("🔍 Procurando ataques em res://data/characters/ataques/")
+	
+	var attacks_base_path = "res://data/characters/ataques/"
+	
+	# 🆕 Lista de diretórios de ataques para procurar
+	var attack_directories = [
+		"actions/meele/",
+		"actions/magic/", 
+		"actions/ranged/",
+		"actions/special/"
+	]
+	
+	loaded_attacks.clear()
+	
+	for dir_path in attack_directories:
+		var full_path = attacks_base_path + dir_path
+		var dir = DirAccess.open(full_path)
+		
+		if dir:
+			print("📁 Procurando em: ", full_path)
+			
+			dir.list_dir_begin()
+			var file_name = dir.get_next()
+			
+			while file_name != "":
+				if not dir.current_is_dir() and file_name.ends_with(".tres"):
+					var attack_full_path = full_path + file_name
+					var attack = load_attack(attack_full_path)
+					
+					if attack:
+						var attack_data = {
+							"name": attack.name,
+							"path": attack_full_path,
+							"resource": attack,
+							"type": dir_path.replace("actions/", "").replace("/", "")
+						}
+						loaded_attacks.append(attack_data)
+						print("✅ Ataque carregado: ", file_name, " -> ", attack.name, " (", attack_data["type"], ")")
+					else:
+						print("❌ Falha ao carregar ataque: ", file_name)
+				
+				file_name = dir.get_next()
+			
+			dir.list_dir_end()
+		else:
+			print("⚠️ Diretório não encontrado: ", full_path)
+	
+	print("🎯 Total de ataques carregados: ", loaded_attacks.size())
+
+# 🆕 NOVA FUNÇÃO: Carregar um ataque individual
+func load_attack(path: String) -> AttackAction:
+	if ResourceLoader.exists(path):
+		var resource = load(path)
+		if resource is AttackAction:
+			print("   ✅ Ataque carregado: ", path)
+			print("      Nome: ", resource.name)
+			print("      AP Cost: ", resource.ap_cost)
+			print("      Sprite Frames: ", resource.slash_sprite_frames != null)
+			print("      Target Type: ", resource.target_type)
+			return resource
+		else:
+			print("   ❌ Arquivo não é um AttackAction: ", path)
+			return null
+	else:
+		print("   ❌ Arquivo não encontrado: ", path)
+		return null
 
 func find_and_load_characters():
 	print("🔍 Procurando personagens em res://data/characters/aliados/")
@@ -44,6 +119,9 @@ func find_and_load_characters():
 				var character = load_character(full_path)
 				
 				if character:
+					# 🆕 NOVO: Verificar e conectar ataques do personagem
+					check_character_attacks(character)
+					
 					# Adiciona à lista de personagens encontrados
 					var char_data = {
 						"name": character.name,
@@ -69,6 +147,37 @@ func find_and_load_characters():
 	else:
 		print("❌ Diretório não encontrado: " + aliados_path)
 		create_fallback_characters()
+
+# 🆕 NOVA FUNÇÃO: Verificar ataques do personagem
+func check_character_attacks(character: Character):
+	print("   🔍 Verificando ataques de: ", character.name)
+	
+	# Verificar combat_actions
+	if character.combat_actions and character.combat_actions.size() > 0:
+		print("   🎯 Combat Actions encontradas: ", character.combat_actions.size())
+		for i in range(character.combat_actions.size()):
+			var action = character.combat_actions[i]
+			if action:
+				print("     ", i, ": ", action.name)
+				print("       AP Cost: ", action.ap_cost)
+				print("       Sprite Frames: ", action.slash_sprite_frames != null)
+				print("       Target Type: ", action.target_type)
+			else:
+				print("     ", i, ": ❌ Ação nula")
+	else:
+		print("   ⚠️ Nenhuma combat_action encontrada")
+	
+	# Verificar basic_actions
+	if character.basic_actions and character.basic_actions.size() > 0:
+		print("   🎯 Basic Actions encontradas: ", character.basic_actions.size())
+		for i in range(character.basic_actions.size()):
+			var action = character.basic_actions[i]
+			if action:
+				print("     ", i, ": ", action.name)
+			else:
+				print("     ", i, ": ❌ Ação nula")
+	else:
+		print("   ⚠️ Nenhuma basic_action encontrada")
 
 func create_fallback_characters():
 	# Cria alguns personagens fallback se não encontrar nenhum
@@ -157,8 +266,6 @@ func _on_start_button_pressed():
 	
 	cleanup_test_character()
 	
-	#var allies_party = create_allies_party_from_found()
-	#var enemies_party = create_test_enemies()
 	var allies_party = preload("res://data/party/default_party.tres")
 	var enemies_party = preload("res://data/party/enemy_default_party.tres")
 
@@ -270,15 +377,45 @@ func create_fallback_character(character_name: String, character_class: String) 
 		character.icon = load(icon_path)
 		print("✅ Icon fallback carregado: " + icon_path)
 	
-	# Adiciona ações básicas
-	character.add_combat_action(create_basic_attack())
-	if character_class == "Mage" or character_class == "Mago":
-		character.add_combat_action(create_fireball())
-	elif character_class == "Warrior" or character_class == "Guerreiro":
-		character.add_combat_action(create_heavy_attack())
+	# 🆕 ATUALIZADO: Adiciona ataques carregados se disponíveis
+	add_loaded_attacks_to_character(character, character_class)
 	
 	character.calculate_stats()
 	return character
+
+# 🆕 NOVA FUNÇÃO: Adicionar ataques carregados ao personagem
+func add_loaded_attacks_to_character(character: Character, character_class: String):
+	# Adiciona ações básicas padrão primeiro
+	character.add_combat_action(create_basic_attack())
+	
+	# 🆕 Tenta adicionar ataques carregados baseado na classe
+	var class_attacks_added = 0
+	
+	for attack_data in loaded_attacks:
+		var attack = attack_data["resource"]
+		var attack_type = attack_data["type"]
+		
+		# Adiciona baseado no tipo de personagem e tipo de ataque
+		if character_class == "Warrior" and attack_type == "meele":
+			character.add_combat_action(attack)
+			class_attacks_added += 1
+			print("   ✅ Ataque adicionado (Guerreiro): ", attack.name)
+		elif character_class == "Mage" and attack_type == "magic":
+			character.add_combat_action(attack)
+			class_attacks_added += 1
+			print("   ✅ Ataque adicionado (Mago): ", attack.name)
+		elif character_class == "Archer" and attack_type == "ranged":
+			character.add_combat_action(attack)
+			class_attacks_added += 1
+			print("   ✅ Ataque adicionado (Arqueiro): ", attack.name)
+	
+	# Fallback se não encontrou ataques específicos
+	if class_attacks_added == 0:
+		print("   ⚠️ Nenhum ataque específico encontrado, usando fallbacks")
+		if character_class == "Mage" or character_class == "Mago":
+			character.add_combat_action(create_fireball())
+		elif character_class == "Warrior" or character_class == "Guerreiro":
+			character.add_combat_action(create_heavy_attack())
 
 func load_character_view(character: Character):
 	var character_view_scene = preload("res://scenes/character_view/CharacterView.tscn")
@@ -327,6 +464,9 @@ func create_animation_buttons():
 		add_child(button)
 		animation_buttons.append(button)
 	
+	# 🆕 ATUALIZADO: Botões para ataques específicos do personagem
+	create_attack_buttons()
+	
 	# Botão para limpar/resetar
 	var clear_button = Button.new()
 	clear_button.text = "❌ Limpar Animações"
@@ -337,6 +477,71 @@ func create_animation_buttons():
 	animation_buttons.append(clear_button)
 	
 	print("✅ Botões de animação criados: ", animation_buttons.size())
+
+# 🆕 NOVA FUNÇÃO: Criar botões para ataques específicos
+func create_attack_buttons():
+	if not current_character:
+		return
+	
+	var attack_button_margin = 10
+	var attack_button_width = 200
+	var attack_button_height = 45
+	var start_x = 650
+	var start_y = 100
+	
+	var attack_count = 0
+	
+	# 🆕 Botões para combat_actions
+	if current_character.combat_actions and current_character.combat_actions.size() > 0:
+		print("🎯 Criando botões para combat_actions: ", current_character.combat_actions.size())
+		
+		for i in range(current_character.combat_actions.size()):
+			var action = current_character.combat_actions[i]
+			if action and action is AttackAction:
+				var button = Button.new()
+				button.text = "🎯 " + action.name + "\n" + str(action.ap_cost) + " AP"
+				button.position = Vector2(start_x, start_y + attack_count * (attack_button_height + attack_button_margin))
+				button.size = Vector2(attack_button_width, attack_button_height)
+				
+				# Cor diferente baseado no tipo de ataque
+				if action.slash_sprite_frames:
+					button.add_theme_color_override("font_color", Color.GREEN)
+					button.tooltip_text = "Tem animação de slash!"
+				else:
+					button.add_theme_color_override("font_color", Color.YELLOW)
+					button.tooltip_text = "Sem animação de slash"
+				
+				button.pressed.connect(_on_specific_attack_pressed.bind(action))
+				add_child(button)
+				animation_buttons.append(button)
+				attack_count += 1
+				
+				print("   ✅ Botão criado para: ", action.name)
+
+# 🆕 NOVA FUNÇÃO: Manipulador para ataques específicos
+func _on_specific_attack_pressed(action: AttackAction):
+	if not test_character_view or not current_character:
+		status_label.text = "Nenhum personagem selecionado!"
+		return
+	
+	print("🎯 Testando ataque específico: ", action.name)
+	status_label.text = "Testando: " + action.name + " - " + current_character.name
+	
+	# 🆕 Aplicar o slash effect diretamente
+	if action.slash_sprite_frames:
+		var slash_config = action.get_slash_config()
+		print("   Slash Config: ", slash_config)
+		
+		if slash_config.get("sprite_frames"):
+			print("   ✅ Sprite Frames encontrado - aplicando slash")
+			test_character_view.apply_slash_effect(slash_config)
+			status_label.text = "✨ " + action.name + " - Slash aplicado!"
+		else:
+			print("   ❌ Sprite Frames não encontrado no slash config")
+			status_label.text = "❌ " + action.name + " - Sem sprite frames"
+	else:
+		print("   ⚠️ Este ataque não tem slash_sprite_frames")
+		status_label.text = "⚠️ " + action.name + " - Sem animação de slash"
 
 func _on_animation_button_pressed(animation_type: String, attack_type: String):
 	if not test_character_view or not current_character:
