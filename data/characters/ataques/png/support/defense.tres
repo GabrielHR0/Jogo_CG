@@ -37,7 +37,7 @@ region = Rect2(280, 0, 40, 66)
 [resource]
 animations = [{
 "frames": [{
-"duration": 3.0,
+"duration": 4.5,
 "texture": SubResource("AtlasTexture_hl0ya")
 }, {
 "duration": 1.0,

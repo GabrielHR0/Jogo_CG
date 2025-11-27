@@ -36,9 +36,19 @@ var current_player_character: Character = null
 var selected_action: Action = null
 var battle_ended: bool = false
 
+# 🆕 NOVO: Sinal de highlight
+signal target_highlighted(character: Character)
+signal target_unhighlighted(character: Character)
+
+# 🆕 NOVO: Referência do alvo destacado
+var highlighted_target: Character = null
+
 # Estados
-enum UIState { IDLE, PLAYER_TURN, AI_TURN, ACTION_EXECUTING, MENU_OPEN }
+enum UIState { IDLE, PLAYER_TURN, AI_TURN, ACTION_EXECUTING }
 var current_ui_state: UIState = UIState.IDLE
+
+# 🆕 NOVO: Sinal de sincronização
+signal action_animations_completed(character: Character)
 
 # 🆕 NOVO: Sistema de efeitos persistentes
 var persistent_effects: Dictionary = {}
@@ -80,7 +90,7 @@ func setup_ui():
 	if actions_label:
 		actions_label.text = "Preparando batalha..."
 	
-	set_buttons_enabled(false)
+	_update_button_states()
 
 func connect_buttons():
 	fight_button.pressed.connect(_on_fight_pressed)
@@ -89,19 +99,29 @@ func connect_buttons():
 	skip_button.pressed.connect(_on_skip_pressed)
 	print("UI Sinais conectados")
 
-func set_buttons_enabled(enabled: bool):
-	fight_button.disabled = not enabled
-	defend_button.disabled = not enabled
-	items_button.disabled = not enabled
-	skip_button.disabled = not enabled
-	print("Botões " + ("✅ habilitados" if enabled else "❌ desabilitados"))
+# 🆕 REFATORADO: Botões habilitados APENAS durante o turno do jogador
+func _update_button_states():
+	"""Atualiza o estado dos botões baseado no UIState"""
+	var should_enable = (current_ui_state == UIState.PLAYER_TURN and 
+						current_player_character != null and 
+						current_player_character.is_alive() and 
+						not battle_ended)
+	
+	fight_button.disabled = not should_enable
+	defend_button.disabled = not should_enable
+	items_button.disabled = not should_enable
+	skip_button.disabled = not should_enable
+	
+	var status = "✅ habilitados" if should_enable else "❌ desabilitados"
+	print("🎮 Botões ", status, " | UIState: ", UIState.keys()[current_ui_state])
 
 func can_process_player_input() -> bool:
-	return (not battle_ended and 
+	var can_process = (not battle_ended and 
 			current_player_character != null and
-			current_player_character in battle.allies_party.members and
 			current_player_character.is_alive() and
-			(current_ui_state == UIState.PLAYER_TURN or current_ui_state == UIState.MENU_OPEN))
+			current_ui_state == UIState.PLAYER_TURN)
+	
+	return can_process
 
 func setup_battle(allies_party: Party, enemies_party: Party):
 	print("Setup battle:", allies_party.name, "vs", enemies_party.name)
@@ -112,43 +132,42 @@ func setup_battle(allies_party: Party, enemies_party: Party):
 	_connect_battle_signals()
 	add_child(battle)
 
+	# 🆕 NOVO: Passar referência do BattleScene para o Battle
+	battle.set_battle_scene(self)
+
 	battle.setup_battle(allies_party, enemies_party)
 	
-	# 🆕 CORREÇÃO: Aguardar um frame para garantir que o battle esteja completamente inicializado
 	await get_tree().process_frame
 	
-	# 🆕 CORREÇÃO: Conectar sinais de suporte APÓS criar as character views
 	create_character_views()
 	_setup_actions_battle_scene_reference()
 	
-	# 🆕 CORREÇÃO: Conectar sinais de suporte APÓS as character views estarem criadas
 	_connect_character_support_signals()
 
 	await get_tree().create_timer(0.5).timeout
 	print("start_battle()")
 	battle.start_battle()
-	
+
 func _setup_actions_battle_scene_reference():
-	"""Configura a referência do BattleScene em todas as SupportActions"""
-	print("🔗 Configurando referências do BattleScene nas SupportActions...")
+	"""Configura a referência do BattleScene em todas as SupportActions E DefendActions"""
+	print("🔗 Configurando referências do BattleScene nas ações...")
 	
 	var action_count = 0
 	for character in battle.allies_party.members + battle.enemies_party.members:
 		for action in character.combat_actions + character.basic_actions:
-			if action is SupportAction:
-				action.set_battle_scene(self)
-				action_count += 1
-				print("   ✅ ", action.name, " configurada para ", character.name)
+			if action is SupportAction or action is DefendAction:
+				if action.has_method("set_battle_scene"):
+					action.set_battle_scene(self)
+					action_count += 1
+					print("   ✅ ", action.name, " configurada para ", character.name)
 	
-	print("🎯 Total de SupportActions configuradas: ", action_count)
+	print("🎯 Total de ações configuradas: ", action_count)
 
-# 🆕 CORREÇÃO: Sistema de conexão de sinais melhorado
 func _connect_battle_signals():
 	if not battle:
 		print("❌ Battle não existe para conectar sinais")
 		return
 	
-	# Sinais básicos do battle
 	battle.battle_started.connect(_on_battle_started)
 	battle.player_turn_started.connect(_on_player_turn_started)
 	battle.ai_turn_started.connect(_on_ai_turn_started)
@@ -160,17 +179,16 @@ func _connect_battle_signals():
 	battle.player_action_selected.connect(_on_player_action_selected)
 	battle.ui_updated.connect(_on_ui_updated)
 	
-	# 🆕 SINAIS DE ANIMAÇÃO - BattleScene executa diretamente
 	battle.slash_effect_requested.connect(_on_battle_slash_requested)
 	battle.action_animation_requested.connect(_on_battle_action_animation_requested)
 	
-	# 🆕 NOVO: Conectar sinal para atualizar efeitos persistentes
+	# 🆕 NOVO: Conectar sinais de detalhes
+	battle.attack_action_details.connect(_on_attack_action_details)
+	
 	if battle.has_signal("turn_ended"):
 		battle.turn_ended.connect(_on_turn_ended)
 	
 	print("✅ Todos os sinais do Battle conectados")
-
-# BattleScene.gd - Adicione este método se não existir
 
 func _on_turn_ended(character: Character):
 	print("🔄 BattleScene: Atualizando efeitos persistentes no final do turno de ", character.name)
@@ -189,16 +207,13 @@ func _update_all_persistent_effects():
 	
 	print("🎆 Efeitos persistentes atualizados para ", updated_count, " ações")
 
-# 🆕 CORREÇÃO: Função simplificada e mais segura
 func _connect_character_support_signals():
 	print("🔗 Conectando sinais de suporte...")
 	
-	# Verificar se o battle e as parties existem
 	if not battle:
 		print("❌ Battle não existe para conectar sinais de suporte")
 		return
 	
-	# 🆕 CORREÇÃO: Verificar diretamente as properties
 	if not "allies_party" in battle or not battle.allies_party:
 		print("❌ Allies Party não disponível")
 		return
@@ -207,16 +222,12 @@ func _connect_character_support_signals():
 		print("❌ Enemies Party não disponível")
 		return
 	
-	# Conectar sinais de todos os personagens existentes
 	var connected_count = 0
 	
-	# 🆕 CORREÇÃO: Acessar diretamente os arrays de members
-	# Aliados
 	for character in battle.allies_party.members:
 		if character and _connect_character_signals(character):
 			connected_count += 1
 	
-	# Inimigos
 	for character in battle.enemies_party.members:
 		if character and _connect_character_signals(character):
 			connected_count += 1
@@ -229,7 +240,6 @@ func _connect_character_signals(character: Character) -> bool:
 	
 	var connected = false
 	
-	# 🆕 Conectar sinais de suporte com verificações de segurança
 	if character.has_signal("shield_applied"):
 		if not character.shield_applied.is_connected(_on_shield_applied):
 			character.shield_applied.connect(_on_shield_applied.bind(character))
@@ -255,16 +265,20 @@ func _connect_character_signals(character: Character) -> bool:
 			print("   🔗 Conectado debuffs_cleansed para", character.name)
 	
 	return connected
-	
-#🆕 SISTEMA DE ANIMAÇÕES DE SUPORTE
+
 func _on_shield_applied(amount: int, duration: int, character: Character):
 	print("🛡️ BattleScene: Escudo aplicado em", character.name, "amount:", amount, "duration:", duration)
 	
 	if character.name in character_views:
 		var character_view = character_views[character.name]
-		character_view.play_shield_effect(amount)
+		var shield_action = null
+		for action in character.combat_actions + character.basic_actions:
+			if action is SupportAction and action.shield_amount > 0:
+				shield_action = action
+				break
+		
+		character_view.play_shield_effect(amount, shield_action)
 	
-	# Atualizar UI se for o personagem atual
 	if current_player_character == character:
 		update_character_status(character)
 
@@ -280,7 +294,6 @@ func _on_debuff_applied(attribute: String, value: int, duration: int, character:
 	
 	if character.name in character_views:
 		var character_view = character_views[character.name]
-		# Mostrar efeito visual de debuff (vermelho/escuro)
 		character_view.play_debuff_effect(attribute, value)
 
 func _on_debuffs_cleansed(count: int, character: Character):
@@ -290,8 +303,11 @@ func _on_debuffs_cleansed(count: int, character: Character):
 		var character_view = character_views[character.name]
 		character_view.play_cleanse_effect(count)
 
-# 🆕 NOVO: Processar ações de suporte especificamente
-# 🆕 CORREÇÃO: Processar ações de suporte COM ORDEM CORRETA
+# 🆕 NOVO: Receber detalhes de ataques
+func _on_attack_action_details(user: Character, action: Action, target: Character, action_name: String):
+	print("⚔️ Ataque detectado:", action_name)
+	# Será usado no _on_action_detailed_executed
+
 func _process_support_action(action: Action, user: Character, target: Character):
 	print("🌟 BattleScene: Processando ação de suporte:", action.name)
 	
@@ -300,7 +316,6 @@ func _process_support_action(action: Action, user: Character, target: Character)
 	
 	var support_action = action as SupportAction
 	
-	# 🆕 CASO ESPECIAL: DEFESA COM EFEITO PERSISTENTE
 	if support_action.buff_attribute == "defense" and support_action.buff_value > 0:
 		_process_defense_action(support_action, user, target)
 		return
@@ -309,9 +324,6 @@ func _process_support_action(action: Action, user: Character, target: Character)
 		_process_barreira_arcana(support_action, user, target)
 		return
 	
-	# 🆕 ORDEM CORRETA DAS ANIMAÇÕES:
-	
-	# 1. PRIMEIRO: Efeito especial principal (se tiver)
 	if action.has_effect_animation():
 		print("   🎬 1. Criando efeito visual principal")
 		var target_wrapper = character_views[target.name].get_parent()
@@ -319,48 +331,37 @@ func _process_support_action(action: Action, user: Character, target: Character)
 			var effect_position = target_wrapper.global_position + target_wrapper.size / 2
 			var effect = action.create_effect_animation(effect_position, self)
 			
-			# 🆕 AGUARDAR EFEITO PRINCIPAL TERMINAR ANTES DE CONTINUAR
 			if effect:
 				print("   ⏳ Aguardando efeito principal terminar...")
-				await get_tree().create_timer(0.5).timeout  # Ajuste o tempo conforme sua animação
+				await get_tree().create_timer(0.5).timeout
 	
-	# 2. SEGUNDO: Efeitos específicos (cura, buff, escudo, cleanse)
-	
-	# 🆕 CURA (pode acontecer junto com outros efeitos)
 	if support_action.heal_amount > 0:
 		print("   💚 2. Executando efeito de cura")
 		character_views[target.name].play_heal_effect(support_action.heal_amount, support_action)
 	
-	# 🆕 BUFF (exceto escudo - esse é tratado separadamente)
 	if support_action.buff_attribute != "" and support_action.buff_value > 0 and support_action.buff_attribute != "defense":
 		print("   📈 2. Executando efeito de buff")
 		character_views[target.name].play_buff_effect(support_action.buff_attribute, support_action.buff_value, support_action)
 	
-	# 🆕 ESCUDO (TRATAMENTO ESPECIAL - deve vir DEPOIS dos outros efeitos)
 	if support_action.shield_amount > 0:
 		print("   🛡️ 3. Executando efeito de escudo PERSISTENTE")
-		# 🆕 PEQUENA PAUSA ANTES DO ESCUDO
 		await get_tree().create_timer(0.2).timeout
 		character_views[target.name].play_shield_effect(support_action.shield_amount, support_action)
 	
-	# 🆕 CLEANSE (pode acontecer junto)
 	if support_action.cleanse_debuffs:
 		print("   ✨ 2. Executando efeito de cleanse")
 		character_views[target.name].play_cleanse_effect(0, support_action)
 	
-	# 🆕 HOT (pode acontecer junto)
 	if support_action.hot_amount > 0 and support_action.hot_duration > 0:
 		print("   💚 2. Executando efeito de HOT")
 		character_views[target.name].play_hot_effect(support_action.hot_amount, support_action.hot_duration)
 
-# 🆕 FUNÇÃO ESPECIAL PARA BARREIRA ARCANA
 func _process_barreira_arcana(action: SupportAction, user: Character, target: Character):
 	print("🌟 BattleScene: Processando BARREIRA ARCANA")
 	
 	if target.name not in character_views:
 		return
 	
-	# 1. EFEITO PRINCIPAL DA AÇÃO
 	if action.has_effect_animation():
 		print("   🎬 1. Efeito principal da barreira")
 		var target_wrapper = character_views[target.name].get_parent()
@@ -368,27 +369,23 @@ func _process_barreira_arcana(action: SupportAction, user: Character, target: Ch
 			var effect_position = target_wrapper.global_position + target_wrapper.size / 2
 			var effect = action.create_effect_animation(effect_position, self)
 			if effect:
-				await get_tree().create_timer(0.6).timeout  # Aguardar animação principal
+				await get_tree().create_timer(0.6).timeout
 	
-	# 2. EFEITO DE BUFF DE DEFESA
 	if action.buff_attribute == "defense" and action.buff_value > 0:
 		print("   📈 2. Efeito de buff de defesa")
 		character_views[target.name].play_buff_effect(action.buff_attribute, action.buff_value, action)
-		await get_tree().create_timer(0.3).timeout  # Pequena pausa
+		await get_tree().create_timer(0.3).timeout
 	
-	# 3. EFEITO DE ESCUDO PERSISTENTE (POR ÚLTIMO)
 	if action.shield_amount > 0:
 		print("   🛡️ 3. Efeito de escudo persistente")
 		character_views[target.name].play_shield_effect(action.shield_amount, action)
 
-# 🆕 NOVO: Processar ação de defesa com efeito persistente
 func _process_defense_action(action: SupportAction, user: Character, target: Character):
 	print("🛡️ BattleScene: Processando DEFESA com efeito persistente")
 	
 	if target.name not in character_views:
 		return
 	
-	# 1. Efeito principal da ação
 	if action.has_effect_animation():
 		print("   🎬 1. Efeito principal da defesa")
 		var target_wrapper = character_views[target.name].get_parent()
@@ -398,27 +395,19 @@ func _process_defense_action(action: SupportAction, user: Character, target: Cha
 			if effect:
 				await get_tree().create_timer(0.4).timeout
 	
-	# 2. Efeito visual no CharacterView
 	print("   🛡️ 2. Efeito de defesa no personagem")
 	character_views[target.name].play_defense_effect(action)
 	
-	# 3. Efeito persistente (se configurado)
-	if action.has_persistent_effect:
-		print("   🎆 3. Criando efeito persistente de defesa")
-		# O efeito persistente é criado automaticamente pelo SupportAction.apply_effects()
-		# Mas podemos forçar a criação aqui também para garantir
-		action.create_persistent_effect(target, action.buff_duration)
-		
+	print("   🎆 DefendAction está controlando os efeitos persistentes")
+
 func _on_battle_action_animation_requested(user: Character, action: Action, target: Character):
 	print("🎬 BattleScene: EXECUTANDO ANIMAÇÃO para ", action.name)
 	print("   User:", user.name, " | Target:", target.name)
 	
-	# 🆕 PRIMEIRO: Verificar se é ação de suporte
 	if action is SupportAction:
 		_process_support_action(action, user, target)
 		return
 	
-	# Verificar se temos as views para ações normais
 	if user.name not in character_views:
 		print("❌ CharacterView do usuário não encontrada:", user.name)
 		return
@@ -430,23 +419,19 @@ func _on_battle_action_animation_requested(user: Character, action: Action, targ
 	var user_view = character_views[user.name]
 	var target_view = character_views[target.name]
 	
-	# 🆕 CORREÇÃO: Obter a posição global do wrapper (pai do CharacterView)
 	var user_wrapper = user_view.get_parent()
 	var target_wrapper = target_view.get_parent()
 	
 	if user_wrapper and target_wrapper:
 		var target_global_pos = target_wrapper.global_position + target_wrapper.size / 2
 		
-		# 🆕 BATTLE SCENE CONTROLA TUDO
 		if action is AttackAction and action.formula == "melee":
 			print("   ⚔️ Executando ATAQUE MEELE com dash")
-			# BattleScene calcula e executa diretamente
 			user_view.execute_melee_attack(target_global_pos)
 			
-			# Aplicar slash effect se tiver
 			if action.has_slash_effect():
 				print("   🗡️ Aplicando slash effect")
-				await get_tree().create_timer(0.5).timeout  # Esperar dash chegar
+				await get_tree().create_timer(0.5).timeout
 				var slash_config = action.get_slash_config()
 				slash_config["z_index"] = 1000
 				target_view.apply_slash_effect(slash_config)
@@ -467,21 +452,19 @@ func _on_battle_slash_requested(action: Action, target_character: Character):
 func create_character_views():
 	print("Criando CharacterViews...")
 	clear_character_views()
-	setup_areas_layout()    # 🆕 Configurar áreas primeiro
-	setup_container_layout() # 🆕 Configurar rows depois
+	setup_areas_layout()
+	setup_container_layout()
 	create_enemy_views()
 	create_ally_views()
 	print("CharacterViews criadas: ", character_views.size())
 
 func setup_container_layout():
 	"""Configura o layout dos containers para posicionamento vertical"""
-	# Configurar as rows (VBoxContainer) para distribuir os filhos verticalmente
 	enemies_front_row.alignment = BoxContainer.ALIGNMENT_CENTER
 	enemies_back_row.alignment = BoxContainer.ALIGNMENT_CENTER
 	allies_front_row.alignment = BoxContainer.ALIGNMENT_CENTER
 	allies_back_row.alignment = BoxContainer.ALIGNMENT_CENTER
 	
-	# Espaçamento vertical entre os personagens
 	enemies_front_row.add_theme_constant_override("separation", 15)
 	enemies_back_row.add_theme_constant_override("separation", 15)
 	allies_front_row.add_theme_constant_override("separation", 15)
@@ -499,8 +482,8 @@ func get_character_container(is_enemy: bool, position: String) -> VBoxContainer:
 		[false, "back"]:
 			return allies_back_row
 		_:
-			return allies_front_row  # fallback
-			
+			return allies_front_row
+
 func create_enemy_views():
 	for character in battle.enemies_party.members:
 		_create_character_display(character, true)
@@ -514,10 +497,8 @@ func _create_character_display(character: Character, is_enemy: bool):
 		print("❌ character_view_scene é null - não é possível criar CharacterView")
 		return
 	
-	# Obter o container correto baseado na posição do personagem
 	var character_container = get_character_container(is_enemy, character.position)
 	
-	# 🆕 CORREÇÃO: Criar um Control wrapper para o Node2D
 	var wrapper = Control.new()
 	wrapper.custom_minimum_size = Vector2(140, 160)
 	wrapper.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -532,35 +513,28 @@ func _create_character_display(character: Character, is_enemy: bool):
 	character_view.character = character
 	character_view.auto_setup = true
 	
-	# 🆕 CORREÇÃO: Centralizar o CharacterView (Node2D) dentro do wrapper (Control)
 	if character_view.has_method("get_sprite_size"):
 		var sprite_size = character_view.get_sprite_size()
 		character_view.position = Vector2(wrapper.custom_minimum_size.x / 2, wrapper.custom_minimum_size.y / 2)
 	else:
-		# Posição padrão caso não tenha o método
-		character_view.position = Vector2(70, 80)  # Metade do custom_minimum_size
+		character_view.position = Vector2(70, 80)
 	
 	wrapper.add_child(character_view)
 	character_container.add_child(wrapper)
 	
 	character_views[character.name] = character_view
 	
-	# 🆕 CONECTAR SINAIS DO CHARACTER individualmente
 	_connect_character_signals(character)
 	
 	print("   CharacterView criada:", character.name, "| Inimigo:", is_enemy, "| Posição:", character.position, "| Container:", character_container.name)
-	
+
 func setup_areas_layout():
 	"""Configura o layout das áreas principais (HBoxContainer)"""
-	# As áreas principais distribuem as rows horizontalmente
 	$HBoxContainer/EnemiesArea.alignment = BoxContainer.ALIGNMENT_CENTER
 	$HBoxContainer/AlliesArea.alignment = BoxContainer.ALIGNMENT_CENTER
-	
-	# Espaçamento entre as áreas de inimigos e aliados
 	$HBoxContainer.add_theme_constant_override("separation", 100)
 
 func clear_character_views():
-	# 🆕 CORREÇÃO: Limpar todos os containers (agora temos wrappers)
 	for container in [enemies_front_row, enemies_back_row, allies_front_row, allies_back_row]:
 		for child in container.get_children():
 			if is_instance_valid(child):
@@ -576,18 +550,21 @@ func _on_battle_started():
 
 func _on_player_turn_started(character: Character):
 	if battle_ended:
+		print("❌ _on_player_turn_started rejeitado - batalha já acabou")
 		return
 	
 	print("🎮 Iniciando turno do JOGADOR:", character.name)
-	actions_label.text = "🎮 Turno de " + character.name + " [AP: %d/%d]" % [character.current_ap, character.get_max_ap()]
-	current_ui_state = UIState.PLAYER_TURN
+	
 	current_player_character = character
+	current_ui_state = UIState.PLAYER_TURN
+	
+	actions_label.text = "🎮 Turno de " + character.name + " [AP: %d/%d]" % [character.current_ap, character.get_max_ap()]
 	
 	await get_tree().create_timer(0.3).timeout
 	
-	set_buttons_enabled(true)
 	update_character_status(character)
 	hide_sub_menus()
+	_update_button_states()
 	
 	print("🎮 Turno do jogador pronto - Botões habilitados")
 
@@ -600,45 +577,64 @@ func _on_ai_turn_started(character: Character):
 	current_ui_state = UIState.AI_TURN
 	current_player_character = character
 	
-	set_buttons_enabled(false)
+	_update_button_states()
 	
 	await get_tree().create_timer(0.3).timeout
 	
 	update_character_status(character)
 	
-	print("🤖 Turno da IA - Botões desabilitados")
+	print("🤖 Turno da IA")
 
 func _on_action_executed(character: Character, action: Action, target: Character):
 	if battle_ended:
 		return
-	
-	current_ui_state = UIState.ACTION_EXECUTING
-	set_buttons_enabled(false)
 	
 	await get_tree().create_timer(0.2).timeout
 	
 	var action_text = "%s usa %s em %s" % [character.name, action.name, target.name]
 	print("Executada:", action_text)
 	actions_label.text = action_text
+	
+	await get_tree().create_timer(0.5).timeout
 
+# 🆕 REFATORADO: Mostra detalhes completos com sinais de ação
 func _on_action_detailed_executed(character: Character, action: Action, target: Character, damage: int, healing: int, ap_used: int):
 	if battle_ended:
 		return
 	
 	var action_text = ""
 	
+	# 🆕 NOVO: Melhor descrição baseada no tipo de ação
 	if action.name == "Pular Turno":
 		action_text = "⏭️ %s pulou o turno" % character.name
-	elif action.name == "Defender":
-		action_text = "🛡️ %s está se defendendo" % character.name
+	elif action.name == "Defender" or action is DefendAction:
+		action_text = "🛡️ %s ativa Postura Defensiva Máxima (+Defesa, +Esquiva, +Reflexão, +Contra-ataque)" % character.name
+	elif action is SupportAction:
+		# 🆕 SUPORTE: Mostrar detalhes
+		var support_action = action as SupportAction
+		var effects = []
+		
+		if support_action.heal_amount > 0:
+			effects.append("Cura: +%d HP" % healing)
+		if support_action.buff_attribute != "":
+			effects.append("Buff: +%d %s (%d turnos)" % [support_action.buff_value, support_action.buff_attribute, support_action.buff_duration])
+		if support_action.shield_amount > 0:
+			effects.append("Escudo: +%d (%d turnos)" % [support_action.shield_amount, support_action.shield_duration])
+		if support_action.cleanse_debuffs:
+			effects.append("Purificação")
+		if support_action.hot_amount > 0:
+			effects.append("HOT: +%d HP (%d turnos)" % [support_action.hot_amount, support_action.hot_duration])
+		
+		action_text = "✨ %s usa %s em %s: [%s]" % [character.name, action.name, target.name, ", ".join(effects)]
 	elif damage > 0:
-		action_text = "💥 %s usou %s em %s e causou %d de dano!" % [character.name, action.name, target.name, damage]
+		# 🆕 ATAQUE: Mostrar nome e dano
+		action_text = "💥 %s usa %s em %s e causa %d de dano!" % [character.name, action.name, target.name, damage]
 	elif healing > 0:
-		action_text = "❤️ %s usou %s em %s e curou %d de HP!" % [character.name, action.name, target.name, healing]
+		action_text = "❤️ %s usa %s em %s e cura %d de HP!" % [character.name, action.name, target.name, healing]
 	elif damage == 0 and action is AttackAction:
-		action_text = "⚔️ %s usou %s em %s, mas não causou dano" % [character.name, action.name, target.name]
+		action_text = "⚔️ %s usa %s em %s, mas não causa dano" % [character.name, action.name, target.name]
 	else:
-		action_text = "✨ %s usou %s em %s" % [character.name, action.name, target.name]
+		action_text = "✨ %s usa %s em %s" % [character.name, action.name, target.name]
 	
 	if ap_used > 0:
 		action_text += " [%d AP]" % ap_used
@@ -646,13 +642,42 @@ func _on_action_detailed_executed(character: Character, action: Action, target: 
 	print("📝 " + action_text)
 	actions_label.text = action_text
 	
-	# Aplicar animação de dano se necessário
+	await get_tree().create_timer(0.8).timeout
+	
 	if damage > 0 and target.name in character_views:
 		character_views[target.name].take_damage()
 	
-	# 🆕 ATUALIZAR: Se foi cura, mostrar efeito visual
 	if healing > 0 and target.name in character_views:
 		character_views[target.name].play_heal_effect(healing)
+	
+	await get_tree().create_timer(0.5).timeout
+	
+	# AGUARDAR ANIMAÇÃO DE AP
+	if ap_used > 0:
+		await _animate_ap_reduction(character, ap_used)
+	
+	# EMITIR SINAL DE CONCLUSÃO DAS ANIMAÇÕES
+	print("🎬 FINALIZANDO ANIMAÇÕES para:", character.name)
+	action_animations_completed.emit(character)
+
+func _animate_ap_reduction(character: Character, ap_used: int):
+	print("💰 Animando redução de AP: ", ap_used, " AP")
+	
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_LINEAR)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	
+	var start_ap = character.current_ap + ap_used
+	var end_ap = character.current_ap
+	
+	tween.tween_method(func(value):
+		ap_bar.value = value
+		ap_label.text = "%d/%d" % [int(value), character.get_max_ap()]
+	, float(start_ap), float(end_ap), 0.6)
+	
+	await tween.finished
+	
+	print("   ✅ Redução de AP concluída")
 
 func _on_turn_completed(character: Character):
 	if battle_ended:
@@ -660,7 +685,6 @@ func _on_turn_completed(character: Character):
 	
 	print("✅ Turno concluído:", character.name)
 	
-	# 🆕 ATUALIZAÇÃO: Atualizar efeitos persistentes quando um turno é completado
 	_update_all_persistent_effects()
 	
 	if battle.current_round > 0 and character.current_ap > 0:
@@ -668,18 +692,24 @@ func _on_turn_completed(character: Character):
 	else:
 		actions_label.text = "✅ %s concluiu o turno" % character.name
 	
-	current_ui_state = UIState.IDLE
-	set_buttons_enabled(false)
-	hide_sub_menus()
+	await get_tree().create_timer(0.8).timeout
 	
-	if current_player_character == character:
-		current_player_character = null
+	# 🆕 CORREÇÃO: NÃO chamar _update_button_states() aqui
+	# Os botões serão atualizados quando o próximo turno começar
+	
+	# Apenas limpar submenus se foi IA
+	if character not in battle.allies_party.members:
+		hide_sub_menus()
 
 func _on_character_died(character: Character):
 	print("💀 Morte:", character.name)
 	actions_label.text = "💀 %s foi derrotado!" % character.name
 	
-	await get_tree().create_timer(0.2).timeout
+	for action in character.combat_actions + character.basic_actions:
+		if action is DefendAction:
+			action.update_defense_effects(character)
+	
+	await get_tree().create_timer(0.8).timeout
 	
 	if character.name in character_views:
 		var view = character_views[character.name]
@@ -691,6 +721,12 @@ func _on_character_died(character: Character):
 func _on_battle_ended(victory: bool):
 	print("🏁 BattleScene: _on_battle_ended - Vitória:", victory)
 	
+	print("🧹 Limpando todos os efeitos persistentes...")
+	for character in battle.allies_party.members + battle.enemies_party.members:
+		for action in character.combat_actions + character.basic_actions:
+			if action is DefendAction:
+				action.clear_all_defense_effects()
+	
 	if victory:
 		actions_label.text = "🎉 Vitória! Todos os inimigos foram derrotados!"
 		print("🎉 VITORIA!")
@@ -700,12 +736,15 @@ func _on_battle_ended(victory: bool):
 	
 	battle_ended = true
 	current_ui_state = UIState.IDLE
-	set_buttons_enabled(false)
+	current_player_character = null
+	_update_button_states()
+	
+	await get_tree().create_timer(1.0).timeout
 	
 	hide_sub_menus()
 	await get_tree().create_timer(2.0).timeout
 	return_to_main()
-	
+
 func _on_player_action_selected():
 	print("Player action selected signal received")
 
@@ -748,7 +787,6 @@ func return_to_main():
 		print("Cena principal carregada: " + main_scene_path)
 	else:
 		print("Arquivo da cena principal não encontrado: " + main_scene_path)
-		# Tentar alternativas
 		var alternative_paths = [
 			"res://Main.tscn",
 			"res://scenes/main.tscn",
@@ -843,7 +881,6 @@ func show_attack_menu():
 
 	attack_menu.visible = true
 	target_menu.visible = false
-	current_ui_state = UIState.MENU_OPEN
 	print("AttackMenu aberto")
 
 func _on_attack_selected(action: Action):
@@ -885,6 +922,11 @@ func show_target_menu(action: Action):
 			var button = create_textured_button(button_text, Vector2(180, 35))
 			button.disabled = not target.is_alive()
 			button.pressed.connect(_on_target_selected.bind(target))
+			
+			# 🆕 NOVO: Conectar hover signals
+			button.mouse_entered.connect(_on_target_button_hover.bind(target))
+			button.mouse_exited.connect(_on_target_button_unhover)
+			
 			target_buttons_container.add_child(button)
 	
 	var back_button = create_textured_button("Voltar", Vector2(180, 35))
@@ -893,8 +935,8 @@ func show_target_menu(action: Action):
 	
 	target_menu.visible = true
 	attack_menu.visible = false
-	current_ui_state = UIState.MENU_OPEN
 	print("TargetMenu aberto")
+
 
 func create_textured_button(text: String, size: Vector2) -> TextureButton:
 	var button = TextureButton.new()
@@ -990,7 +1032,7 @@ func _on_target_selected(target: Character):
 	execute_player_action(selected_action, target)
 
 func _on_target_back_pressed():
-	if current_ui_state != UIState.MENU_OPEN:
+	if current_ui_state != UIState.PLAYER_TURN:
 		return
 	
 	print("↩️ Voltando do menu de alvos")
@@ -999,10 +1041,8 @@ func _on_target_back_pressed():
 			show_attack_menu()
 		else:
 			hide_sub_menus()
-			current_ui_state = UIState.PLAYER_TURN
 	else:
 		hide_sub_menus()
-		current_ui_state = UIState.PLAYER_TURN
 
 func execute_player_action(action: Action, target: Character):
 	print("🚀 Iniciando execução de ação...")
@@ -1025,9 +1065,9 @@ func execute_player_action(action: Action, target: Character):
 	print("✅ Executando:", action.name, "de", current_player_character.name, "em", target.name)
 	print("💰 AP disponível:", current_player_character.current_ap, "/", current_player_character.get_max_ap())
 	
-	set_buttons_enabled(false)
-	hide_sub_menus()
 	current_ui_state = UIState.ACTION_EXECUTING
+	_update_button_states()
+	hide_sub_menus()
 	
 	battle.on_player_select_action(action, target)
 	selected_action = null
@@ -1038,6 +1078,74 @@ func find_defend_action(character: Character) -> Action:
 		if action.name == "Defender":
 			return action
 	return null
+
+func _on_target_button_hover(target: Character):
+	"""Destacar alvo quando mouse entra no botão"""
+	print("🔆 Destacando alvo:", target.name)
+	
+	if target.name in character_views:
+		highlighted_target = target
+		var character_view = character_views[target.name]
+		_apply_target_highlight(character_view)
+		target_highlighted.emit(target)
+
+func _on_target_button_unhover():
+	"""Remover destaque quando mouse sai do botão"""
+	if highlighted_target:
+		print("🔆 Removendo destaque de:", highlighted_target.name)
+		
+		if highlighted_target.name in character_views:
+			var character_view = character_views[highlighted_target.name]
+			_remove_target_highlight(character_view)
+			target_unhighlighted.emit(highlighted_target)
+		
+		highlighted_target = null
+
+func _apply_target_highlight(character_view: Node):
+	"""Aplicar linha branca ao redor do personagem"""
+	# 🆕 Criar outline/border ao redor do sprite
+	var highlight = ColorRect.new()
+	highlight.name = "TargetHighlight"
+	highlight.color = Color.WHITE
+	highlight.color.a = 0.0  # Começar transparente
+	
+	# Obter o tamanho do sprite do CharacterView
+	var sprite_size = Vector2(140, 160)  # Tamanho padrão do wrapper
+	
+	highlight.size = sprite_size
+	highlight.position = Vector2(-sprite_size.x / 2, -sprite_size.y / 2)
+	
+	# Adicionar como filha do CharacterView
+	character_view.add_child(highlight)
+	highlight.z_index = 1000
+	
+	# 🆕 Animar o destaque piscando
+	var tween = character_view.create_tween()
+	tween.set_loops()
+	tween.tween_property(highlight, "color:a", 0.3, 0.3)
+	tween.tween_property(highlight, "color:a", 0.0, 0.3)
+	
+	# Armazenar referência
+	character_view.set_meta("highlight_node", highlight)
+	character_view.set_meta("highlight_tween", tween)
+
+func _remove_target_highlight(character_view: Node):
+	"""Remover destaque do personagem"""
+	if character_view.has_meta("highlight_node"):
+		var highlight = character_view.get_meta("highlight_node")
+		
+		# Parar animação
+		if character_view.has_meta("highlight_tween"):
+			var tween = character_view.get_meta("highlight_tween")
+			tween.kill()
+			character_view.remove_meta("highlight_tween")
+		
+		# Remover nó
+		if is_instance_valid(highlight):
+			highlight.queue_free()
+		
+		character_view.remove_meta("highlight_node")
+		print("🔆 Destaque removido")
 
 func find_skip_action(character: Character) -> Action:
 	if character == null: return null

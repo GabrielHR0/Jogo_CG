@@ -106,7 +106,7 @@ func get_max_hp() -> int:
 	return max(0, 30 + get_attribute("constitution") * 10)
 
 func get_max_ap() -> int:
-	return max(0, 6 + get_attribute("agility") + int(get_attribute("intelligence") / 2))
+	return max(0, 3 + get_attribute("agility") + int(get_attribute("intelligence") / 2))
 
 func calculate_defense() -> int:
 	return max(0, 2 + int(get_attribute("constitution") * 0.8) + int(get_attribute("strength") * 0.3))
@@ -121,7 +121,7 @@ func get_defense() -> int:
 	return base_defense
 
 func calculate_ap_recovery() -> int:
-	return max(0, 3 + int(get_attribute("agility") / 2) + int(get_attribute("intelligence") / 3))
+	return max(0, 3 + int(get_attribute("agility") / 6) + int(get_attribute("intelligence") / 5))
 
 func restore_ap():
 	var recovered = calculate_ap_recovery()
@@ -233,6 +233,50 @@ func stop_defending():
 		defense_bonus = 0
 		dodge_chance = 0.0
 		print("   🛡️", name, "saiu da posição defensiva")
+
+# Character.gd - Adicione estes métodos
+
+# 🆕 DEFESA AVANÇADA COM MÚLTIPLOS EFEITOS
+# Character.gd - Adicione estes métodos
+
+# 🆕 DEFESA AVANÇADA COM MÚLTIPLOS EFEITOS
+func start_advanced_defense(defense_multiplier: float, dodge_chance: float, damage_reflection: float, counter_attack_chance: float):
+	is_defending = true
+	defense_bonus = int(get_attribute("constitution") * defense_multiplier)
+	self.dodge_chance = dodge_chance  # 🆕 Use self para acessar a variável da classe
+	
+	# 🆕 NOVOS EFEITOS DA DEFESA AVANÇADA
+	set_meta("damage_reflection", damage_reflection)
+	set_meta("counter_attack_chance", counter_attack_chance)
+	
+	request_defense_animation()
+	
+	print("   🛡️", name, "ativa DEFESA AVANÇADA")
+	print("   📈 +", defense_bonus, "defesa (", defense_multiplier, "x constituição)")
+	print("   🎯 Esquiva: +", dodge_chance * 100, "%")
+	print("   🔄 Reflexão: +", damage_reflection * 100, "% do dano")
+	print("   ⚔️ Contra-ataque: ", counter_attack_chance * 100, "% de chance")
+
+
+# 🆕 MÉTODO SEPARADO PARA REFLEXÃO DE DANO (chamado pelo Battle)
+func reflect_damage(attacker: Character, original_damage: int):
+	if is_defending and attacker and has_meta("damage_reflection"):
+		var reflection_percent = get_meta("damage_reflection")
+		var reflected_damage = int(original_damage * reflection_percent)
+		
+		if reflected_damage > 0:
+			print("   🔄 ", name, " reflete ", reflected_damage, " de dano para ", attacker.name)
+			attacker.take_damage(reflected_damage)
+# 🆕 SISTEMA DE CONTRA-ATAQUE
+func attempt_counter_attack(attacker: Character):
+	if is_defending and attacker and has_meta("counter_attack_chance"):
+		var counter_chance = get_meta("counter_attack_chance")
+		
+		if randf() < counter_chance:
+			print("   ⚔️ ", name, " realiza um CONTRA-ATAQUE em ", attacker.name)
+			# Aqui você pode implementar a lógica do contra-ataque
+			var counter_damage = int(calculate_melee_damage() * 0.5)  # 50% do dano normal
+			attacker.take_damage(counter_damage)
 
 func add_buff(attr_name: String, buff_value: int, duration_turns: int):
 	if buffs.has(attr_name):

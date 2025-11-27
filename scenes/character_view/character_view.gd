@@ -42,12 +42,8 @@ func center_sprite():
 	if not sprite.texture:
 		return
 	
-	# 🆕 CORREÇÃO: Centralizar o sprite no pivô do CharacterView
-	# Resetar a posição primeiro
 	sprite.position = Vector2.ZERO
 	
-	# O pivô do CharacterView já é (0,0), então o sprite fica centralizado naturalmente
-	# Se precisar de ajuste adicional, usar offset
 	if character and character.animation_data:
 		sprite.position += character.animation_data.sprite_offset
 
@@ -56,10 +52,9 @@ func adjust_sprite_size():
 		return
 	
 	var texture_size = sprite.texture.get_size()
-	var max_width = 240 # 🆕 Aumentado de 120 para 180
-	var max_height = 290 # 🆕 Aumentado de 150 para 220
+	var max_width = 240
+	var max_height = 290
 	
-	# 🆕 CORREÇÃO: Calcular escala mantendo proporção
 	var scale_x = max_width / texture_size.x
 	var scale_y = max_height / texture_size.y
 	var final_scale = min(scale_x, scale_y)
@@ -81,9 +76,8 @@ func create_health_bar():
 	var bar_width = 80
 	var bar_height = 7
 	
-	# 🆕 CALCULAR POSIÇÃO BASEADA NO TAMANHO DO SPRITE
 	var sprite_height = get_sprite_size().y
-	var bar_offset = sprite_height * 0.5  # 60% da altura do sprite acima
+	var bar_offset = sprite_height * 0.5
 	
 	health_bar_container.position = Vector2(-bar_width / 2, -bar_offset)
 	health_bar_container.size = Vector2(bar_width, bar_height)
@@ -125,96 +119,105 @@ func update_health_bar():
 	
 	health_bar_container.visible = character.is_alive()
 
-# 🆕 SISTEMA DE ANIMAÇÕES DE SUPORTE COM SPRITEFRAMES DAS AÇÕES
-
-# Efeito de cura com SpriteFrames da ação
+# 🆕 EFEITO DE CURA
 func play_heal_effect(heal_amount: int, action: SupportAction = null):
 	print("💚 CharacterView EFEITO DE CURA: ", character.name, " +", heal_amount, "HP")
 	
-	# 🆕 PRIMEIRO: Tentar usar o SpriteFrames da ação se disponível
 	if action and action.heal_effect_frames:
 		print("   🎬 Usando SpriteFrames da ação para cura")
 		_create_action_effect(action.heal_effect_frames, Color.GREEN, Vector2(1.2, 1.2), Vector2(0, -50))
 	else:
-		# Fallback: Efeito visual básico de cura no sprite
 		var heal_tween = create_tween()
 		heal_tween.parallel().tween_property(sprite, "modulate", Color.GREEN, 0.2)
 		heal_tween.parallel().tween_property(sprite, "scale", sprite.scale * 1.1, 0.2)
 		heal_tween.tween_property(sprite, "modulate", Color.WHITE, 0.2)
 		heal_tween.parallel().tween_property(sprite, "scale", sprite.scale, 0.2)
 	
-	# Texto flutuante de cura
 	show_floating_text("+" + str(heal_amount) + " HP", Color.GREEN)
+	update_health_bar()
 
-# Efeito de buff com SpriteFrames da ação
+# 🆕 EFEITO DE BUFF
 func play_buff_effect(buff_attribute: String, buff_value: int, action: SupportAction = null):
 	print("📈 CharacterView EFEITO DE BUFF: ", character.name, " +", buff_value, " ", buff_attribute)
 	
 	var buff_color = _get_buff_color(buff_attribute)
 	
-	# 🆕 PRIMEIRO: Tentar usar o SpriteFrames da ação se disponível
 	if action and action.buff_effect_frames:
 		print("   🎬 Usando SpriteFrames da ação para buff")
 		_create_action_effect(action.buff_effect_frames, buff_color, Vector2(1.1, 1.1), Vector2(0, -30))
 	else:
-		# Fallback: Efeito visual básico de buff
 		var buff_tween = create_tween()
 		buff_tween.parallel().tween_property(sprite, "modulate", buff_color, 0.3)
 		buff_tween.tween_property(sprite, "modulate", Color.WHITE, 0.3)
 	
-	# Texto flutuante do buff
 	var attribute_text = _get_buff_display_name(buff_attribute)
 	show_floating_text(attribute_text + " +" + str(buff_value), buff_color)
 
-# Efeito de escudo com SpriteFrames da ação
+# 🆕 EFEITO DE ESCUDO (RECEBE ACTION)
 func play_shield_effect(shield_amount: int, action: SupportAction = null):
 	print("🛡️ CharacterView EFEITO DE ESCUDO: ", character.name, " +", shield_amount, " escudo")
 	
-	# 🆕 PRIMEIRO: Tentar usar o SpriteFrames da ação se disponível
 	if action and action.shield_effect_frames:
 		print("   🎬 Usando SpriteFrames da ação para escudo")
 		_create_action_effect(action.shield_effect_frames, Color.CYAN, Vector2(1.3, 1.3), Vector2(0, -20))
 	else:
-		# Fallback: Efeito visual básico de escudo
 		var shield_tween = create_tween()
 		shield_tween.parallel().tween_property(sprite, "modulate", Color.CYAN, 0.4)
 		shield_tween.parallel().tween_property(sprite, "scale", sprite.scale * 1.05, 0.4)
 		shield_tween.tween_property(sprite, "modulate", Color.WHITE, 0.4)
 		shield_tween.parallel().tween_property(sprite, "scale", sprite.scale, 0.4)
 	
-	# Texto flutuante
 	show_floating_text("Escudo +" + str(shield_amount), Color.CYAN)
 
-# Efeito de cleanse com SpriteFrames da ação
+# 🆕 EFEITO DE CLEANSE
 func play_cleanse_effect(debuff_count: int, action: SupportAction = null):
 	print("✨ CharacterView EFEITO DE CLEANSE: ", character.name, " removeu ", debuff_count, " debuffs")
 	
-	# 🆕 PRIMEIRO: Tentar usar o SpriteFrames da ação se disponível
 	if action and action.cleanse_effect_frames:
 		print("   🎬 Usando SpriteFrames da ação para cleanse")
 		_create_action_effect(action.cleanse_effect_frames, Color.WHITE, Vector2(1.0, 1.0), Vector2(0, -40))
 	else:
-		# Fallback: Efeito visual básico de purificação
 		var cleanse_tween = create_tween()
 		cleanse_tween.parallel().tween_property(sprite, "modulate", Color.WHITE, 0.3)
 		cleanse_tween.parallel().tween_property(sprite, "scale", sprite.scale * 1.15, 0.3)
 		cleanse_tween.tween_property(sprite, "modulate", Color.WHITE, 0.2)
 		cleanse_tween.parallel().tween_property(sprite, "scale", sprite.scale, 0.2)
 	
-	# Texto flutuante
 	show_floating_text("Purificado!", Color.WHITE)
 
-# Efeito de HOT (Heal Over Time)
+# 🆕 EFEITO DE HOT
 func play_hot_effect(hot_amount: int, duration: int):
 	print("💚 CharacterView EFEITO DE HOT: ", character.name, " +", hot_amount, "HP/turno por ", duration, " turnos")
 	
-	# Efeito visual mais suave para HOT
 	var hot_tween = create_tween()
 	hot_tween.parallel().tween_property(sprite, "modulate", Color(0, 1, 0, 0.7), 0.2)
 	hot_tween.tween_property(sprite, "modulate", Color.WHITE, 0.2)
 	
-	# Texto flutuante específico para HOT
 	show_floating_text("Cura Contínua +" + str(hot_amount), Color(0, 1, 0, 0.8))
+
+# 🆕 EFEITO DE DEFESA (PARA DEFEND ACTION)
+func play_defense_effect(action: SupportAction = null):
+	print("🛡️ CharacterView EFEITO DE DEFESA: ", character.name)
+	
+	var defense_tween = create_tween()
+	defense_tween.parallel().tween_property(sprite, "modulate", Color.CYAN, 0.2)
+	defense_tween.parallel().tween_property(sprite, "scale", sprite.scale * 1.05, 0.2)
+	defense_tween.tween_property(sprite, "modulate", Color.WHITE, 0.2)
+	defense_tween.parallel().tween_property(sprite, "scale", sprite.scale, 0.2)
+	
+	show_floating_text("Defesa ↑", Color.CYAN)
+
+# 🆕 EFEITO DE DEBUFF
+func play_debuff_effect(attribute: String, value: int):
+	print("📉 CharacterView EFEITO DE DEBUFF: ", character.name, " -", value, " ", attribute)
+	
+	var debuff_color = Color(1, 0, 0, 0.7)
+	var debuff_tween = create_tween()
+	debuff_tween.parallel().tween_property(sprite, "modulate", debuff_color, 0.3)
+	debuff_tween.tween_property(sprite, "modulate", Color.WHITE, 0.3)
+	
+	var attribute_text = _get_buff_display_name(attribute)
+	show_floating_text(attribute_text + " -" + str(value), debuff_color)
 
 # 🆕 FUNÇÃO PRINCIPAL: Criar efeito visual com SpriteFrames
 func _create_action_effect(sprite_frames: SpriteFrames, color: Color, effect_scale: Vector2, offset: Vector2):
@@ -229,21 +232,17 @@ func _create_action_effect(sprite_frames: SpriteFrames, color: Color, effect_sca
 	effect_sprite.z_index = 1000
 	effect_sprite.centered = true
 	
-	# Posicionar acima do personagem
 	effect_sprite.global_position = global_position + offset
 	
-	# Usar top_level para ficar acima de tudo
 	effect_sprite.top_level = true
 	effect_sprite.z_as_relative = false
 	
 	get_tree().current_scene.add_child(effect_sprite)
 	
-	# Tocar animação
 	if sprite_frames.has_animation("default"):
 		effect_sprite.play("default")
 		effect_sprite.animation_finished.connect(_on_effect_animation_finished.bind(effect_sprite))
 	else:
-		# Fallback: usar primeira animação disponível
 		var anim_names = sprite_frames.get_animation_names()
 		if anim_names.size() > 0:
 			effect_sprite.play(anim_names[0])
@@ -256,23 +255,7 @@ func _on_effect_animation_finished(effect_sprite: AnimatedSprite2D):
 	if effect_sprite and is_instance_valid(effect_sprite):
 		effect_sprite.queue_free()
 
-# 🆕 FUNÇÃO PARA EFEITOS DE ATAQUE COM SPRITEFRAMES
-func play_attack_effect(action: Action):
-	print("🎬 CharacterView EFEITO DE ATAQUE: ", character.name, " - ", action.name)
-	
-	# 🆕 Usar o sistema de efeitos da Action se disponível
-	if action.has_effect_animation():
-		print("   🎬 Usando SpriteFrames da ação de ataque")
-		var effect_position = global_position
-		var effect = action.create_effect_animation(effect_position, get_tree().current_scene)
-		if effect:
-			print("   ✅ Efeito de ataque criado")
-		else:
-			print("   ❌ Não foi possível criar efeito de ataque")
-
-# 🆕 FUNÇÕES AUXILIARES PARA ANIMAÇÕES
-
-# Texto flutuante para efeitos
+# 🆕 TEXTO FLUTUANTE
 func show_floating_text(text: String, color: Color):
 	var floating_text = Label.new()
 	floating_text.text = text
@@ -280,13 +263,11 @@ func show_floating_text(text: String, color: Color):
 	floating_text.add_theme_font_size_override("font_size", 16)
 	floating_text.position = Vector2(-40, -80)
 	
-	# Configurar como top_level para ficar acima de tudo
 	floating_text.top_level = true
 	floating_text.z_index = 2000
 	
 	add_child(floating_text)
 	
-	# Animação do texto flutuante
 	var text_tween = create_tween()
 	text_tween.parallel().tween_property(floating_text, "position", floating_text.position + Vector2(0, -50), 1.0)
 	text_tween.parallel().tween_property(floating_text, "modulate:a", 0.0, 1.0)
@@ -316,25 +297,7 @@ func _get_buff_display_name(attribute: String) -> String:
 		"critical_chance": return "Crítico"
 		_: return attribute
 
-# 🆕 FUNÇÃO PARA DEBUG VISUAL
-func enable_debug_visuals():
-	# Adicionar um ponto vermelho no pivô (0,0)
-	var debug_point = Sprite2D.new()
-	debug_point.texture = preload("res://icon.svg")  # Usar qualquer textura pequena
-	debug_point.scale = Vector2(0.1, 0.1)
-	debug_point.modulate = Color.RED
-	debug_point.z_index = 1000
-	add_child(debug_point)
-	
-	# Adicionar retângulo verde ao redor do sprite
-	var debug_rect = ColorRect.new()
-	debug_rect.size = sprite.get_rect().size
-	debug_rect.position = sprite.position
-	debug_rect.color = Color(0, 1, 0, 0.3)  # Verde semi-transparente
-	debug_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(debug_rect)
-
-# 🆕 SISTEMA SIMPLIFICADO: BattleScene chama esta função diretamente
+# 🆕 ATAQUE MEELE
 func execute_melee_attack(target_global_position: Vector2):
 	print("🎬 CharacterView EXECUTANDO ATAQUE MEELE: ", character.name)
 	
@@ -344,33 +307,27 @@ func execute_melee_attack(target_global_position: Vector2):
 	
 	is_dashing = true
 	
-	# 1. Calcular posição próxima do alvo
 	var direction = (target_global_position - global_position).normalized()
 	var distance = global_position.distance_to(target_global_position)
-	var dash_distance = distance * 0.7  # 70% da distância
+	var dash_distance = distance * 0.7
 	var min_distance = 50.0
 	dash_distance = max(dash_distance, min_distance)
 	var dash_target = position + (direction * dash_distance)
 	
 	print("   📏 Dash para: ", dash_target, " (distância: ", dash_distance, ")")
 	
-	# 2. Sequência de dash
 	var sequence_tween = create_tween()
 	
-	# Dash para frente
 	sequence_tween.tween_property(self, "position", dash_target, 0.3)
 	sequence_tween.tween_callback(perform_attack_animation)
 	
-	# Pequena pausa para ataque
 	sequence_tween.tween_interval(0.3)
 	
-	# Voltar
 	sequence_tween.tween_property(self, "position", original_position, 0.4)
 	sequence_tween.tween_callback(finish_attack)
 
 func perform_attack_animation():
 	print("   🗡️ Executando animação de ataque")
-	# Animação simples de ataque
 	var attack_tween = create_tween()
 	attack_tween.tween_property(sprite, "position", sprite.position + Vector2(15, -8), 0.1)
 	attack_tween.tween_property(sprite, "position", sprite.position, 0.1)
@@ -378,23 +335,23 @@ func perform_attack_animation():
 func finish_attack():
 	print("   ✅ Ataque concluído")
 	is_dashing = false
-	position = original_position  # Garantir posição exata
+	position = original_position
 
-# Para outros tipos de ataque
 func execute_normal_attack():
 	print("🎬 CharacterView ATAQUE NORMAL: ", character.name)
 	var attack_tween = create_tween()
 	attack_tween.tween_property(sprite, "position", sprite.position + Vector2(10, -5), 0.1)
 	attack_tween.tween_property(sprite, "position", sprite.position, 0.1)
 
-# Sistema de dano
+# 🆕 DANO
 func take_damage():
 	print("💥 CharacterView DANO: ", character.name)
 	var damage_tween = create_tween()
 	damage_tween.tween_property(sprite, "modulate", Color.RED, 0.1)
 	damage_tween.tween_property(sprite, "modulate", Color.WHITE, 0.1)
+	update_health_bar()
 
-# Sistema de slash effects
+# 🆕 SLASH EFFECT
 func apply_slash_effect(slash_config: Dictionary):
 	print("🗡️ CharacterView SLASH EFFECT: ", character.name)
 	
@@ -405,11 +362,9 @@ func apply_slash_effect(slash_config: Dictionary):
 	slash_sprite.z_index = slash_config.get("z_index", 1000)
 	slash_sprite.centered = true
 	
-	# Usar top_level para ficar acima de tudo
 	slash_sprite.top_level = true
 	slash_sprite.z_as_relative = false
 	
-	# Posicionar no personagem
 	slash_sprite.global_position = global_position
 	
 	get_tree().current_scene.add_child(slash_sprite)
@@ -421,55 +376,24 @@ func apply_slash_effect(slash_config: Dictionary):
 			slash_sprite.sprite_frames.set_animation_loop(anim_to_play, false)
 			slash_sprite.play(anim_to_play)
 	
-	# Conectar sinal para remover após animação
 	slash_sprite.animation_finished.connect(_on_slash_animation_finished.bind(slash_sprite))
-	
-func play_defense_effect(action: SupportAction = null):
-	print("🛡️ CharacterView EFEITO DE DEFESA: ", character.name)
-	
-	# Efeito visual inicial
-	var defense_tween = create_tween()
-	defense_tween.parallel().tween_property(sprite, "modulate", Color.CYAN, 0.2)
-	defense_tween.parallel().tween_property(sprite, "scale", sprite.scale * 1.05, 0.2)
-	defense_tween.tween_property(sprite, "modulate", Color.WHITE, 0.2)
-	defense_tween.parallel().tween_property(sprite, "scale", sprite.scale, 0.2)
-	
-	# Texto flutuante
-	show_floating_text("Defesa ↑", Color.CYAN)
-	
-	# 🆕 Se a ação tiver efeito persistente, ele será criado automaticamente pela SupportAction
 
-# 🆕 NOVO: Efeito de debuff (adicione este método também se não existir)
-func play_debuff_effect(attribute: String, value: int):
-	print("📉 CharacterView EFEITO DE DEBUFF: ", character.name, " -", value, " ", attribute)
-	
-	var debuff_color = Color(1, 0, 0, 0.7)  # Vermelho escuro
-	var debuff_tween = create_tween()
-	debuff_tween.parallel().tween_property(sprite, "modulate", debuff_color, 0.3)
-	debuff_tween.tween_property(sprite, "modulate", Color.WHITE, 0.3)
-	
-	var attribute_text = _get_buff_display_name(attribute)
-	show_floating_text(attribute_text + " -" + str(value), debuff_color)
-	
 func _on_slash_animation_finished(slash_sprite: AnimatedSprite2D):
 	if slash_sprite and is_instance_valid(slash_sprite):
 		slash_sprite.queue_free()
 
-# Atualizar barra de vida continuamente
+# 🆕 ATUALIZAR HP
 func _process(_delta):
 	if character and health_bar_created:
 		update_health_bar()
 
-# 🆕 FUNÇÃO PARA OBTER TAMANHO DO SPRITE (útil para o BattleScene)
 func get_sprite_size() -> Vector2:
 	if sprite and sprite.texture:
 		return sprite.texture.get_size() * sprite.scale
 	return Vector2.ZERO
 
-# 🆕 FUNÇÃO PARA OBTER RETÂNGULO DO SPRITE
 func get_sprite_rect() -> Rect2:
 	if sprite and sprite.texture:
 		var texture_size = sprite.texture.get_size() * sprite.scale
 		return Rect2(sprite.position, texture_size)
 	return Rect2()
-	
