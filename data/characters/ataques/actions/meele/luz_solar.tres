@@ -1,0 +1,95 @@
+[gd_resource type="SpriteFrames" load_steps=14 format=3 uid="uid://cso7d130fi1du"]
+
+[ext_resource type="Texture2D" uid="uid://cjq5xsix3nwpl" path="res://data/characters/ataques/png/meele/issamu minami transform - meele.png" id="1_4swo6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdulh"]
+atlas = ExtResource("1_4swo6")
+region = Rect2(0, 0, 63, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h517p"]
+atlas = ExtResource("1_4swo6")
+region = Rect2(63, 0, 63, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hljac"]
+atlas = ExtResource("1_4swo6")
+region = Rect2(126, 0, 63, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skfim"]
+atlas = ExtResource("1_4swo6")
+region = Rect2(189, 0, 63, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbgrd"]
+atlas = ExtResource("1_4swo6")
+region = Rect2(252, 0, 63, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ee051"]
+atlas = ExtResource("1_4swo6")
+region = Rect2(315, 0, 63, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2f1e"]
+atlas = ExtResource("1_4swo6")
+region = Rect2(378, 0, 63, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynwlj"]
+atlas = ExtResource("1_4swo6")
+region = Rect2(441, 0, 63, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wr0ry"]
+atlas = ExtResource("1_4swo6")
+region = Rect2(504, 0, 63, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qb1qj"]
+atlas = ExtResource("1_4swo6")
+region = Rect2(567, 0, 63, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7aigl"]
+atlas = ExtResource("1_4swo6")
+region = Rect2(630, 0, 63, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0xb3"]
+atlas = ExtResource("1_4swo6")
+region = Rect2(693, 0, 63, 62)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdulh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h517p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hljac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skfim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbgrd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ee051")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2f1e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynwlj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wr0ry")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qb1qj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7aigl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0xb3")
+}],
+"loop": true,
+"name": &"Luz Solar",
+"speed": 5.0
+}]

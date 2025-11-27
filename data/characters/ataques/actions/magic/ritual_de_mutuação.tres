@@ -1,0 +1,67 @@
+[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://sw6wr8y3nbre"]
+
+[ext_resource type="Texture2D" uid="uid://c4oappjhch8yx" path="res://data/characters/ataques/png/magic/darom - magic.png" id="1_vh24u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fs05m"]
+atlas = ExtResource("1_vh24u")
+region = Rect2(0, 0, 64, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkpdk"]
+atlas = ExtResource("1_vh24u")
+region = Rect2(64, 0, 64, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvrry"]
+atlas = ExtResource("1_vh24u")
+region = Rect2(128, 0, 64, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18xqp"]
+atlas = ExtResource("1_vh24u")
+region = Rect2(192, 0, 64, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1s5h"]
+atlas = ExtResource("1_vh24u")
+region = Rect2(256, 0, 64, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvdd3"]
+atlas = ExtResource("1_vh24u")
+region = Rect2(320, 0, 64, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_781ln"]
+atlas = ExtResource("1_vh24u")
+region = Rect2(384, 0, 64, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1f8e"]
+atlas = ExtResource("1_vh24u")
+region = Rect2(448, 0, 64, 68)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fs05m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bkpdk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvrry")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18xqp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1s5h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fvdd3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_781ln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1f8e")
+}],
+"loop": true,
+"name": &"Ritual de Mutuação",
+"speed": 5.0
+}]

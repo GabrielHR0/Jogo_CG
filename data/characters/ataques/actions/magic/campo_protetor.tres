@@ -1,0 +1,81 @@
+[gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://b1k5d77e8g3n6"]
+
+[ext_resource type="Texture2D" uid="uid://rme63ss3oqcj" path="res://data/characters/ataques/png/magic/soichiro akizuki - magic.png" id="1_aot5p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_185no"]
+atlas = ExtResource("1_aot5p")
+region = Rect2(0, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncij3"]
+atlas = ExtResource("1_aot5p")
+region = Rect2(64, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ilh5"]
+atlas = ExtResource("1_aot5p")
+region = Rect2(128, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ooxys"]
+atlas = ExtResource("1_aot5p")
+region = Rect2(192, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gv6i8"]
+atlas = ExtResource("1_aot5p")
+region = Rect2(256, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjqks"]
+atlas = ExtResource("1_aot5p")
+region = Rect2(320, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vs2ja"]
+atlas = ExtResource("1_aot5p")
+region = Rect2(384, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_227ry"]
+atlas = ExtResource("1_aot5p")
+region = Rect2(448, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rmyt"]
+atlas = ExtResource("1_aot5p")
+region = Rect2(512, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aeki4"]
+atlas = ExtResource("1_aot5p")
+region = Rect2(576, 0, 64, 63)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_185no")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncij3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ilh5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ooxys")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gv6i8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjqks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vs2ja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_227ry")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3rmyt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aeki4")
+}],
+"loop": true,
+"name": &"Campo Protetor",
+"speed": 5.0
+}]

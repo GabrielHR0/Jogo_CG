@@ -1,0 +1,102 @@
+[gd_resource type="SpriteFrames" load_steps=15 format=3 uid="uid://csntu5foljqbl"]
+
+[ext_resource type="Texture2D" uid="uid://jk6l2tyclu6y" path="res://data/characters/ataques/png/magic/nobuhiko akizuki - magic.png" id="1_sjwrn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4tj0"]
+atlas = ExtResource("1_sjwrn")
+region = Rect2(0, 0, 64, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ub1w1"]
+atlas = ExtResource("1_sjwrn")
+region = Rect2(64, 0, 64, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hdpie"]
+atlas = ExtResource("1_sjwrn")
+region = Rect2(128, 0, 64, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8vwo"]
+atlas = ExtResource("1_sjwrn")
+region = Rect2(192, 0, 64, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q73vr"]
+atlas = ExtResource("1_sjwrn")
+region = Rect2(256, 0, 64, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jue73"]
+atlas = ExtResource("1_sjwrn")
+region = Rect2(320, 0, 64, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vb1sv"]
+atlas = ExtResource("1_sjwrn")
+region = Rect2(384, 0, 64, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mqi2"]
+atlas = ExtResource("1_sjwrn")
+region = Rect2(448, 0, 64, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0okiq"]
+atlas = ExtResource("1_sjwrn")
+region = Rect2(512, 0, 64, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gyvyh"]
+atlas = ExtResource("1_sjwrn")
+region = Rect2(576, 0, 64, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jn7ih"]
+atlas = ExtResource("1_sjwrn")
+region = Rect2(640, 0, 64, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3hxdc"]
+atlas = ExtResource("1_sjwrn")
+region = Rect2(704, 0, 64, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqtep"]
+atlas = ExtResource("1_sjwrn")
+region = Rect2(768, 0, 64, 60)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x4tj0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ub1w1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hdpie")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8vwo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q73vr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jue73")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vb1sv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3mqi2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0okiq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gyvyh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jn7ih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3hxdc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqtep")
+}],
+"loop": true,
+"name": &"Marca da Escuridão",
+"speed": 5.0
+}]

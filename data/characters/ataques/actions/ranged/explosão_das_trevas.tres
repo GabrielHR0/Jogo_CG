@@ -1,0 +1,81 @@
+[gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://bp1glqi3ytu1x"]
+
+[ext_resource type="Texture2D" uid="uid://b78gi1prn7ns" path="res://data/characters/ataques/png/ranged/masaru todo - ranged.png" id="1_60bvt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0rp6"]
+atlas = ExtResource("1_60bvt")
+region = Rect2(0, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgatx"]
+atlas = ExtResource("1_60bvt")
+region = Rect2(64, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47b8u"]
+atlas = ExtResource("1_60bvt")
+region = Rect2(128, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ow1m7"]
+atlas = ExtResource("1_60bvt")
+region = Rect2(192, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvd6x"]
+atlas = ExtResource("1_60bvt")
+region = Rect2(256, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_birfy"]
+atlas = ExtResource("1_60bvt")
+region = Rect2(320, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u3eta"]
+atlas = ExtResource("1_60bvt")
+region = Rect2(384, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fidvv"]
+atlas = ExtResource("1_60bvt")
+region = Rect2(448, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hf1eu"]
+atlas = ExtResource("1_60bvt")
+region = Rect2(512, 0, 64, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pct8q"]
+atlas = ExtResource("1_60bvt")
+region = Rect2(576, 0, 64, 66)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0rp6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgatx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47b8u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ow1m7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvd6x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_birfy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u3eta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fidvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hf1eu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pct8q")
+}],
+"loop": true,
+"name": &"Explosão das Trevas",
+"speed": 5.0
+}]

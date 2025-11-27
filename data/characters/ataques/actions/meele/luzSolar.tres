@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MeleeAttack" load_steps=4 format=3 uid="uid://1pi276br0o6x"]
+
+[ext_resource type="Script" uid="uid://be0b1oathrib4" path="res://models/actions/atacks/MeleeAttack.gd" id="1_njjx8"]
+[ext_resource type="SpriteFrames" uid="uid://cso7d130fi1du" path="res://data/characters/ataques/actions/meele/luz_solar.tres" id="2_xvcwg"]
+[ext_resource type="AudioStream" uid="uid://bgasb87jktc1i" path="res://data/characters/ataques/sons/luzSolar.mp3" id="3_xvcwg"]
+
+[resource]
+script = ExtResource("1_njjx8")
+damage_multiplier = 3.0
+critical_chance = 0.15
+critical_multiplier = 1.8
+ap_cost = 6
+sound_effect = ExtResource("3_xvcwg")
+slash_sprite_frames = ExtResource("2_xvcwg")
+metadata/_custom_type_script = "uid://be0b1oathrib4"

@@ -1,8 +1,8 @@
 [gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://dgdbxo4mcnwlf"]
 
-[ext_resource type="Texture2D" uid="uid://dm5at5lixyeg6" path="res://assets/Darom (Sumo Sacerdote de Gorgom)/Sprites/png/andando.png" id="1_wddon"]
-[ext_resource type="Texture2D" uid="uid://cwm8081y8tlkg" path="res://assets/Darom (Sumo Sacerdote de Gorgom)/Sprites/png/ataque.png" id="2_2rxow"]
-[ext_resource type="Texture2D" uid="uid://ccn5x2errarjk" path="res://assets/Darom (Sumo Sacerdote de Gorgom)/Sprites/png/dano.png" id="3_0bdx1"]
+[ext_resource type="Texture2D" uid="uid://bundjp37sgm7" path="res://assets/Darom (Sumo Sacerdote de Gorgom)/Sprites/png/andando.png" id="1_wddon"]
+[ext_resource type="Texture2D" uid="uid://b07j5mrue61eh" path="res://assets/Darom (Sumo Sacerdote de Gorgom)/Sprites/png/ataque.png" id="2_2rxow"]
+[ext_resource type="Texture2D" uid="uid://1l6xucboeft6" path="res://assets/Darom (Sumo Sacerdote de Gorgom)/Sprites/png/dano.png" id="3_0bdx1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_51brd"]
 atlas = ExtResource("1_wddon")

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="AttackAction" load_steps=3 format=3 uid="uid://dfwwec8v5de4u"]
+[gd_resource type="Resource" script_class="AttackAction" load_steps=4 format=3 uid="uid://dfwwec8v5de4u"]
 
 [ext_resource type="Script" uid="uid://buw3paw6jsg2r" path="res://models/actions/atacks/AttackAction.gd" id="1_xqe4b"]
 [ext_resource type="SpriteFrames" uid="uid://kbcaww01u63" path="res://data/characters/ataques/actions/meele/espada_radiante.tres" id="2_0yl5g"]
+[ext_resource type="AudioStream" uid="uid://treykne4bmkd" path="res://data/characters/ataques/sons/espadaRadianteEcorteSombrio.mp3" id="3_0yl5g"]
 
 [resource]
 script = ExtResource("1_xqe4b")
@@ -10,6 +11,7 @@ critical_chance = 0.15
 critical_multiplier = 1.8
 name = "Espada Radiante"
 ap_cost = 5
+sound_effect = ExtResource("3_0yl5g")
 slash_sprite_frames = ExtResource("2_0yl5g")
 slash_color = Color(0, 1, 1, 0.8039216)
 slash_offset = Vector2(1, 0)

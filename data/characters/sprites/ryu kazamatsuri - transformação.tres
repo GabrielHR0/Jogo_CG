@@ -1,8 +1,8 @@
 [gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://d4k277edrpnon"]
 
-[ext_resource type="Texture2D" uid="uid://jaob1aye35xa" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Transformação/png/andando transformação.png" id="1_rrg5u"]
-[ext_resource type="Texture2D" uid="uid://ddjwbx2havrkv" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Transformação/png/ataque transformação.png" id="2_6wvxe"]
-[ext_resource type="Texture2D" uid="uid://dp87gi0plgxwq" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Transformação/png/dano transformação.png" id="3_sua68"]
+[ext_resource type="Texture2D" uid="uid://dnj7j4mvtccaf" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Transformação/png/andando transformação.png" id="1_rrg5u"]
+[ext_resource type="Texture2D" uid="uid://66x3ocqoe3xo" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Transformação/png/ataque transformação.png" id="2_6wvxe"]
+[ext_resource type="Texture2D" uid="uid://dyk56hs3ksq1q" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Transformação/png/dano transformação.png" id="3_sua68"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q6f1a"]
 atlas = ExtResource("1_rrg5u")

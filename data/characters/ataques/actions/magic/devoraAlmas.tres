@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MagicAttack" load_steps=4 format=3 uid="uid://cc54or3yoctus"]
+
+[ext_resource type="Script" uid="uid://cpw4jpb7pdqbv" path="res://models/actions/atacks/MagicAttack.gd" id="1_xhthq"]
+[ext_resource type="SpriteFrames" uid="uid://nduuk3j5r5kt" path="res://data/characters/ataques/actions/magic/devora_almas.tres" id="2_5vrk7"]
+[ext_resource type="AudioStream" uid="uid://d3ti8snc5aqyk" path="res://data/characters/ataques/sons/devoraAlmasEmarcasDaEscuridão.mp3" id="3_5vrk7"]
+
+[resource]
+script = ExtResource("1_xhthq")
+element = "dark"
+damage_multiplier = 2.6
+critical_chance = 0.12
+critical_multiplier = 1.8
+ap_cost = 8
+sound_effect = ExtResource("3_5vrk7")
+slash_sprite_frames = ExtResource("2_5vrk7")
+metadata/_custom_type_script = "uid://cpw4jpb7pdqbv"

@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://chd44kmhhpcxu" path="res://data/characters/animações/ryu kazamatsuri.tres" id="1_pyj4v"]
 [ext_resource type="Texture2D" uid="uid://siiot5kxxc0l" path="res://assets/Ícones/Ryu Kazamatsuri.png" id="2_pyj4v"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_2cm0e"]
-[ext_resource type="Resource" uid="uid://csl6lc7fnaq7h" path="res://data/characters/ataques/actions/ranged/ryu kazamtsuri.tres" id="3_kqsgh"]
+[ext_resource type="Resource" uid="uid://csl6lc7fnaq7h" path="res://data/characters/ataques/actions/ranged/flechasDuplas.tres" id="3_kqsgh"]
 [ext_resource type="Texture2D" uid="uid://yr13glpub7ol" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Ryu Kazamatsuri (Arqueiro  Furtivo).png" id="4_kqsgh"]
 
 [resource]

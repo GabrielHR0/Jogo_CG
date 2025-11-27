@@ -1,0 +1,95 @@
+[gd_resource type="SpriteFrames" load_steps=14 format=3 uid="uid://3gdr2anlsa0b"]
+
+[ext_resource type="Texture2D" uid="uid://ca7pqffu0dx05" path="res://data/characters/ataques/png/magic/bishum - magic.png" id="1_2dg0o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qutin"]
+atlas = ExtResource("1_2dg0o")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sxgsm"]
+atlas = ExtResource("1_2dg0o")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tcixx"]
+atlas = ExtResource("1_2dg0o")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncfi3"]
+atlas = ExtResource("1_2dg0o")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8maeh"]
+atlas = ExtResource("1_2dg0o")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l85r1"]
+atlas = ExtResource("1_2dg0o")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ccvg"]
+atlas = ExtResource("1_2dg0o")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofh8f"]
+atlas = ExtResource("1_2dg0o")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cf76h"]
+atlas = ExtResource("1_2dg0o")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8eqrn"]
+atlas = ExtResource("1_2dg0o")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1k23h"]
+atlas = ExtResource("1_2dg0o")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjboi"]
+atlas = ExtResource("1_2dg0o")
+region = Rect2(704, 0, 64, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qutin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sxgsm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tcixx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncfi3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8maeh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l85r1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ccvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ofh8f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cf76h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8eqrn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1k23h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rjboi")
+}],
+"loop": true,
+"name": &"Reflexo Sombrio",
+"speed": 5.0
+}]

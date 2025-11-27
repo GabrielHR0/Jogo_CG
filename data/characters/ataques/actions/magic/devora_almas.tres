@@ -1,0 +1,95 @@
+[gd_resource type="SpriteFrames" load_steps=14 format=3 uid="uid://nduuk3j5r5kt"]
+
+[ext_resource type="Texture2D" uid="uid://ck4dgmmf7jiwm" path="res://data/characters/ataques/png/magic/masaru todo transform - magic.png" id="1_yahao"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63u4t"]
+atlas = ExtResource("1_yahao")
+region = Rect2(0, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnixf"]
+atlas = ExtResource("1_yahao")
+region = Rect2(64, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2wrx"]
+atlas = ExtResource("1_yahao")
+region = Rect2(128, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ictk"]
+atlas = ExtResource("1_yahao")
+region = Rect2(192, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixhu4"]
+atlas = ExtResource("1_yahao")
+region = Rect2(256, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir5wi"]
+atlas = ExtResource("1_yahao")
+region = Rect2(320, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2728s"]
+atlas = ExtResource("1_yahao")
+region = Rect2(384, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cmpk"]
+atlas = ExtResource("1_yahao")
+region = Rect2(448, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3sra"]
+atlas = ExtResource("1_yahao")
+region = Rect2(512, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkvyl"]
+atlas = ExtResource("1_yahao")
+region = Rect2(576, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejs7k"]
+atlas = ExtResource("1_yahao")
+region = Rect2(640, 0, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r70sv"]
+atlas = ExtResource("1_yahao")
+region = Rect2(704, 0, 64, 63)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63u4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bnixf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2wrx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ictk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixhu4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ir5wi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2728s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0cmpk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3sra")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkvyl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejs7k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r70sv")
+}],
+"loop": true,
+"name": &"Devora Almas",
+"speed": 5.0
+}]

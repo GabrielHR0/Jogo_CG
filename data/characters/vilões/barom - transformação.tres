@@ -1,11 +1,18 @@
-[gd_resource type="Resource" script_class="Character" load_steps=7 format=3 uid="uid://boie7dqqlox1v"]
+[gd_resource type="Resource" script_class="Character" load_steps=8 format=3 uid="uid://boie7dqqlox1v"]
 
 [ext_resource type="Resource" uid="uid://3jblf2fjrif1" path="res://data/characters/animações/baraom - transformação.tres" id="1_ah4bt"]
 [ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_hw50x"]
-[ext_resource type="Texture2D" uid="uid://da0tu8s4poq06" path="res://assets/Ícones/Baraom - Transformação.png" id="2_ah4bt"]
-[ext_resource type="Resource" uid="uid://bxwkst8scro57" path="res://data/characters/ataques/actions/meele/baraom transform.tres" id="3_1xx05"]
+[ext_resource type="Texture2D" uid="uid://lw313h6bbtr6" path="res://assets/Ícones/Baraom - Transformação.png" id="2_ah4bt"]
+[ext_resource type="Script" uid="uid://be0b1oathrib4" path="res://models/actions/atacks/MeleeAttack.gd" id="3_1xx05"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_q6gyf"]
-[ext_resource type="Texture2D" uid="uid://ur387hmii3g2" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Baraom (Sumo Sacerdote  Guerreiro Mutante) - Transformação.png" id="4_1xx05"]
+[ext_resource type="Texture2D" uid="uid://cfu48sqbqefr2" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Baraom (Sumo Sacerdote  Guerreiro Mutante) - Transformação.png" id="4_1xx05"]
+
+[sub_resource type="Resource" id="Resource_gq28a"]
+script = ExtResource("3_1xx05")
+damage_multiplier = 2.2
+critical_chance = 0.06
+critical_multiplier = 1.7
+metadata/_custom_type_script = "uid://be0b1oathrib4"
 
 [resource]
 script = ExtResource("3_q6gyf")
@@ -16,6 +23,6 @@ strength = 8
 constitution = 10
 agility = 3
 role = 1
-combat_actions = Array[ExtResource("1_hw50x")]([ExtResource("3_1xx05")])
+combat_actions = Array[ExtResource("1_hw50x")]([SubResource("Resource_gq28a")])
 animation_data = ExtResource("1_ah4bt")
 metadata/_custom_type_script = "uid://bbcihyrs4lcmp"
