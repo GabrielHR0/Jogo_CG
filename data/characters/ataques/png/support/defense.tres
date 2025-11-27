@@ -1,0 +1,67 @@
+[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://cmcgd5kcxlhmq"]
+
+[ext_resource type="Texture2D" uid="uid://c01iuwc8dnb2y" path="res://data/characters/ataques/png/support/shield.png" id="1_deao1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hl0ya"]
+atlas = ExtResource("1_deao1")
+region = Rect2(0, 0, 40, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cit1a"]
+atlas = ExtResource("1_deao1")
+region = Rect2(40, 0, 40, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c13sy"]
+atlas = ExtResource("1_deao1")
+region = Rect2(80, 0, 40, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmspb"]
+atlas = ExtResource("1_deao1")
+region = Rect2(120, 0, 40, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xy24"]
+atlas = ExtResource("1_deao1")
+region = Rect2(160, 0, 40, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0dpow"]
+atlas = ExtResource("1_deao1")
+region = Rect2(200, 0, 40, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0s26w"]
+atlas = ExtResource("1_deao1")
+region = Rect2(240, 0, 40, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ephck"]
+atlas = ExtResource("1_deao1")
+region = Rect2(280, 0, 40, 66)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_hl0ya")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cit1a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c13sy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hmspb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4xy24")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0dpow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0s26w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ephck")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]

@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="MagicAttack" load_steps=4 format=3 uid="uid://db3sivcj53pe2"]
 
 [ext_resource type="Script" uid="uid://cpw4jpb7pdqbv" path="res://models/actions/atacks/MagicAttack.gd" id="1_0pgp6"]
-[ext_resource type="SpriteFrames" uid="uid://sw6wr8y3nbre" path="res://data/characters/ataques/actions/magic/ritual_de_mutuação.tres" id="2_4livb"]
-[ext_resource type="AudioStream" uid="uid://bm2hkfhqrnb5t" path="res://data/characters/ataques/sons/ritualDeMutação.mp3" id="3_4livb"]
+[ext_resource type="SpriteFrames" path="res://data/characters/ataques/actions/magic/ritual_de_mutuação.tres" id="2_4livb"]
+[ext_resource type="AudioStream" uid="uid://k2t2cdwxsqdi" path="res://data/characters/ataques/sons/ritualDeMutação.mp3" id="3_4livb"]
 
 [resource]
 script = ExtResource("1_0pgp6")

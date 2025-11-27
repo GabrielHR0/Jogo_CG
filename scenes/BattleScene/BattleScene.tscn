@@ -44,7 +44,7 @@ expand_mode = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.19500001
-anchor_top = 0.293
+anchor_top = 0.2388333
 anchor_right = 0.78700006
 anchor_bottom = 0.7456667
 offset_left = -0.6000061
@@ -56,35 +56,35 @@ metadata/_edit_use_anchors_ = true
 
 [node name="EnemiesArea" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 0
 theme_override_constants/separation = 20
 
 [node name="EnemyBackRow" type="VBoxContainer" parent="HBoxContainer/EnemiesArea"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_constants/separation = 0
 
 [node name="EnemyFrontRow" type="VBoxContainer" parent="HBoxContainer/EnemiesArea"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_constants/separation = 0
 
 [node name="AlliesArea" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 8
 theme_override_constants/separation = 20
 
 [node name="AllyFrontRow" type="VBoxContainer" parent="HBoxContainer/AlliesArea"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_constants/separation = 0
 
 [node name="AllyBackRow" type="VBoxContainer" parent="HBoxContainer/AlliesArea"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_constants/separation = 0
 

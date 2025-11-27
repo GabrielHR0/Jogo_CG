@@ -1,4 +1,3 @@
-# Character.gd
 extends Resource
 class_name Character
 
@@ -34,6 +33,13 @@ var is_defending: bool = false
 var defense_bonus: int = 0
 var dodge_chance: float = 0.0
 
+# 🆕 SISTEMA DE SUPORTE
+var current_shield: int = 0
+var shield_duration: int = 0
+var hot_amount: int = 0
+var hot_duration: int = 0
+var debuffs := {}
+
 var animation_system: AnimationSystem = null
 var battle_position: Vector2 = Vector2.ZERO
 
@@ -43,11 +49,21 @@ signal defense_animation_requested()
 signal effect_requested(effect_name, position_offset)
 signal position_updated(new_position: Vector2)
 signal animation_system_ready(system: AnimationSystem)
-signal character_died()  # 🆕 NOVO: Sinal de morte
+signal character_died()
+# 🆕 NOVOS SINAIS PARA SUPORTE
+signal shield_applied(amount: int, duration: int)
+signal hot_applied(amount: int, duration: int)
+signal debuff_applied(attribute: String, value: int, duration: int)
+signal debuffs_cleansed(count: int)
 
 func _init():
 	calculate_stats()
 	_setup_basic_actions()
+	# 🆕 Inicializar sistemas de suporte
+	current_shield = 0
+	shield_duration = 0
+	hot_amount = 0
+	hot_duration = 0
 
 func _setup_basic_actions():
 	basic_actions.clear()
@@ -117,6 +133,12 @@ func restore_ap():
 	return recovered
 
 func take_damage(dmg: int) -> int:
+	# 🆕 CORREÇÃO: Verificar escudo primeiro
+	var damage_after_shield = _process_shield(dmg)
+	if damage_after_shield <= 0:
+		print("   🛡️ Escudo absorveu todo o dano!")
+		return 0
+	
 	# Verifica se esquiva completamente
 	if is_defending and randf() < dodge_chance:
 		print("   🎯", name, "esquivou completamente do ataque!")
@@ -124,10 +146,10 @@ func take_damage(dmg: int) -> int:
 		return 0
 	
 	var defense_reduction = int(get_defense() * 0.5)
-	var final_damage = max(0, dmg - defense_reduction)
+	var final_damage = max(0, damage_after_shield - defense_reduction)
 	current_hp = max(0, current_hp - final_damage)
 	
-	# 🆕 NOVO: Emite sinal de morte se HP chegou a zero
+	# Emite sinal de morte se HP chegou a zero
 	if current_hp <= 0:
 		character_died.emit()
 	
@@ -139,6 +161,23 @@ func take_damage(dmg: int) -> int:
 		print("   💥 Dano final:", final_damage, "(original:", dmg, ")")
 	
 	return final_damage
+
+# 🆕 NOVO: Processar dano no escudo
+func _process_shield(damage: int) -> int:
+	if current_shield <= 0:
+		return damage
+	
+	if damage <= current_shield:
+		current_shield -= damage
+		print("   🛡️ Escudo absorveu ", damage, " de dano")
+		print("   🛡️ Escudo restante: ", current_shield)
+		return 0
+	else:
+		var remaining_damage = damage - current_shield
+		print("   🛡️ Escudo absorveu ", current_shield, " de dano")
+		current_shield = 0
+		shield_duration = 0  # Escudo quebrado
+		return remaining_damage
 
 func spend_ap(cost: int):
 	current_ap = max(0, current_ap - max(0, cost))
@@ -163,10 +202,18 @@ func get_attribute(attr_name: String) -> int:
 		"agility": base_value = agility
 		"intelligence": base_value = intelligence
 		_: base_value = 0
+	
+	# Aplicar buffs
 	var buff_value = 0
 	if buffs.has(attr_name):
 		buff_value = buffs[attr_name][0]
-	return max(0, base_value + buff_value)
+	
+	# 🆕 Aplicar debuffs
+	var debuff_value = 0
+	if debuffs.has(attr_name):
+		debuff_value = debuffs[attr_name][0]
+	
+	return max(0, base_value + buff_value - debuff_value)
 
 func start_defending():
 	is_defending = true
@@ -214,6 +261,82 @@ func update_buffs():
 	
 	_recalculate_combat_stats_only()
 
+# 🆕 NOVO: Adicionar escudo
+func add_shield(amount: int, duration: int):
+	current_shield = amount
+	shield_duration = duration
+	shield_applied.emit(amount, duration)
+	print("   🛡️ ", name, " ganhou escudo de ", amount, " por ", duration, " turnos")
+
+# 🆕 NOVO: Adicionar Heal Over Time
+func add_hot(amount: int, duration: int):
+	hot_amount = amount
+	hot_duration = duration
+	hot_applied.emit(amount, duration)
+	print("   💚 ", name, " ganhou cura contínua de ", amount, " HP por ", duration, " turnos")
+
+# 🆕 NOVO: Sistema de debuffs
+func add_debuff(attr_name: String, debuff_value: int, duration_turns: int):
+	if debuffs.has(attr_name):
+		var current_debuff = debuffs[attr_name]
+		current_debuff[0] += debuff_value
+		current_debuff[1] = max(current_debuff[1], duration_turns)
+	else:
+		debuffs[attr_name] = [debuff_value, duration_turns]
+	
+	debuff_applied.emit(attr_name, debuff_value, duration_turns)
+	_recalculate_combat_stats_only()
+
+# 🆕 NOVO: Remover todos os debuffs (cleanse)
+func remove_all_debuffs() -> int:
+	var removed_count = debuffs.size()
+	debuffs.clear()
+	debuffs_cleansed.emit(removed_count)
+	_recalculate_combat_stats_only()
+	print("   ✨ ", name, " removeu ", removed_count, " debuffs")
+	return removed_count
+
+# 🆕 NOVO: Atualizar debuffs
+func update_debuffs():
+	var keys_to_remove = []
+	for attr_name in debuffs.keys():
+		debuffs[attr_name][1] -= 1
+		if debuffs[attr_name][1] <= 0:
+			keys_to_remove.append(attr_name)
+	for attr_name in keys_to_remove:
+		debuffs.erase(attr_name)
+	
+	_recalculate_combat_stats_only()
+
+# 🆕 NOVO: Processar efeitos no início do turno
+func process_start_of_turn_effects():
+	# Processar HOT (Heal Over Time)
+	if hot_duration > 0 and hot_amount > 0:
+		var actual_heal = min(hot_amount, get_max_hp() - current_hp)
+		if actual_heal > 0:
+			current_hp += actual_heal
+			print("   💚 Cura contínua: ", name, " recuperou ", actual_heal, " HP")
+			request_heal_animation()
+		hot_duration -= 1
+		if hot_duration <= 0:
+			hot_amount = 0
+			print("   💚 Cura contínua de ", name, " terminou")
+
+# 🆕 NOVO: Processar efeitos no final do turno
+func process_end_of_turn_effects():
+	# Processar duração do escudo
+	if shield_duration > 0:
+		shield_duration -= 1
+		if shield_duration <= 0:
+			current_shield = 0
+			print("   🛡️ Escudo de ", name, " expirou")
+	
+	# Processar buffs
+	update_buffs()
+	
+	# Processar debuffs
+	update_debuffs()
+
 func add_combat_action(action: Action):
 	if combat_actions.size() < 4:
 		combat_actions.append(action)
@@ -252,7 +375,6 @@ func set_battle_position(new_position: Vector2):
 
 func get_battle_position() -> Vector2:
 	return battle_position
-	
 
 func request_attack_animation(attack_type: String = "basic", target_position: Vector2 = Vector2.ZERO):
 	animation_requested.emit("attack", attack_type)
@@ -271,11 +393,31 @@ func request_attack_animation(attack_type: String = "basic", target_position: Ve
 				effect_requested.emit("sparkles", Vector2(0, -50))
 
 func request_heal_animation():
-	# Usar o sistema de sinais existente
 	effect_requested.emit("heal", Vector2(0, -30))
 	
 	if animation_system:
 		animation_system.play_heal_animation()
+
+# 🆕 NOVO: Solicitar animação de buff
+func request_buff_animation(buff_type: String):
+	effect_requested.emit("buff", Vector2(0, -40))
+	
+	if animation_system:
+		animation_system.play_buff_animation(buff_type)
+
+# 🆕 NOVO: Solicitar animação de escudo
+func request_shield_animation():
+	effect_requested.emit("shield", Vector2(0, 0))
+	
+	if animation_system:
+		animation_system.play_shield_animation()
+
+# 🆕 NOVO: Solicitar animação de cleanse
+func request_cleanse_animation():
+	effect_requested.emit("cleanse", Vector2(0, -60))
+	
+	if animation_system:
+		animation_system.play_cleanse_animation()
 		
 func request_damage_animation():
 	damage_animation_requested.emit()
@@ -366,13 +508,20 @@ func receive_healing(amount: int):
 func can_act() -> bool:
 	return is_alive() and current_ap > 0
 
+# 🆕 ATUALIZADO: Resetar estado de batalha completo
 func reset_battle_state():
 	is_defending = false
 	defense_bonus = 0
 	dodge_chance = 0.0
 	buffs.clear()
+	debuffs.clear()
+	current_shield = 0
+	shield_duration = 0
+	hot_amount = 0
+	hot_duration = 0
 	_recalculate_combat_stats_only()
 
+# 🆕 ATUALIZADO: Informações de status completas
 func get_status_info() -> Dictionary:
 	return {
 		"name": name,
@@ -382,10 +531,21 @@ func get_status_info() -> Dictionary:
 		"max_ap": get_max_ap(),
 		"is_defending": is_defending,
 		"buffs": buffs.duplicate(),
+		"debuffs": debuffs.duplicate(),
+		"shield": current_shield,
+		"shield_duration": shield_duration,
+		"hot_amount": hot_amount,
+		"hot_duration": hot_duration,
 		"is_alive": is_alive(),
 		"battle_position": battle_position
 	}
 
+# 🆕 CORREÇÃO: Método has_buff corrigido
+func has_buff(attribute: String) -> bool:
+	# buffs é um Dictionary onde as chaves são os nomes dos atributos
+	return buffs.has(attribute)
+
+# 🆕 ATUALIZADO: Print status completo
 func print_status():
 	print("=== STATUS %s ===" % name)
 	print("❤️ HP: %d/%d" % [current_hp, get_max_hp()])
@@ -399,10 +559,15 @@ func print_status():
 	print("🏹 Dano à Distância: %d" % ranged_damage)
 	print("🛡️ Defesa: %d" % defense)
 	print("🛡️ Defendendo: %s" % ("Sim" if is_defending else "Não"))
+	print("🛡️ Escudo: %d (dura %d turnos)" % [current_shield, shield_duration])
+	print("💚 Cura Contínua: %d HP (dura %d turnos)" % [hot_amount, hot_duration])
 	print("📍 Posição: %s" % battle_position)
 	print("📈 Buffs Ativos: %d" % buffs.size())
 	for buff in buffs:
 		print("   - %s: +%d (%d turnos)" % [buff, buffs[buff][0], buffs[buff][1]])
+	print("📉 Debuffs Ativos: %d" % debuffs.size())
+	for debuff in debuffs:
+		print("   - %s: -%d (%d turnos)" % [debuff, debuffs[debuff][0], debuffs[debuff][1]])
 	print("================")
 
 func cleanup():

@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="RangedAttack" load_steps=4 format=3 uid="uid://bsu2wnimg5264"]
 
 [ext_resource type="Script" uid="uid://d006vpi5yx8qh" path="res://models/actions/atacks/RangedAttack.gd" id="1_8xjmu"]
-[ext_resource type="SpriteFrames" uid="uid://dn42oi6316hq2" path="res://data/characters/ataques/actions/ranged/onda_verde.tres" id="2_1qcf4"]
-[ext_resource type="AudioStream" uid="uid://dk8w7vv11w4y0" path="res://data/characters/ataques/sons/ondaVerde.mp3" id="3_1qcf4"]
+[ext_resource type="SpriteFrames" path="res://data/characters/ataques/actions/ranged/onda_verde.tres" id="2_1qcf4"]
+[ext_resource type="AudioStream" uid="uid://8q4ps7nicoo1" path="res://data/characters/ataques/sons/ondaVerde.mp3" id="3_1qcf4"]
 
 [resource]
 script = ExtResource("1_8xjmu")

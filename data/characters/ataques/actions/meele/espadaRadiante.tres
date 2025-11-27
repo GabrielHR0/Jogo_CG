@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://buw3paw6jsg2r" path="res://models/actions/atacks/AttackAction.gd" id="1_xqe4b"]
 [ext_resource type="SpriteFrames" uid="uid://kbcaww01u63" path="res://data/characters/ataques/actions/meele/espada_radiante.tres" id="2_0yl5g"]
-[ext_resource type="AudioStream" uid="uid://treykne4bmkd" path="res://data/characters/ataques/sons/espadaRadianteEcorteSombrio.mp3" id="3_0yl5g"]
+[ext_resource type="AudioStream" uid="uid://cpfrtvxo0lwxx" path="res://data/characters/ataques/sons/espadaRadianteEcorteSombrio.mp3" id="3_0yl5g"]
 
 [resource]
 script = ExtResource("1_xqe4b")

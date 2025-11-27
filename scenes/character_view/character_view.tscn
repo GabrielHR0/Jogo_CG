@@ -26,6 +26,9 @@ func setup(c: Character, side: String = \"ally\"):
 "
 
 [node name="CharacterView2" type="HBoxContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = -1
+anchor_right = 0.031000001
+anchor_bottom = 0.056
+offset_right = 0.3199997
+offset_bottom = -0.3199997
 script = SubResource("GDScript_ux8jc")

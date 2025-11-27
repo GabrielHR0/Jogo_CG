@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="SupportAction" load_steps=4 format=3 uid="uid://bwpru665k0oca"]
+
+[ext_resource type="SpriteFrames" uid="uid://y5s73yphkqn4" path="res://data/characters/ataques/png/support/buff.tres" id="1_oqcjf"]
+[ext_resource type="Script" uid="uid://d15y0iaji4k5x" path="res://models/actions/SupportAction.gd" id="1_t0i3h"]
+[ext_resource type="SpriteFrames" uid="uid://cmcgd5kcxlhmq" path="res://data/characters/ataques/png/support/defense.tres" id="2_oqcjf"]
+
+[resource]
+script = ExtResource("1_t0i3h")
+buff_attribute = "defense"
+buff_value = 5
+buff_duration = 2
+shield_amount = 20
+hot_amount = 0
+hot_duration = 0
+has_persistent_effect = true
+persistent_effect_frames = ExtResource("2_oqcjf")
+persistent_effect_color = Color(0.2509804, 0.3372549, 0.94509804, 1)
+name = "Barreira Arcana"
+ap_cost = 7
+target_type = "ally"
+description = "Concede escudo e aumenta defesa"
+animation_type = "heal"
+effect_sprite_frames = ExtResource("1_oqcjf")
+effect_color = Color(0.2509804, 0.3372549, 0.94509804, 1)
+effect_offset = Vector2(0, 0)
+projectile_color = Color(0.2509804, 0.3372549, 0.94509804, 1)
+slash_color = Color(0.2509804, 0.3372549, 0.94509804, 1)
+melee_dash_enabled = false
+metadata/_custom_type_script = "uid://d15y0iaji4k5x"

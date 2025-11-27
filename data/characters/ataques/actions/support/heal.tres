@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SupportAction" load_steps=3 format=3 uid="uid://on5pxxgrmnyb"]
+
+[ext_resource type="Script" uid="uid://d15y0iaji4k5x" path="res://models/actions/SupportAction.gd" id="1_kbwda"]
+[ext_resource type="SpriteFrames" uid="uid://ds38mo68e2i6" path="res://data/characters/ataques/png/support/heal_sprite.tres" id="1_q5ajw"]
+
+[resource]
+script = ExtResource("1_kbwda")
+heal_amount = 15
+heal_effect_frames = ExtResource("1_q5ajw")
+name = "Totem Curativo"
+ap_cost = 9
+target_type = "ally"
+animation_type = "special"
+slash_sprite_frames = ExtResource("1_q5ajw")
+melee_dash_enabled = false
+metadata/_custom_type_script = "uid://d15y0iaji4k5x"

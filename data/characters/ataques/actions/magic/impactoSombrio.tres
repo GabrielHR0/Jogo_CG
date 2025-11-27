@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MagicAttack" load_steps=4 format=3 uid="uid://bnxxekhx3hgkd"]
+[gd_resource type="Resource" script_class="MagicAttack" load_steps=4 format=3 uid="uid://cq7pq04opmlq6"]
 
 [ext_resource type="Script" uid="uid://cpw4jpb7pdqbv" path="res://models/actions/atacks/MagicAttack.gd" id="1_mpgv8"]
 [ext_resource type="SpriteFrames" uid="uid://dep2m5j86vpkh" path="res://data/characters/ataques/actions/magic/impacto_sombrio.tres" id="2_tcxsb"]

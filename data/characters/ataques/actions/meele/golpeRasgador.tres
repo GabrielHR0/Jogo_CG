@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="MeleeAttack" load_steps=4 format=3 uid="uid://d2qxer3cg2puf"]
 
 [ext_resource type="Script" uid="uid://be0b1oathrib4" path="res://models/actions/atacks/MeleeAttack.gd" id="1_3u8ku"]
-[ext_resource type="SpriteFrames" uid="uid://1x4miu2cobr5" path="res://data/characters/ataques/actions/meele/golpe_rasgador.tres" id="2_7a28c"]
-[ext_resource type="AudioStream" uid="uid://ngx1mpe2ix7w" path="res://data/characters/ataques/sons/golpeRasgador.mp3" id="3_7a28c"]
+[ext_resource type="SpriteFrames" path="res://data/characters/ataques/actions/meele/golpe_rasgador.tres" id="2_7a28c"]
+[ext_resource type="AudioStream" uid="uid://bpnv5w24rg6q1" path="res://data/characters/ataques/sons/golpeRasgador.mp3" id="3_7a28c"]
 
 [resource]
 script = ExtResource("1_3u8ku")

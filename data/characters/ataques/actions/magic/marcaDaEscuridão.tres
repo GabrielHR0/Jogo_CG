@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cpw4jpb7pdqbv" path="res://models/actions/atacks/MagicAttack.gd" id="1_intal"]
 [ext_resource type="SpriteFrames" uid="uid://csntu5foljqbl" path="res://data/characters/ataques/actions/magic/marca_da_escuridão.tres" id="2_xs7x3"]
-[ext_resource type="AudioStream" uid="uid://d3ti8snc5aqyk" path="res://data/characters/ataques/sons/devoraAlmasEmarcasDaEscuridão.mp3" id="3_xs7x3"]
+[ext_resource type="AudioStream" uid="uid://det653vc6jpxn" path="res://data/characters/ataques/sons/devoraAlmasEmarcasDaEscuridão.mp3" id="3_xs7x3"]
 
 [resource]
 script = ExtResource("1_intal")

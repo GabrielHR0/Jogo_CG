@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="MagicAttack" load_steps=4 format=3 uid="uid://dt5w10butxjbp"]
 
 [ext_resource type="Script" uid="uid://cpw4jpb7pdqbv" path="res://models/actions/atacks/MagicAttack.gd" id="1_nefov"]
-[ext_resource type="SpriteFrames" uid="uid://b1k5d77e8g3n6" path="res://data/characters/ataques/actions/magic/campo_protetor.tres" id="2_rnhsa"]
-[ext_resource type="AudioStream" uid="uid://c5ulhtjocyfvs" path="res://data/characters/ataques/sons/campoProtetor.wav" id="3_fp5d2"]
+[ext_resource type="SpriteFrames" path="res://data/characters/ataques/actions/magic/campo_protetor.tres" id="2_rnhsa"]
+[ext_resource type="AudioStream" uid="uid://bi2y5tgjvku4o" path="res://data/characters/ataques/sons/campoProtetor.wav" id="3_fp5d2"]
 
 [resource]
 script = ExtResource("1_nefov")

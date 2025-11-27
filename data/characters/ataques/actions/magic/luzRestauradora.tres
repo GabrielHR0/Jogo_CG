@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="MagicAttack" load_steps=4 format=3 uid="uid://b0gkmqyou2en5"]
 
 [ext_resource type="Script" uid="uid://cpw4jpb7pdqbv" path="res://models/actions/atacks/MagicAttack.gd" id="1_3ebh2"]
-[ext_resource type="SpriteFrames" uid="uid://cssp8gtjbdoce" path="res://data/characters/ataques/actions/magic/luz_restauradora.tres" id="2_3voxl"]
-[ext_resource type="AudioStream" uid="uid://cnq3syj3n1twj" path="res://data/characters/ataques/sons/luzRestauradora.wav" id="3_3voxl"]
+[ext_resource type="SpriteFrames" path="res://data/characters/ataques/actions/magic/luz_restauradora.tres" id="2_3voxl"]
+[ext_resource type="AudioStream" uid="uid://bol5mes25txob" path="res://data/characters/ataques/sons/luzRestauradora.wav" id="3_3voxl"]
 
 [resource]
 script = ExtResource("1_3ebh2")

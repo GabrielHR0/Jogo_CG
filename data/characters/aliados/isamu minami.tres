@@ -2,10 +2,10 @@
 
 [ext_resource type="Resource" uid="uid://dk6227jpq4lwj" path="res://data/characters/animações/issamu minami.tres" id="1_4iabv"]
 [ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_qqne4"]
-[ext_resource type="Texture2D" uid="uid://cfianqlrip01m" path="res://assets/Ícones/Issamu Minami  Noctis Rex (2).png" id="2_4iabv"]
+[ext_resource type="Texture2D" uid="uid://gm0im2jqsgog" path="res://assets/Ícones/Issamu Minami  Noctis Rex (2).png" id="2_4iabv"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_1y1bv"]
 [ext_resource type="Resource" uid="uid://dfwwec8v5de4u" path="res://data/characters/ataques/actions/meele/espadaRadiante.tres" id="3_jhw53"]
-[ext_resource type="Texture2D" uid="uid://c1m1hcvunkeu7" path="res://data/characters/protagonista/Issamu Minami  Noctis Rex.png" id="4_jhw53"]
+[ext_resource type="Texture2D" uid="uid://do82yyd51ujge" path="res://data/characters/protagonista/Issamu Minami  Noctis Rex.png" id="4_jhw53"]
 
 [resource]
 script = ExtResource("3_1y1bv")

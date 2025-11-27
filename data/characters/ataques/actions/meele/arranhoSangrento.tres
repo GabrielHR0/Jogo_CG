@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="MeleeAttack" load_steps=4 format=3 uid="uid://74ix0lwbu40w"]
 
 [ext_resource type="Script" uid="uid://be0b1oathrib4" path="res://models/actions/atacks/MeleeAttack.gd" id="1_w12yh"]
-[ext_resource type="SpriteFrames" uid="uid://ds0tqiqmdxcvu" path="res://data/characters/ataques/actions/meele/arranho_sangrento.tres" id="2_selh6"]
-[ext_resource type="AudioStream" uid="uid://bgi2iuhpjxaii" path="res://data/characters/ataques/sons/arranhoSangrento.mp3" id="3_selh6"]
+[ext_resource type="SpriteFrames" path="res://data/characters/ataques/actions/meele/arranho_sangrento.tres" id="2_selh6"]
+[ext_resource type="AudioStream" uid="uid://certrx72qmi2t" path="res://data/characters/ataques/sons/arranhoSangrento.mp3" id="3_selh6"]
 
 [resource]
 script = ExtResource("1_w12yh")

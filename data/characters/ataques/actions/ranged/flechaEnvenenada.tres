@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RangedAttack" load_steps=3 format=3 uid="uid://cf04egynx25t7"]
 
 [ext_resource type="Script" uid="uid://d006vpi5yx8qh" path="res://models/actions/atacks/RangedAttack.gd" id="1_06xfx"]
-[ext_resource type="AudioStream" uid="uid://o07nsew4dwe4" path="res://data/characters/ataques/sons/flechasEnvenenadas.mp3" id="2_geeuo"]
+[ext_resource type="AudioStream" uid="uid://dqxe1fvof30y8" path="res://data/characters/ataques/sons/flechasEnvenenadas.mp3" id="2_geeuo"]
 
 [resource]
 script = ExtResource("1_06xfx")

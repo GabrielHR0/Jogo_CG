@@ -1,6 +1,6 @@
-[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://sw6wr8y3nbre"]
+[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://22a5lueqwniw"]
 
-[ext_resource type="Texture2D" uid="uid://c4oappjhch8yx" path="res://data/characters/ataques/png/magic/darom - magic.png" id="1_vh24u"]
+[ext_resource type="Texture2D" uid="uid://lylsaxei88gm" path="res://data/characters/ataques/png/magic/darom - magic.png" id="1_vh24u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fs05m"]
 atlas = ExtResource("1_vh24u")

@@ -1,6 +1,6 @@
-[gd_resource type="SpriteFrames" load_steps=15 format=3 uid="uid://ds0tqiqmdxcvu"]
+[gd_resource type="SpriteFrames" load_steps=15 format=3 uid="uid://ctswn81ectriy"]
 
-[ext_resource type="Texture2D" uid="uid://ccltfe2imk5k3" path="res://data/characters/ataques/png/meele/bestas demoníacas - meele.png" id="1_nji0h"]
+[ext_resource type="Texture2D" uid="uid://bw37evtley4k8" path="res://data/characters/ataques/png/meele/bestas demoníacas - meele.png" id="1_nji0h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i815f"]
 atlas = ExtResource("1_nji0h")

@@ -2,14 +2,13 @@
 
 [ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_atlt0"]
 [ext_resource type="Resource" uid="uid://qfeb8jhrqjy2" path="res://data/characters/animações/issamu minami - transformação.tres" id="1_f1ljb"]
-[ext_resource type="Texture2D" uid="uid://bblk7yi80ls1c" path="res://assets/Ícones/Issamu Minami  Noctis Rex - Transformação (2).png" id="2_f1ljb"]
+[ext_resource type="Texture2D" uid="uid://ck506eogmelgj" path="res://assets/Ícones/Issamu Minami  Noctis Rex - Transformação (2).png" id="2_f1ljb"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_xxwc7"]
-[ext_resource type="Texture2D" uid="uid://cct40lr1mueae" path="res://assets/Issamu Minami - Noctis Rex/Issamu Minami  Noctis Rex - Transformação.png" id="4_xqv41"]
-
+[ext_resource type="Texture2D" uid="uid://t0wiplnqexqa" path="res://assets/Issamu Minami - Noctis Rex/Issamu Minami  Noctis Rex - Transformação.png" id="4_xqv41"]
 
 [resource]
 script = ExtResource("3_xxwc7")
-name = "Issamu Minami - Transformação"
+name = "Issamu Minami"
 icon = ExtResource("2_f1ljb")
 texture = ExtResource("4_xqv41")
 strength = 9

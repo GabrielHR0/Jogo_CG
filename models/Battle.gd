@@ -242,6 +242,8 @@ func _execute_action(character: Character, action: Action, target: Character):
 	if target and target.is_alive():
 		print("❤️", target.name, "HP:", target.current_hp, "/", target.get_max_hp())
 
+# No Battle.gd, após criar as ações de defesa
+
 func _calculate_turn_order():
 	if global_agility_order:
 		turn_order = (allies_party.alive() + enemies_party.alive()).duplicate()
@@ -335,6 +337,13 @@ func force_end_player_turn():
 		turn_completed.emit(character)
 		player_action_selected.emit()
 
+func setup_defense_actions():
+	for character in allies_party.members + enemies_party.members:
+		for action in character.get_all_actions():
+			if action is DefendAction:
+				action.set_battle_scene(self)  # Passa a referência do BattleScene
+				
+				
 # Função para forçar próximo turno
 func force_next_turn():
 	print("🔄 Battle: forçando próximo turno")
