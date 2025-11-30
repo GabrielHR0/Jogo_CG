@@ -1,9 +1,9 @@
 [gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://6x44hwa53upg"]
 
-[ext_resource type="Texture2D" uid="uid://ic1icm7fvaek" path="res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/png/andando.png" id="1_81ro5"]
-[ext_resource type="Texture2D" uid="uid://c8lrvma02nuhh" path="res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/png/ataque.png" id="2_v11ul"]
-[ext_resource type="Texture2D" uid="uid://cgkjcsm5sp3oe" path="res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/png/dano.png" id="3_j77tn"]
-[ext_resource type="Texture2D" uid="uid://dwr1ojqduqoxu" path="res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Transformação/png/transformação.png" id="4_m3150"]
+[ext_resource type="Texture2D" uid="uid://b3x6ly7veqi8u" path="res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/png/andando.png" id="1_81ro5"]
+[ext_resource type="Texture2D" uid="uid://bimwehn7u71mt" path="res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/png/ataque.png" id="2_v11ul"]
+[ext_resource type="Texture2D" uid="uid://ck7v14ljfyhnj" path="res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Forma normal/png/dano.png" id="3_j77tn"]
+[ext_resource type="Texture2D" uid="uid://ccm44moekq8wm" path="res://assets/Nobuhiko Akizuki  Umbra Luna﻿ -/Sprites - Transformação/png/transformação.png" id="4_m3150"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6dypl"]
 atlas = ExtResource("1_81ro5")

@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_lqcti"]
 [ext_resource type="Resource" uid="uid://dpr4eaig3druj" path="res://data/characters/animações/kyoko akizuki.tres" id="1_mtfra"]
-[ext_resource type="Texture2D" uid="uid://dkrls4wdtgqjg" path="res://assets/Ícones/Kyoko Akizuki.png" id="2_ptt3b"]
+[ext_resource type="Texture2D" uid="uid://cl8g5jr8p6a1c" path="res://assets/Ícones/Kyoko Akizuki.png" id="2_ptt3b"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_hxa5h"]
 [ext_resource type="Resource" uid="uid://on5pxxgrmnyb" path="res://data/characters/ataques/actions/support/heal.tres" id="3_lqvtp"]
 [ext_resource type="Resource" uid="uid://bwpru665k0oca" path="res://data/characters/ataques/actions/support/Barreira Arcana.tres" id="4_cgdaw"]
-[ext_resource type="Texture2D" uid="uid://b8mko0jtgphws" path="res://assets/Kyoko Akizuki (Clériga  Suporte)/Kyoko Akizuki (Clériga  Suporte).png" id="4_crtmj"]
+[ext_resource type="Texture2D" uid="uid://dnfyjui5t6kjg" path="res://assets/Kyoko Akizuki (Clériga  Suporte)/Kyoko Akizuki (Clériga  Suporte).png" id="4_crtmj"]
 
 [resource]
 script = ExtResource("3_hxa5h")

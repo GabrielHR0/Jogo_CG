@@ -2,10 +2,10 @@
 
 [ext_resource type="Resource" uid="uid://3jblf2fjrif1" path="res://data/characters/animações/baraom - transformação.tres" id="1_ah4bt"]
 [ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_hw50x"]
-[ext_resource type="Texture2D" uid="uid://lw313h6bbtr6" path="res://assets/Ícones/Baraom - Transformação.png" id="2_ah4bt"]
+[ext_resource type="Texture2D" uid="uid://cuh3jmtx1e5g7" path="res://assets/Ícones/Baraom - Transformação.png" id="2_ah4bt"]
 [ext_resource type="Script" uid="uid://be0b1oathrib4" path="res://models/actions/atacks/MeleeAttack.gd" id="3_1xx05"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_q6gyf"]
-[ext_resource type="Texture2D" uid="uid://cfu48sqbqefr2" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Baraom (Sumo Sacerdote  Guerreiro Mutante) - Transformação.png" id="4_1xx05"]
+[ext_resource type="Texture2D" uid="uid://cf2fplmc21w8r" path="res://assets/Baraom (Sumo Sacerdote  Guerreiro Mutante)/Baraom (Sumo Sacerdote  Guerreiro Mutante) - Transformação.png" id="4_1xx05"]
 
 [sub_resource type="Resource" id="Resource_gq28a"]
 script = ExtResource("3_1xx05")

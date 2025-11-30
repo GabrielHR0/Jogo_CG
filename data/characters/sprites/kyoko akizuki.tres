@@ -1,8 +1,8 @@
 [gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://4g5ef01r6g8b"]
 
-[ext_resource type="Texture2D" uid="uid://bi86ndnvcrhuw" path="res://assets/Kyoko Akizuki (Clériga  Suporte)/Sprites/png/andando.png" id="1_38jmq"]
-[ext_resource type="Texture2D" uid="uid://d0m0p6qmmebv4" path="res://assets/Kyoko Akizuki (Clériga  Suporte)/Sprites/png/ataque.png" id="2_8j3fd"]
-[ext_resource type="Texture2D" uid="uid://cq4hfw08afrfn" path="res://assets/Kyoko Akizuki (Clériga  Suporte)/Sprites/png/dano.png" id="3_4alyn"]
+[ext_resource type="Texture2D" uid="uid://ddqrtnofsl7uq" path="res://assets/Kyoko Akizuki (Clériga  Suporte)/Sprites/png/andando.png" id="1_38jmq"]
+[ext_resource type="Texture2D" uid="uid://c6pkr8xvrypbg" path="res://assets/Kyoko Akizuki (Clériga  Suporte)/Sprites/png/ataque.png" id="2_8j3fd"]
+[ext_resource type="Texture2D" uid="uid://cdmlei6gr215g" path="res://assets/Kyoko Akizuki (Clériga  Suporte)/Sprites/png/dano.png" id="3_4alyn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_38jmq"]
 atlas = ExtResource("1_38jmq")

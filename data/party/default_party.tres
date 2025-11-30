@@ -1,14 +1,11 @@
-[gd_resource type="Resource" script_class="Party" load_steps=8 format=3 uid="uid://bbykbm4cew1yg"]
+[gd_resource type="Resource" script_class="Party" load_steps=5 format=3 uid="uid://bbykbm4cew1yg"]
 
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="1_m4nj2"]
 [ext_resource type="Resource" uid="uid://dyae0d3l0ev27" path="res://data/characters/aliados/isamu minami.tres" id="2_qv1kt"]
 [ext_resource type="Script" uid="uid://rhljqyamkwai" path="res://models/Party.gd" id="3_1xy06"]
 [ext_resource type="Resource" uid="uid://b068d3h4cxb6u" path="res://data/characters/aliados/kyoko.tres" id="3_a5p8w"]
-[ext_resource type="Resource" uid="uid://d1sqfgwabokee" path="res://data/characters/aliados/soichiro akizuki.tres" id="4_i64ji"]
-[ext_resource type="Resource" uid="uid://bprbjhsq5jmtq" path="res://data/characters/aliados/ryu kazamtsuri - transformação.tres" id="5_wjs3h"]
-[ext_resource type="Resource" uid="uid://bwc6p6wqb3y58" path="res://data/characters/aliados/katsumi kida.tres" id="6_18sp8"]
 
 [resource]
 script = ExtResource("3_1xy06")
-members = Array[ExtResource("1_m4nj2")]([ExtResource("2_qv1kt"), ExtResource("3_a5p8w"), ExtResource("4_i64ji"), ExtResource("5_wjs3h"), ExtResource("6_18sp8")])
+members = Array[ExtResource("1_m4nj2")]([ExtResource("2_qv1kt"), ExtResource("3_a5p8w")])
 metadata/_custom_type_script = "uid://rhljqyamkwai"

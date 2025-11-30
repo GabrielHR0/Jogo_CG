@@ -850,22 +850,32 @@ func _on_character_died(character: Character):
 			view.queue_free()
 		character_views.erase(character.name)
 		print("   CharacterView removida:", character.name)
-
 func _on_battle_ended(victory: bool):
-	print("🏁 BattleScene: _on_battle_ended - Vitória:", victory)
+	print("BattleScene _on_battle_ended - Vitória:", victory)
 	
-	print("🧹 Limpando todos os efeitos persistentes...")
+	# Limpar efeitos persistentes de defesa
+	print("Limpando todos os efeitos persistentes...")
 	for character in battle.allies_party.members + battle.enemies_party.members:
 		for action in character.combat_actions + character.basic_actions:
 			if action is DefendAction:
 				action.clear_all_defense_effects()
 	
 	if victory:
-		actions_label.text = "🎉 Vitória! Todos os inimigos foram derrotados!"
-		print("🎉 VITORIA!")
+		actions_label.text = "Vitória! Todos os inimigos foram derrotados!"
+		print("VITÓRIA!")
+		
+		# Aqui você pode depois chamar uma tela de vitória se quiser
 	else:
-		actions_label.text = "💔 Derrota! Todos os aliados foram derrotados!"
-		print("💔 DERROTA!")
+		actions_label.text = "Derrota! Todos os aliados foram derrotados!"
+		print("DERROTA! Carregando tela de derrota...")
+		
+		# 🆕 CARREGAR CENA DE DERROTA
+		var lose_scene_path := "res://scenes/Lose/lose.tscn"
+		if FileAccess.file_exists(lose_scene_path):
+			await get_tree().create_timer(1.5).timeout  # pequeno delay opcional
+			get_tree().change_scene_to_file(lose_scene_path)
+		else:
+			print("❌ Arquivo da cena de derrota não encontrado:", lose_scene_path)
 	
 	battle_ended = true
 	current_ui_state = UIState.IDLE
@@ -873,10 +883,8 @@ func _on_battle_ended(victory: bool):
 	_update_button_states()
 	
 	await get_tree().create_timer(1.0).timeout
-	
 	hide_sub_menus()
-	await get_tree().create_timer(2.0).timeout
-	return_to_main()
+
 
 func _on_player_action_selected():
 	print("Player action selected signal received")

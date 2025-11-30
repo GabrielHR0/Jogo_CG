@@ -3,16 +3,16 @@
 [ext_resource type="Script" uid="uid://d006vpi5yx8qh" path="res://models/actions/atacks/RangedAttack.gd" id="1_4in2n"]
 [ext_resource type="SpriteFrames" uid="uid://b3008neqbofi1" path="res://data/characters/ataques/actions/ranged/arrow_projectil.tres" id="1_dxpww"]
 [ext_resource type="SpriteFrames" uid="uid://pxdsnyte4sci" path="res://data/characters/ataques/actions/ranged/sangue_retorcido.tres" id="2_s1hqd"]
-[ext_resource type="AudioStream" uid="uid://i3putkjgb22r" path="res://data/characters/ataques/sons/sangueRetorcidoEcorteBrutalEumbral.mp3" id="3_s1hqd"]
+[ext_resource type="AudioStream" uid="uid://bqxt113qf2ced" path="res://data/characters/ataques/sons/sangueRetorcidoEcorteBrutalEumbral.mp3" id="3_s1hqd"]
 
 [resource]
 script = ExtResource("1_4in2n")
-damage_multiplier = 1.6
+damage_multiplier = 2.0
 critical_chance = 0.2
 critical_multiplier = 1.4
 formula = "ranged"
 name = "Sangue retorcido"
-ap_cost = 11
+ap_cost = 7
 animation_type = "ranged"
 projectile_sprite_frames = ExtResource("1_dxpww")
 sound_effect = ExtResource("3_s1hqd")

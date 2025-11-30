@@ -1,8 +1,8 @@
 [gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://ywbyys43gpvf"]
 
-[ext_resource type="Texture2D" uid="uid://hljplin3td4l" path="res://assets/Soichiro Akizuki (Mago Mentor)/Sprites/png/andando.png" id="1_ab8g2"]
-[ext_resource type="Texture2D" uid="uid://dcs83vnk7s1wt" path="res://assets/Soichiro Akizuki (Mago Mentor)/Sprites/png/ataque.png" id="2_7hgay"]
-[ext_resource type="Texture2D" uid="uid://chbav66635ag5" path="res://assets/Soichiro Akizuki (Mago Mentor)/Sprites/png/dano.png" id="3_7ys4b"]
+[ext_resource type="Texture2D" uid="uid://d2dn3geqaaein" path="res://assets/Soichiro Akizuki (Mago Mentor)/Sprites/png/andando.png" id="1_ab8g2"]
+[ext_resource type="Texture2D" uid="uid://cvejs635y5a4" path="res://assets/Soichiro Akizuki (Mago Mentor)/Sprites/png/ataque.png" id="2_7hgay"]
+[ext_resource type="Texture2D" uid="uid://5fhbwmcckmje" path="res://assets/Soichiro Akizuki (Mago Mentor)/Sprites/png/dano.png" id="3_7ys4b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c6it2"]
 atlas = ExtResource("1_ab8g2")

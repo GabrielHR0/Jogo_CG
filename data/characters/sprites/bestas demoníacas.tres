@@ -1,8 +1,8 @@
 [gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://dodrpxj2vjjdv"]
 
-[ext_resource type="Texture2D" uid="uid://kaa4xfcmky13" path="res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/Sprites/png/andando.png" id="1_0dh4r"]
-[ext_resource type="Texture2D" uid="uid://l0iaj878118f" path="res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/Sprites/png/ataque.png" id="2_ta3rx"]
-[ext_resource type="Texture2D" uid="uid://gu2l6m82n6rd" path="res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/Sprites/png/dano.png" id="3_ar7eh"]
+[ext_resource type="Texture2D" uid="uid://c1mpyrs01cvau" path="res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/Sprites/png/andando.png" id="1_0dh4r"]
+[ext_resource type="Texture2D" uid="uid://k8evby8nxpc0" path="res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/Sprites/png/ataque.png" id="2_ta3rx"]
+[ext_resource type="Texture2D" uid="uid://ca00lqkguu0ac" path="res://assets/Criaturas de Gorgom/Bestas demoníacas de Gorgom/Sprites/png/dano.png" id="3_ar7eh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qho21"]
 atlas = ExtResource("1_0dh4r")

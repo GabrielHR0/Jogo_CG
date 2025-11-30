@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://1u1k1k2oek3p" path="res://models/actions/Action.gd" id="1_cri1c"]
 [ext_resource type="Resource" uid="uid://bh8d17nvw2j5y" path="res://data/characters/animações/darom.tres" id="1_g3jst"]
-[ext_resource type="Texture2D" uid="uid://ddbv2nf2cuul7" path="res://assets/Ícones/Darom.png" id="2_g3jst"]
+[ext_resource type="Texture2D" uid="uid://cltkpnaugpg0s" path="res://assets/Ícones/Darom.png" id="2_g3jst"]
 [ext_resource type="Script" uid="uid://bbcihyrs4lcmp" path="res://models/Character.gd" id="3_c6au6"]
 [ext_resource type="Resource" uid="uid://db3sivcj53pe2" path="res://data/characters/ataques/actions/magic/ritualDeMutuação.tres" id="3_xm0l2"]
-[ext_resource type="Texture2D" uid="uid://dsgscra5o3iil" path="res://assets/Darom (Sumo Sacerdote de Gorgom)/Darom (Sumo Sacerdote de Gorgom).png" id="4_xm0l2"]
+[ext_resource type="Texture2D" uid="uid://cls5cbau81ljp" path="res://assets/Darom (Sumo Sacerdote de Gorgom)/Darom (Sumo Sacerdote de Gorgom).png" id="4_xm0l2"]
 [ext_resource type="Resource" uid="uid://co8b2vj2lgqkp" path="res://data/characters/ataques/actions/ranged/sangueRetorcido.tres" id="4_yll17"]
 
 [resource]
