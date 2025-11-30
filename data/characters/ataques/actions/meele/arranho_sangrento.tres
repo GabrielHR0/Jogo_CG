@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=15 format=3 uid="uid://ctswn81ectriy"]
 
-[ext_resource type="Texture2D" uid="uid://ccltfe2imk5k3" path="res://data/characters/ataques/png/meele/bestas demoníacas - meele.png" id="1_nji0h"]
+[ext_resource type="Texture2D" uid="uid://bw37evtley4k8" path="res://data/characters/ataques/png/meele/bestas demoníacas - meele.png" id="1_nji0h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i815f"]
 atlas = ExtResource("1_nji0h")
@@ -57,40 +57,40 @@ region = Rect2(704, 0, 64, 52)
 [resource]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_i815f")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_ogkbj")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_e5t7m")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_11ant")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_h8jgg")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_wx7jk")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_hxure")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_p484p")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_svh7q")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_4jmxv")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_086xt")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_xtisd")
 }, {
 "duration": 1.0,
@@ -98,5 +98,5 @@ animations = [{
 }],
 "loop": true,
 "name": &"Arranho Sangrento",
-"speed": 5.0
+"speed": 30.0
 }]

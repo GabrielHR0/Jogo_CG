@@ -11,6 +11,7 @@ critical_chance = 0.15
 critical_multiplier = 1.8
 name = "Espada Radiante"
 ap_cost = 5
+animation_type = "melee"
 sound_effect = ExtResource("3_0yl5g")
 slash_sprite_frames = ExtResource("2_0yl5g")
 slash_color = Color(0, 1, 1, 0.8039216)

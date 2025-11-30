@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="MeleeAttack" load_steps=4 format=3 uid="uid://dou21w78nk6l0"]
+[gd_resource type="Resource" script_class="MeleeAttack" load_steps=4 format=3 uid="uid://31na5yrcy8gb"]
 
-[ext_resource type="SpriteFrames" uid="uid://dr14bchnj6l3e" path="res://data/characters/ataques/actions/meele/corte_brutal.tres" id="1_v58gf"]
+[ext_resource type="SpriteFrames" uid="uid://dp6mb5qwpe2iv" path="res://data/characters/ataques/actions/meele/corte_brutal.tres" id="1_v58gf"]
 [ext_resource type="Script" uid="uid://be0b1oathrib4" path="res://models/actions/atacks/MeleeAttack.gd" id="2_usami"]
-[ext_resource type="AudioStream" uid="uid://dofdiwgukpomh" path="res://data/characters/ataques/sons/sangueRetorcidoEcorteBrutalEumbral.mp3" id="3_usami"]
+[ext_resource type="AudioStream" uid="uid://i3putkjgb22r" path="res://data/characters/ataques/sons/sangueRetorcidoEcorteBrutalEumbral.mp3" id="3_usami"]
 
 [resource]
 script = ExtResource("2_usami")
 damage_multiplier = 2.5
 critical_chance = 0.18
 critical_multiplier = 1.4
+name = "Corte brutal"
 ap_cost = 6
+animation_type = "melee"
 sound_effect = ExtResource("3_usami")
 slash_sprite_frames = ExtResource("1_v58gf")
 metadata/_custom_type_script = "uid://be0b1oathrib4"

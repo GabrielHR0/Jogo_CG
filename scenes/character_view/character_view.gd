@@ -16,6 +16,10 @@ var health_bar_container: Control
 var health_bar_fill: ColorRect
 var health_bar_created: bool = false
 
+# 🆕 NOVOS SINAIS: Sincronização de animações
+signal magic_attack_finished
+signal ranged_attack_finished
+
 func _ready():
 	if auto_setup and character:
 		setup_character()
@@ -119,7 +123,7 @@ func update_health_bar():
 	
 	health_bar_container.visible = character.is_alive()
 
-# 🆕 EFEITO DE CURA
+# EFEITO DE CURA
 func play_heal_effect(heal_amount: int, action: SupportAction = null):
 	print("💚 CharacterView EFEITO DE CURA: ", character.name, " +", heal_amount, "HP")
 	
@@ -136,7 +140,7 @@ func play_heal_effect(heal_amount: int, action: SupportAction = null):
 	show_floating_text("+" + str(heal_amount) + " HP", Color.GREEN)
 	update_health_bar()
 
-# 🆕 EFEITO DE BUFF
+# EFEITO DE BUFF
 func play_buff_effect(buff_attribute: String, buff_value: int, action: SupportAction = null):
 	print("📈 CharacterView EFEITO DE BUFF: ", character.name, " +", buff_value, " ", buff_attribute)
 	
@@ -153,7 +157,7 @@ func play_buff_effect(buff_attribute: String, buff_value: int, action: SupportAc
 	var attribute_text = _get_buff_display_name(buff_attribute)
 	show_floating_text(attribute_text + " +" + str(buff_value), buff_color)
 
-# 🆕 EFEITO DE ESCUDO (RECEBE ACTION)
+# EFEITO DE ESCUDO
 func play_shield_effect(shield_amount: int, action: SupportAction = null):
 	print("🛡️ CharacterView EFEITO DE ESCUDO: ", character.name, " +", shield_amount, " escudo")
 	
@@ -169,7 +173,7 @@ func play_shield_effect(shield_amount: int, action: SupportAction = null):
 	
 	show_floating_text("Escudo +" + str(shield_amount), Color.CYAN)
 
-# 🆕 EFEITO DE CLEANSE
+# EFEITO DE CLEANSE
 func play_cleanse_effect(debuff_count: int, action: SupportAction = null):
 	print("✨ CharacterView EFEITO DE CLEANSE: ", character.name, " removeu ", debuff_count, " debuffs")
 	
@@ -185,7 +189,7 @@ func play_cleanse_effect(debuff_count: int, action: SupportAction = null):
 	
 	show_floating_text("Purificado!", Color.WHITE)
 
-# 🆕 EFEITO DE HOT
+# EFEITO DE HOT
 func play_hot_effect(hot_amount: int, duration: int):
 	print("💚 CharacterView EFEITO DE HOT: ", character.name, " +", hot_amount, "HP/turno por ", duration, " turnos")
 	
@@ -195,7 +199,7 @@ func play_hot_effect(hot_amount: int, duration: int):
 	
 	show_floating_text("Cura Contínua +" + str(hot_amount), Color(0, 1, 0, 0.8))
 
-# 🆕 EFEITO DE DEFESA (PARA DEFEND ACTION)
+# EFEITO DE DEFESA
 func play_defense_effect(action: SupportAction = null):
 	print("🛡️ CharacterView EFEITO DE DEFESA: ", character.name)
 	
@@ -207,7 +211,7 @@ func play_defense_effect(action: SupportAction = null):
 	
 	show_floating_text("Defesa ↑", Color.CYAN)
 
-# 🆕 EFEITO DE DEBUFF
+# EFEITO DE DEBUFF
 func play_debuff_effect(attribute: String, value: int):
 	print("📉 CharacterView EFEITO DE DEBUFF: ", character.name, " -", value, " ", attribute)
 	
@@ -219,7 +223,7 @@ func play_debuff_effect(attribute: String, value: int):
 	var attribute_text = _get_buff_display_name(attribute)
 	show_floating_text(attribute_text + " -" + str(value), debuff_color)
 
-# 🆕 FUNÇÃO PRINCIPAL: Criar efeito visual com SpriteFrames
+# FUNÇÃO PRINCIPAL: Criar efeito visual com SpriteFrames
 func _create_action_effect(sprite_frames: SpriteFrames, color: Color, effect_scale: Vector2, offset: Vector2):
 	if not sprite_frames:
 		print("   ❌ SpriteFrames não disponível")
@@ -255,7 +259,7 @@ func _on_effect_animation_finished(effect_sprite: AnimatedSprite2D):
 	if effect_sprite and is_instance_valid(effect_sprite):
 		effect_sprite.queue_free()
 
-# 🆕 TEXTO FLUTUANTE
+# TEXTO FLUTUANTE
 func show_floating_text(text: String, color: Color):
 	var floating_text = Label.new()
 	floating_text.text = text
@@ -297,7 +301,7 @@ func _get_buff_display_name(attribute: String) -> String:
 		"critical_chance": return "Crítico"
 		_: return attribute
 
-# 🆕 ATAQUE MEELE
+# 🆕 ATAQUE MEELE COM DASH + SLASH RESTAURADOS
 func execute_melee_attack(target_global_position: Vector2):
 	print("🎬 CharacterView EXECUTANDO ATAQUE MEELE: ", character.name)
 	
@@ -318,11 +322,14 @@ func execute_melee_attack(target_global_position: Vector2):
 	
 	var sequence_tween = create_tween()
 	
+	# 1️⃣ DASH para o alvo
 	sequence_tween.tween_property(self, "position", dash_target, 0.3)
 	sequence_tween.tween_callback(perform_attack_animation)
 	
+	# 2️⃣ Manter na posição do ataque
 	sequence_tween.tween_interval(0.3)
 	
+	# 3️⃣ Voltar para posição original
 	sequence_tween.tween_property(self, "position", original_position, 0.4)
 	sequence_tween.tween_callback(finish_attack)
 
@@ -337,13 +344,198 @@ func finish_attack():
 	is_dashing = false
 	position = original_position
 
+# 🆕 ATAQUE MÁGICO COM SINAL DE CONCLUSÃO
+func execute_magic_attack(target_global_position: Vector2, projectile_config: Dictionary = {}):
+	print("🎬 CharacterView EXECUTANDO ATAQUE MÁGICO: ", character.name)
+	
+	# 1️⃣ Animação de cast
+	var cast_tween = create_tween()
+	cast_tween.parallel().tween_property(sprite, "modulate", Color.CYAN, 0.2)
+	cast_tween.parallel().tween_property(sprite, "scale", sprite.scale * 1.1, 0.2)
+	cast_tween.tween_property(sprite, "modulate", Color.WHITE, 0.2)
+	cast_tween.parallel().tween_property(sprite, "scale", sprite.scale, 0.2)
+	
+	await cast_tween.finished
+	
+	# 2️⃣ Criar projétil
+	var projectile_sprite_frames = projectile_config.get("sprite_frames", null)
+	var projectile_color = projectile_config.get("color", Color.CYAN)
+	var projectile_scale = projectile_config.get("scale", Vector2(0.8, 0.8))
+	var projectile_speed = projectile_config.get("speed", 250.0)
+	
+	if projectile_sprite_frames == null:
+		print("   ⚠️ AVISO: projectile_sprite_frames é NULL - criando projétil padrão")
+		await _create_default_magic_projectile(target_global_position, projectile_config)
+		magic_attack_finished.emit()
+		return
+	
+	var projectile = AnimatedSprite2D.new()
+	projectile.position = global_position
+	projectile.scale = projectile_scale
+	projectile.modulate = projectile_color
+	projectile.z_index = 500
+	projectile.centered = true
+	projectile.top_level = true
+	projectile.z_as_relative = false
+	projectile.sprite_frames = projectile_sprite_frames
+	
+	get_tree().current_scene.add_child(projectile)
+	
+	# 🆕 ESSENCIAL: Tocar animação do projétil
+	if projectile_sprite_frames.has_animation("default"):
+		projectile.play("default")
+		print("   ▶️ Projétil mágico animado")
+	else:
+		var anim_names = projectile_sprite_frames.get_animation_names()
+		if anim_names.size() > 0:
+			projectile.play(anim_names[0])
+			print("   ▶️ Projétil mágico animado (fallback)")
+		else:
+			print("   ❌ Nenhuma animação no projétil")
+	
+	# 3️⃣ Mover projétil
+	var distance = projectile.position.distance_to(target_global_position)
+	var duration = distance / projectile_speed
+	
+	print("   🔮 Projétil saindo de ", projectile.position, " para ", target_global_position)
+	print("   ⏱️ Duração: ", duration, "s")
+	
+	var projectile_tween = create_tween()
+	projectile_tween.tween_property(projectile, "position", target_global_position, duration)
+	
+	await projectile_tween.finished
+	
+	projectile.queue_free()
+	
+	print("   ✅ Ataque Mágico concluído - Emitindo sinal")
+	# 🆕 EMITIR SINAL de conclusão
+	magic_attack_finished.emit()
+
+# 🆕 ATAQUE RANGED COM SINAL DE CONCLUSÃO
+func execute_ranged_attack(target_global_position: Vector2, projectile_config: Dictionary = {}):
+	print("🎬 CharacterView EXECUTANDO ATAQUE RANGED: ", character.name)
+	
+	# 1️⃣ Animação de preparação
+	var aim_tween = create_tween()
+	aim_tween.parallel().tween_property(sprite, "position", sprite.position + Vector2(10, -15), 0.2)
+	aim_tween.tween_property(sprite, "position", sprite.position, 0.2)
+	
+	await aim_tween.finished
+	
+	# 2️⃣ Configuração do projétil
+	var projectile_sprite_frames = projectile_config.get("sprite_frames", null)
+	var projectile_color = projectile_config.get("color", Color.YELLOW)
+	var projectile_scale = projectile_config.get("scale", Vector2(1.0, 1.0))
+	var projectile_speed = projectile_config.get("speed", 350.0)
+	
+	if projectile_sprite_frames == null:
+		print("   ⚠️ AVISO: projectile_sprite_frames é NULL - criando projétil padrão")
+		await _create_default_ranged_projectile(target_global_position, projectile_config)
+		ranged_attack_finished.emit()
+		return
+	
+	var projectile = AnimatedSprite2D.new()
+	projectile.position = global_position + Vector2(30, -20)
+	projectile.scale = projectile_scale
+	projectile.modulate = projectile_color
+	projectile.z_index = 500
+	projectile.centered = true
+	projectile.top_level = true
+	projectile.z_as_relative = false
+	projectile.sprite_frames = projectile_sprite_frames
+	
+	get_tree().current_scene.add_child(projectile)
+	
+	# 🆕 ESSENCIAL: Tocar animação do projétil
+	if projectile_sprite_frames.has_animation("default"):
+		projectile.play("default")
+		print("   ▶️ Projétil ranged animado")
+	else:
+		var anim_names = projectile_sprite_frames.get_animation_names()
+		if anim_names.size() > 0:
+			projectile.play(anim_names[0])
+			print("   ▶️ Projétil ranged animado (fallback)")
+		else:
+			print("   ❌ Nenhuma animação no projétil")
+	
+	# 3️⃣ Calcular rotação e mover
+	var direction = (target_global_position - projectile.position).normalized()
+	projectile.rotation = direction.angle()
+	
+	var distance = projectile.position.distance_to(target_global_position)
+	var duration = distance / projectile_speed
+	
+	print("   🏹 Projétil saindo de ", projectile.position, " para ", target_global_position)
+	print("   ⏱️ Duração: ", duration, "s")
+	print("   🔄 Rotação: ", rad_to_deg(projectile.rotation), "°")
+	
+	var projectile_tween = create_tween()
+	projectile_tween.tween_property(projectile, "position", target_global_position, duration)
+	
+	await projectile_tween.finished
+	
+	projectile.queue_free()
+	
+	print("   ✅ Ataque Ranged concluído - Emitindo sinal")
+	# 🆕 EMITIR SINAL de conclusão
+	ranged_attack_finished.emit()
+
+# 🆕 Projétil mágico padrão (fallback)
+func _create_default_magic_projectile(target_pos: Vector2, config: Dictionary):
+	print("   🎨 Criando projétil mágico padrão")
+	
+	var projectile = ColorRect.new()
+	projectile.size = Vector2(20, 20)
+	projectile.position = global_position
+	projectile.color = config.get("color", Color.CYAN)
+	projectile.z_index = 500
+	
+	get_tree().current_scene.add_child(projectile)
+	
+	# Mover
+	var distance = projectile.position.distance_to(target_pos)
+	var duration = distance / config.get("speed", 250.0)
+	
+	var tween = create_tween()
+	tween.tween_property(projectile, "position", target_pos, duration)
+	
+	await tween.finished
+	projectile.queue_free()
+
+# 🆕 Projétil ranged padrão (fallback)
+func _create_default_ranged_projectile(target_pos: Vector2, config: Dictionary):
+	print("   🎨 Criando projétil ranged padrão")
+	
+	var projectile = ColorRect.new()
+	projectile.size = Vector2(30, 8)
+	projectile.position = global_position + Vector2(30, -20)
+	projectile.color = config.get("color", Color.YELLOW)
+	projectile.z_index = 500
+	
+	get_tree().current_scene.add_child(projectile)
+	
+	# Calcular rotação
+	var direction = (target_pos - projectile.position).normalized()
+	projectile.rotation = direction.angle()
+	
+	# Mover
+	var distance = projectile.position.distance_to(target_pos)
+	var duration = distance / config.get("speed", 350.0)
+	
+	var tween = create_tween()
+	tween.tween_property(projectile, "position", target_pos, duration)
+	
+	await tween.finished
+	projectile.queue_free()
+
+# ATAQUE NORMAL
 func execute_normal_attack():
 	print("🎬 CharacterView ATAQUE NORMAL: ", character.name)
 	var attack_tween = create_tween()
 	attack_tween.tween_property(sprite, "position", sprite.position + Vector2(10, -5), 0.1)
 	attack_tween.tween_property(sprite, "position", sprite.position, 0.1)
 
-# 🆕 DANO
+# DANO
 func take_damage():
 	print("💥 CharacterView DANO: ", character.name)
 	var damage_tween = create_tween()
@@ -351,7 +543,7 @@ func take_damage():
 	damage_tween.tween_property(sprite, "modulate", Color.WHITE, 0.1)
 	update_health_bar()
 
-# 🆕 SLASH EFFECT
+# 🆕 SLASH EFFECT - SEM ANIMAÇÃO DE IMPACTO EXTRA
 func apply_slash_effect(slash_config: Dictionary):
 	print("🗡️ CharacterView SLASH EFFECT: ", character.name)
 	
@@ -375,6 +567,7 @@ func apply_slash_effect(slash_config: Dictionary):
 			var anim_to_play = "default" if slash_sprite.sprite_frames.has_animation("default") else anim_names[0]
 			slash_sprite.sprite_frames.set_animation_loop(anim_to_play, false)
 			slash_sprite.play(anim_to_play)
+			print("   ▶️ Slash effect animado")
 	
 	slash_sprite.animation_finished.connect(_on_slash_animation_finished.bind(slash_sprite))
 
@@ -382,7 +575,7 @@ func _on_slash_animation_finished(slash_sprite: AnimatedSprite2D):
 	if slash_sprite and is_instance_valid(slash_sprite):
 		slash_sprite.queue_free()
 
-# 🆕 ATUALIZAR HP
+# ATUALIZAR HP
 func _process(_delta):
 	if character and health_bar_created:
 		update_health_bar()
@@ -397,3 +590,23 @@ func get_sprite_rect() -> Rect2:
 		var texture_size = sprite.texture.get_size() * sprite.scale
 		return Rect2(sprite.position, texture_size)
 	return Rect2()
+	
+# 🆕 NOVA: Animação de dodge
+func play_dodge_animation():
+	print("🎯 CharacterView EFEITO DE DODGE: ", character.name)
+	
+	var dodge_tween = create_tween()
+	
+	# Move para os lados rapidamente
+	dodge_tween.tween_property(self, "position", position + Vector2(50, 0), 0.1)
+	dodge_tween.tween_property(self, "position", position, 0.1)
+	dodge_tween.tween_property(self, "position", position + Vector2(-50, 0), 0.1)
+	dodge_tween.tween_property(self, "position", position, 0.1)
+	
+	# Efeito de cor
+	var color_tween = create_tween()
+	color_tween.set_parallel(true)
+	color_tween.tween_property(sprite, "modulate", Color.YELLOW, 0.2)
+	color_tween.tween_property(sprite, "modulate", Color.WHITE, 0.2)
+	
+	show_floating_text("Esquivou!", Color.YELLOW)

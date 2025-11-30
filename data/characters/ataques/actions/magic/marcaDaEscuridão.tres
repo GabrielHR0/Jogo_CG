@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="MagicAttack" load_steps=4 format=3 uid="uid://bnxxekhx3hgkd"]
+[gd_resource type="Resource" script_class="MagicAttack" load_steps=5 format=3 uid="uid://bnxxekhx3hgkd"]
 
 [ext_resource type="Script" uid="uid://cpw4jpb7pdqbv" path="res://models/actions/atacks/MagicAttack.gd" id="1_intal"]
+[ext_resource type="SpriteFrames" uid="uid://kf0lnrh88uud" path="res://data/characters/ataques/actions/magic/magic_projectile.tres" id="1_mtop1"]
 [ext_resource type="SpriteFrames" uid="uid://csntu5foljqbl" path="res://data/characters/ataques/actions/magic/marca_da_escuridão.tres" id="2_xs7x3"]
 [ext_resource type="AudioStream" uid="uid://det653vc6jpxn" path="res://data/characters/ataques/sons/devoraAlmasEmarcasDaEscuridão.mp3" id="3_xs7x3"]
 
@@ -10,7 +11,13 @@ element = "shadow"
 damage_multiplier = 1.2
 critical_chance = 0.14
 critical_multiplier = 1.1
+formula = "magic"
+name = "Marca da escuridão"
 ap_cost = 8
+animation_type = "magic"
+projectile_sprite_frames = ExtResource("1_mtop1")
+projectile_speed = 500.0
+projectile_color = Color(0.22197065, 0.0005453695, 0.5141671, 1)
 sound_effect = ExtResource("3_xs7x3")
 slash_sprite_frames = ExtResource("2_xs7x3")
 metadata/_custom_type_script = "uid://cpw4jpb7pdqbv"

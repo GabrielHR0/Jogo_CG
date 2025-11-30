@@ -1,6 +1,6 @@
-[gd_resource type="SpriteFrames" load_steps=17 format=3 uid="uid://dmi0br7awa2mu"]
+[gd_resource type="SpriteFrames" load_steps=17 format=3 uid="uid://cbfst3qg5fts2"]
 
-[ext_resource type="Texture2D" uid="uid://cebn0w734pkop" path="res://data/characters/ataques/png/magic/issamu minami transform - magic.png" id="1_cyup8"]
+[ext_resource type="Texture2D" uid="uid://c5yj08dxdq8eh" path="res://data/characters/ataques/png/magic/issamu minami transform - magic.png" id="1_cyup8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d188y"]
 atlas = ExtResource("1_cyup8")

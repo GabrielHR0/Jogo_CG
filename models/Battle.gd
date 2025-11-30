@@ -13,11 +13,17 @@ signal player_action_selected()
 signal ui_updated()
 signal turn_ended(character: Character)
 
-# 🆕 NOVO: Sinais para animações
+# 🆕 Sinais de eventos de defesa
+signal dodge_event(character: Character, attacker: Character)
+signal shield_break_event(character: Character, damage_remaining: int)
+signal reflection_event(defender: Character, attacker: Character, reflected_damage: int)
+signal counter_attack_event(defender: Character, attacker: Character, counter_damage: int)
+
+# 🆕 Sinais para animações
 signal slash_effect_requested(action: Action, target_character: Character)
 signal action_animation_requested(user: Character, action: Action, target: Character)
 
-# 🆕 NOVO: Sinais com detalhes de ação
+# 🆕 Sinais com detalhes de ação
 signal attack_action_details(user: Character, action: Action, target: Character, action_name: String)
 
 var allies_party: Party
@@ -31,7 +37,7 @@ var current_turn_index: int = 0
 var waiting_for_player_input: bool = false
 var current_player_character: Character = null
 
-# 🆕 NOVO: Referência ao BattleScene para sincronização
+# 🆕 Referência ao BattleScene para sincronização
 var battle_scene: Node = null
 
 @export var global_agility_order: bool = true
@@ -52,7 +58,7 @@ func _initialize_characters():
 		character.calculate_stats()
 		character.full_heal()
 
-# 🆕 NOVO: Receber referência do BattleScene
+# 🆕 Receber referência do BattleScene
 func set_battle_scene(scene: Node):
 	battle_scene = scene
 	print("🔗 BattleScene referência configurada no Battle")
@@ -161,13 +167,12 @@ func _execute_ai_turn(character: Character):
 	else:
 		print("🤖", character.name, "não encontrou ação válida")
 	
-	# 🆕 CORRIGIDO: Aguardar sinal de conclusão de animações do BattleScene
+	# 🆕 Aguardar sinal de conclusão de animações do BattleScene
 	if battle_scene and battle_scene.has_signal("action_animations_completed"):
 		print("⏳ Aguardando conclusão de animações no BattleScene...")
 		await battle_scene.action_animations_completed
 		print("✅ Animações concluídas!")
 	else:
-		# Fallback se BattleScene não estiver configurado
 		print("⚠️ BattleScene não configurado - usando delay padrão")
 		await get_tree().create_timer(0.8).timeout
 	
@@ -206,13 +211,12 @@ func on_player_select_action(action: Action, target: Character):
 	print("🎮 Executando ação do jogador...")
 	await _execute_action(actor, action, target)
 	
-	# 🆕 CORRIGIDO: Aguardar sinal de conclusão de animações do BattleScene
+	# 🆕 Aguardar sinal de conclusão de animações do BattleScene
 	if battle_scene and battle_scene.has_signal("action_animations_completed"):
 		print("⏳ Aguardando conclusão de animações do jogador no BattleScene...")
 		await battle_scene.action_animations_completed
 		print("✅ Animações do jogador concluídas!")
 	else:
-		# Fallback se BattleScene não estiver configurado
 		print("⚠️ BattleScene não configurado - usando delay padrão")
 		await get_tree().create_timer(2.5).timeout
 	
@@ -227,64 +231,104 @@ func _execute_action(character: Character, action: Action, target: Character):
 	
 	await get_tree().create_timer(action_delay_sec).timeout
 	
-	# GARANTIR que emite o sinal de animação
 	print("🎬 EMITINDO sinal de animação para BattleScene")
 	action_animation_requested.emit(character, action, target)
 	
-	# 🆕 NOVO: Emitir detalhes de ataque se for AttackAction
 	if action is AttackAction:
 		attack_action_details.emit(character, action, target, action.name)
 	
-	# AGUARDAR ANIMAÇÃO COMPLETA NO BATTLE SCENE
-	if action is AttackAction and action.formula == "melee":
-		print("⏳ Aguardando animação melee (1.5s)...")
+	# Aguardar animação
+	if action is AttackAction and action.animation_type == "melee":
+		await get_tree().create_timer(1.5).timeout
+	elif action is AttackAction and action.animation_type in ["magic", "ranged"]:
 		await get_tree().create_timer(1.5).timeout
 	elif action is SupportAction or action is DefendAction:
-		print("⏳ Aguardando animação de suporte (1.2s)...")
 		await get_tree().create_timer(1.2).timeout
 	else:
-		print("⏳ Aguardando animação normal (0.8s)...")
 		await get_tree().create_timer(0.8).timeout
 	
-	# Guardar HP/AP antes da ação
+	# Guardar HP/AP antes
 	var target_hp_before = target.current_hp if target else 0
 	var character_ap_before = character.current_ap
+	
+	# 🆕 DECLARAR variáveis ANTES de usar
+	var damage_dealt = 0
+	var healing_done = 0
+	var ap_used = 0
+	
+	# 🆕 NOVO: Se é ataque, processar efeitos especiais de defesa ANTES do dano
+	if action is AttackAction and target and target.is_defending:
+		# Verificar dodge
+		if target.dodge_chance > 0 and randf() < target.dodge_chance:
+			print("   🎯", target.name, "esquivou completamente!")
+			dodge_event.emit(target, character)
+			# Não aplicar dano
+			damage_dealt = 0
+			ap_used = character_ap_before - character.current_ap
+			await get_tree().create_timer(0.5).timeout
+			action_detailed_executed.emit(character, action, target, 0, 0, ap_used)
+			return
 	
 	# Executar ação real
 	action.execute(character, target)
 	action_executed.emit(character, action, target)
 	
-	# Calcular dano/efeito
-	var damage_dealt = 0
-	var healing_done = 0
-	var ap_used = character_ap_before - character.current_ap
-	
+	# Calcular resultados
 	if target:
 		if action is AttackAction:
 			damage_dealt = target_hp_before - target.current_hp
 			if damage_dealt > 0:
 				print("💥 Dano causado:", damage_dealt)
+			
+			# 🆕 Processar reflexão de dano
+			if damage_dealt > 0 and target.is_defending and target.has_meta("damage_reflection"):
+				var reflection_percent = target.get_meta("damage_reflection")
+				var reflected_damage = int(damage_dealt * reflection_percent)
+				if reflected_damage > 0:
+					print("   🔄", target.name, "reflete", reflected_damage, "de dano para", character.name)
+					reflection_event.emit(target, character, reflected_damage)
+					# Aplicar reflexão no atacante
+					var attacker_hp_before = character.current_hp
+					character.take_damage(reflected_damage)
+					var actual_reflected = attacker_hp_before - character.current_hp
+					if actual_reflected > 0 and character.name in battle_scene.get_character_views():
+						battle_scene.character_views[character.name].take_damage()
+			
+			# 🆕 Processar contra-ataque
+			if damage_dealt > 0 and target.is_defending and target.has_meta("counter_attack_chance"):
+				var counter_chance = target.get_meta("counter_attack_chance")
+				if randf() < counter_chance:
+					var counter_damage = int(target.calculate_melee_damage() * 0.5)
+					print("   ⚔️", target.name, "realiza CONTRA-ATAQUE em", character.name)
+					counter_attack_event.emit(target, character, counter_damage)
+					# Aplicar contra-ataque
+					var attacker_hp_before = character.current_hp
+					character.take_damage(counter_damage)
+					var actual_counter = attacker_hp_before - character.current_hp
+					if actual_counter > 0 and character.name in battle_scene.get_character_views():
+						battle_scene.character_views[character.name].take_damage()
+			
 		elif action.name == "Curar" or action.name.contains("Cura"):
 			healing_done = target.current_hp - target_hp_before
 			if healing_done > 0:
 				print("❤️ Cura realizada:", healing_done)
 	
-	# EMITIR SINAL COM DETALHES (BattleScene aguardará aqui)
+	# Calcular AP usado
+	ap_used = character_ap_before - character.current_ap
+	
 	print("📡 Emitindo action_detailed_executed...")
 	action_detailed_executed.emit(character, action, target, damage_dealt, healing_done, ap_used)
 	
-	# Verificar se o personagem morreu durante a ação
 	if not character.is_alive():
 		print("💀", character.name, "morreu durante a execução da ação!")
 		character_died.emit(character)
 	
 	await get_tree().create_timer(between_actions_delay_sec).timeout
 	
-	# Log do estado final
 	print("💰 AP após ação:", character.current_ap, "/", character.get_max_ap())
 	if target and target.is_alive():
 		print("❤️", target.name, "HP:", target.current_hp, "/", target.get_max_hp())
-
+		
 func _calculate_turn_order():
 	if global_agility_order:
 		turn_order = (allies_party.alive() + enemies_party.alive()).duplicate()

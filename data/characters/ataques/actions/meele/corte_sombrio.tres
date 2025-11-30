@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://brmr6ofbfb1q"]
 
-[ext_resource type="Texture2D" uid="uid://bm8tvcd2axox5" path="res://data/characters/ataques/png/meele/nobuhiko akizuki - meele.png" id="1_17mhr"]
+[ext_resource type="Texture2D" uid="uid://creaoygkrgr7d" path="res://data/characters/ataques/png/meele/nobuhiko akizuki - meele.png" id="1_17mhr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kdfvi"]
 atlas = ExtResource("1_17mhr")
@@ -49,40 +49,40 @@ region = Rect2(640, 0, 64, 54)
 [resource]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_kdfvi")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_408f1")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_83606")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_t3vch")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_7bj5e")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_8867s")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_ypja5")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_8bbbi")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_bsn4o")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_cwsqd")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_3chrn")
 }],
 "loop": true,
 "name": &"Corte Sombrio",
-"speed": 5.0
+"speed": 30.0
 }]

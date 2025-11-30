@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="MagicAttack" load_steps=4 format=3 uid="uid://d7sfk0ctyp0t"]
+[gd_resource type="Resource" script_class="MagicAttack" load_steps=4 format=3 uid="uid://bdelby068sit"]
 
 [ext_resource type="Script" uid="uid://cpw4jpb7pdqbv" path="res://models/actions/atacks/MagicAttack.gd" id="1_xcq85"]
-[ext_resource type="SpriteFrames" uid="uid://dmi0br7awa2mu" path="res://data/characters/ataques/actions/magic/julgamento_sagrado.tres" id="2_ypem6"]
-[ext_resource type="AudioStream" uid="uid://dinakevq4ifgc" path="res://data/characters/ataques/sons/julgamentoSagradoEgarraAbissa.mp3" id="3_ypem6"]
+[ext_resource type="SpriteFrames" uid="uid://cbfst3qg5fts2" path="res://data/characters/ataques/actions/magic/julgamento_sagrado.tres" id="2_ypem6"]
+[ext_resource type="AudioStream" uid="uid://c7q6oonameq8m" path="res://data/characters/ataques/sons/julgamentoSagradoEgarraAbissa.mp3" id="3_ypem6"]
 
 [resource]
 script = ExtResource("1_xcq85")
@@ -10,7 +10,10 @@ element = "holy"
 damage_multiplier = 2.5
 critical_chance = 0.12
 critical_multiplier = 1.3
+formula = "magic"
+name = "Julgamento sagrado"
 ap_cost = 9
+animation_type = "magic"
 sound_effect = ExtResource("3_ypem6")
 slash_sprite_frames = ExtResource("2_ypem6")
 metadata/_custom_type_script = "uid://cpw4jpb7pdqbv"

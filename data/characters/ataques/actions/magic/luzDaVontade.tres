@@ -1,15 +1,18 @@
-[gd_resource type="Resource" script_class="MagicAttack" load_steps=4 format=3 uid="uid://byvp80ll0u7hh"]
+[gd_resource type="Resource" script_class="MagicAttack" load_steps=4 format=3 uid="uid://c3wdmpxjwukt3"]
 
 [ext_resource type="Script" uid="uid://cpw4jpb7pdqbv" path="res://models/actions/atacks/MagicAttack.gd" id="1_h48fe"]
-[ext_resource type="SpriteFrames" uid="uid://bdwvcnngsrhxp" path="res://data/characters/ataques/actions/magic/luz_da_vontade.tres" id="2_m6gm4"]
-[ext_resource type="AudioStream" uid="uid://csx4pghqv8dla" path="res://data/characters/ataques/sons/luzDaVontade.mp3" id="3_m6gm4"]
+[ext_resource type="SpriteFrames" uid="uid://ctu7k500mgx8f" path="res://data/characters/ataques/actions/magic/luz_da_vontade.tres" id="2_m6gm4"]
+[ext_resource type="AudioStream" uid="uid://dr41ordw14ptk" path="res://data/characters/ataques/sons/luzDaVontade.mp3" id="3_m6gm4"]
 
 [resource]
 script = ExtResource("1_h48fe")
 element = "light"
 damage_multiplier = 1.5
 critical_multiplier = 1.2
+formula = "magic"
+name = "Luz da vontade"
 ap_cost = 8
+animation_type = "magic"
 sound_effect = ExtResource("3_m6gm4")
 slash_sprite_frames = ExtResource("2_m6gm4")
 metadata/_custom_type_script = "uid://cpw4jpb7pdqbv"

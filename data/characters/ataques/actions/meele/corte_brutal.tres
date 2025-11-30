@@ -1,6 +1,6 @@
-[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://dr14bchnj6l3e"]
+[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://dp6mb5qwpe2iv"]
 
-[ext_resource type="Texture2D" uid="uid://bwlv8piof75n0" path="res://data/characters/ataques/png/meele/baraom - meele.png" id="1_gtppt"]
+[ext_resource type="Texture2D" uid="uid://c1rjgo5xy1uxr" path="res://data/characters/ataques/png/meele/baraom - meele.png" id="1_gtppt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_to4k5"]
 atlas = ExtResource("1_gtppt")

@@ -1,6 +1,6 @@
-[gd_resource type="SpriteFrames" load_steps=14 format=3 uid="uid://nduuk3j5r5kt"]
+[gd_resource type="SpriteFrames" load_steps=14 format=3 uid="uid://cb0u7tpaayona"]
 
-[ext_resource type="Texture2D" uid="uid://ck4dgmmf7jiwm" path="res://data/characters/ataques/png/magic/masaru todo transform - magic.png" id="1_yahao"]
+[ext_resource type="Texture2D" uid="uid://bl62ab4ukep4p" path="res://data/characters/ataques/png/magic/masaru todo transform - magic.png" id="1_yahao"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_63u4t"]
 atlas = ExtResource("1_yahao")

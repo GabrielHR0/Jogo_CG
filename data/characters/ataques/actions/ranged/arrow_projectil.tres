@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://b3008neqbofi1"]
+
+[ext_resource type="Texture2D" uid="uid://bfkk5612khqql" path="res://assets/arrow_projectil.png" id="1_ruvs8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wd04e"]
+atlas = ExtResource("1_ruvs8")
+region = Rect2(0, 0, 60, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q58dk"]
+atlas = ExtResource("1_ruvs8")
+region = Rect2(120, 0, 60, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07ddd"]
+atlas = ExtResource("1_ruvs8")
+region = Rect2(180, 0, 60, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6yjpf"]
+atlas = ExtResource("1_ruvs8")
+region = Rect2(240, 0, 60, 44)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_wd04e")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_q58dk")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_07ddd")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_6yjpf")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
