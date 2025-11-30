@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://dtk20mv748ark"]
+
+[ext_resource type="Texture2D" uid="uid://c0aqmw58q742u" path="res://assets/credits.png" id="1_6jp30"]
+[ext_resource type="Script" uid="uid://2y2c5ldalgr6" path="res://scenes/Credits/credits.gd" id="1_bhyic"]
+[ext_resource type="Texture2D" uid="uid://brm6cepnpw7yx" path="res://assets/button_menu.png" id="3_0quu6"]
+[ext_resource type="FontFile" uid="uid://bv6ipcwooovjh" path="res://assets/fonts/Pixellari.ttf" id="4_rsa1k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6jp30"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bhyic"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0quu6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rsa1k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xwk23"]
+
+[sub_resource type="FontVariation" id="FontVariation_6jp30"]
+base_font = ExtResource("4_rsa1k")
+spacing_top = 12
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchor_right = 1.052
+anchor_bottom = 1.062
+offset_right = -0.5600586
+offset_bottom = 0.35998535
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bhyic")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_6jp30")
+
+[node name="BackButton" type="Button" parent="."]
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.47800002
+anchor_top = 0.855
+anchor_right = 0.47800002
+anchor_bottom = 0.855
+offset_left = -63.388
+offset_top = -54.075012
+offset_right = 86.612
+offset_bottom = 45.924988
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6jp30")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_bhyic")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_0quu6")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_rsa1k")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xwk23")
+
+[node name="TextureRect" type="TextureRect" parent="BackButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_0quu6")
+
+[node name="Label" type="Label" parent="BackButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("FontVariation_6jp30")
+theme_override_font_sizes/font_size = 26
+text = "BACK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

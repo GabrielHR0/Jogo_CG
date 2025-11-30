@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://uj6x8nkx3kjq"]
 
-[ext_resource type="Texture2D" uid="uid://c4u6bp1ndi3cg" path="res://data/characters/ataques/png/magic/soichiro akizuki - magic.png" id="1_aot5p"]
+[ext_resource type="Texture2D" uid="uid://rme63ss3oqcj" path="res://data/characters/ataques/png/magic/soichiro akizuki - magic.png" id="1_aot5p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_185no"]
 atlas = ExtResource("1_aot5p")
