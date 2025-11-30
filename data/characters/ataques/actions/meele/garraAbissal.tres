@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="MeleeAttack" load_steps=4 format=3 uid="uid://bxwkst8scro57"]
+[gd_resource type="Resource" script_class="MeleeAttack" load_steps=4 format=3 uid="uid://b71m6ebv104l7"]
 
-[ext_resource type="SpriteFrames" uid="uid://dsugkxa0awu2k" path="res://data/characters/ataques/actions/meele/garra_abissal.tres" id="1_msuta"]
+[ext_resource type="SpriteFrames" uid="uid://cyghddht8aj4l" path="res://data/characters/ataques/actions/meele/garra_abissal.tres" id="1_msuta"]
 [ext_resource type="Script" uid="uid://be0b1oathrib4" path="res://models/actions/atacks/MeleeAttack.gd" id="2_f51ly"]
-[ext_resource type="AudioStream" uid="uid://dinakevq4ifgc" path="res://data/characters/ataques/sons/julgamentoSagradoEgarraAbissa.mp3" id="3_f51ly"]
+[ext_resource type="AudioStream" uid="uid://c7q6oonameq8m" path="res://data/characters/ataques/sons/julgamentoSagradoEgarraAbissa.mp3" id="3_f51ly"]
 
 [resource]
 script = ExtResource("2_f51ly")
 damage_multiplier = 2.6
 critical_chance = 0.12
+name = "Garra abissal"
 ap_cost = 5
+animation_type = "melee"
 sound_effect = ExtResource("3_f51ly")
 slash_sprite_frames = ExtResource("1_msuta")
 metadata/_custom_type_script = "uid://be0b1oathrib4"

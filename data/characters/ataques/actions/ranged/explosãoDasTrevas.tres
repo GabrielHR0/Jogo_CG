@@ -1,15 +1,21 @@
-[gd_resource type="Resource" script_class="RangedAttack" load_steps=4 format=3 uid="uid://xsblo4it45dr"]
+[gd_resource type="Resource" script_class="RangedAttack" load_steps=5 format=3 uid="uid://dp63o7kaf88a4"]
 
 [ext_resource type="Script" uid="uid://d006vpi5yx8qh" path="res://models/actions/atacks/RangedAttack.gd" id="1_pcaiu"]
-[ext_resource type="SpriteFrames" uid="uid://bp1glqi3ytu1x" path="res://data/characters/ataques/actions/ranged/explosão_das_trevas.tres" id="2_0gmi3"]
-[ext_resource type="AudioStream" uid="uid://dvo7qkl431e8p" path="res://data/characters/ataques/sons/explosãoDasTrevasEimpactoSombrio.mp3" id="3_0gmi3"]
+[ext_resource type="SpriteFrames" uid="uid://cn65mc0xl0chb" path="res://data/characters/ataques/actions/ranged/explosão_das_trevas.tres" id="2_0gmi3"]
+[ext_resource type="SpriteFrames" uid="uid://b3008neqbofi1" path="res://data/characters/ataques/actions/ranged/arrow_projectil.tres" id="2_l1ogb"]
+[ext_resource type="AudioStream" uid="uid://capk4766x8bqg" path="res://data/characters/ataques/sons/explosãoDasTrevasEimpactoSombrio.mp3" id="3_0gmi3"]
 
 [resource]
 script = ExtResource("1_pcaiu")
 damage_multiplier = 2.2
 critical_chance = 0.15
 critical_multiplier = 1.7
+formula = "ranged"
+name = "Explosão das trevas"
 ap_cost = 10
+animation_type = "ranged"
+effect_sprite_frames = ExtResource("2_0gmi3")
+projectile_sprite_frames = ExtResource("2_l1ogb")
 sound_effect = ExtResource("3_0gmi3")
 slash_sprite_frames = ExtResource("2_0gmi3")
 metadata/_custom_type_script = "uid://d006vpi5yx8qh"

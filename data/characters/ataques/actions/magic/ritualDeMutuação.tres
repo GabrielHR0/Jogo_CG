@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MagicAttack" load_steps=4 format=3 uid="uid://db3sivcj53pe2"]
 
 [ext_resource type="Script" uid="uid://cpw4jpb7pdqbv" path="res://models/actions/atacks/MagicAttack.gd" id="1_0pgp6"]
-[ext_resource type="SpriteFrames" path="res://data/characters/ataques/actions/magic/ritual_de_mutuação.tres" id="2_4livb"]
+[ext_resource type="SpriteFrames" uid="uid://22a5lueqwniw" path="res://data/characters/ataques/actions/magic/ritual_de_mutuação.tres" id="2_4livb"]
 [ext_resource type="AudioStream" uid="uid://k2t2cdwxsqdi" path="res://data/characters/ataques/sons/ritualDeMutação.mp3" id="3_4livb"]
 
 [resource]
@@ -10,7 +10,10 @@ element = "dark"
 damage_multiplier = 1.5
 critical_chance = 0.2
 critical_multiplier = 1.2
+formula = "magic"
+name = "Ritual de mutação"
 ap_cost = 9
+animation_type = "magic"
 sound_effect = ExtResource("3_4livb")
 slash_sprite_frames = ExtResource("2_4livb")
 metadata/_custom_type_script = "uid://cpw4jpb7pdqbv"

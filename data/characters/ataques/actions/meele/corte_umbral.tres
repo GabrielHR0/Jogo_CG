@@ -1,6 +1,6 @@
-[gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://kcg7t2aiy2v6"]
+[gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://cx7jj34jwiuhe"]
 
-[ext_resource type="Texture2D" uid="uid://c0ut3b7s24kx6" path="res://data/characters/ataques/png/meele/nobuhiko akizuki transform - meele.png" id="1_oxw4c"]
+[ext_resource type="Texture2D" uid="uid://bydxml65q0f64" path="res://data/characters/ataques/png/meele/nobuhiko akizuki transform - meele.png" id="1_oxw4c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rpqro"]
 atlas = ExtResource("1_oxw4c")

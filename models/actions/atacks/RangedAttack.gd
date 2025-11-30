@@ -1,4 +1,3 @@
-# RangedAttack.gd
 extends AttackAction
 class_name RangedAttack
 
@@ -17,7 +16,6 @@ func _init():
 	description = "Um ataque preciso à distância"
 
 func calculate_damage(user: Character, target: Character) -> int:
-	# Verifica se acerta o alvo
 	var hit_chance = calculate_hit_chance(user, target)
 	if randf() > hit_chance:
 		print("   🎯 " + user.name + " errou o alvo!")
@@ -29,5 +27,4 @@ func calculate_damage(user: Character, target: Character) -> int:
 func calculate_hit_chance(user: Character, target: Character) -> float:
 	var user_agility = user.get_attribute("agility")
 	var target_agility = target.get_attribute("agility")
-	var calculated_accuracy = accuracy + (user_agility - target_agility) * 0.02
-	return clamp(calculated_accuracy, 0.1, 0.95)
+	return clamp(accuracy + (user_agility - target_agility) * 0.02, 0.1, 0.95)

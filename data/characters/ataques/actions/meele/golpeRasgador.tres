@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MeleeAttack" load_steps=4 format=3 uid="uid://d2qxer3cg2puf"]
 
 [ext_resource type="Script" uid="uid://be0b1oathrib4" path="res://models/actions/atacks/MeleeAttack.gd" id="1_3u8ku"]
-[ext_resource type="SpriteFrames" path="res://data/characters/ataques/actions/meele/golpe_rasgador.tres" id="2_7a28c"]
+[ext_resource type="SpriteFrames" uid="uid://dfpaqeqauwm00" path="res://data/characters/ataques/actions/meele/golpe_rasgador.tres" id="2_7a28c"]
 [ext_resource type="AudioStream" uid="uid://bpnv5w24rg6q1" path="res://data/characters/ataques/sons/golpeRasgador.mp3" id="3_7a28c"]
 
 [resource]
@@ -9,7 +9,9 @@ script = ExtResource("1_3u8ku")
 damage_multiplier = 2.8
 critical_chance = 0.19
 critical_multiplier = 1.7
-ap_cost = 6
+name = "Golpe rasgador"
+ap_cost = 8
+animation_type = "melee"
 sound_effect = ExtResource("3_7a28c")
 slash_sprite_frames = ExtResource("2_7a28c")
 metadata/_custom_type_script = "uid://be0b1oathrib4"

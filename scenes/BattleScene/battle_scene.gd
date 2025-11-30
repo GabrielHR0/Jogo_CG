@@ -36,13 +36,6 @@ var current_player_character: Character = null
 var selected_action: Action = null
 var battle_ended: bool = false
 
-# 🆕 NOVO: Sinal de highlight
-signal target_highlighted(character: Character)
-signal target_unhighlighted(character: Character)
-
-# 🆕 NOVO: Referência do alvo destacado
-var highlighted_target: Character = null
-
 # Estados
 enum UIState { IDLE, PLAYER_TURN, AI_TURN, ACTION_EXECUTING }
 var current_ui_state: UIState = UIState.IDLE
@@ -162,7 +155,25 @@ func _setup_actions_battle_scene_reference():
 					print("   ✅ ", action.name, " configurada para ", character.name)
 	
 	print("🎯 Total de ações configuradas: ", action_count)
-
+	
+	# 🆕 Esperar mensagem com tempo mínimo e skip por input
+func _wait_for_message(min_time: float = 1.2, max_time: float = 3.5) -> void:
+	var elapsed := 0.0
+	
+	# 1) Tempo mínimo obrigatório (não pode pular ainda)
+	while elapsed < min_time:
+		await get_tree().process_frame
+		elapsed += get_process_delta_time()
+	
+	# 2) Janela em que o jogador pode pular com clique/tecla
+	while elapsed < max_time:
+		# Tecla de confirmar (ui_accept) ou clique do mouse
+		if Input.is_action_just_pressed("ui_accept") or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			break
+		
+		await get_tree().process_frame
+		elapsed += get_process_delta_time()
+		
 func _connect_battle_signals():
 	if not battle:
 		print("❌ Battle não existe para conectar sinais")
@@ -181,14 +192,39 @@ func _connect_battle_signals():
 	
 	battle.slash_effect_requested.connect(_on_battle_slash_requested)
 	battle.action_animation_requested.connect(_on_battle_action_animation_requested)
-	
-	# 🆕 NOVO: Conectar sinais de detalhes
 	battle.attack_action_details.connect(_on_attack_action_details)
+	
+	# 🆕 NOVOS: Conectar eventos de defesa
+	battle.dodge_event.connect(_on_dodge_event)
+	battle.shield_break_event.connect(_on_shield_break_event)
+	battle.reflection_event.connect(_on_reflection_event)
+	battle.counter_attack_event.connect(_on_counter_attack_event)
 	
 	if battle.has_signal("turn_ended"):
 		battle.turn_ended.connect(_on_turn_ended)
 	
 	print("✅ Todos os sinais do Battle conectados")
+
+# 🆕 NOVOS HANDLERS de eventos
+func _on_dodge_event(character: Character, attacker: Character):
+	print("🎯 Dodge detectado!")
+	actions_label.text = "🎯 %s esquivou completamente do ataque de %s!" % [character.name, attacker.name]
+	
+	if character.name in character_views:
+		character_views[character.name].play_dodge_animation()
+
+func _on_shield_break_event(character: Character, damage_remaining: int):
+	print("💔 Escudo quebrado!")
+	actions_label.text = "💔 Escudo de %s foi quebrado! (%d de dano restante)" % [character.name, damage_remaining]
+
+func _on_reflection_event(defender: Character, attacker: Character, reflected_damage: int):
+	print("🔄 Reflexão!")
+	actions_label.text = "🔄 %s reflete %d de dano para %s!" % [defender.name, reflected_damage, attacker.name]
+
+func _on_counter_attack_event(defender: Character, attacker: Character, counter_damage: int):
+	print("⚔️ Contra-ataque!")
+	actions_label.text = "⚔️ %s realiza um CONTRA-ATAQUE em %s, causando %d de dano!" % [defender.name, attacker.name, counter_damage]
+
 
 func _on_turn_ended(character: Character):
 	print("🔄 BattleScene: Atualizando efeitos persistentes no final do turno de ", character.name)
@@ -306,7 +342,6 @@ func _on_debuffs_cleansed(count: int, character: Character):
 # 🆕 NOVO: Receber detalhes de ataques
 func _on_attack_action_details(user: Character, action: Action, target: Character, action_name: String):
 	print("⚔️ Ataque detectado:", action_name)
-	# Será usado no _on_action_detailed_executed
 
 func _process_support_action(action: Action, user: Character, target: Character):
 	print("🌟 BattleScene: Processando ação de suporte:", action.name)
@@ -400,6 +435,9 @@ func _process_defense_action(action: SupportAction, user: Character, target: Cha
 	
 	print("   🎆 DefendAction está controlando os efeitos persistentes")
 
+# 🆕 REFATORADO: Suporte a melee, magic e ranged com projéteis
+# 🆕 REFATORADO: Suporte a melee, magic e ranged COM SLASH EFFECT
+# 🆕 REFATORADO: Suporte a melee, magic e ranged COM SINCRONIZAÇÃO CORRETA
 func _on_battle_action_animation_requested(user: Character, action: Action, target: Character):
 	print("🎬 BattleScene: EXECUTANDO ANIMAÇÃO para ", action.name)
 	print("   User:", user.name, " | Target:", target.name)
@@ -408,38 +446,78 @@ func _on_battle_action_animation_requested(user: Character, action: Action, targ
 		_process_support_action(action, user, target)
 		return
 	
-	if user.name not in character_views:
-		print("❌ CharacterView do usuário não encontrada:", user.name)
-		return
-	
-	if target.name not in character_views:
-		print("❌ CharacterView do alvo não encontrada:", target.name)
+	if user.name not in character_views or target.name not in character_views:
+		print("❌ CharacterView não encontrada")
 		return
 	
 	var user_view = character_views[user.name]
 	var target_view = character_views[target.name]
-	
-	var user_wrapper = user_view.get_parent()
 	var target_wrapper = target_view.get_parent()
+	var target_global_pos = target_wrapper.global_position + target_wrapper.size / 2
 	
-	if user_wrapper and target_wrapper:
-		var target_global_pos = target_wrapper.global_position + target_wrapper.size / 2
-		
-		if action is AttackAction and action.formula == "melee":
-			print("   ⚔️ Executando ATAQUE MEELE com dash")
-			user_view.execute_melee_attack(target_global_pos)
+	# 🆕 Switch case completo para todos os tipos de animação
+	if action is AttackAction:
+		match action.animation_type:
+			"melee":
+				print("   ⚔️ Executando ATAQUE MEELE COM DASH + SLASH")
+				user_view.execute_melee_attack(target_global_pos)
+				
+				# 🆕 Aguardar o dash terminar antes de aplicar slash
+				await get_tree().create_timer(0.7).timeout
+				
+				if action.has_slash_effect():
+					print("   🗡️ Aplicando slash effect no alvo")
+					var slash_config = action.get_slash_config()
+					slash_config["z_index"] = 1000
+					target_view.apply_slash_effect(slash_config)
 			
-			if action.has_slash_effect():
-				print("   🗡️ Aplicando slash effect")
-				await get_tree().create_timer(0.5).timeout
-				var slash_config = action.get_slash_config()
-				slash_config["z_index"] = 1000
-				target_view.apply_slash_effect(slash_config)
-		else:
-			print("   ✨ Executando ATAQUE NORMAL")
-			user_view.execute_normal_attack()
+			"magic":
+				print("   🔮 Executando ATAQUE MÁGICO com projétil")
+				var projectile_config = {
+					"sprite_frames": action.projectile_sprite_frames,
+					"color": action.projectile_color,
+					"scale": action.projectile_scale,
+					"speed": action.projectile_speed
+				}
+				
+				# 🆕 Executar animação e AGUARDAR
+				user_view.execute_magic_attack(target_global_pos, projectile_config)
+				await user_view.magic_attack_finished
+				
+				# 🆕 DEPOIS que projétil chegar, aplicar slash
+				if action.has_slash_effect():
+					print("   🗡️ Aplicando slash effect no alvo após impacto")
+					var slash_config = action.get_slash_config()
+					slash_config["z_index"] = 1000
+					target_view.apply_slash_effect(slash_config)
+				
+			"ranged":
+				print("   🏹 Executando ATAQUE RANGED com projétil")
+				var projectile_config = {
+					"sprite_frames": action.projectile_sprite_frames,
+					"color": action.projectile_color,
+					"scale": action.projectile_scale,
+					"speed": action.projectile_speed
+				}
+				
+				# 🆕 Executar animação e AGUARDAR
+				user_view.execute_ranged_attack(target_global_pos, projectile_config)
+				await user_view.ranged_attack_finished
+				
+				# 🆕 DEPOIS que projétil chegar, aplicar slash
+				if action.has_slash_effect():
+					print("   🗡️ Aplicando slash effect no alvo após impacto")
+					var slash_config = action.get_slash_config()
+					slash_config["z_index"] = 1000
+					target_view.apply_slash_effect(slash_config)
+			
+			_:
+				print("   ✨ Executando ATAQUE NORMAL")
+				user_view.execute_normal_attack()
 	else:
-		print("❌ Wrappers não encontrados para as CharacterViews")
+		print("   ✨ Executando AÇÃO NORMAL")
+		user_view.execute_normal_attack()
+
 
 func _on_battle_slash_requested(action: Action, target_character: Character):
 	print("🗡️ BattleScene: Slash effect recebido")
@@ -598,37 +676,68 @@ func _on_action_executed(character: Character, action: Action, target: Character
 	await get_tree().create_timer(0.5).timeout
 
 # 🆕 REFATORADO: Mostra detalhes completos com sinais de ação
+# 🆕 REFATORADO: Mostrar detalhes de ações de suporte E defesa
 func _on_action_detailed_executed(character: Character, action: Action, target: Character, damage: int, healing: int, ap_used: int):
 	if battle_ended:
 		return
 	
 	var action_text = ""
 	
-	# 🆕 NOVO: Melhor descrição baseada no tipo de ação
-	if action.name == "Pular Turno":
-		action_text = "⏭️ %s pulou o turno" % character.name
-	elif action.name == "Defender" or action is DefendAction:
-		action_text = "🛡️ %s ativa Postura Defensiva Máxima (+Defesa, +Esquiva, +Reflexão, +Contra-ataque)" % character.name
+	# ⚔️ ATAQUE: Mostrar dano
+	if damage > 0:
+		action_text = "💥 %s usa %s em %s e causa %d de dano!" % [character.name, action.name, target.name, damage]
+	
+	# 🛡️ DEFESA: Mostrar detalhes de defesa
+	elif action is DefendAction:
+		var defense_bonus = int(character.get_attribute("constitution") * action.defense_multiplier)
+		var dodge_percent = int(action.dodge_chance_bonus * 100)
+		var reflection_percent = int(action.damage_reflection * 100)
+		var counter_percent = int(action.counter_attack_chance * 100)
+		
+		action_text = "🛡️ %s ativa POSTURA DEFENSIVA MÁXIMA! [+%d DEF, +%d%% ESQ, +%d%% REF, %d%% CONTRA]" % [
+			character.name, 
+			defense_bonus, 
+			dodge_percent,
+			reflection_percent,
+			counter_percent
+		]
+	
+	# ✨ SUPORTE: Mostrar múltiplos efeitos
 	elif action is SupportAction:
-		# 🆕 SUPORTE: Mostrar detalhes
 		var support_action = action as SupportAction
 		var effects = []
 		
-		if support_action.heal_amount > 0:
+		# Cura
+		if support_action.heal_amount > 0 and healing > 0:
 			effects.append("Cura: +%d HP" % healing)
-		if support_action.buff_attribute != "":
-			effects.append("Buff: +%d %s (%d turnos)" % [support_action.buff_value, support_action.buff_attribute, support_action.buff_duration])
+		
+		# Buff de atributo
+		if support_action.buff_attribute != "" and support_action.buff_value > 0:
+			var attr_name = _get_attribute_display_name(support_action.buff_attribute)
+			effects.append("Buff: +%d %s (%d turnos)" % [support_action.buff_value, attr_name, support_action.buff_duration])
+		
+		# Escudo
 		if support_action.shield_amount > 0:
 			effects.append("Escudo: +%d (%d turnos)" % [support_action.shield_amount, support_action.shield_duration])
-		if support_action.cleanse_debuffs:
-			effects.append("Purificação")
-		if support_action.hot_amount > 0:
-			effects.append("HOT: +%d HP (%d turnos)" % [support_action.hot_amount, support_action.hot_duration])
 		
-		action_text = "✨ %s usa %s em %s: [%s]" % [character.name, action.name, target.name, ", ".join(effects)]
-	elif damage > 0:
-		# 🆕 ATAQUE: Mostrar nome e dano
-		action_text = "💥 %s usa %s em %s e causa %d de dano!" % [character.name, action.name, target.name, damage]
+		# Cleanse
+		if support_action.cleanse_debuffs:
+			effects.append("Purificação: Remove debuffs")
+		
+		# HOT
+		if support_action.hot_amount > 0:
+			effects.append("Cura Contínua: +%d HP (%d turnos)" % [support_action.hot_amount, support_action.hot_duration])
+		
+		if effects.size() > 0:
+			action_text = "✨ %s usa %s em %s: [%s]" % [character.name, action.name, target.name, ", ".join(effects)]
+		else:
+			action_text = "✨ %s usa %s em %s" % [character.name, action.name, target.name]
+	
+	# Pular turno
+	elif action.name == "Pular Turno":
+		action_text = "⏭️ %s pulou o turno" % character.name
+	
+	# Fallback
 	elif healing > 0:
 		action_text = "❤️ %s usa %s em %s e cura %d de HP!" % [character.name, action.name, target.name, healing]
 	elif damage == 0 and action is AttackAction:
@@ -636,6 +745,7 @@ func _on_action_detailed_executed(character: Character, action: Action, target: 
 	else:
 		action_text = "✨ %s usa %s em %s" % [character.name, action.name, target.name]
 	
+	# Adicionar custo de AP
 	if ap_used > 0:
 		action_text += " [%d AP]" % ap_used
 	
@@ -644,21 +754,44 @@ func _on_action_detailed_executed(character: Character, action: Action, target: 
 	
 	await get_tree().create_timer(0.8).timeout
 	
+	# Animações visuais
+	print("📝 " + action_text)
+	actions_label.text = action_text
+	
+	await get_tree().create_timer(0.8).timeout
+	
+	await _wait_for_message(1.2, 3.5)
+	
 	if damage > 0 and target.name in character_views:
 		character_views[target.name].take_damage()
 	
 	if healing > 0 and target.name in character_views:
 		character_views[target.name].play_heal_effect(healing)
 	
-	await get_tree().create_timer(0.5).timeout
+	# Aqui já não precisa mais de outro delay fixo;
+	# o texto ficou tempo suficiente na tela
 	
-	# AGUARDAR ANIMAÇÃO DE AP
 	if ap_used > 0:
 		await _animate_ap_reduction(character, ap_used)
 	
-	# EMITIR SINAL DE CONCLUSÃO DAS ANIMAÇÕES
 	print("🎬 FINALIZANDO ANIMAÇÕES para:", character.name)
 	action_animations_completed.emit(character)
+
+# 🆕 NOVO: Traduzir nome dos atributos
+func _get_attribute_display_name(attribute: String) -> String:
+	match attribute:
+		"strength": return "Força"
+		"constitution": return "Constituição"
+		"agility": return "Agilidade"
+		"intelligence": return "Inteligência"
+		"defense": return "Defesa"
+		"attack": return "Ataque"
+		"speed": return "Velocidade"
+		"magic": return "Magia"
+		"max_hp": return "Vida Máxima"
+		"critical_chance": return "Crítico"
+		_: return attribute
+
 
 func _animate_ap_reduction(character: Character, ap_used: int):
 	print("💰 Animando redução de AP: ", ap_used, " AP")
@@ -937,7 +1070,6 @@ func show_target_menu(action: Action):
 	attack_menu.visible = false
 	print("TargetMenu aberto")
 
-
 func create_textured_button(text: String, size: Vector2) -> TextureButton:
 	var button = TextureButton.new()
 	
@@ -1079,6 +1211,21 @@ func find_defend_action(character: Character) -> Action:
 			return action
 	return null
 
+func find_skip_action(character: Character) -> Action:
+	if character == null: return null
+	
+	for action in character.basic_actions:
+		if action.name == "Pular Turno":
+			return action
+	
+	for action in character.combat_actions:
+		if action.name == "Pular Turno":
+			return action
+	
+	print("❌ Ação 'Pular Turno' não encontrada")
+	return null
+
+# 🆕 NOVO: Funções de highlight de alvo
 func _on_target_button_hover(target: Character):
 	"""Destacar alvo quando mouse entra no botão"""
 	print("🔆 Destacando alvo:", target.name)
@@ -1103,60 +1250,46 @@ func _on_target_button_unhover():
 
 func _apply_target_highlight(character_view: Node):
 	"""Aplicar linha branca ao redor do personagem"""
-	# 🆕 Criar outline/border ao redor do sprite
+	if character_view.has_meta("highlight_node"):
+		return  # Já tem highlight
+	
 	var highlight = ColorRect.new()
 	highlight.name = "TargetHighlight"
 	highlight.color = Color.WHITE
-	highlight.color.a = 0.0  # Começar transparente
+	highlight.color.a = 0.3
 	
-	# Obter o tamanho do sprite do CharacterView
-	var sprite_size = Vector2(140, 160)  # Tamanho padrão do wrapper
-	
+	var sprite_size = Vector2(140, 160)
 	highlight.size = sprite_size
 	highlight.position = Vector2(-sprite_size.x / 2, -sprite_size.y / 2)
-	
-	# Adicionar como filha do CharacterView
-	character_view.add_child(highlight)
 	highlight.z_index = 1000
 	
-	# 🆕 Animar o destaque piscando
+	character_view.add_child(highlight)
+	character_view.set_meta("highlight_node", highlight)
+	
+	# Animar piscando
 	var tween = character_view.create_tween()
 	tween.set_loops()
-	tween.tween_property(highlight, "color:a", 0.3, 0.3)
-	tween.tween_property(highlight, "color:a", 0.0, 0.3)
-	
-	# Armazenar referência
-	character_view.set_meta("highlight_node", highlight)
-	character_view.set_meta("highlight_tween", tween)
+	tween.tween_property(highlight, "color:a", 0.0, 0.5)
+	tween.tween_property(highlight, "color:a", 0.3, 0.5)
 
 func _remove_target_highlight(character_view: Node):
-	"""Remover destaque do personagem"""
 	if character_view.has_meta("highlight_node"):
 		var highlight = character_view.get_meta("highlight_node")
 		
-		# Parar animação
 		if character_view.has_meta("highlight_tween"):
 			var tween = character_view.get_meta("highlight_tween")
 			tween.kill()
 			character_view.remove_meta("highlight_tween")
 		
-		# Remover nó
 		if is_instance_valid(highlight):
 			highlight.queue_free()
 		
 		character_view.remove_meta("highlight_node")
 		print("🔆 Destaque removido")
 
-func find_skip_action(character: Character) -> Action:
-	if character == null: return null
-	
-	for action in character.basic_actions:
-		if action.name == "Pular Turno":
-			return action
-	
-	for action in character.combat_actions:
-		if action.name == "Pular Turno":
-			return action
-	
-	print("❌ Ação 'Pular Turno' não encontrada")
-	return null
+# 🆕 NOVO: Referência do alvo destacado
+var highlighted_target: Character = null
+
+# 🆕 NOVO: Sinais de highlight
+signal target_highlighted(character: Character)
+signal target_unhighlighted(character: Character)

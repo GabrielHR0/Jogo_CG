@@ -492,5 +492,6 @@ offset_bottom = -0.07600403
 theme = ExtResource("4_i6wy2")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 autowrap_trim_flags = 0
 justification_flags = 0

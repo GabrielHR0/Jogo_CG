@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MeleeAttack" load_steps=4 format=3 uid="uid://bdhd2xahi02ak"]
 
 [ext_resource type="Script" uid="uid://be0b1oathrib4" path="res://models/actions/atacks/MeleeAttack.gd" id="1_2jor3"]
-[ext_resource type="SpriteFrames" path="res://data/characters/ataques/actions/meele/corte_sombrio.tres" id="2_lxiit"]
+[ext_resource type="SpriteFrames" uid="uid://brmr6ofbfb1q" path="res://data/characters/ataques/actions/meele/corte_sombrio.tres" id="2_lxiit"]
 [ext_resource type="AudioStream" uid="uid://cpfrtvxo0lwxx" path="res://data/characters/ataques/sons/espadaRadianteEcorteSombrio.mp3" id="3_lxiit"]
 
 [resource]
@@ -9,7 +9,9 @@ script = ExtResource("1_2jor3")
 damage_multiplier = 2.1
 critical_chance = 0.2
 critical_multiplier = 1.4
+name = "Corte sombrio"
 ap_cost = 6
+animation_type = "melee"
 sound_effect = ExtResource("3_lxiit")
 slash_sprite_frames = ExtResource("2_lxiit")
 metadata/_custom_type_script = "uid://be0b1oathrib4"

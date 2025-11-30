@@ -1,13 +1,25 @@
-[gd_resource type="Resource" script_class="RangedAttack" load_steps=3 format=3 uid="uid://cf04egynx25t7"]
+[gd_resource type="Resource" script_class="RangedAttack" load_steps=5 format=3 uid="uid://cf04egynx25t7"]
 
 [ext_resource type="Script" uid="uid://d006vpi5yx8qh" path="res://models/actions/atacks/RangedAttack.gd" id="1_06xfx"]
+[ext_resource type="SpriteFrames" uid="uid://b3008neqbofi1" path="res://data/characters/ataques/actions/ranged/arrow_projectil.tres" id="1_sl4iw"]
 [ext_resource type="AudioStream" uid="uid://dqxe1fvof30y8" path="res://data/characters/ataques/sons/flechasEnvenenadas.mp3" id="2_geeuo"]
+[ext_resource type="SpriteFrames" uid="uid://batqm5n4ttka1" path="res://data/characters/ataques/actions/ranged/flecha_envenenada.tres" id="3_1b6nn"]
 
 [resource]
 script = ExtResource("1_06xfx")
 damage_multiplier = 1.5
 critical_chance = 0.15
 critical_multiplier = 1.3
+formula = "ranged"
+name = "Flecha envenenada"
 ap_cost = 11
+animation_type = "ranged"
+effect_sprite_frames = ExtResource("3_1b6nn")
+effect_color = Color(0.11118197, 0.5672228, 2.887845e-06, 1)
+projectile_sprite_frames = ExtResource("1_sl4iw")
+projectile_speed = 500.0
+projectile_color = Color(0.10980392, 0.5686275, 0, 1)
 sound_effect = ExtResource("2_geeuo")
+slash_sprite_frames = ExtResource("3_1b6nn")
+melee_dash_enabled = false
 metadata/_custom_type_script = "uid://d006vpi5yx8qh"

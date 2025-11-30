@@ -24,11 +24,9 @@ func get_element_emoji() -> String:
 		"lightning": return "⚡"
 		_: return "✨"
 
-# 🆕 MELHORADO: Usar o sistema unificado
 func create_effect_animation(position: Vector2, parent: Node) -> Node:
 	var element_color = _get_element_color()
 	var element_scale = _get_element_scale()
-	
 	return super.create_effect_animation(position, parent)
 
 func _get_element_color() -> Color:

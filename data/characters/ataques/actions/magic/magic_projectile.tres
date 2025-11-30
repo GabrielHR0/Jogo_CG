@@ -1,0 +1,32 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://kf0lnrh88uud"]
+
+[ext_resource type="Texture2D" uid="uid://di3k4oi1ev70o" path="res://assets/magic_projectile.png" id="1_2ng1l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ng1l"]
+atlas = ExtResource("1_2ng1l")
+region = Rect2(0, 0, 103, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2rsp"]
+atlas = ExtResource("1_2ng1l")
+region = Rect2(103, 0, 103, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uo5ij"]
+atlas = ExtResource("1_2ng1l")
+region = Rect2(206, 0, 103, 44)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ng1l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2rsp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uo5ij")
+}],
+"loop": false,
+"name": &"default",
+"speed": 30.0
+}]

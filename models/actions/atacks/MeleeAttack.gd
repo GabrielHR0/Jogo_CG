@@ -1,4 +1,3 @@
-# MeleeAttack.gd
 extends AttackAction
 class_name MeleeAttack
 
@@ -8,7 +7,7 @@ func _init():
 	target_type = "enemy"
 	damage_multiplier = 1.0
 	formula = "melee"
-	animation_type = "melee"
+	animation_type = "melee"  # 🆕 CORRIGIDO: era "melei"
 	description = "Um ataque físico básico com a arma"
 
 func calculate_damage(user: Character, target: Character) -> int:

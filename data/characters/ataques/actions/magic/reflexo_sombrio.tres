@@ -1,6 +1,6 @@
-[gd_resource type="SpriteFrames" load_steps=14 format=3 uid="uid://3gdr2anlsa0b"]
+[gd_resource type="SpriteFrames" load_steps=14 format=3 uid="uid://30huwfmjk3sj"]
 
-[ext_resource type="Texture2D" uid="uid://ca7pqffu0dx05" path="res://data/characters/ataques/png/magic/bishum - magic.png" id="1_2dg0o"]
+[ext_resource type="Texture2D" uid="uid://bdsk84ege64qx" path="res://data/characters/ataques/png/magic/bishum - magic.png" id="1_2dg0o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qutin"]
 atlas = ExtResource("1_2dg0o")
