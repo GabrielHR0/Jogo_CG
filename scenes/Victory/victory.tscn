@@ -1,0 +1,88 @@
+[gd_scene load_steps=11 format=3 uid="uid://bcrpgiyqcxjy4"]
+
+[ext_resource type="Script" uid="uid://ng0cmki3hs0r" path="res://scenes/Victory/victory.gd" id="1_8ggoa"]
+[ext_resource type="Texture2D" uid="uid://daodf2b1fdpc3" path="res://assets/tela win.png" id="2_y2kgv"]
+[ext_resource type="Texture2D" uid="uid://duhmku6rfqtuu" path="res://assets/button_menu.png" id="3_pjieu"]
+[ext_resource type="FontFile" uid="uid://cfe6xlsgbh48x" path="res://assets/fonts/Pixellari.ttf" id="4_cdl7q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8ggoa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y2kgv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pjieu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cdl7q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2mvav"]
+
+[sub_resource type="FontVariation" id="FontVariation_2mvav"]
+base_font = ExtResource("4_cdl7q")
+
+[node name="Victory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8ggoa")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_y2kgv")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(300, 150)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.453
+anchor_top = 0.526
+anchor_right = 0.648
+anchor_bottom = 0.70000005
+offset_left = 0.15997314
+offset_top = 0.27996826
+offset_right = 0.55999756
+offset_bottom = -3.0517578e-05
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8ggoa")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_y2kgv")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_pjieu")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_cdl7q")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2mvav")
+
+[node name="TextureRect" type="TextureRect" parent="Button"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.133
+anchor_right = 1.133
+anchor_bottom = 1.0
+offset_left = 21.249989
+offset_top = -7.0
+offset_right = -32.250015
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_pjieu")
+
+[node name="Label" type="Label" parent="Button"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.016
+anchor_top = 0.416
+anchor_right = 1.0
+anchor_bottom = 0.67200005
+offset_left = 13.000008
+offset_right = -3.0
+offset_bottom = 3.9999924
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("FontVariation_2mvav")
+theme_override_font_sizes/font_size = 32
+text = "BACK TO MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
