@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bpugnv1s7ktlt"]
+[gd_scene load_steps=23 format=3 uid="uid://bpugnv1s7ktlt"]
 
 [ext_resource type="Script" uid="uid://df7nuot1iuf4y" path="res://scenes/Menu/main_menu.gd" id="1_evs2v"]
 [ext_resource type="Texture2D" uid="uid://c5v5uqdgqve07" path="res://assets/menu_bg.png" id="1_k0vh8"]
@@ -19,9 +19,29 @@
 base_font = ExtResource("3_8mcyk")
 spacing_top = 12
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xvd5r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gs3bo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1omn4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gm3l1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7x3yx"]
+
 [sub_resource type="FontVariation" id="FontVariation_8mcyk"]
 base_font = ExtResource("3_8mcyk")
 spacing_top = 12
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rnqyn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a4h6l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p7m1c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vy2io"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xtkql"]
 
 [sub_resource type="FontVariation" id="FontVariation_4q1m5"]
 base_font = ExtResource("3_8mcyk")
@@ -92,9 +112,14 @@ text = "PLAY	"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CreditsButton" type="Control" parent="ButtonsContainer"]
+[node name="CreditsButton" type="Button" parent="ButtonsContainer"]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xvd5r")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gs3bo")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_1omn4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_gm3l1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7x3yx")
 
 [node name="TextureRect" type="TextureRect" parent="ButtonsContainer/CreditsButton"]
 custom_minimum_size = Vector2(300, 80)
@@ -117,9 +142,14 @@ text = "CREDITS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ExitButton" type="Control" parent="ButtonsContainer"]
+[node name="ExitButton" type="Button" parent="ButtonsContainer"]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rnqyn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_a4h6l")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p7m1c")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_vy2io")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xtkql")
 
 [node name="TextureRect" type="TextureRect" parent="ButtonsContainer/ExitButton"]
 custom_minimum_size = Vector2(300, 80)
@@ -143,3 +173,5 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="pressed" from="ButtonsContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="ButtonsContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="ButtonsContainer/ExitButton" to="." method="_on_exit_button_pressed"]
