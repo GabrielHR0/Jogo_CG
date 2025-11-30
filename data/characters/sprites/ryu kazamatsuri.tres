@@ -1,9 +1,9 @@
 [gd_resource type="SpriteFrames" load_steps=15 format=3 uid="uid://cfwqvksu4wih"]
 
-[ext_resource type="Texture2D" uid="uid://pbblxd7ukvyw" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/andnado.png" id="1_161e1"]
-[ext_resource type="Texture2D" uid="uid://btyee8dw5ixaj" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/ataque.png" id="2_i14oe"]
-[ext_resource type="Texture2D" uid="uid://cd02b8akc47ua" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/dano.png" id="3_tcqqh"]
-[ext_resource type="Texture2D" uid="uid://clxl0411klxcg" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Transformação/png/transformação.png" id="4_i14oe"]
+[ext_resource type="Texture2D" uid="uid://ceg8wlmf56ufy" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/andnado.png" id="1_161e1"]
+[ext_resource type="Texture2D" uid="uid://rrifk7poh3b0" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/ataque.png" id="2_i14oe"]
+[ext_resource type="Texture2D" uid="uid://ds3mfjooidgo8" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Forma normal/png/dano.png" id="3_tcqqh"]
+[ext_resource type="Texture2D" uid="uid://dtlfmbe5p8s7a" path="res://assets/Ryu Kazamatsuri (Arqueiro  Furtivo)/Sprites - Transformação/png/transformação.png" id="4_i14oe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fi407"]
 atlas = ExtResource("1_161e1")

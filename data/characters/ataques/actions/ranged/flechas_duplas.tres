@@ -1,6 +1,6 @@
-[gd_resource type="SpriteFrames" load_steps=14 format=3 uid="uid://dhshqjxkpaaof"]
+[gd_resource type="SpriteFrames" load_steps=14 format=3 uid="uid://b6hxwj7u1uhbl"]
 
-[ext_resource type="Texture2D" uid="uid://c0s0uhwjx4ilj" path="res://data/characters/ataques/png/ranged/ryu kazamatsuri - ranged.png" id="1_46yik"]
+[ext_resource type="Texture2D" uid="uid://dt0mqh5mi5iwm" path="res://data/characters/ataques/png/ranged/ryu kazamatsuri - ranged.png" id="1_46yik"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b1105"]
 atlas = ExtResource("1_46yik")
