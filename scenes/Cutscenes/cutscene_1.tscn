@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://ww4vcvjg87oc"]
+
+[ext_resource type="Script" path="res://scenes/Cutscenes/cutscene_1.gd" id="1_et2d8"]
+[ext_resource type="VideoStream" uid="uid://cpjy7dp7wqtpc" path="res://assets/cutscene 1.ogv" id="2_u0sux"]
+
+[node name="Cutscene 1" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_et2d8")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+stream = ExtResource("2_u0sux")
+autoplay = true
+expand = true
+
+[connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
