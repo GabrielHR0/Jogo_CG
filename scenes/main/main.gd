@@ -4,6 +4,8 @@ extends Node2D
 @onready var status_label = $StatusLabel
 @onready var test_button = $TestButton
 
+var battle_ended: bool = false
+signal battle_finished(victory: bool)
 var test_character_view: CharacterView = null
 var character_buttons: Array[Button] = []
 var animation_buttons: Array[Button] = []
@@ -15,29 +17,652 @@ var found_characters: Array[Dictionary] = []
 # 🆕 NOVO: Array para armazenar ataques carregados
 var loaded_attacks: Array[Dictionary] = []
 
+# Controle de fases para fluxo automático
+var current_phase: int = 0
+var max_phases: int = 2  # Agora temos 2 fases
+var game_started: bool = false
+
 func _ready():
 	print("=== 🎮 MENU PRINCIPAL ===")
-	if start_button:
-		start_button.pressed.connect(_on_start_button_pressed)
-	
-	if test_button:
-		test_button.pressed.connect(_on_test_button_pressed)
 	
 	status_label.text = "Procurando personagens e ataques..."
 	
-	# 🆕 NOVO: Carregar ataques primeiro
 	load_all_attacks()
-	
-	# Procura e carrega personagens automaticamente
 	find_and_load_characters()
+	
+	# Configurar botão de início
+	if start_button:
+		start_button.pressed.connect(_on_start_game_pressed)
+	
+	# Configurar botão de teste (se existir)
+	if test_button:
+		test_button.pressed.connect(_on_test_button_pressed)
+	
+	status_label.text = "Pronto! Clique em 'Jogar' para começar."
 
-# 🆕 NOVA FUNÇÃO: Carregar todos os ataques disponíveis
+# 🆕 NOVO: Iniciar jogo quando clicar no botão
+func _on_start_game_pressed():
+	print("🎮 Iniciando jogo...")
+	game_started = true
+	start_button.visible = false
+	if test_button:
+		test_button.visible = false
+	
+	# Limpar UI existente
+	cleanup_test_character()
+	for button in character_buttons + animation_buttons:
+		if is_instance_valid(button):
+			button.queue_free()
+	character_buttons.clear()
+	animation_buttons.clear()
+	
+	start_game_flow()
+
+# 🆕 NOVO: Botão de teste
+func _on_test_button_pressed():
+	print("🔧 Modo teste ativado")
+	status_label.text = "Modo teste - Selecione um personagem"
+	create_character_buttons()
+
+func start_game_flow() -> void:
+	print("🎬 INICIANDO FLUXO DO JOGO")
+	current_phase = 0
+	
+	while current_phase < max_phases:
+		print("📖 === INICIANDO FASE ", current_phase + 1, " ===")
+		
+		# 1. Mostrar cutscene da fase
+		print("DEBUG: Mostrando cutscene...")
+		await _play_cutscene(current_phase)
+		
+		# 2. Criar party aliada
+		print("DEBUG: Criando party aliada...")
+		var allies_party = create_allies_party_from_found()
+		
+		# 3. Criar party inimiga baseada na fase
+		print("DEBUG: Criando party inimiga...")
+		var enemies_party = _create_enemies_party_for_phase(current_phase)
+		
+		# 4. Executar batalha
+		print("⚔️ Iniciando batalha da fase ", current_phase + 1)
+		var victory = await _run_battle(allies_party, enemies_party)
+		
+		print("DEBUG: Resultado da batalha: ", victory)
+		
+		if victory:
+			print("✅ Vitória na fase ", current_phase + 1)
+			
+			# Se não for a última fase, mostrar cutscene de transição
+			if current_phase < max_phases - 1:
+				print("DEBUG: Mostrando cutscene de transição...")
+				await _play_transition_cutscene(current_phase)
+				current_phase += 1  # 🆕 IMPORTANTE: Avançar para próxima fase
+			else:
+				print("DEBUG: Última fase concluída!")
+				break
+		else:
+			print("❌ Derrota na fase ", current_phase + 1)
+			await _play_defeat_cutscene()
+			break
+	
+	# Se completou todas as fases
+	if current_phase >= max_phases - 1:
+		print("DEBUG: Todas as fases completadas!")
+		await _play_victory_cutscene()
+	else:
+		print("DEBUG: Jogo interrompido na fase ", current_phase + 1)
+	
+	# Fim do jogo
+	status_label.text = "Fim do jogo! Obrigado por jogar!"
+	print("🎮 FIM DO JOGO")
+	
+	# Resetar para o menu
+	current_phase = 0
+	start_button.visible = true
+	if test_button:
+		test_button.visible = true
+	game_started = false
+
+# 🆕 NOVO: Cutscenes para cada fase
+func _play_cutscene(phase_index: int) -> void:
+	print("🎬 CUTSCENE Fase ", phase_index + 1)
+	
+	var cutscenes = [
+		"""🌅 FLORESTA DOS ESPÍRITOS
+
+Você acorda em uma floresta densa e misteriosa.
+O ar está frio e uma névoa esbranquiçada cobre o solo.
+Estranhos sussurros ecoam entre as árvores...
+
+De repente, figuras sombrias emergem da neblina!
+Goblins famintos avistam você e avançam com intenções hostis.
+
+Prepare-se para a batalha!""",
+
+		"""🔥 RUÍNAS DO TEMPLO PROIBIDO
+
+Após derrotar os goblins, você adentra um antigo templo élfico.
+O ar aqui está pesado com energia arcana corrompida.
+Estatuas de guerreiros élficos observam seu avanço...
+
+No salão principal, os GUARDIÕES ÉLFICOS CORROMPIDOS aguardam!
+O Xamã Orc Arcano canaliza energias proibidas, 
+enquanto seu Campeão bate seu machado no chão, 
+causando rachaduras na pedra milenar.
+
+Esta será sua batalha MAIS DIFÍCIL até agora!
+Os Guardiões possuem habilidades antigas e sinergias mortais.
+ESTRATÉGIA será crucial para sobreviver!"""
+	]
+	
+	var cutscene_text = cutscenes[phase_index] if phase_index < cutscenes.size() else "Próxima fase..."
+	
+	# Mostrar texto da cutscene
+	status_label.text = cutscene_text
+	
+	# Aguardar input do jogador
+	await get_tree().create_timer(0.5).timeout
+	status_label.text = cutscene_text + "\n\n[Pressione ESPAÇO ou clique para continuar]"
+	
+	# Esperar input
+	await _wait_for_any_input()
+	
+	print("✅ Cutscene da fase ", phase_index + 1, " concluída")
+
+# 🆕 NOVO: Cutscene de transição entre fases
+func _play_transition_cutscene(phase_index: int) -> void:
+	print("🎬 CUTSCENE de Transição")
+	
+	var transitions = [
+		"""✨ VOCÊ VENCEU... POR ENQUANTO
+
+Os goblins recuam para as sombras da floresta.
+Sua coragem foi provada, mas o verdadeiro desafio apenas começa.
+
+À frente, as RUÍNAS DO TEMPLO PROIBIDO emanam uma energia
+perturbadora e antiga. Você sente uma presença poderosa
+e maligna guardando algo dentro...
+
+Os Guardiões Corrompidos que habitam essas ruínas
+não são como os goblins - eles são guerreiros treinados,
+com táticas e magias antigas.
+
+PREPARE-SE PARA SUA BATALHA MAIS DESAFIADORA!"""
+	]
+	
+	if phase_index < transitions.size():
+		status_label.text = transitions[phase_index]
+		await get_tree().create_timer(0.5).timeout
+		status_label.text = transitions[phase_index] + "\n\n[Pressione ESPAÇO ou clique para continuar]"
+		await _wait_for_any_input()
+	
+	print("✅ Transição concluída")
+
+# 🆕 NOVO: Cutscene de derrota
+func _play_defeat_cutscene() -> void:
+	print("🎬 CUTSCENE de Derrota")
+	
+	status_label.text = """💀 DERROTA
+
+Você foi derrotado em batalha...
+Sua jornada termina aqui, mas sua coragem não será esquecida.
+
+Os espíritos da floresta acolhem você,
+enquanto seus inimigos celebram sua vitória.
+
+Tente novamente quando estiver mais forte!"""
+	
+	await get_tree().create_timer(0.5).timeout
+	status_label.text += "\n\n[Pressione ESPAÇO ou clique para voltar ao menu]"
+	await _wait_for_any_input()
+	
+	# Reiniciar jogo
+	current_phase = 0
+	start_button.visible = true
+	if test_button:
+		test_button.visible = true
+	game_started = false
+	status_label.text = "Pronto! Clique em 'Jogar' para tentar novamente."
+
+# 🆕 NOVO: Cutscene de vitória final
+func _play_victory_cutscene() -> void:
+	print("🎬 CUTSCENE de Vitória Final")
+	
+	status_label.text = """🎉 VITÓRIA COMPLETA!
+
+Você derrotou todos os inimigos!
+O xamã orc cai ao chão, e as energias malignas
+que permeavam o templo começam a se dissipar.
+
+No centro da câmara principal, você encontra
+um artefato brilhante - a fonte do poder do templo.
+
+Sua missão está completa!
+Você emerge das ruínas como um verdadeiro herói,
+pronto para novas aventuras..."""
+	
+	await get_tree().create_timer(0.5).timeout
+	status_label.text += "\n\n[Pressione ESPAÇO ou clique para voltar ao menu]"
+	await _wait_for_any_input()
+	
+	# Voltar ao menu
+	current_phase = 0
+	start_button.visible = true
+	if test_button:
+		test_button.visible = true
+	game_started = false
+	status_label.text = "Vitória! Clique em 'Jogar' para uma nova aventura."
+
+# 🆕 NOVO: Esperar qualquer input
+func _wait_for_any_input() -> void:
+	print("⏳ Aguardando input do jogador...")
+	
+	var input_received = false
+	
+	while not input_received:
+		if Input.is_action_just_pressed("ui_accept") or \
+		   Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) or \
+		   Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+			input_received = true
+		await get_tree().process_frame
+	
+	print("✅ Input recebido")
+
+# 🆕 ATUALIZADO: Criar party inimiga baseada na fase
+func _create_enemies_party_for_phase(phase_index: int) -> Party:
+	match phase_index:
+		0:
+			return _create_goblin_party()
+		1:
+			return _create_guardian_party()
+		_:
+			return _create_default_party()
+
+func _create_goblin_party() -> Party:
+	var party = Party.new()
+	party.name = "Goblins Novatos"
+	
+	# Goblin 1 - Mais fraco
+	var goblin1 = create_enemy_character("Goblin Espião", "Archer", 3, 2, 6, 1)
+	goblin1.position = "back"
+	party.add_member(goblin1)
+	
+	# Goblin 2 - Mais fraco
+	var goblin2 = create_enemy_character("Goblin Aprendiz", "Warrior", 5, 4, 3, 1)
+	goblin2.position = "front"
+	party.add_member(goblin2)
+	
+	# Goblin 3 - Mais fraco
+	var goblin3 = create_enemy_character("Goblin Arremessador", "Archer", 2, 1, 5, 1)
+	goblin3.position = "back"
+	party.add_member(goblin3)
+	
+	print("✅ Party fase 1 (FÁCIL) criada")
+	return party
+
+func _create_guardian_party() -> Party:
+	var party = Party.new()
+	party.name = "Guardiões do Templo"
+	
+	# Chefe: Xamã Orc (MAIS FORTE)
+	var orc_shaman = create_enemy_character("Xamã Orc Arcano", "Mage", 8, 8, 5, 10)
+	orc_shaman.position = "back"
+	
+	# Bola de fogo mais forte
+	var powerful_fireball = create_fireball()
+	powerful_fireball.name = "Inferno Arcano"
+	powerful_fireball.ap_cost = 6
+	powerful_fireball.damage_multiplier = 2.0
+	orc_shaman.add_combat_action(powerful_fireball)
+	
+	# Curse mais forte
+	var strong_curse = SupportAction.new()
+	strong_curse.name = "Maldição Poderosa"
+	strong_curse.ap_cost = 4
+	strong_curse.target_type = "enemy"
+	strong_curse.buff_attribute = "strength"
+	strong_curse.buff_value = -3
+	strong_curse.buff_duration = 4
+	orc_shaman.add_combat_action(strong_curse)
+	
+	# Nova habilidade: Proteção Arcana
+	var arcane_protection = SupportAction.new()
+	arcane_protection.name = "Proteção Arcana"
+	arcane_protection.ap_cost = 3
+	arcane_protection.target_type = "self"
+	arcane_protection.buff_attribute = "defense"
+	arcane_protection.buff_value = 5
+	arcane_protection.buff_duration = 3
+	orc_shaman.add_combat_action(arcane_protection)
+	
+	party.add_member(orc_shaman)
+	
+	# Guarda: Orc Campeão (TANK MUITO RESISTENTE)
+	var orc_champion = create_enemy_character("Orc Campeão", "Tank", 12, 15, 3, 2)
+	orc_champion.position = "front"
+	
+	# Ataque devastador
+	var devastating_attack = AttackAction.new()
+	devastating_attack.name = "Golpe Devastador"
+	devastating_attack.ap_cost = 5
+	devastating_attack.target_type = "enemy"
+	devastating_attack.damage_multiplier = 2.0
+	devastating_attack.formula = "melee"
+	orc_champion.add_combat_action(devastating_attack)
+	
+	# Provocação forte
+	var strong_taunt = SupportAction.new()
+	strong_taunt.name = "Provocação Intimidante"
+	strong_taunt.ap_cost = 3
+	strong_taunt.target_type = "enemy"
+	strong_taunt.buff_attribute = "attack"
+	strong_taunt.buff_value = -2
+	strong_taunt.buff_duration = 3
+	orc_champion.add_combat_action(strong_taunt)
+	
+	# Nova habilidade: Revitalizar
+	var revitalize = SupportAction.new()
+	revitalize.name = "Revitalizar"
+	revitalize.ap_cost = 4
+	revitalize.target_type = "self"
+	revitalize.buff_attribute = "constitution"
+	revitalize.buff_value = 4
+	revitalize.buff_duration = 3
+	orc_champion.add_combat_action(revitalize)
+	
+	party.add_member(orc_champion)
+	
+	# Apoio: Atirador Elite
+	var orc_elite = create_enemy_character("Atirador de Elite Orc", "Archer", 8, 7, 10, 4)
+	orc_elite.position = "back"
+	
+	# Flecha rápida e forte
+	var rapid_shot = AttackAction.new()
+	rapid_shot.name = "Rajada de Flechas"
+	rapid_shot.ap_cost = 3
+	rapid_shot.target_type = "enemy"
+	rapid_shot.damage_multiplier = 1.5
+	rapid_shot.formula = "ranged"
+	orc_elite.add_combat_action(rapid_shot)
+	
+	# Disparo preciso
+	var precise_shot = AttackAction.new()
+	precise_shot.name = "Disparo Preciso"
+	precise_shot.ap_cost = 4
+	precise_shot.target_type = "enemy"
+	precise_shot.damage_multiplier = 1.8
+	precise_shot.formula = "ranged"
+	orc_elite.add_combat_action(precise_shot)
+	
+	# Habilidade especial: Postura de Mira
+	var aim_stance = SupportAction.new()
+	aim_stance.name = "Postura de Mira"
+	aim_stance.ap_cost = 2
+	aim_stance.target_type = "self"
+	aim_stance.buff_attribute = "agility"
+	aim_stance.buff_value = 3
+	aim_stance.buff_duration = 2
+	orc_elite.add_combat_action(aim_stance)
+	
+	party.add_member(orc_elite)
+	
+	# 🆕 QUARTO INIMIGO: Assassino
+	var orc_assassin = create_enemy_character("Assassino Orc", "Warrior", 9, 6, 9, 3)
+	orc_assassin.position = "mid"
+	
+	# Ataque furtivo
+	var sneak_attack = AttackAction.new()
+	sneak_attack.name = "Ataque Furtivo"
+	sneak_attack.ap_cost = 4
+	sneak_attack.target_type = "enemy"
+	sneak_attack.damage_multiplier = 1.7
+	sneak_attack.formula = "melee"
+	orc_assassin.add_combat_action(sneak_attack)
+	
+	# Golpe rápido
+	var quick_strike = AttackAction.new()
+	quick_strike.name = "Golpe Rápido"
+	quick_strike.ap_cost = 2
+	quick_strike.target_type = "enemy"
+	quick_strike.damage_multiplier = 1.0
+	quick_strike.formula = "melee"
+	orc_assassin.add_combat_action(quick_strike)
+	
+	party.add_member(orc_assassin)
+	
+	print("⚠️ PARTE 2 - INIMIGOS FORTIFICADOS!")
+	print("   Xamã: INT 10 | Campeão: STR 12 CON 15")
+	print("   Elite: AGI 10 | Assassino: STR 9 AGI 9")
+	print("   TOTAL: 4 INIMIGOS PODEROSOS")
+	
+	return party
+	
+func _create_default_party() -> Party:
+	var party = Party.new()
+	party.name = "Inimigos Básicos"
+	
+	# Criar um inimigo básico genérico
+	var enemy = create_enemy_character("Inimigo Genérico", "Warrior", 5, 5, 5, 5)
+	enemy.position = "front"
+	party.add_member(enemy)
+	
+	# Adicionar um segundo inimigo para balancear
+	var enemy2 = create_enemy_character("Inimigo Suporte", "Archer", 3, 3, 6, 3)
+	enemy2.position = "back"
+	party.add_member(enemy2)
+	
+	print("✅ Party padrão criada: ", party.name)
+	return party
+
+# 🆕 ATUALIZADO: Criar personagem inimigo com bônus para fase 2
+# 🆕 ATUALIZADO: Criar personagem inimigo SEM tentar acessar max_hp/current_hp
+func create_enemy_character(name: String, enemy_class: String, strength: int, constitution: int, agility: int, intelligence: int) -> Character:
+	var character = Character.new()
+	character.name = name
+	
+	# 🆕 BÔNUS PARA FASE 2 (fase mais difícil)
+	var phase_bonus = 0
+	if current_phase == 1:  # Fase 2
+		phase_bonus = 1  # +1 em todos os stats para fase 2 (já incluído nos valores acima)
+	
+	character.strength = strength
+	character.constitution = constitution
+	character.agility = agility
+	character.intelligence = intelligence
+	
+	# Versão SUPER simplificada para evitar erros
+	# Primeiro tenta texturas específicas
+	var goblin_path = "res://assets/characters/goblin.png"
+	var orc_path = "res://assets/characters/orc.png"
+	
+	if name.to_lower().contains("goblin") and ResourceLoader.exists(goblin_path):
+		character.texture = load(goblin_path)
+	elif name.to_lower().contains("orc") and ResourceLoader.exists(orc_path):
+		character.texture = load(orc_path)
+	else:
+		# Fallback
+		var warrior_path = "res://assets/characters/warrior.png"
+		var hero_path = "res://assets/characters/hero.png"
+		var char_path = "res://assets/characters/character.png"
+		
+		if ResourceLoader.exists(warrior_path):
+			character.texture = load(warrior_path)
+		elif ResourceLoader.exists(hero_path):
+			character.texture = load(hero_path)
+		elif ResourceLoader.exists(char_path):
+			character.texture = load(char_path)
+	
+	# Adicionar ações básicas
+	character.add_combat_action(create_basic_attack())
+	
+	# Ações específicas por classe
+	match enemy_class:
+		"Warrior":
+			character.add_combat_action(create_heavy_attack())
+		"Mage":
+			character.add_combat_action(create_fireball())
+		"Archer":
+			var quick_shot = AttackAction.new()
+			quick_shot.name = "Disparo Rápido"
+			quick_shot.ap_cost = 2
+			quick_shot.target_type = "enemy"
+			quick_shot.damage_multiplier = 0.8
+			quick_shot.formula = "ranged"
+			character.add_combat_action(quick_shot)
+		"Tank":
+			var defend_action = create_defend_action()
+			defend_action.name = "Postura Defensiva"
+			character.add_combat_action(defend_action)
+	
+	character.calculate_stats()
+	
+	# 🆕 REMOVIDO: HP extra para fase 2 (causava erro porque Character não tem essas propriedades)
+	# if current_phase == 1:
+	#     character.max_hp += 20
+	#     character.current_hp = character.max_hp
+	
+	return character
+
+# 🆕 NOVO: Criar ação de defesa para inimigos
+func create_defend_action() -> SupportAction:
+	var action = SupportAction.new()
+	action.name = "Defender"
+	action.ap_cost = 2
+	action.target_type = "self"
+	action.buff_attribute = "defense"
+	action.buff_value = 3
+	action.buff_duration = 2
+	return action
+
+# 🆕 CORRIGIDO: Função _run_battle para manter Main.gd ativo
+# 🆕 ATUALIZADO: Adicionado tratamento de erro para evitar o problema "null instance"
+func _run_battle(allies_party: Party, enemies_party: Party) -> bool:
+	print("⚔️ PREPARANDO BATALHA - Fase ", current_phase + 1)
+	
+	cleanup_test_character()
+	
+	var battle_scene_res = preload("res://scenes/BattleScene/BattleScene.tscn")
+	var battle_scene = battle_scene_res.instantiate()
+	
+	# Conectar o sinal ANTES de adicionar à cena
+	var battle_finished_promise = battle_scene.battle_finished
+	
+	# IMPORTANTE: Desconectar sinais anteriores
+	if battle_scene.is_connected("battle_finished", Callable(self, "_on_battle_finished")):
+		battle_scene.disconnect("battle_finished", Callable(self, "_on_battle_finished"))
+	
+	# 🆕 NOVO: Verificar se a cena anterior foi limpa corretamente
+	await get_tree().process_frame
+	
+	# Adicionar à cena
+	get_tree().root.add_child(battle_scene)
+	
+	# Esconder o Main temporariamente
+	self.visible = false
+	
+	print("DEBUG: Configurando batalha...")
+	battle_scene.call_deferred("setup_battle", allies_party, enemies_party)
+	battle_scene.call_deferred("start_battle")
+	
+	print("⏳ Aguardando término da batalha...")
+	
+	# Aguardar o sinal
+	var battle_result = await battle_finished_promise
+	
+	print("✅ Batalha finalizada. Vitória: ", battle_result)
+	
+	# IMPORTANTE: Aguardar um frame para garantir que tudo foi limpo
+	await get_tree().process_frame
+	
+	# 🆕 ATUALIZADO: Limpeza mais segura
+	if is_instance_valid(battle_scene):
+		print("🧹 Limpando cena de batalha...")
+		
+		# 🆕 IMPORTANTE: Limpar todos os efeitos persistentes ANTES de remover a cena
+		_cleanup_battle_scene_effects(battle_scene)
+		
+		# Remover do parent
+		if battle_scene.get_parent():
+			battle_scene.get_parent().remove_child(battle_scene)
+		
+		# Liberar memória
+		battle_scene.queue_free()
+		
+		# 🆕 Forçar coleta de lixo
+		await get_tree().process_frame
+	
+	# Mostrar o Main novamente
+	self.visible = true
+	
+	print("DEBUG: Retornando ao fluxo do jogo. Fase: ", current_phase)
+	
+	return battle_result
+
+# 🆕 NOVA FUNÇÃO: Limpar efeitos da cena de batalha antes de destruí-la
+func _cleanup_battle_scene_effects(battle_scene: Node):
+	"""Limpa todos os efeitos persistentes antes de destruir a cena - VERSÃO SEGURA"""
+	print("🧹 Limpando efeitos da BattleScene...")
+	
+	# 🆕 Usar uma abordagem segura baseada em nomes e métodos
+	# 1. Procurar por nós que sabemos que podem ter efeitos persistentes
+	var nodes_to_cleanup = []
+	
+	# Procurar recursivamente
+	_find_nodes_with_persistent_effects(battle_scene, nodes_to_cleanup)
+	
+	# Limpar todos os nós encontrados
+	for node in nodes_to_cleanup:
+		if is_instance_valid(node):
+			print("   🧹 Limpando: ", node.name)
+			if node.has_method("clear_all_persistent_effects"):
+				node.clear_all_persistent_effects()
+			elif node.has_method("cleanup"):
+				node.cleanup()
+	
+	print("✅ Efeitos da BattleScene limpos")
+
+func _find_nodes_with_persistent_effects(node: Node, result: Array):
+	"""Encontra recursivamente todos os nós com efeitos persistentes"""
+	if not node:
+		return
+	
+	# Verificar este nó
+	if (node.has_method("clear_all_persistent_effects") or 
+		node.has_method("cleanup") or
+		"Support" in node.name or
+		"Action" in node.name):
+		result.append(node)
+	
+	# Verificar filhos recursivamente
+	for child in node.get_children():
+		_find_nodes_with_persistent_effects(child, result)
+
+# 🆕 NOVA FUNÇÃO: Limpar referências de forma segura
+func _disconnect_all_signals():
+	"""Desconecta todos os sinais para evitar referências pendentes"""
+	print("🔌 Desconectando todos os sinais...")
+	# Esta função pode ser expandida conforme necessário
+	pass
+
+func cleanup_test_character():
+	if test_character_view:
+		test_character_view.queue_free()
+		test_character_view = null
+	
+	for button in animation_buttons:
+		if is_instance_valid(button):
+			button.queue_free()
+	animation_buttons.clear()
+	
+	current_character = null
+
+# --- FUNÇÕES ORIGINAIS DO SEU MAIN.GD ---
+
 func load_all_attacks():
 	print("🔍 Procurando ataques em res://data/characters/ataques/")
 	
 	var attacks_base_path = "res://data/characters/ataques/"
 	
-	# 🆕 Lista de diretórios de ataques para procurar
 	var attack_directories = [
 		"actions/meele/",
 		"actions/magic/", 
@@ -82,7 +707,22 @@ func load_all_attacks():
 	
 	print("🎯 Total de ataques carregados: ", loaded_attacks.size())
 
-# 🆕 NOVA FUNÇÃO: Carregar um ataque individual
+func setup_battle(allies_party: Party, enemies_party: Party) -> void:
+	print("Configurando batalha: Aliados %d, Inimigos %d" % [allies_party.size(), enemies_party.size()])
+	# Faça sua configuração normal aqui (carregar personagens, UI, etc.)
+
+func start_battle() -> void:
+	print("Batalha iniciada")
+	# Insira sua lógica real de batalha aqui
+	# Exemplo simples de delay para simular batalha
+	await get_tree().create_timer(3).timeout
+	_on_battle_ended(true)  # Simula vitória para teste
+
+func _on_battle_ended(victory: bool):
+	print("Batalha finalizada. Vitória: ", victory)
+	battle_ended = true
+	battle_finished.emit(victory)
+
 func load_attack(path: String) -> AttackAction:
 	if ResourceLoader.exists(path):
 		var resource = load(path)
@@ -109,7 +749,6 @@ func find_and_load_characters():
 	if dir:
 		found_characters.clear()
 		
-		# Lista todos os arquivos .tres do diretório
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		
@@ -119,10 +758,8 @@ func find_and_load_characters():
 				var character = load_character(full_path)
 				
 				if character:
-					# 🆕 NOVO: Verificar e conectar ataques do personagem
 					check_character_attacks(character)
 					
-					# Adiciona à lista de personagens encontrados
 					var char_data = {
 						"name": character.name,
 						"path": full_path,
@@ -148,11 +785,9 @@ func find_and_load_characters():
 		print("❌ Diretório não encontrado: " + aliados_path)
 		create_fallback_characters()
 
-# 🆕 NOVA FUNÇÃO: Verificar ataques do personagem
 func check_character_attacks(character: Character):
 	print("   🔍 Verificando ataques de: ", character.name)
 	
-	# Verificar combat_actions
 	if character.combat_actions and character.combat_actions.size() > 0:
 		print("   🎯 Combat Actions encontradas: ", character.combat_actions.size())
 		for i in range(character.combat_actions.size()):
@@ -167,7 +802,6 @@ func check_character_attacks(character: Character):
 	else:
 		print("   ⚠️ Nenhuma combat_action encontrada")
 	
-	# Verificar basic_actions
 	if character.basic_actions and character.basic_actions.size() > 0:
 		print("   🎯 Basic Actions encontradas: ", character.basic_actions.size())
 		for i in range(character.basic_actions.size()):
@@ -180,7 +814,6 @@ func check_character_attacks(character: Character):
 		print("   ⚠️ Nenhuma basic_action encontrada")
 
 func create_fallback_characters():
-	# Cria alguns personagens fallback se não encontrar nenhum
 	var fallback_chars = [
 		{"name": "🧙‍♂️ Mago", "class": "Mage"},
 		{"name": "⚔️ Guerreiro", "class": "Warrior"},
@@ -202,7 +835,6 @@ func create_fallback_characters():
 	status_label.text = "Personagens fallback - Selecione para testar animações"
 
 func create_character_buttons():
-	# Remove botões antigos se existirem
 	for button in character_buttons:
 		if is_instance_valid(button):
 			button.queue_free()
@@ -218,9 +850,7 @@ func create_character_buttons():
 		var button = Button.new()
 		var char_data = found_characters[i]
 		
-		# Usa emoji + nome do personagem
 		var display_name = char_data.name
-		# Adiciona emoji baseado no nome se não tiver
 		if not display_name.contains("🧙") and not display_name.contains("⚔️") and not display_name.contains("🏹") and not display_name.contains("🛡️"):
 			if display_name.to_lower().contains("mago") or display_name.to_lower().contains("mage") or display_name.to_lower().contains("wizard"):
 				display_name = "🧙‍♂️ " + display_name
@@ -237,11 +867,11 @@ func create_character_buttons():
 		button.position = Vector2(start_x, start_y + i * (button_height + button_margin))
 		button.size = Vector2(button_width, button_height)
 		
-		# Tooltip com o caminho do arquivo
 		if not char_data.path.begins_with("fallback://"):
 			button.tooltip_text = char_data.path
 		
-		button.pressed.connect(_on_character_button_pressed.bind(char_data.resource, char_data.name))
+		# Correção: usar função lambda para capturar valores
+		button.pressed.connect(func(): _on_character_button_pressed(char_data.resource, char_data.name))
 		
 		add_child(button)
 		character_buttons.append(button)
@@ -252,7 +882,6 @@ func _on_character_button_pressed(character: Character, character_name: String):
 	print("👤 Selecionando personagem: ", character_name)
 	status_label.text = "Carregando: " + character_name
 	
-	# Remove personagem anterior se existir
 	cleanup_test_character()
 	
 	current_character = character
@@ -260,22 +889,10 @@ func _on_character_button_pressed(character: Character, character_name: String):
 	create_animation_buttons()
 	status_label.text = "Pronto: " + character_name + " - Selecione uma animação"
 
-func _on_start_button_pressed():
-	print("🎯 Iniciando batalha...")
-	status_label.text = "Carregando batalha..."
-	
-	cleanup_test_character()
-	
-	var allies_party = preload("res://data/party/default_party.tres")
-	var enemies_party = preload("res://data/party/enemy_default_party.tres")
-
-	load_battle_scene(allies_party, enemies_party)
-
 func create_allies_party_from_found() -> Party:
 	var party = Party.new()
 	party.name = "Heróis"
 	
-	# Usa os primeiros 4 personagens encontrados para a party
 	var max_members = min(4, found_characters.size())
 	
 	for i in range(max_members):
@@ -283,32 +900,15 @@ func create_allies_party_from_found() -> Party:
 		party.add_member(char_data.resource)
 		print("✅ Adicionado à party: " + char_data.name)
 	
-	# Se não encontrou personagens suficientes, cria alguns extras
 	if party.members.is_empty():
 		print("⚠️ Nenhum personagem encontrado, criando party fallback...")
 		party.add_member(create_fallback_character("Guerreiro", "Warrior"))
 		party.add_member(create_fallback_character("Mago", "Mage"))
+		party.add_member(create_fallback_character("Arqueiro", "Archer"))
 	
 	print("✅ Party aliada criada: " + party.name + " com " + str(party.members.size()) + " membros")
 	return party
-
-func _on_test_button_pressed():
-	print("🧪 Modo teste de animações")
-	status_label.text = "Selecione um personagem para testar animações"
-
-func cleanup_test_character():
-	if test_character_view:
-		test_character_view.queue_free()
-		test_character_view = null
 	
-	# Remove botões de animação
-	for button in animation_buttons:
-		if is_instance_valid(button):
-			button.queue_free()
-	animation_buttons.clear()
-	
-	current_character = null
-
 func load_character(path: String) -> Character:
 	if ResourceLoader.exists(path):
 		var resource = load(path)
@@ -416,6 +1016,14 @@ func add_loaded_attacks_to_character(character: Character, character_class: Stri
 			character.add_combat_action(create_fireball())
 		elif character_class == "Warrior" or character_class == "Guerreiro":
 			character.add_combat_action(create_heavy_attack())
+		elif character_class == "Archer" or character_class == "Arqueiro":
+			var arrow_shot = AttackAction.new()
+			arrow_shot.name = "Flecha Precisa"
+			arrow_shot.ap_cost = 3
+			arrow_shot.target_type = "enemy"
+			arrow_shot.damage_multiplier = 1.2
+			arrow_shot.formula = "ranged"
+			character.add_combat_action(arrow_shot)
 
 func load_character_view(character: Character):
 	var character_view_scene = preload("res://scenes/character_view/CharacterView.tscn")
@@ -459,7 +1067,8 @@ func create_animation_buttons():
 		# Conecta o sinal com os parâmetros da animação
 		var anim_type = animations[i].type
 		var attack_type = animations[i].attack_type
-		button.pressed.connect(_on_animation_button_pressed.bind(anim_type, attack_type))
+		# Correção: usar função lambda para capturar valores
+		button.pressed.connect(func(): _on_animation_button_pressed(anim_type, attack_type))
 		
 		add_child(button)
 		animation_buttons.append(button)
@@ -511,7 +1120,10 @@ func create_attack_buttons():
 					button.add_theme_color_override("font_color", Color.YELLOW)
 					button.tooltip_text = "Sem animação de slash"
 				
-				button.pressed.connect(_on_specific_attack_pressed.bind(action))
+				# Correção: usar função lambda para capturar a ação
+				var captured_action = action  # Capturar em variável local
+				button.pressed.connect(func(): _on_specific_attack_pressed(captured_action))
+				
 				add_child(button)
 				animation_buttons.append(button)
 				attack_count += 1

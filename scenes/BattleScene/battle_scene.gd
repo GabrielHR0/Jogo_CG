@@ -1,5 +1,8 @@
 extends Control
 
+# 🆕 ADICIONAR ESTE SINAL NO TOPO DO ARQUIVO
+signal battle_finished(victory: bool)
+
 # Áreas de batalha (topo)
 @onready var enemies_front_row = $HBoxContainer/EnemiesArea/EnemyFrontRow
 @onready var enemies_back_row  = $HBoxContainer/EnemiesArea/EnemyBackRow
@@ -40,6 +43,13 @@ var battle_ended: bool = false
 enum UIState { IDLE, PLAYER_TURN, AI_TURN, ACTION_EXECUTING }
 var current_ui_state: UIState = UIState.IDLE
 
+# 🆕 ADICIONADO: Variáveis para gerenciamento de referências
+var characters: Dictionary = {}  # Referência aos personagens da batalha
+var turn_queue_characters: Array = []  # Personagens na fila de turnos
+var allies: Array = []  # Aliados
+var enemies: Array = []  # Inimigos
+var turn_queue: Node = null  # Referência à fila de turnos
+
 # 🆕 NOVO: Sinal de sincronização
 signal action_animations_completed(character: Character)
 
@@ -49,6 +59,13 @@ var persistent_effects: Dictionary = {}
 func get_character_views() -> Dictionary:
 	"""Fornece acesso às character_views para as SupportActions"""
 	return character_views
+
+# 🆕 NOVO: Referência do alvo destacado
+var highlighted_target: Character = null
+
+# 🆕 NOVO: Sinais de highlight
+signal target_highlighted(character: Character)
+signal target_unhighlighted(character: Character)
 
 # Configuração das CharacterViews
 var character_view_scene: PackedScene
@@ -121,6 +138,13 @@ func setup_battle(allies_party: Party, enemies_party: Party):
 	battle_ended = false
 	current_ui_state = UIState.IDLE
 	
+	# 🆕 NOVO: Inicializar arrays
+	characters.clear()
+	turn_queue_characters.clear()
+	allies.clear()
+	enemies.clear()
+	turn_queue = null
+	
 	battle = Battle.new()
 	_connect_battle_signals()
 	add_child(battle)
@@ -132,6 +156,9 @@ func setup_battle(allies_party: Party, enemies_party: Party):
 	
 	await get_tree().process_frame
 	
+	# 🆕 NOVO: Capturar referências do Battle
+	_update_references_from_battle()
+	
 	create_character_views()
 	_setup_actions_battle_scene_reference()
 	
@@ -140,6 +167,65 @@ func setup_battle(allies_party: Party, enemies_party: Party):
 	await get_tree().create_timer(0.5).timeout
 	print("start_battle()")
 	battle.start_battle()
+
+# 🆕 NOVA FUNÇÃO: Capturar referências do Battle
+func _update_references_from_battle():
+	"""Captura referências importantes do objeto Battle"""
+	if not battle:
+		print("❌ Battle não existe para capturar referências")
+		return
+	
+	# Tentar obter referências do Battle
+	characters.clear()
+	allies.clear()
+	enemies.clear()
+	
+	# Capturar todos os personagens
+	for char in battle.allies_party.members:
+		if char:
+			characters[char.name] = char
+			allies.append(char)
+	
+	for char in battle.enemies_party.members:
+		if char:
+			characters[char.name] = char
+			enemies.append(char)
+	
+	# Tentar encontrar a TurnQueue
+	turn_queue = _find_turn_queue()
+	
+	print("🔄 Referências atualizadas:")
+	print("   Personagens: ", characters.size())
+	print("   Aliados: ", allies.size())
+	print("   Inimigos: ", enemies.size())
+	print("   TurnQueue: ", "Encontrada" if turn_queue else "Não encontrada")
+
+func _find_turn_queue() -> Node:
+	"""Procura pela TurnQueue na cena"""
+	# Primeiro, tentar pegar do Battle se existir
+	if battle and battle.has_method("get_turn_queue"):
+		var queue = battle.get_turn_queue()
+		if queue:
+			return queue
+	
+	# Procurar na árvore
+	var nodes = get_tree().get_nodes_in_group("turn_queue")
+	if nodes.size() > 0:
+		return nodes[0]
+	
+	# Tentar encontrar pelo caminho
+	var possible_paths = [
+		"TurnQueue",
+		"Battle/TurnQueue",
+		"../TurnQueue"
+	]
+	
+	for path in possible_paths:
+		var node = get_node_or_null(NodePath(path))
+		if node:
+			return node
+	
+	return null
 
 func _setup_actions_battle_scene_reference():
 	"""Configura a referência do BattleScene em todas as SupportActions E DefendActions"""
@@ -850,40 +936,36 @@ func _on_character_died(character: Character):
 			view.queue_free()
 		character_views.erase(character.name)
 		print("   CharacterView removida:", character.name)
+
+# 🆕 CORRIGIDA: Agora emite o sinal battle_finished
+# BattleScene.gd - MODIFIQUE APENAS ESTA FUNÇÃO:
 func _on_battle_ended(victory: bool):
-	print("BattleScene _on_battle_ended - Vitória:", victory)
+	print("🏁 Batalha finalizada - Vitória: ", victory)
 	
-	# Limpar efeitos persistentes de defesa
-	print("Limpando todos os efeitos persistentes...")
-	for character in battle.allies_party.members + battle.enemies_party.members:
-		for action in character.combat_actions + character.basic_actions:
-			if action is DefendAction:
-				action.clear_all_defense_effects()
+	# Limpar todos os efeitos persistentes ANTES de emitir o sinal
+	var all_support_actions = []
 	
-	if victory:
-		actions_label.text = "Vitória! Todos os inimigos foram derrotados!"
-		print("VITÓRIA!")
-		
-		# Aqui você pode depois chamar uma tela de vitória se quiser
-	else:
-		actions_label.text = "Derrota! Todos os aliados foram derrotados!"
-		print("DERROTA! Carregando tela de derrota...")
-		
-		# 🆕 CARREGAR CENA DE DERROTA
-		var lose_scene_path := "res://scenes/Lose/lose.tscn"
-		if FileAccess.file_exists(lose_scene_path):
-			await get_tree().create_timer(1.5).timeout  # pequeno delay opcional
-			get_tree().change_scene_to_file(lose_scene_path)
-		else:
-			print("❌ Arquivo da cena de derrota não encontrado:", lose_scene_path)
+	# Coletar todas as SupportActions
+	for character_name in characters:
+		var character = characters[character_name]
+		if character:
+			for action in character.combat_actions:
+				if action is SupportAction:
+					all_support_actions.append(action)
 	
-	battle_ended = true
-	current_ui_state = UIState.IDLE
-	current_player_character = null
-	_update_button_states()
+	# Limpar todas
+	for support_action in all_support_actions:
+		if is_instance_valid(support_action):
+			support_action.clear_all_persistent_effects()
 	
-	await get_tree().create_timer(1.0).timeout
-	hide_sub_menus()
+	# Aguardar um frame para garantir que tudo foi limpo
+	await get_tree().process_frame
+	
+	# Emitir sinal
+	battle_finished.emit(victory)
+	
+	# Limpar completamente a cena
+	cleanup_battle()
 
 
 func _on_player_action_selected():
@@ -1295,9 +1377,38 @@ func _remove_target_highlight(character_view: Node):
 		character_view.remove_meta("highlight_node")
 		print("🔆 Destaque removido")
 
-# 🆕 NOVO: Referência do alvo destacado
-var highlighted_target: Character = null
-
-# 🆕 NOVO: Sinais de highlight
-signal target_highlighted(character: Character)
-signal target_unhighlighted(character: Character)
+func cleanup_battle():
+	print("🧹 Limpando completamente a batalha...")
+	
+	# 1. Limpar todas as referências aos personagens
+	for character_name in characters:
+		var character = characters[character_name]
+		if character and is_instance_valid(character):
+			# Limpar ações de suporte
+			for action in character.combat_actions:
+				if action is SupportAction and is_instance_valid(action):
+					action.clear_all_persistent_effects()
+			# Limpar estado do personagem (se o método existir)
+			if character.has_method("cleanup"):
+				character.cleanup()
+	
+	# 2. Limpar UI (TurnQueue)
+	if turn_queue and is_instance_valid(turn_queue):
+		if turn_queue.has_method("cleanup"):
+			turn_queue.cleanup()
+	
+	# 3. Limpar arrays
+	characters.clear()
+	turn_queue_characters.clear()
+	allies.clear()
+	enemies.clear()
+	
+	# 4. Limpar outras referências
+	if battle and is_instance_valid(battle):
+		battle.queue_free()
+		battle = null
+	
+	# 5. Limpar CharacterViews
+	clear_character_views()
+	
+	print("✅ BattleScene completamente limpa")

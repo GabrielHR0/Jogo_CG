@@ -380,6 +380,10 @@ func _get_buff_color(attribute: String) -> Color:
 		"critical_chance": return Color.PURPLE
 		_: return Color.WHITE
 
+# No final do arquivo SupportAction.gd, modifique a função:
+
 func _notification(what):
 	if what == NOTIFICATION_PREDELETE:
+		print("🧹 SupportAction sendo destruído: ", name)
+		# Limpar efeitos persistentes
 		clear_all_persistent_effects()
